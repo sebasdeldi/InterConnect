@@ -1,0 +1,8 @@
+	<li><%= is_admin? %></li>
+	<li><%= is_agent? %></li>
+	<li><%= is_consignee? %></li>
+	<li><%= is_shipper? %></li>
+
+
+
+<%=link_to('Logout', destroy_user_session_path, method: :delete)%>
