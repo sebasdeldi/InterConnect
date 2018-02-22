@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222163400) do
+ActiveRecord::Schema.define(version: 20180222182314) do
 
   create_table "functionalities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "role_id"
@@ -34,10 +34,9 @@ ActiveRecord::Schema.define(version: 20180222163400) do
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "user_id"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "steps", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -58,15 +57,17 @@ ActiveRecord::Schema.define(version: 20180222163400) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.bigint "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   add_foreign_key "functionalities", "roles"
   add_foreign_key "operations_by_users", "operations"
   add_foreign_key "operations_by_users", "users"
-  add_foreign_key "roles", "users"
   add_foreign_key "steps", "operations"
+  add_foreign_key "users", "roles"
 end

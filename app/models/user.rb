@@ -5,6 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :operations_by_users
-  has_one :role
-
+  belongs_to :roles , optional: true
 end
