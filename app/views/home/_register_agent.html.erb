@@ -1,7 +1,11 @@
 <h2>Register new agent</h2>
 
-<%= form_for(resource, as: resource_name, url:  new_user_registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
+
+  <!--role hidden field-->  
+  <%= hidden_field_tag :role, "agent" %>
+
 
   <div class="field">
     <%= f.label :email %><br />
