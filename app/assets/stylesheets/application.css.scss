@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= toastr
  *= require_tree .
  *= require_self
  */
@@ -23,3 +24,5 @@ $major-blue: #3273dc;
 .is-danger-icon { color: red; }
 
 .swal-button--confirm { background-color: $major-blue }
+
+.login-logo { margin: 35px; }

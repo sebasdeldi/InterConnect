@@ -1,0 +1,43 @@
+
+<div class="columns">
+  <div class="column is-half  is-offset-one-quarter">
+    
+    <img class='login-logo' src="http://www.interworldfreight.com/img/logo/logo.png">
+
+    <nav class= 'panel is-form-panel'>
+      <p class="panel-heading">
+        Log In
+      </p>
+
+      <div class='panel-block'>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "control"}) do |f| %>
+          <div class="field email">
+            <%= f.label :email, class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope email"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field password">
+            <%= f.label :password, class: 'label' %>
+            <p class="control has-icons-left">
+              <%= f.password_field :password, autocomplete: "off", class: 'input' %>
+                <span class="icon is-small is-left">
+                <i class="fas fa-lock password"></i>
+              </span>
+            </p>
+          </div>
+
+          <div class="control">
+            <%= f.submit "Log In", class: 'button is-link' %>
+          </div>
+
+        <% end %>
+      </div>
+    </nav>
+   
+  </div>
+</div>

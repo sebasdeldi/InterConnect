@@ -61,3 +61,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Jquery gem 
 gem 'jquery-rails'
+
+# Nice toast messages gem
+gem 'toastr-rails'

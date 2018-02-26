@@ -1,11 +1,15 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <title>InterConnect</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -13,9 +17,14 @@
 
   <body>
     <div class="container is-widescreen"> 
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <% if flash[:alert] %>
+        <%= javascript_tag "toastr.error('#{alert}', 'Error')" %>        
+      <% end %>
+      <% if flash[:notice] %>
+        <%= javascript_tag "toastr.success('#{notice}', 'Success')" %>
+      <% end %>
       <%= yield %>   
     </div>
   </body>
 </html>
+

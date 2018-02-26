@@ -43,18 +43,21 @@ var ready = () => {
 	}
 
 	var removeEmailError = () => {
+		$('#user_email').text('');
 		$('#user_email').removeClass('is-danger');
 		$('.fa-envelope.email').removeClass('is-danger-icon');
 		$('.help.email').remove('');
 	}
 
 	var removePasswordError = () => {
+		$('#user_password').text('');
 		$('#user_password').removeClass('is-danger');
 		$('.fa-lock.password').removeClass('is-danger-icon');
 		$('.help.password').remove('');
 	}
 
 	var removePasswordConfirmationError = () => {
+		$('#user_password_confirmation').text('');		
 		$('#user_password_confirmation').removeClass('is-danger');
 		$('.fa-lock.password-confirmation').removeClass('is-danger-icon');
 		$('.help.password-confirmation').remove('');
