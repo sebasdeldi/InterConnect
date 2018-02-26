@@ -23,12 +23,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
         expire_data_after_sign_in!
         #respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
-      render json: {'success' => true}
+      render json: {'success': true}
     else
       clean_up_passwords resource
       set_minimum_password_length
       #respond_with resource
-      render json: {'success' => false}
+      errors = resource.errors.messages
+      render json: {'success': false, 'password_error': errors[:password], 'password_confirmation_error': errors[:password_confirmation],
+       'email_error': errors[:email]}
     end
   end
 

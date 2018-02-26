@@ -14,5 +14,12 @@
  *= require_self
  */
 
+$major-blue: #3273dc;
 
-.hidden{ display: none; }
+.hidden { display: none; }
+
+.is-form-panel { margin-top: 35px; }
+
+.is-danger-icon { color: red; }
+
+.swal-button--confirm { background-color: $major-blue }

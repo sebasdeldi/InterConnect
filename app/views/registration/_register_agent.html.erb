@@ -1,117 +1,54 @@
-<h2>Register new agent</h2>
+<div class="columns">
+  <div class="column is-half  is-offset-one-quarter">
+    
+    <nav class= 'panel is-form-panel'>
+      <p class="panel-heading">
+        Register new agent
+      </p>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true) do |f| %>
-  <%= devise_error_messages! %>
-
-  <!--role hidden field-->  
-  <%= hidden_field_tag :role, "agent" %>
-
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+      <div class='panel-block'>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true, html: {class: "control"}) do |f| %>
+          <!--role hidden field-->  
+          <%= hidden_field_tag :role, "agent" %>
 
 
-<div class="field">
-  <label class="label">Name</label>
-  <div class="control">
-    <input class="input" type="text" placeholder="Text input">
-  </div>
-</div>
+          <div class="field email">
+            <%= f.label :email, class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope email"></i>
+              </span>
+            </div>
+          </div>
 
-<div class="field">
-  <label class="label">Username</label>
-  <div class="control has-icons-left has-icons-right">
-    <input class="input is-success" type="text" placeholder="Text input" value="bulma">
-    <span class="icon is-small is-left">
-      <i class="fas fa-user"></i>
-    </span>
-    <span class="icon is-small is-right">
-      <i class="fas fa-check"></i>
-    </span>
-  </div>
-  <p class="help is-success">This username is available</p>
-</div>
+          <div class="field password">
+            <%= f.label :password, class: 'label' %>
+            <p class="control has-icons-left">
+              <%= f.password_field :password, autocomplete: "off", class: 'input' %>
+                <span class="icon is-small is-left">
+                <i class="fas fa-lock password"></i>
+              </span>
+            </p>
+          </div>
 
-<div class="field">
-  <label class="label">Email</label>
-  <div class="control has-icons-left has-icons-right">
-    <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
-    <span class="icon is-small is-left">
-      <i class="fas fa-envelope"></i>
-    </span>
-    <span class="icon is-small is-right">
-      <i class="fas fa-exclamation-triangle"></i>
-    </span>
-  </div>
-  <p class="help is-danger">This email is invalid</p>
-</div>
+          <div class="field password-confirmation">
+            <%= f.label :password_confirmation, class: 'label' %>
+            <p class="control has-icons-left">
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: 'input' %>
+                <span class="icon is-small is-left">
+                <i class="fas fa-lock password-confirmation"></i>
+              </span>
+            </p>
+          </div>
 
-<div class="field">
-  <label class="label">Subject</label>
-  <div class="control">
-    <div class="select">
-      <select>
-        <option>Select dropdown</option>
-        <option>With options</option>
-      </select>
-    </div>
-  </div>
-</div>
+          <div class="control">
+            <%= f.submit "Register", class: 'button is-link' %>
+          </div>
 
-<div class="field">
-  <label class="label">Message</label>
-  <div class="control">
-    <textarea class="textarea" placeholder="Textarea"></textarea>
-  </div>
-</div>
-
-<div class="field">
-  <div class="control">
-    <label class="checkbox">
-      <input type="checkbox">
-      I agree to the <a href="#">terms and conditions</a>
-    </label>
-  </div>
-</div>
-
-<div class="field">
-  <div class="control">
-    <label class="radio">
-      <input type="radio" name="question">
-      Yes
-    </label>
-    <label class="radio">
-      <input type="radio" name="question">
-      No
-    </label>
-  </div>
-</div>
-
-<div class="field is-grouped">
-  <div class="control">
-    <button class="button is-link">Submit</button>
-  </div>
-  <div class="control">
-    <button class="button is-text">Cancel</button>
+        <% end %>
+      </div>
+    </nav>
+   
   </div>
 </div>
