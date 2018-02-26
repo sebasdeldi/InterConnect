@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-
   # GET /resource/sign_up
   # def new
   #   super
@@ -18,16 +17,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
-        respond_with resource, location: after_sign_up_path_for(resource)
+        #respond_with resource, location: after_sign_up_path_for(resource)
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        #respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
+      render json: {'success' => true}
     else
       clean_up_passwords resource
       set_minimum_password_length
-      respond_with resource
+      #respond_with resource
+      render json: {'success' => false}
     end
   end
 
