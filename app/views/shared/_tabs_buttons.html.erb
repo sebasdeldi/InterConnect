@@ -8,12 +8,23 @@
 		    		<span><%= is_admin? ? 'Insights' : 'Operations' %></span>
 		    	</a>
 		    </li>
+
 		    <li id='second-tab' class="tab">
 		    	<a>
 		    		<span class="icon is-small"><i class="fas fa-user-plus"></i></span>
 		    		<span>Register <%= role_to_register.capitalize %></span>
 		    	</a>
 		    </li>
+
+		    <% if is_agent? %>
+			    <li id='fourth-tab' class="tab">
+			    	<a>
+			    		<span class="icon is-small"><i class="fas fa-user-plus"></i></span>
+			    		<span>Register Consignee</span>
+			    	</a>
+			    </li>
+			  <% end %>
+
 		    <li id='third-tab' class="tab">
 		    	<a>
 		    		<span class="icon is-small"><i class="fas fa-cogs"></i></span>

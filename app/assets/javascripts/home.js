@@ -22,6 +22,8 @@ var ready = () => {
 	  $('#second-tab-content').addClass('hidden');
 	  $('#first-tab-content').addClass('hidden');
 	  $('#third-tab-content').addClass('hidden');
+	  $('#fourth-tab-content').addClass('hidden');
+
 	}
 
 }

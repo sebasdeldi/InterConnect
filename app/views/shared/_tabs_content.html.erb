@@ -8,6 +8,9 @@
       <%= render 'registration/register', role: role, role_to_register: role_to_register %>
     </div>
 
+    <div class="hidden" id="fourth-tab-content">
+      <%= render 'registration/register', role: role, role_to_register: 'consignee' %>
+    </div>
 
     <div class="hidden" id="third-tab-content">
       <%= render 'shared/options' %>
