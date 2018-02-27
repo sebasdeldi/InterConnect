@@ -1,47 +1,5 @@
 <div class="section">
-
-	<div class="columns">
-		<div class="column">
-			<div class="tabs is-centered">
-			  <ul>
-			    <li id='insights-tab' class="tab is-active">
-			    	<a>
-			    		<span class="icon is-small"><i class="far fa-chart-bar"></i></span>
-			    		<span>Insights</span>
-			    	</a>
-			    </li>
-			    <li id='registerAgent-tab' class="tab">
-			    	<a>
-			    		<span class="icon is-small"><i class="fas fa-user-plus"></i></span>
-			    		<span>Register Agent</span>
-			    	</a>
-			    </li>
-			    <li id='options-tab' class="tab">
-			    	<a>
-			    		<span class="icon is-small"><i class="fas fa-cogs"></i></span>
-			    		<span>Options</span>
-			    	</a>
-			    </li>
-			  </ul>
-			</div>
-		</div>
-	</div>
-
-	<div class="columns">
-		<div class="column">
-	    <div id="insights-tab-content">
-	    </div>
-
-	    <div class="hidden" id="registerAgent-tab-content">
-	      <%= render 'registration/register_agent' %>
-	    </div>
-
-
-	    <div class="hidden" id="options-tab-content">
-	      <%= render 'shared/options' %>
-	    </div>
-		</div>
-	</div>
-
+	<%= render 'shared/tabs_buttons', role: 'admin', role_to_register: 'agent' %>
+	<%= render 'shared/tabs_content', role: 'admin', role_to_register: 'agent' %>
 </div>
 

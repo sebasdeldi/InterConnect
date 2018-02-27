@@ -11,7 +11,7 @@ var ready = () => {
 			removePasswordConfirmationError();
 			swal({
 			  title: "User registered!",
-			  text: "User registered with agent permissions",
+			  text: "User registered with the expected permissions",
 			  icon: "success",
 			  button: "Close",
 			});
@@ -20,8 +20,6 @@ var ready = () => {
 			if (data.password_error[0] != null) { passwordError(data.password_error[0]) } else { removePasswordError() }
 			if (data.password_confirmation_error[0] != null) { passwordConfirmationError(data.password_confirmation_error[0]) } else { removePasswordConfirmationError() }		
 		}
-		console.log(data)
-
 	});
 
 	var emailError = (error) => {

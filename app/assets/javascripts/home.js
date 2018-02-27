@@ -19,9 +19,9 @@ var ready = () => {
 	}
 
 	var hideAll = () => {
-	  $('#registerAgent-tab-content').addClass('hidden');
-	  $('#insights-tab-content').addClass('hidden');
-	  $('#options-tab-content').addClass('hidden');
+	  $('#second-tab-content').addClass('hidden');
+	  $('#first-tab-content').addClass('hidden');
+	  $('#third-tab-content').addClass('hidden');
 	}
 
 }
