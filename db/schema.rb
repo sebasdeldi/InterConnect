@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222182314) do
+ActiveRecord::Schema.define(version: 20180301161122) do
 
   create_table "functionalities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "role_id"
@@ -19,11 +19,11 @@ ActiveRecord::Schema.define(version: 20180222182314) do
     t.index ["role_id"], name: "index_functionalities_on_role_id"
   end
 
-  create_table "general_cargo_info", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "general_cargo_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "operation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["operation_id"], name: "index_general_cargo_info_on_operation_id"
+    t.index ["operation_id"], name: "index_general_cargo_infos_on_operation_id"
   end
 
   create_table "operations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -38,6 +38,18 @@ ActiveRecord::Schema.define(version: 20180222182314) do
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_operations_by_users_on_operation_id"
     t.index ["user_id"], name: "index_operations_by_users_on_user_id"
+  end
+
+  create_table "pieces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "type"
+    t.decimal "weight", precision: 10
+    t.decimal "height", precision: 10
+    t.decimal "width", precision: 10
+    t.decimal "depth", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "general_cargo_info_id"
+    t.index ["general_cargo_info_id"], name: "index_pieces_on_general_cargo_info_id"
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -66,8 +78,9 @@ ActiveRecord::Schema.define(version: 20180222182314) do
   end
 
   add_foreign_key "functionalities", "roles"
-  add_foreign_key "general_cargo_info", "operations"
+  add_foreign_key "general_cargo_infos", "operations"
   add_foreign_key "operations_by_users", "operations"
   add_foreign_key "operations_by_users", "users"
+  add_foreign_key "pieces", "general_cargo_infos"
   add_foreign_key "users", "roles"
 end
