@@ -63,7 +63,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
   def redirect_unless_admin
-    unless is_admin? || is_agent? || is_shipper?
+    unless is_admin? || is_representative? || is_agent?
       flash[:error] = "Only admins can do that"
       redirect_to unauthenticated_root_path
     end

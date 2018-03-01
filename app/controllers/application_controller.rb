@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :resource_name, :resource, :devise_mapping, :resource_class, :is_admin?, :is_agent?, :is_consignee?,
-    :is_shipper?
+  helper_method :resource_name, :resource, :devise_mapping, :resource_class, :is_admin?, :is_representative?, :is_shipper?,
+    :is_agent?
 
 
   # Roles detection helpers
@@ -10,16 +10,16 @@ class ApplicationController < ActionController::Base
   	current_role == 'admin' ? true : false
   end
 
-  def is_agent?
-  	current_role == 'agent' ? true : false
-  end
-
-  def is_consignee?
-  	current_role == 'consignee' ? true : false
+  def is_representative?
+  	current_role == 'representative' ? true : false
   end
 
   def is_shipper?
   	current_role == 'shipper' ? true : false
+  end
+
+  def is_agent?
+  	current_role == 'agent' ? true : false
   end
 
 
