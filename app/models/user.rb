@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   has_many :operations_by_users
   belongs_to :roles , optional: true
+
+  scope :agents, -> { where(role_id: Role.find_by(name: 'agent').id) }
 end

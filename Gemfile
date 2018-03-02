@@ -64,3 +64,6 @@ gem 'jquery-rails'
 
 # Nice toast messages gem
 gem 'toastr-rails'
+
+# Css gem
+gem "bulma-rails", "~> 0.6.2"

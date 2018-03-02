@@ -26,6 +26,8 @@ var ready = () => {
 
 	}
 
+	console.log( 'holaaa')
+
 }
 
 $(document).ready(ready);

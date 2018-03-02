@@ -1,0 +1,15 @@
+@import "bulma";
+
+$major-blue: #3273dc;
+
+.hidden { display: none; }
+
+.is-form-panel { margin-top: 35px; }
+
+.is-danger-icon { color: red; }
+
+.swal-button--confirm { background-color: $major-blue }
+
+.login-logo { margin: 35px; }
+
+.full-select { width: 100%; }

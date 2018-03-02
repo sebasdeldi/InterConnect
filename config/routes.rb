@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+
+	resources :operations_by_users, only: [:new, :create]
+ 	
  	devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
