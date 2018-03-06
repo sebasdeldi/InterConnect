@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
     :is_agent?
 
 
+
   # Roles detection helpers
   def is_admin?
   	current_role == 'admin' ? true : false
@@ -44,5 +45,17 @@ class ApplicationController < ActionController::Base
   	def current_role
   		current_role = current_user.nil? ? 'Not logged in' : Role.find(current_user.role_id).name 
   	end
+
+    def require_new_operation_permission
+      check_permission('representative', 'agent')
+    end
+
+    def check_permission(*roles)
+      unless roles.include? current_role
+        flash[:alert] = "Access denied"
+        redirect_back(fallback_location: authenticated_root_path)
+      end
+    end
+
 
 end

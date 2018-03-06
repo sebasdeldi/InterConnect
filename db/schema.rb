@@ -29,16 +29,21 @@ ActiveRecord::Schema.define(version: 20180301210917) do
   create_table "operations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "type"
+    t.string "modality"
+    t.string "status"
   end
 
   create_table "operations_by_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "user_id"
+    t.bigint "agent_id"
+    t.bigint "shipper_id"
+    t.bigint "representative_id"
     t.bigint "operation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["agent_id"], name: "index_operations_by_users_on_agent_id"
     t.index ["operation_id"], name: "index_operations_by_users_on_operation_id"
-    t.index ["user_id"], name: "index_operations_by_users_on_user_id"
+    t.index ["representative_id"], name: "index_operations_by_users_on_representative_id"
+    t.index ["shipper_id"], name: "index_operations_by_users_on_shipper_id"
   end
 
   create_table "pieces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -60,6 +65,7 @@ ActiveRecord::Schema.define(version: 20180301210917) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "company_name"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -81,7 +87,6 @@ ActiveRecord::Schema.define(version: 20180301210917) do
   add_foreign_key "functionalities", "roles"
   add_foreign_key "general_cargo_infos", "operations"
   add_foreign_key "operations_by_users", "operations"
-  add_foreign_key "operations_by_users", "users"
   add_foreign_key "pieces", "general_cargo_infos"
   add_foreign_key "users", "roles"
 end

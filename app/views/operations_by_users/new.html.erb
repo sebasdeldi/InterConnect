@@ -12,7 +12,7 @@
         		<label class="label">Cargo Agent:</label>
         	  <div class="control has-icons-left">
         	    <div class="select full-select">
-        	    	<%= f.select :user_id, options_from_collection_for_select(@agents, 'id', 'email'), {include_blank: 'Select a cargo agent'} ,{class: 'full-select'} %>
+        	    	<%= f.select :agent_id, options_from_collection_for_select(@agents, 'id', 'email'), {include_blank: 'Select a cargo agent'} ,{class: 'full-select'} %>
         	    </div>
         	    <div class="icon is-small is-left">
         	      <i class="fas fa-globe"></i>
