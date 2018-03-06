@@ -5,6 +5,7 @@ $bg-body: #f9f9f9;
 
 $red: #ee4d4d;
 $blue: #3273dc;
+$grey: #6A6F62;
 $primary-color: $blue;
 $secondary-color: $red;
 
@@ -61,37 +62,6 @@ h1, h2, h3, h4 {
   padding: 10px 0;
 }
 
-// Header
-header {	
-	background: $secondary-color;
-	padding: 10px;
-	@include prefix(box-shadow, 0 3px 3px rgba(0,0,0,0.05)); 
-	@extend %clearfix;
-
-	.logo {
-		color: $primary-color;
-		float: left;
-		font:{
-			family: $base-font-title;
-			size: 22px;
-			weight: 500;
-		}
-		
-		> span {
-			color: lighten($primary-color, 20%);
-			font-weight: 300;
-		}
-	}
-
-	.social {
-		float: right;
-		.btn {
-			font-family: "Dosis";
-			font-size: 14px;
-			margin: 10px 5px;
-		}
-	}
-}
 
 
 // Timeline
@@ -146,7 +116,7 @@ header {
 			width: 45%;
 			background: #fff;
 			padding: 20px;
-			@include prefix(box-shadow, 0 3px 0 rgba(0,0,0,0.1));
+			@include prefix(box-shadow, 3px 3px 3px 3px rgba(0,0,0,0.5));
 			@include prefix(border-radius, 5px);
 			@include prefix(transition, all .3s ease);
 
