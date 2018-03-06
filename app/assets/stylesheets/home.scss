@@ -1,5 +1,14 @@
 table{
 	margin: 25px 0;
+
+	td{
+		text-align: center;
+	}
+
+	th{
+		text-align: center !important;
+	}
+
 }
 
 table .row:hover{

@@ -1,0 +1,35 @@
+<div class='panel-block'>
+  <%= form_for operations_by_user, html: {class: "control"} do |f| %>
+  	<div class="field">
+  		<label class="label"><%= is_representative? ? 'Cargo Agent:' : 'Interworld Freight Representative' %></label>
+  	  <div class="control has-icons-left">
+  	    <div class="select full-select">
+  	    	<% if is_representative? %>
+  	    		<%= f.select :agent_id, options_from_collection_for_select(agents, 'id', 'email'), {include_blank: 'Select a cargo agent'} ,{class: 'full-select'} %>
+  	    	<% elsif is_agent? %>
+  	    		<%= f.select :representative_id, options_from_collection_for_select(representatives, 'id', 'email'), {include_blank: 'Select an Interworld Freight representative'} ,{class: 'full-select'} %>
+  	    	<% end %>
+  	    </div>
+  	    <div class="icon is-small is-left">
+  	      <i class="fas fa-globe"></i>
+  	    </div>
+  	  </div>
+  	</div>
+
+    <div class="control">
+    	<%= f.button type: 'submit', class: 'button is-success' do %>
+        <span class="icon is-small">
+          <i class="fas fa-check"></i>
+        </span>
+        <span>Create</span>
+      <% end %>
+
+    	<%= link_to authenticated_root_path, data: { turbolinks: false }, class: 'button is-danger' do %>
+      	<span>Cancel</span>
+      	<span class="icon is-small">
+      	  <i class="fas fa-times"></i>
+      	</span>
+    	<% end %>
+    </div>
+  <% end %>
+</div>
