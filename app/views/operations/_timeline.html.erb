@@ -15,12 +15,13 @@
 					</svg>
 				</div>
 				<div class="timeline-content">
-					<h2>LOREM IPSUM DOLOR</h2>
+					<h2>CARGO GENERAL INFORMATION</h2>
+					<br>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-						Atque, facilis quo maiores magnam modi ab libero praesentium blanditiis.
+						This step will trigger an email to <%= agent.company_name %> and to their Shipper (if they enabled the option) letting them know that the operation is already being handled by you and asking them to verify the information if it hasn't been provided by the Cargo Agent.
 					</p>
-					<a href="#" class="btn">button</a>
+					<br>
+					<%= link_to 'Go to step', new_general_cargo_info_path(operation_id: operation_id), data: { turbolinks: false }, class: 'button is-link' %>
 				</div>
 			</div>
 
@@ -44,7 +45,7 @@
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, facilis quo. Maiores magnam modi ab libero praesentium blanditiis consequatur aspernatur accusantium maxime molestiae sunt ipsa.
 					</p>
-					<a href="#" class="btn">button</a>
+					<a href="#" class="button is-link">button</a>
 				</div>
 			</div>
 
@@ -64,7 +65,7 @@
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, facilis quo. Maiores magnam modi ab libero praesentium blanditiis consequatur aspernatur accusantium maxime molestiae sunt ipsa.
 					</p>
-					<a href="#" class="btn">button</a>
+					<a href="#" class="button is-link">button</a>
 				</div>
 			</div>
 		</div>

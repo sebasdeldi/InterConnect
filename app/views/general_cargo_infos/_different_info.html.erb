@@ -1,0 +1,33 @@
+
+<div class="columns">
+  <div class="column is-half  is-offset-one-quarter">
+    
+    <nav class= 'panel is-form-panel hidden' id='different-info'>
+      <p class="panel-heading">
+        General Cargo Information for operation <%= params[:operation_id] %> y
+      </p>
+
+      <div class='panel-block'>
+        <%= form_for @general_cargo_info, class: 'control' do |f| %>
+
+          <div class="field email">
+            <%= f.label :pieces_number, class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.number_field :pieces_number, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope email"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="control">
+            <%= f.submit "Register", class: 'button is-link' %>
+          </div>
+
+        <% end %>
+      </div>
+    </nav>
+   
+  </div>
+</div>
+

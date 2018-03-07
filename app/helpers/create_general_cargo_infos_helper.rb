@@ -1,0 +1,2 @@
+module CreateGeneralCargoInfosHelper
+end
