@@ -4,13 +4,10 @@ var ready = () => {
 	$("#new_user").on("ajax:success", function(event) {
 
 		var detail = event.detail;
-		console.log(event.detail)
 		var data = detail[0], status = detail[1],  xhr = detail[2];
 
 		if(data.email_error == null && data.password_error == null && data.password_confirmation_error == null ){
-			removeEmailError();
-			removePasswordError();
-			removePasswordConfirmationError();
+			removeErrors();
 			swal({
 			  title: "User registered!",
 			  text: "User registered with the expected permissions",
@@ -23,6 +20,13 @@ var ready = () => {
 			if (data.password_confirmation_error[0] != null) { passwordConfirmationError(data.password_confirmation_error[0]) } else { removePasswordConfirmationError() }		
 		}
 	});
+
+
+	var removeErrors = () => {
+		removeEmailError();
+		removePasswordError();
+		removePasswordConfirmationError();
+	}
 
 	var emailError = (error) => {
 		$('#user_email').addClass('is-danger');

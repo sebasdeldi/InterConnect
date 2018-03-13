@@ -11,42 +11,42 @@
 
           <%= hidden_field_tag :operation_id, params[:operation_id] %>
 
-          <div class="field pieces_number">
+          <div class="field pieces-number-diff">
             <%= f.label 'Number of pieces', class: 'label' %>
             <div class="control has-icons-left">
-              <%= f.number_field :pieces_number, autofocus: true, class: 'input', id: 'different-info-input', min: 0, placeholder: 3 %>
+              <%= f.number_field :pieces_number, autofocus: true, class: 'input pieces-number-diff', min: 0, placeholder: 3 %>
               <span class="icon is-small is-left">
-                <i class="fas fa-envelope email"></i>
+                <i class="fas fa-envelope pieces-number-diff"></i>
               </span>
             </div>
           </div>  
 
-          <div class="field tax_id">
+          <div class="field tax-id">
             <%= f.label 'Tax id', class: 'label' %>
             <div class="control has-icons-left">
-              <%= f.text_field :tax_id, autofocus: true, class: 'input', id: 'different-info-input' %>
+              <%= f.text_field :tax_id, autofocus: true, class: 'input tax-id' %>
               <span class="icon is-small is-left">
-                <i class="fas fa-envelope email"></i>
+                <i class="fas fa-envelope tax-id"></i>
               </span>
             </div>
           </div> 
 
-          <div class="field pickup_address">
+          <div class="field pv-address">
             <%= f.label 'PickUp Address', class: 'label' %>
             <div class="control has-icons-left">
-              <%= f.text_field :pv_address, autofocus: true, class: 'input', id: 'different-info-input' %>
+              <%= f.text_field :pv_address, autofocus: true, class: 'input pv-address' %>
               <span class="icon is-small is-left">
-                <i class="fas fa-envelope email"></i>
+                <i class="fas fa-envelope pv-address"></i>
               </span>
             </div>
           </div> 
 
-          <div class="field packing_list">
+          <div class="field packing-list">
             <%= f.label 'Packing List', class: 'label' %>
             <div class="control has-icons-left">
-              <%= f.text_field :packing_list, autofocus: true, class: 'input', id: 'different-info-input' %>
+              <%= f.text_field :packing_list, autofocus: true, class: 'input packing-list' %>
               <span class="icon is-small is-left">
-                <i class="fas fa-envelope email"></i>
+                <i class="fas fa-envelope packing-list"></i>
               </span>
             </div>
           </div> 
@@ -55,9 +55,9 @@
           <div class="field invoice">
             <%= f.label 'Invoice', class: 'label' %>
             <div class="control has-icons-left">
-              <%= f.text_field :invoice, autofocus: true, class: 'input', id: 'different-info-input' %>
+              <%= f.text_field :invoice, autofocus: true, class: 'input invoice' %>
               <span class="icon is-small is-left">
-                <i class="fas fa-envelope email"></i>
+                <i class="fas fa-envelope invoice"></i>
               </span>
             </div>
           </div> 
