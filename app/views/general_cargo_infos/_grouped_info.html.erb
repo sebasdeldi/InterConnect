@@ -1,14 +1,14 @@
 
 <div class="columns">
-  <div class="column is-half  is-offset-one-quarter">
+  <div class="column is-half  is-offset-one-quarter is-8 is-offset-2">
     
-    <nav class= 'panel is-form-panel hidden' id='grouped-info'>
+    <nav class= 'panel is-form-panel hidden card-shadow' id='grouped-info'>
       <p class="panel-heading">
         General Cargo Information for operation <%= params[:operation_id] %> x
       </p>
 
       <div class='panel-block'>
-        <%= form_for @general_cargo_info, class: 'control' do |f| %>
+        <%= form_for @general_cargo_info, html: {class: "control"} do |f| %>
 
           <div class="field email">
             <%= f.label :pieces_number, class: 'label' %>

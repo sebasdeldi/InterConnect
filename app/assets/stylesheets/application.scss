@@ -2,6 +2,7 @@
 @import 'home.scss';
 @import 'timeline.scss';
 @import 'general_cargo_infos.scss';
+@import 'bulma_mods.scss';
 
 
 $major-blue: #3273dc;
@@ -17,3 +18,5 @@ $major-blue: #3273dc;
 .login-logo { margin: 35px; }
 
 .full-select { width: 100%; }
+
+.body {  background-color: #e2e1e0 !important;}

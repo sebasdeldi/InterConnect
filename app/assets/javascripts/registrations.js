@@ -1,9 +1,10 @@
 
 var ready = () => {
 
-	$("form").on("ajax:success", function(event) {
+	$("#new_user").on("ajax:success", function(event) {
 
 		var detail = event.detail;
+		console.log(event.detail)
 		var data = detail[0], status = detail[1],  xhr = detail[2];
 
 		if(data.email_error == null && data.password_error == null && data.password_confirmation_error == null ){

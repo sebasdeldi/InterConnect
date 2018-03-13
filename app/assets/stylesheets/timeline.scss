@@ -116,7 +116,7 @@ h1, h2, h3, h4 {
 			width: 45%;
 			background: #fff;
 			padding: 20px;
-			@include prefix(box-shadow, 3px 3px 3px 3px rgba(0,0,0,0.5));
+			box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 			@include prefix(border-radius, 5px);
 			@include prefix(transition, all .3s ease);
 

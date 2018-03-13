@@ -23,7 +23,6 @@ var ready = () => {
 	  $('#first-tab-content').addClass('hidden');
 	  $('#third-tab-content').addClass('hidden');
 	  $('#fourth-tab-content').addClass('hidden');
-
 	}
 
 }

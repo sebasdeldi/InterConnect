@@ -1,27 +1,72 @@
 
 <div class="columns">
-  <div class="column is-half  is-offset-one-quarter">
-    
-    <nav class= 'panel is-form-panel hidden' id='different-info'>
+  <div class="column is-half is-8 is-offset-2">
+    <nav class= 'panel is-form-panel hidden card-shadow' id='different-info'>
       <p class="panel-heading">
-        General Cargo Information for operation <%= params[:operation_id] %> y
+        General Cargo Information for operation <%= params[:operation_id] %>
       </p>
 
       <div class='panel-block'>
-        <%= form_for @general_cargo_info, class: 'control' do |f| %>
+        <%= form_with model: @general_cargo_info, id: 'different-info-form', html: {class: "control different-info"} do |f| %>
 
-          <div class="field email">
-            <%= f.label :pieces_number, class: 'label' %>
+          <%= hidden_field_tag :operation_id, params[:operation_id] %>
+
+          <div class="field pieces_number">
+            <%= f.label 'Number of pieces', class: 'label' %>
             <div class="control has-icons-left">
-              <%= f.number_field :pieces_number, autofocus: true, class: 'input' %>
+              <%= f.number_field :pieces_number, autofocus: true, class: 'input', id: 'different-info-input', min: 0, placeholder: 3 %>
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope email"></i>
               </span>
             </div>
-          </div>
+          </div>  
 
+          <div class="field tax_id">
+            <%= f.label 'Tax id', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :tax_id, autofocus: true, class: 'input', id: 'different-info-input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope email"></i>
+              </span>
+            </div>
+          </div> 
+
+          <div class="field pickup_address">
+            <%= f.label 'PickUp Address', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :pv_address, autofocus: true, class: 'input', id: 'different-info-input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope email"></i>
+              </span>
+            </div>
+          </div> 
+
+          <div class="field packing_list">
+            <%= f.label 'Packing List', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :packing_list, autofocus: true, class: 'input', id: 'different-info-input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope email"></i>
+              </span>
+            </div>
+          </div> 
+
+
+          <div class="field invoice">
+            <%= f.label 'Invoice', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :invoice, autofocus: true, class: 'input', id: 'different-info-input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope email"></i>
+              </span>
+            </div>
+          </div> 
+
+          <br>
+
+          <div id="container"></div>
           <div class="control">
-            <%= f.submit "Register", class: 'button is-link' %>
+            <%= f.submit "Register Cargo Information", class: 'button is-link' %>
           </div>
 
         <% end %>
@@ -30,4 +75,3 @@
    
   </div>
 </div>
-
