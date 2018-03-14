@@ -35,24 +35,43 @@ var ready = () => {
 
 	$("#different-info-form").on("ajax:success", function(event) {
 		var detail = event.detail;
-		var data = detail[0];
+		var data = detail[0].errors[0];
+		if (data.piece_error == undefined){
+			checkGeneralErrors(data);
+		} else {
+			checkPieceErrors(data);
+		}
+	});
 
-		if(data.tax_id_error == null && data.packing_list_error == null && data.pv_address_error == null && data.invoice_error == null && data.pieces_number_error == null ){
-			removeErrors();
+	var checkGeneralErrors = (data) => {
+		if (data.tax_id_error != null && data.packing_list_error != null && data.pv_address_error != null && data.invoice_error != null && data.pieces_number_error != null ){
+			if (data.tax_id_error[0] != null) { taxIdError(data.tax_id_error[0]) } else { removeTaxIdError() }
+			if (data.packing_list_error[0] != null) { packingListError(data.packing_list_error[0]) } else { removePackingListError() }
+			if (data.pv_address_error[0] != null) { pvAddressError(data.pv_address_error[0]) } else { removePvAddressError() }		
+			if (data.invoice_error[0] != null) { invoiceError(data.invoice_error[0]) } else { removeInvoiceError() }		
+			if (data.pieces_number_error[0] != null) { piecesNumberError(data.pieces_number_error[0]) } else { removePiecesNumberError() }
+		}
+	}
+
+
+	var checkPieceErrors = (data) => {
+		if(data.piece_error == true){
+			swal({
+			  title: "Error!",
+			  text: "Please submit all the information!",
+			  icon: "error",
+			  button: "Close",
+			});
+		}else{
 			swal({
 			  title: "Info loaded!",
 			  text: "Cargo information succesfully loaded to the system",
 			  icon: "success",
 			  button: "Close",
-			});
-		}else{
-			if (data.tax_id_error[0] != null) { taxIdError(data.tax_id_error[0]) } else { removeTaxIdError() }
-			if (data.packing_list_error[0] != null) { packingListError(data.packing_list_error[0]) } else { removePackingListError() }
-			if (data.pv_address_error[0] != null) { pvAddressError(data.pv_address_error[0]) } else { removePvAddressError() }		
-			if (data.invoice_error[0] != null) { invoiceError(data.invoice_error[0]) } else { removeInvoiceError() }		
-			if (data.pieces_number_error[0] != null) { piecesNumberError(data.pieces_number_error[0]) } else { removePiecesNumberError() }		
+			});	
+			clearFields();
 		}
-	});
+	}
 
 	var removeErrors = () => {
 		removeTaxIdError();
@@ -60,6 +79,10 @@ var ready = () => {
 		removePvAddressError();
 		removeInvoiceError();
 		removePiecesNumberError();
+	}
+
+	var clearFields = () => {
+		$('.input').val('');
 	}
 
 	var piecesNumberError = (error) => {
