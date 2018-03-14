@@ -8,9 +8,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    role_id = Role.where(name: params[:role]).first.id
+    role = Role.where(name: params[:role]).first
     build_resource(sign_up_params)
-    resource.role_id = role_id
+    resource.role_id = role.id
     resource.save
     yield resource if block_given?
     if resource.persisted?
@@ -29,7 +29,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       set_minimum_password_length
       #respond_with resource
       errors = resource.errors.messages
-      render json: {'success': false, 'password_error': errors[:password], 'password_confirmation_error': errors[:password_confirmation],
+      render json: {'role': role.name, 'success': false, 'password_error': errors[:password], 'password_confirmation_error': errors[:password_confirmation],
        'email_error': errors[:email]}
     end
   end

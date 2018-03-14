@@ -69,7 +69,7 @@ var ready = () => {
 			  icon: "success",
 			  button: "Close",
 			});	
-			clearFields();
+			$('.input').val('');
 		}
 	}
 
@@ -79,10 +79,6 @@ var ready = () => {
 		removePvAddressError();
 		removeInvoiceError();
 		removePiecesNumberError();
-	}
-
-	var clearFields = () => {
-		$('.input').val('');
 	}
 
 	var piecesNumberError = (error) => {

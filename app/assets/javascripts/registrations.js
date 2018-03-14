@@ -1,68 +1,76 @@
 
 var ready = () => {
 
-	$("#new_user").on("ajax:success", function(event) {
+	$(".agent").on("ajax:success", function(event,) {
+		onSubmit(event, 'agent');
+	});
+
+	$(".shipper").on("ajax:success", function(event) {
+		onSubmit(event, 'shipper');
+	});
+
+	
+	var onSubmit = (event, roleName) => {
 
 		var detail = event.detail;
 		var data = detail[0], status = detail[1],  xhr = detail[2];
 
 		if(data.email_error == null && data.password_error == null && data.password_confirmation_error == null ){
-			removeErrors();
 			swal({
 			  title: "User registered!",
 			  text: "User registered with the expected permissions",
 			  icon: "success",
 			  button: "Close",
 			});
+			$('.input').val('');
+			removeErrors(roleName);
 		}else{
-			if (data.email_error[0] != null) { emailError(data.email_error[0]) } else { removeEmailError() }
-			if (data.password_error[0] != null) { passwordError(data.password_error[0]) } else { removePasswordError() }
-			if (data.password_confirmation_error[0] != null) { passwordConfirmationError(data.password_confirmation_error[0]) } else { removePasswordConfirmationError() }		
+			if (data.email_error[0] != null) { emailError(data.email_error[0], data.role) } else { removeEmailError(data.role) }
+			if (data.password_error[0] != null) { passwordError(data.password_error[0], data.role) } else { removePasswordError(data.role) }
+			if (data.password_confirmation_error[0] != null) { passwordConfirmationError(data.password_confirmation_error[0], data.role) } else { removePasswordConfirmationError(data.role) }		
 		}
-	});
-
-
-	var removeErrors = () => {
-		removeEmailError();
-		removePasswordError();
-		removePasswordConfirmationError();
 	}
 
-	var emailError = (error) => {
-		$('#user_email').addClass('is-danger');
-		$('.fa-envelope.email').addClass('is-danger-icon');
-		if ($('.help.email').length === 0) { $('.field.email').append('<p class="help is-danger email">' + error + '</p>'); }
+
+	var removeErrors = (role) => {
+		console.log(role)
+		removeEmailError(role);
+		removePasswordError(role);
+		removePasswordConfirmationError(role);
 	}
 
-	var passwordError = (error) => {
-		$('#user_password').addClass('is-danger');
-		$('.fa-lock.password').addClass('is-danger-icon');
-		if ($('.help.password').length === 0) { $('.field.password').append('<p class="help is-danger password">' + error + '</p>'); }
+	var emailError = (error, role) => {
+		$('.email.'+role).addClass('is-danger');
+		$('.fa-envelope.email.'+role).addClass('is-danger-icon');
+		if ($('.help.email.'+role).length === 0) { $('.field.email.'+ role).append('<p class="help is-danger email ' + role + '">' + error + '</p>'); }
 	}
 
-	var passwordConfirmationError = (error) => {
-		$('#user_password_confirmation').addClass('is-danger');
-		$('.fa-lock.password-confirmation').addClass('is-danger-icon');
-		if ($('.help.password-confirmation').length === 0) { $('.field.password-confirmation').append('<p class="help is-danger password-confirmation">' + error + '</p>'); }
+	var passwordError = (error, role) => {
+		$('.password.'+role).addClass('is-danger');
+		$('.fa-lock.password.'+role).addClass('is-danger-icon');
+		if ($('.help.password.'+role).length === 0) { $('.field.password.'+role).append('<p class="help is-danger password ' + role + '">'+ error + '</p>'); }
 	}
 
-	var removeEmailError = () => {
-		$('#user_email').text('');
-		$('#user_email').removeClass('is-danger');
-		$('.fa-envelope.email').removeClass('is-danger-icon');
+	var passwordConfirmationError = (error, role) => {
+		$('.password-confirmation.'+role).addClass('is-danger');
+		$('.fa-lock.password-confirmation.'+role).addClass('is-danger-icon');
+		if ($('.help.password-confirmation.'+role).length === 0) { $('.field.password-confirmation.'+role).append('<p class="help is-danger password-confirmation ' + role + '">'+ error + '</p>'); }
+	}
+
+	var removeEmailError = (role) => {
+		$('.email.'+role).removeClass('is-danger');
+		$('.fa-envelope.email.'+role).removeClass('is-danger-icon');
 		$('.help.email').remove('');
 	}
 
-	var removePasswordError = () => {
-		$('#user_password').text('');
-		$('#user_password').removeClass('is-danger');
+	var removePasswordError = (role) => {
+		$('.password.'+role).removeClass('is-danger');
 		$('.fa-lock.password').removeClass('is-danger-icon');
 		$('.help.password').remove('');
 	}
 
-	var removePasswordConfirmationError = () => {
-		$('#user_password_confirmation').text('');		
-		$('#user_password_confirmation').removeClass('is-danger');
+	var removePasswordConfirmationError = (role) => {
+		$('.password-confirmation.'+role).removeClass('is-danger');
 		$('.fa-lock.password-confirmation').removeClass('is-danger-icon');
 		$('.help.password-confirmation').remove('');
 	}
