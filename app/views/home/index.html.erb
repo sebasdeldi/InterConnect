@@ -1,0 +1,9 @@
+<% if is_admin? %>
+	<%= render 'admin_index' %>
+<% elsif is_representative? %>
+	<%= render 'representative_index' %>
+<% elsif is_shipper? %>
+	<%= render 'shipper_index' %>
+<% elsif is_agent? %>
+	<%= render 'agent_index' %>
+<% end %>

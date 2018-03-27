@@ -1,0 +1,4 @@
+<% if is_representative? %>
+	<%= render 'timeline', operation_id: @operation.id, agent: @agent %>
+<% elsif is_agent? %>
+<% end %>

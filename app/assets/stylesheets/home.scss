@@ -1,0 +1,23 @@
+table{
+	margin: 25px 0;
+
+	td{
+		text-align: center;
+	}
+
+	th{
+		text-align: center !important;
+	}
+
+}
+
+table .row:hover{
+	background-color: #3273dc;
+	color: white;
+}
+
+.new-operation{
+	position: fixed;
+	bottom: 25px;
+	right: 25px;
+}

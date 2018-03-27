@@ -1,0 +1,24 @@
+
+<div class="columns">
+	<div class="column">
+    <div id="first-tab-content">
+      <% if is_representative? || is_agent? %>
+        <%= render 'shared/representative&agent_operations.html' %>
+      <% else %>
+        <%= render 'shared/operations' %>
+      <% end %>
+    </div>
+
+    <div class="hidden" id="second-tab-content">
+      <%= render 'registration/register', role: role, role_to_register: role_to_register %>
+    </div>
+
+    <div class="hidden" id="fourth-tab-content">
+      <%= render 'registration/register', role: role, role_to_register: 'shipper' %>
+    </div>
+
+    <div class="hidden" id="third-tab-content">
+      <%= render 'shared/options' %>
+    </div>
+	</div>
+</div>
