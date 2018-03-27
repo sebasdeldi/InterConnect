@@ -1,7 +1,7 @@
 
 <div class="columns">
-  <div class="column is-half is-8 is-offset-2">
-    <nav class= 'panel is-form-panel hidden card-shadow' id='different-info'>
+  <div class="column <%= is_operation_completed?(params[:operation_id]) ? 'is-6' : 'is-half is-8 is-offset-2' %>">
+    <nav class= 'panel is-form-panel hidden card-shadow different-info' id='different-info' >
       <p class="panel-heading">
         General Cargo Information for operation <%= params[:operation_id] %>
       </p>
@@ -72,6 +72,29 @@
         <% end %>
       </div>
     </nav>
-   
   </div>
+
+  <% if is_operation_completed?(params[:operation_id]) %>
+    <div class="column is-6">
+      <nav class= 'panel is-form-panel card-shadow different-info hidden' id='different-info' >
+        <p class="panel-heading">
+          Alerts for operation <%= params[:operation_id] %>
+        </p>
+
+        <div class='panel-block'>
+          <article class="message is-warning">
+            <div class="message-header">
+              <p>Warning</p>
+              <button class="delete" aria-label="delete"></button>
+            </div>
+            <div class="message-body">
+              <p>
+                Please have in count that a record for this step of the <b>operation identified with the number <%= params[:operation_id] %></b> was previously saved in our system, and by submiting new information, the old data would be overriden.  
+              </p>
+            </div>
+          </article>
+        </div>
+      </nav>
+    </div>
+  <% end %>
 </div>

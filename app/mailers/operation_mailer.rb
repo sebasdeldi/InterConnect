@@ -1,0 +1,2 @@
+class OperationMailer < ApplicationMailer
+end

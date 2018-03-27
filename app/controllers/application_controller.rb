@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :resource_name, :resource, :devise_mapping, :resource_class, :is_admin?, :is_representative?, :is_shipper?,
-    :is_agent?
+    :is_agent?, :is_operation_completed?
 
 
 
@@ -39,6 +39,12 @@ class ApplicationController < ActionController::Base
  
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
+  end
+
+
+  # Operation helpers
+  def is_operation_completed?(operation_id)
+    GeneralCargoInfo.find_by(operation_id: operation_id).nil? ? false : true
   end
 
   private

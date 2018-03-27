@@ -6,9 +6,10 @@ var ready = () => {
 
 	$(".form-button").on("click", (e) => {
 		var formName = (e.currentTarget.attributes[1].nodeValue);
+		console.log(formName)
 		hideAll();
-	  $("#" + formName).removeClass("hidden");
-	  $("#" + formName).addClass("unhidden");
+	  $("." + formName).removeClass("hidden");
+	  $("." + formName).addClass("unhidden");
 	});
 
 	var hideAll = () => {
@@ -16,6 +17,8 @@ var ready = () => {
 	  $("#grouped-info").addClass("hidden");
 	  $("#type-info").addClass("hidden");
 	}
+
+	// ERROR HANDLING LOGIC
 
 	$('.pieces-number-diff').on("change keydown paste input", () => {
 		addFields($('.input.pieces-number-diff').val())
@@ -70,6 +73,9 @@ var ready = () => {
 			  button: "Close",
 			});	
 			$('.input').val('');
+			setTimeout(function() {
+			  window.location.href = "/operations/"+data.operation_id;
+			}, 2500);
 		}
 	}
 

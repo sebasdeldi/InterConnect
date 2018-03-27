@@ -19,6 +19,14 @@ $base-font-color: #726f77;
 // Timeline
 $timeline-color: $primary-color;
 
+.step-completed {
+	background-color: #1bb213 !important;
+}
+
+.button.step-completed { color: white;}
+
+.step-completed-no-bg.timeline-content::before{ border-left: 7px solid #1bb213 !important; }
+
 
 // Mixins and Placeholders
 %clearfix {
