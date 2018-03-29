@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :user_imports
+
 	resources :operations_by_users, only: [:new, :create]
 	resources :general_cargo_infos, only: [:new, :create]
 	resources :operations, only: [:show]

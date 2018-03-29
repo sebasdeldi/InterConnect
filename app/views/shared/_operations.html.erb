@@ -1,1 +1,21 @@
-OPERATIONS PANEL FOR ADMIN AND SHIPPER
+<% User.all.each do |user| %>
+	<ul>
+		<li><b>EMAIL:</b> <%= user.email %> </li>
+		<li><b>COMPANY NAME:</b> <%= user.company_name%> </li>
+		<li><b>CONTACT NAME:</b> <%= user.contact_first_name %> </li>
+		<li><b>CONTACT LAST NAME:</b> <%= user.contact_last_name%> </li>
+		<li><b>PHONE:</b> <%= user.phone_number%> </li>
+		<li><b>ADDRESS:</b> <%= user.address%> </li>
+		<li><b>STATE:</b> <%= user.state%> </li>
+		<li><b>CONTRY:</b> <%= user.country%> </li>
+		<li><b>CITY:</b> <%= user.city%> </li>
+		<li><b>ACCOUNT TYPE:</b> <%= user.account_type%> </li>
+		<li><b>ZIP CODE: </b><%= user.zip_code%> </li>
+	</ul>
+	<br>
+	<br>
+<% end %>
+
+
+
+

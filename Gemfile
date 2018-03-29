@@ -67,3 +67,7 @@ gem 'toastr-rails'
 
 # Css gem
 gem "bulma-rails", "~> 0.6.2"
+
+# Xls and xlsm reader gem
+gem "roo"
+gem "roo-xls"

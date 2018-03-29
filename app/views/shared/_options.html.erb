@@ -8,4 +8,13 @@
     </span>
     Log Out 
   <% end %>
+
+  <% if is_admin? %>
+	  <%= link_to(new_user_import_path, class: "panel-block is-active", data: { turbolinks: false} ) do %>        
+	    <span class="panel-icon">
+	      <i class="fas fa-upload"></i>
+	    </span>
+	    Import Users 
+	  <% end %>
+	<% end %>
 </nav>

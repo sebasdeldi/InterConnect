@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :email, uniqueness: true
+
   has_many :agent, class_name: 'OperationsByUser'
   has_many :shipper, class_name: 'OperationsByUser'
   has_many :representative, class_name: 'OperationsByUser'

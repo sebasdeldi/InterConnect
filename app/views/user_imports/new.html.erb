@@ -1,0 +1,67 @@
+
+
+
+<div class="columns">
+  <div class="column is-half  is-offset-one-quarter">
+    
+    <nav class= 'panel is-form-panel card-shadow'>
+      <p class="panel-heading">
+        Import Users
+      </p>
+
+      <div class='panel-block'>
+
+        <div class="content">
+        
+
+          <div class="notification is-warning">
+            <button class="delete"></button>
+            <p> An <strong>EXCEL</strong> file can be used to import records.</p> 
+            <p>Please use the following format (keep the first row exactly as it is) in order to ensure a succesful data importation:</p>
+            <p>
+              <a href="https://drive.google.com/file/d/1VJbO-jNSz7YX7iNeBQk7VwmzNnBMIoFo/view?usp=sharing" target="blank">
+                <i class="far fa-file-excel"></i>  
+              </a> 
+            </p>
+          
+
+              If an already existent <strong>EMAIL</strong> is supplied it will update the matching record instead of creating a new one.
+            </p>
+          </div>
+
+
+          <%= form_for @user_import do |f| %>
+            <% if @user_import.errors.any? %>
+              <div id="error_explanation">
+                <div class="notification is-danger import">
+                  <button class="delete"></button>
+                  <%= pluralize(@user_import.errors.count, "error") %> prohibited this import from completing:
+                  <ul>
+                    <% @user_import.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                  </p>
+                </div>
+              </div>
+            <% end %>
+
+            <br>
+            <br>
+            <div class="field">
+              <%= f.file_field :file %>
+            </div>
+            <a class="button is-link submit">
+              Import Users
+            </a>
+
+            <br>
+            <br>
+          <% end %>
+      </div>
+    </nav>
+   
+  </div>
+</div>
+
+
