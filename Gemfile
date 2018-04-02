@@ -46,7 +46,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   # Use mysql as the database for Active Record
   #gem 'mysql2', '>= 0.3.18', '< 0.5'
-  gem 'pg', '~> 0.18.4'
 end
 
 group :development do
@@ -58,9 +57,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :production do
-  gem 'pg', '~> 0.18.4'
-end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -77,3 +73,5 @@ gem "bulma-rails", "~> 0.6.2"
 # Xls and xlsm reader gem
 gem "roo"
 gem "roo-xls"
+
+gem 'pg', '~> 0.18.4'
