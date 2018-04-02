@@ -7,7 +7,7 @@ class UserImport
   def save(file)
   	imported_users = imported_users(file)
 		if imported_users.map(&:valid?).all?
-		  imported_users.each(&:save)
+		 imported_users.each(&:save)
 		  true
 		else
 		  imported_users.each_with_index do |user, index|
