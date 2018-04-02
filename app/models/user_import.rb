@@ -9,18 +9,24 @@ class UserImport
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      user = User.find_by_id(row["email"]) || User.new
-      user.attributes = row.to_hash
-      unless user.save
-      	puts '========================================================================================================'
-      	puts '========================================================================================================'
-      	puts 'NO SE GUARDÓ'
-      	puts 'NO SE GUARDÓ'
-      	puts 'NO SE GUARDÓ'
-      	puts 'NO SE GUARDÓ'
-      	puts 'NO SE GUARDÓ'
-      	puts '========================================================================================================'
-      	puts '========================================================================================================'
+      if !User.find_by_id(row["email"]).nil?
+      	user = User.new
+      	user.attributes = row.to_hash
+
+      else
+      	user = User.find_by_id(row["email"])
+      	user.attributes = row.to_hash
+      	unless user.update
+      		puts '========================================================================================================'
+      		puts '========================================================================================================'
+      		puts 'NO SE GUARDÓ'
+      		puts 'NO SE GUARDÓ'
+      		puts 'NO SE GUARDÓ'
+      		puts 'NO SE GUARDÓ'
+      		puts 'NO SE GUARDÓ'
+      		puts '========================================================================================================'
+      		puts '========================================================================================================'
+      	end
       end
     end
   end
