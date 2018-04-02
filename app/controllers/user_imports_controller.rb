@@ -7,7 +7,7 @@ class UserImportsController < ApplicationController
 
   def create
     @user_import = UserImport.new
-  	if @user_import.save(params[:user_import][:file])
+  	if @user_import.save_imported_users(params[:user_import][:file])
       redirect_to authenticated_root_path, notice: "Imported records successfully."
     else
       render :new
