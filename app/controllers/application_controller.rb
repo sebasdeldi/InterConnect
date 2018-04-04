@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :resource_name, :resource, :devise_mapping, :resource_class, :is_admin?, :is_representative?, :is_shipper?,
-    :is_agent?, :is_operation_completed?
+    :is_agent?, :is_operation_completed?, :is_fcl_exw?
 
 
 
@@ -45,6 +45,10 @@ class ApplicationController < ActionController::Base
   # Operation helpers
   def is_operation_completed?(operation_id)
     GeneralCargoInfo.find_by(operation_id: operation_id).nil? ? false : true
+  end
+
+  def is_fcl_exw?(operation_id)
+    Operation.find(operation_id).modality == 'FCL-EXW' ? true : false
   end
 
   private

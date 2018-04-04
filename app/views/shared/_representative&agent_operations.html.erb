@@ -12,7 +12,7 @@
   <tbody>
     <% @operations_by_user.each do |operation_by_user| %>
       <tr class='row'>
-        <td data-link="<%= operation_path(operation_by_user.operation_id) %>"><%= operation_by_user.operation_id %></td>
+        <td><%= operation_by_user.operation_id %></td>
         <td data-link="<%= operation_path(operation_by_user.operation_id) %>"><%= operation_by_user.operation.modality %></td>
         <td data-link="<%= operation_path(operation_by_user.operation_id) %>"><%= operation_by_user.operation.status %></td>
         <td data-link="<%= operation_path(operation_by_user.operation_id) %>"><%= is_representative? ? operation_by_user.agent.company_name : operation_by_user.representative.company_name %></td>
