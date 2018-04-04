@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180301210917) do
+ActiveRecord::Schema.define(version: 20180404160234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "fcl_exw_cargo_infos", force: :cascade do |t|
+    t.bigint "operation_id"
+    t.string "loading_address"
+    t.string "container_size"
+    t.datetime "loading_datetime"
+    t.float "gross_weight"
+    t.text "commercial_description"
+    t.boolean "cargo_hazardous"
+    t.string "hazardous_document"
+    t.string "schedule_b_number"
+    t.string "ein"
+    t.string "pickup_reference"
+    t.string "contact_name"
+    t.string "contact_email"
+    t.string "contact_phone"
+    t.string "contact_company"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["operation_id"], name: "index_fcl_exw_cargo_infos_on_operation_id"
+  end
 
   create_table "functionalities", force: :cascade do |t|
     t.bigint "role_id"
@@ -101,6 +122,7 @@ ActiveRecord::Schema.define(version: 20180301210917) do
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 
+  add_foreign_key "fcl_exw_cargo_infos", "operations"
   add_foreign_key "functionalities", "roles"
   add_foreign_key "general_cargo_infos", "operations"
   add_foreign_key "operations_by_users", "operations"

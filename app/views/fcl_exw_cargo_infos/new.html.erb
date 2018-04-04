@@ -1,0 +1,196 @@
+
+<div class="columns">
+  <div class="column <%= is_fcl_exw_info_stage_completed?(params[:operation_id]) ? 'is-6' : 'is-half is-8 is-offset-2' %>">
+    <nav class= 'panel is-form-panel card-shadow' >
+      <p class="panel-heading">
+        FCL - EXW Cargo information for operation: <%= params[:operation_id] %>
+      </p>
+
+      <div class='panel-block'>
+        <%= form_with model: @fcl_cargo_info, id: 'different-info-form', html: {class: "control"} do |f| %>
+
+          <%= hidden_field_tag :operation_id, params[:operation_id] %>
+
+          <div class="field">
+            <%= f.label 'Loading Address:', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :loading_address, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>  
+
+
+          
+          <div class="field">
+            <%= f.label 'Container Type:', class: 'label' %>
+            <div class="control has-icons-left">
+              <div class="select full-select">
+
+                <%= f.select :container_size, options_for_select(["20'", "40'", "45'", "20' NOR", "40' NOR", "Flat Rack", "Open Top"],"20'"), {}, class: 'full-select' %>
+              </div>
+              <div class="icon is-small is-left">
+                <i class="fas fa-globe"></i>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="field">
+            <%= f.label 'Loading Date & Time:', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :loading_datetime, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div> 
+
+
+
+          <div class="field">
+            <%= f.label 'Gross Weight:', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.number_field :gross_weight, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div> 
+
+
+          <div class="field">
+            <%= f.label 'Commercial Description:', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :commercial_description, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div> 
+
+
+
+          <div class="field">
+            <%= f.label 'Is Cargo Hazardous?', class: 'label' %>
+            <div class="control has-icons-left">
+              <div class="select full-select">
+
+                <%= f.select :cargo_hazardous, options_for_select(["NO", "YES"], "NO"), {}, class: 'full-select' %>
+              </div>
+              <div class="icon is-small is-left">
+                <i class="fas fa-globe"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label 'Schedule B Number or Tariff Code:', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :schedule_b_number, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div> 
+
+          <div class="field">
+            <%= f.label 'EIN:', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :ein, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label 'Pick Up Reference:', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :pickup_reference, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <%= f.label 'Contact Company:', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :contact_company, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>  
+
+
+          <div class="field">
+            <%= f.label 'Contact Name:', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :contact_name, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>  
+
+          <div class="field">
+            <%= f.label 'Contact Email:', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :contact_email, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>  
+
+
+          <div class="field">
+            <%= f.label 'Contact Phone:', class: 'label' %>
+            <div class="control has-icons-left">
+              <%= f.text_field :contact_phone, autofocus: true, class: 'input' %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>  
+
+
+          <br>
+
+          <div id="container"></div>
+          <div class="control">
+            <%= f.submit "Register Cargo Information", class: 'button is-link' %>
+          </div>
+
+        <% end %>
+      </div>
+    </nav>
+  </div>
+
+  <% if is_fcl_exw_info_stage_completed?(params[:operation_id]) %>
+    <div class="column is-6">
+      <nav class= 'panel is-form-panel card-shadow' >
+        <p class="panel-heading">
+          Alerts for operation <%= params[:operation_id] %>
+        </p>
+
+        <div class='panel-block'>
+          <article class="message is-warning">
+            <div class="message-header">
+              <p>Warning</p>
+              <button class="delete" aria-label="delete"></button>
+            </div>
+            <div class="message-body">
+              <p>
+                Please have in count that a record for this step of the <b>operation identified with the number <%= params[:operation_id] %></b> was previously saved in our system, and by submiting new information, the old data would be overriden.  
+              </p>
+            </div>
+          </article>
+        </div>
+      </nav>
+    </div>
+  <% end %>
+</div>

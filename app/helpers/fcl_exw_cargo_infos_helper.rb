@@ -1,0 +1,2 @@
+module FclExwCargoInfosHelper
+end
