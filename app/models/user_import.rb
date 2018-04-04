@@ -9,24 +9,30 @@ class UserImport
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      if !User.find_by_id(row["email"]).nil?
-      	user = User.new
-      	user.attributes = row.to_hash
+      user_selection = User.find_by(email: row["email"].downcase)
+      user = user_selection.nil? ? User.new : user_selection
 
-      else
-      	user = User.find_by_id(row["email"])
-      	user.attributes = row.to_hash
-      	unless user.update
-      		puts '========================================================================================================'
-      		puts '========================================================================================================'
-      		puts 'NO SE GUARDÓ'
-      		puts 'NO SE GUARDÓ'
-      		puts 'NO SE GUARDÓ'
-      		puts 'NO SE GUARDÓ'
-      		puts 'NO SE GUARDÓ'
-      		puts '========================================================================================================'
-      		puts '========================================================================================================'
-      	end
+      if row["account_type"] == "Customers"
+      	user.role_id = 4
+      elsif row["account_type"] == "Forwarding Agents"
+      	user.role_id = 3
+      elsif row["account_type"] == "Vendors"
+      	user.role_id = 5
+      elsif row["account_type"] == "Carriers"
+      	user.role_id = 6
+      end
+      
+      user.attributes = row.to_hash
+      unless user.save
+      	puts '========================================================================================================'
+      	puts '========================================================================================================'
+      	puts 'NO SE GUARDÓ'
+      	puts 'NO SE GUARDÓ'
+      	puts 'NO SE GUARDÓ'
+      	puts 'NO SE GUARDÓ'
+      	puts 'NO SE GUARDÓ'
+      	puts '========================================================================================================'
+      	puts '========================================================================================================'
       end
     end
   end
@@ -39,4 +45,6 @@ class UserImport
     else raise "Unknown file type: #{file.original_filename}"
     end
   end
+
 end
+

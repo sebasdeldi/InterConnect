@@ -12,14 +12,17 @@
 
 ActiveRecord::Schema.define(version: 20180301210917) do
 
-  create_table "functionalities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "functionalities", force: :cascade do |t|
     t.bigint "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["role_id"], name: "index_functionalities_on_role_id"
   end
 
-  create_table "general_cargo_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "general_cargo_infos", force: :cascade do |t|
     t.bigint "operation_id"
     t.integer "pieces_number"
     t.string "invoice"
@@ -31,14 +34,14 @@ ActiveRecord::Schema.define(version: 20180301210917) do
     t.index ["operation_id"], name: "index_general_cargo_infos_on_operation_id"
   end
 
-  create_table "operations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "operations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "modality"
     t.string "status"
   end
 
-  create_table "operations_by_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "operations_by_users", force: :cascade do |t|
     t.bigint "agent_id"
     t.bigint "shipper_id"
     t.bigint "representative_id"
@@ -51,25 +54,25 @@ ActiveRecord::Schema.define(version: 20180301210917) do
     t.index ["shipper_id"], name: "index_operations_by_users_on_shipper_id"
   end
 
-  create_table "pieces", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "pieces", force: :cascade do |t|
     t.string "sort"
-    t.decimal "weight", precision: 10
-    t.decimal "height", precision: 10
-    t.decimal "width", precision: 10
-    t.decimal "depth", precision: 10
+    t.decimal "weight"
+    t.decimal "height"
+    t.decimal "width"
+    t.decimal "depth"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "general_cargo_info_id"
     t.index ["general_cargo_info_id"], name: "index_pieces_on_general_cargo_info_id"
   end
 
-  create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade do |t|
     t.string "company_name"
     t.string "contact_first_name"
     t.string "contact_last_name"
