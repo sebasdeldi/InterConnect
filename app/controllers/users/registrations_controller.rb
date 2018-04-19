@@ -1,20 +1,19 @@
-# frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # GET /resource/sign_up
-  # def new
-  #   super
-  # end
 
-  # POST /resource
   def create
     role = Role.where(name: params[:role]).first
-    build_resource(sign_up_params)
-    resource.role_id = role.id
-    resource.save
+    if params[:password].present?
+      user = User.new(user_strong_params.merge(role_id: role.id))
+    else
+      user = User.new(user_strong_params.merge(role_id: role.id, password: '12345678'))
+    end
+
+    user.save
+
     yield resource if block_given?
-    if resource.persisted?
-      if resource.active_for_authentication?
+    if user.persisted?
+      if user.active_for_authentication?
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
         #respond_with resource, location: after_sign_up_path_for(resource)
@@ -28,44 +27,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       set_minimum_password_length
       #respond_with resource
-      errors = resource.errors.messages
+      errors = user.errors.messages
       render json: {'role': role.name, 'success': false, 'password_error': errors[:password], 'password_confirmation_error': errors[:password_confirmation],
        'email_error': errors[:email]}
     end
   end
 
-  # GET /resource/edit
-  # def edit
-  #   super
-  # end
 
-  # PUT /resource
-  # def update
-  #   super
-  # end
-
-  # DELETE /resource
-  # def destroy
-  #   super
-  # end
-
-  # GET /resource/cancel
-  # Forces the session data which is usually expired after sign
-  # in to be expired now. This is useful if the user wants to
-  # cancel oauth signing in/up in the middle of the process,
-  # removing all OAuth session data.
-  # def cancel
-  #   super
-  # end
 
   before_action :authenticate_user!, :redirect_unless_admin,  only: [:new, :create]
   skip_before_action :require_no_authentication
 
   private
+
+  def user_strong_params
+    params.require(:user).permit(:company_name, :contact_first_name, :contact_last_name, :phone_number, :address, :state, :country, :city, :account_type, :zip_code,
+    :email, :password, :outlook_password )
+  end
+
   def redirect_unless_admin
     unless is_admin? || is_representative? || is_agent?
       flash[:error] = "Only admins can do that"
-      redirect_to unauthenticated_root_path, turbolinks: false
+      redirect_to unauthenticated_root_path
     end
   end
 

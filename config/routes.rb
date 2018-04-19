@@ -6,7 +6,10 @@ Rails.application.routes.draw do
 	resources :general_cargo_infos, only: [:new, :create]
 	resources :fcl_exw_cargo_infos, only: [:new, :create]
 	resources :operations, only: [:show]
- 	
+	post "/fcl_exw_info", to: "fcl_exw_cargo_infos#request_info"
+	post "/fcl_exw_confirm_info", to: "fcl_exw_cargo_infos#confirm_info"
+
+
  	devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'

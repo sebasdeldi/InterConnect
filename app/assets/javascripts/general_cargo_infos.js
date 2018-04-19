@@ -1,9 +1,6 @@
 
 // GENERAL INFO FORM CHOOSING LOGIC
-
-
-var ready = () => {
-
+document.addEventListener("turbolinks:load", function() {
 	$(".form-button").on("click", (e) => {
 		var formName = (e.currentTarget.attributes[1].nodeValue);
 		console.log(formName)
@@ -146,8 +143,5 @@ var ready = () => {
 		$('.fa-envelope.pieces-number-diff').removeClass('is-danger-icon');
 		$('.help.pieces-number-diff').remove('');
 	}
+});
 
-}
-
-$(document).ready(ready);
-$(document).on('page:load', ready);

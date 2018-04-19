@@ -14,7 +14,22 @@
 //= require turbolinks
 //= require jquery3
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require toastr
 //= require_tree .
 
+
+document.addEventListener("turbolinks:load", function() {
+  FontAwesome.dom.i2svg();
+
+  $(".show-modal").click(function() {
+  	console.log('click!')
+    $(".modal").addClass("is-active");  
+  });
+
+  $(".close-modal").click(function() {
+    $(".modal").removeClass("is-active");
+  });
+
+});
 

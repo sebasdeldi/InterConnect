@@ -10,27 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404160234) do
+ActiveRecord::Schema.define(version: 20180409194330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
 
   create_table "fcl_exw_cargo_infos", force: :cascade do |t|
     t.bigint "operation_id"
     t.string "loading_address"
     t.string "container_size"
-    t.datetime "loading_datetime"
+    t.date "loading_date"
+    t.time "loading_time"
     t.float "gross_weight"
     t.text "commercial_description"
-    t.boolean "cargo_hazardous"
+    t.string "cargo_hazardous"
     t.string "hazardous_document"
     t.string "schedule_b_number"
     t.string "ein"
     t.string "pickup_reference"
-    t.string "contact_name"
-    t.string "contact_email"
-    t.string "contact_phone"
-    t.string "contact_company"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_fcl_exw_cargo_infos_on_operation_id"
@@ -60,6 +72,8 @@ ActiveRecord::Schema.define(version: 20180404160234) do
     t.datetime "updated_at", null: false
     t.string "modality"
     t.string "status"
+    t.boolean "fcl_exw_info_requested", default: false
+    t.boolean "fcl_exw_info_confirmed", default: false
   end
 
   create_table "operations_by_users", force: :cascade do |t|
@@ -106,6 +120,7 @@ ActiveRecord::Schema.define(version: 20180404160234) do
     t.string "zip_code"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "outlook_password"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

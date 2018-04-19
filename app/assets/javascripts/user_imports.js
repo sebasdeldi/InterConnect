@@ -1,6 +1,5 @@
 
-
-var ready = () => {
+document.addEventListener("turbolinks:load", function() {
 
 	$(function() {
 	  $('.submit').click(function() {
@@ -8,9 +7,5 @@ var ready = () => {
 	    $('.submit').addClass('is-loading');
 	  });
 	});
+});
 
-
-}
-
-$(document).ready(ready);
-$(document).on("page:load", ready);

@@ -1,0 +1,19 @@
+
+<div class='timeline'>
+	<div class="container">
+    <h1 class="project-name">
+    	OPERATION ID: <b><%= operation_id %></b> 
+    	<br>
+    	CARGO AGENT: <b><%= agent.company_name.upcase %> </b> 
+    	<br>
+    	SHIPPER: <b><%= shipper.company_name.upcase %> </b>  
+    </h1>
+		<div id="timeline">
+			<%= render 'fcl_exw_initial_timeline_item', operation_id: operation_id, agent: agent, shipper: shipper %>
+			<%= render 'fcl_exw_request_cargo_info' , operation_id: operation_id, agent: agent, shipper: shipper%>
+			<%= render 'fcl_exw_info_received.html', operation_id: operation_id, agent: agent, shipper: shipper %>
+			<%= render 'fcl_exw_info_timeline_item', operation_id: operation_id, agent: agent, shipper: shipper %>
+		</div>
+	</div>	
+</div>
+	

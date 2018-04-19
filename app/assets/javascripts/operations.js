@@ -1,11 +1,9 @@
 // CLICKEABLE TABLE ROWS
 
 
-var ready = () => {
+document.addEventListener("turbolinks:load", function() {
 	$('.row').on('click', (e) => {
 		window.location = e.target.dataset.link;
 	});
-}
+});
 
-$(document).ready(ready);
-$(document).on("page:load", ready);

@@ -12,9 +12,30 @@
 		<h2 class="<%= is_fcl_exw_info_stage_completed?(operation_id) ? 'step-completed' : '' %>">CARGO GENERAL INFORMATION</h2>
 		<br>
 		<p>
-			This step will trigger an email to <%= agent.company_name %> and to their Shipper (if they enabled the option) letting them know that the operation is already being handled by you and asking them to verify the information if it hasn't been provided by the Cargo Agent.
+			<center>
+				<i class="fas fa-truck-loading timeline-card-icon <%= is_fcl_exw_info_stage_completed?(operation_id) ? 'step-completed-icon' : '' %>""></i>
+			</center>
+			<br>
+			Please load to the system the information that your shipper (<b><%= shipper.company_name %></b>) confirmed regarding the cargo issued by the agent <b><%= agent.company_name %></b>. 
+			<br>
+			<br>
+			<article class="message is-warning">
+			  <div class="message-header">
+			    <p><i class="fas fa-exclamation-triangle"> </i>   Warning</p>
+			  </div>
+			  <div class="message-body">
+			  	<ul>
+			  		<li>
+			  			- This information will be stored in our Magaya database, generating a new Booking Order.
+			  		</li>
+			  		<br>
+			  		<li>
+			  			- The information provided here, can be edited at any moment.
+			  		</li>
+			  	</ul>
+			  </div>
+			</article>
 		</p>
-		<br>
-		<%= link_to 'Go to step', new_fcl_exw_cargo_info_path(operation_id: operation_id), data: { turbolinks: false }, class:is_fcl_exw_info_stage_completed?(operation_id) ? 'button step-completed' : 'button is-link'  %>
+		<%= link_to is_fcl_exw_info_stage_completed?(operation_id) ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_cargo_info_path(operation_id: operation_id), class:is_fcl_exw_info_stage_completed?(operation_id) ? 'button step-completed' : 'button is-link'  %>
 	</div>
 </div>

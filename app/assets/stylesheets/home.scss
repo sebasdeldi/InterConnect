@@ -16,8 +16,21 @@ table .row:hover{
 	color: white;
 }
 
-.new-operation{
+.fixed-bottom-button{
 	position: fixed;
 	bottom: 25px;
 	right: 25px;
+}
+
+
+
+.middle-icon{
+	font-size: 56px;
+	text-align: center;
+	color: #4a4a4a;
+}
+
+.middle-icon:hover{
+	cursor: pointer;
+	font-size: 68px;
 }

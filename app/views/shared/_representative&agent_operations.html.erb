@@ -5,6 +5,7 @@
       <th>Type</th>
       <th>Status</th>
       <th><%= is_representative? ? 'Agent' : 'Representative' %></th>
+      <th>Shipper</th>
       <th>Creation Date</th>
     </tr>
   </thead>
@@ -12,10 +13,11 @@
   <tbody>
     <% @operations_by_user.each do |operation_by_user| %>
       <tr class='row'>
-        <td><%= operation_by_user.operation_id %></td>
+        <td data-link="<%= operation_path(operation_by_user.operation_id) %>"><%= operation_by_user.operation_id %></td>
         <td data-link="<%= operation_path(operation_by_user.operation_id) %>"><%= operation_by_user.operation.modality %></td>
         <td data-link="<%= operation_path(operation_by_user.operation_id) %>"><%= operation_by_user.operation.status %></td>
         <td data-link="<%= operation_path(operation_by_user.operation_id) %>"><%= is_representative? ? operation_by_user.agent.company_name : operation_by_user.representative.company_name %></td>
+        <td data-link="<%= operation_path(operation_by_user.operation_id) %>"><%= operation_by_user.shipper.company_name %></td>
         <td data-link="<%= operation_path(operation_by_user.operation_id) %>"><%= operation_by_user.operation.created_at.to_date %></td>
       </tr>
     <% end %>
@@ -27,6 +29,6 @@
 
 <div class="columns">
 	<div class="column">
-		<%= link_to 'New Operation', new_operations_by_user_path, data: { turbolinks: false }, class: 'button is-link new-operation' %>
+		<%= link_to 'NEW OPERATION', new_operations_by_user_path, class: 'button is-link fixed-bottom-button' %>
 	</div>
 </div>

@@ -16,6 +16,7 @@ class OperationsByUsersController < ApplicationController
 		def set_variables
 			@operations_by_user = OperationsByUser.new
 			@agents = User.agents
+			@shippers = User.shippers
 			@representatives = User.representatives
 		end
 
@@ -24,7 +25,7 @@ class OperationsByUsersController < ApplicationController
 				operation = Operation.create(status: 'In process (starting stage)', modality: params[:modality])
 				@operations_by_user = OperationsByUser.create(strong_params_for_representatives.merge(operation_id: operation.id, representative_id: current_user.id))
 				flash[:notice] = "Operation successfuly created."
-				redirect_to authenticated_root_path, turbolinks: false
+				redirect_to authenticated_root_path
 			else
 				flash[:alert] = "Please choose a valid agent."
 				render :new
@@ -36,7 +37,7 @@ class OperationsByUsersController < ApplicationController
 				operation = Operation.create(status: 'In process (starting stage)', modality: params[:modality])
 				@operations_by_user = OperationsByUser.create(strong_params_for_agents.merge(operation_id: operation.id, agent_id: current_user.id))
 				flash[:notice] = "Operation successfuly created."
-				redirect_to authenticated_root_path, turbolinks: false
+				redirect_to authenticated_root_path
 			else
 				flash[:alert] = "Please choose a valid agent."
 				render :new
@@ -44,7 +45,7 @@ class OperationsByUsersController < ApplicationController
 		end
 
 		def strong_params_for_representatives
-			params.require(:operations_by_user).permit(:agent_id)
+			params.require(:operations_by_user).permit(:agent_id, :shipper_id)
 		end
 
 		def strong_params_for_agents

@@ -2,7 +2,9 @@
 @import 'home.scss';
 @import 'timeline.scss';
 @import 'general_cargo_infos.scss';
+@import 'fcl_exw_cargo_infos.scss';
 @import 'bulma_mods.scss';
+@import 'jquery.ui.all';
 
 
 $major-blue: #3273dc;
@@ -17,7 +19,10 @@ $major-blue: #3273dc;
 
 .login-logo { margin: 35px; }
 
+.mid-select { width: 45%; }
+
 .full-select { width: 100%; }
+
 
 .body {  background-color: #e2e1e0 !important;}
 
@@ -28,3 +33,12 @@ $major-blue: #3273dc;
 .is-danger.import { height: 300px !important; overflow: hidden;}
 
 .is-danger.import:hover { height: 300px !important; overflow: auto;}
+
+.text-joiner {line-height: 2;}
+
+
+.modal-card:hover{
+	overflow-y: auto;
+}
+
+

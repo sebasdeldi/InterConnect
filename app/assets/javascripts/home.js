@@ -1,9 +1,7 @@
 
 // TABS LOGIC
 
-
-var ready = () => {
-
+document.addEventListener("turbolinks:load", function() {
 	$('.tab').on('click', (e) => {
 		var tabName = (e.currentTarget.attributes[0].nodeValue);
 		removeActive();
@@ -24,8 +22,4 @@ var ready = () => {
 	  $('#third-tab-content').addClass('hidden');
 	  $('#fourth-tab-content').addClass('hidden');
 	}
-
-}
-
-$(document).ready(ready);
-$(document).on("page:load", ready);
+});
