@@ -72,8 +72,11 @@ ActiveRecord::Schema.define(version: 20180409194330) do
     t.datetime "updated_at", null: false
     t.string "modality"
     t.string "status"
+    t.float "steps_number"
+    t.float "current_step"
     t.boolean "fcl_exw_info_requested", default: false
     t.boolean "fcl_exw_info_confirmed", default: false
+    t.boolean "fcl_exw_quotation_confirmed", default: false
   end
 
   create_table "operations_by_users", force: :cascade do |t|

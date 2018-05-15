@@ -1,0 +1,45 @@
+<%= render 'shared/charts_control_bar', modality_content: modality_content, search_content: search_content, path: path, operations: operations %>
+<div class=" "> 
+
+	<div class="columns">
+	  <div class="column">
+	    <button class="accordion">
+	    	ALL
+	    	<span id='newest-tag' class="tag is-rounded inline-tag"> <b> <%= operations_count operations.first %> </b></span>
+	  	</button>
+	    <div class="accordion-panel">
+	    	<br>
+	    	<br>
+	      <%= column_chart operations.first %>
+	      <br>
+	      <br>
+	    </div>
+	    <br>
+	    <button class="accordion">
+	    	COMPLETED
+	    	<span id='newest-tag' class="tag is-rounded inline-tag"> <b><%= operations_count operations.second %></b></span>
+	  	</button>
+	    <div class="accordion-panel">
+	    	<br>
+	    	<br>
+	      <%= column_chart operations.second %>
+	      <br>
+	      <br>
+	    </div>
+	    <br>
+	    <button class="accordion">
+	    	IN PROGRESS
+	    	<span id='newest-tag' class="tag is-rounded inline-tag"> <b><%= operations_count operations.third %></b></span>
+	    </button>
+	    <div class="accordion-panel">
+	    	<br>
+	    	<br>
+	      <%= column_chart operations.third %>
+	      <br>
+	      <br>
+	    </div>
+	    <br>
+	  </div>
+	</div>
+</div>
+

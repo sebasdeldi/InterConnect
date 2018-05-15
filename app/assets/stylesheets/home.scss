@@ -18,8 +18,13 @@ table .row:hover{
 
 .fixed-bottom-button{
 	position: fixed;
-	bottom: 25px;
+	bottom: 50px;
 	right: 25px;
+}
+
+.fixed-bottom-button.follow-up-email{
+	height: 50px;
+	bottom: 0 !important;
 }
 
 

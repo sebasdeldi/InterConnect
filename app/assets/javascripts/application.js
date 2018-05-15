@@ -16,6 +16,8 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require toastr
+//= require Chart.bundle
+//= require chartkick
 //= require_tree .
 
 
@@ -23,12 +25,13 @@ document.addEventListener("turbolinks:load", function() {
   FontAwesome.dom.i2svg();
 
   $(".show-modal").click(function() {
-  	console.log('click!')
-    $(".modal").addClass("is-active");  
+  	var modal_type = this.classList[this.classList.length-1]
+    $(".modal." + modal_type).addClass("is-active");  
   });
 
   $(".close-modal").click(function() {
-    $(".modal").removeClass("is-active");
+  	var modal_type = this.classList[this.classList.length-1]
+    $(".modal." + modal_type).removeClass("is-active");
   });
 
 });

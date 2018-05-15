@@ -1,0 +1,62 @@
+
+<a class="show-modal button is-link fixed-bottom-button follow-up-email">LAST CONTACT WITH CLIENTS WAS ON: <b> MAY 36, 2018</b></a>
+
+<div class="modal follow-up-email">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">oelo negrito</p>
+      <button class="delete close-modal follow-up-email" aria-label="close"></button>
+    </header>
+
+    <section class="modal-card-body">
+    	
+      <article class="message is-primary">
+        <div class="message-header">
+          <p>AGENT</p>
+        </div>
+        <div class="message-body">
+          <p>
+            <b>Company Name:</b> <%= agent.company_name %>
+          </p>
+          <br>
+          <p>
+            <b>Email Address:</b> <%= agent.email %> 
+          </p>
+          <br>
+          <p>
+            <b>Phone Number:</b> <%= agent.phone_number %> 
+          </p>
+          <br>
+          <p>
+            <b>Contact Name:</b> <%= agent.contact_first_name %> <%= agent.contact_last_name %>
+          </p>
+        </div>
+      </article>
+      <br>
+      <article class="message is-primary">
+        <div class="message-header">
+          <p>SHIPPER</p>
+        </div>
+        <div class="message-body">
+          <p>
+            <b>Company Name:</b> <%= shipper.company_name %>
+          </p>
+          <br>
+          <p>
+            <b>Email Address:</b> <%= shipper.email %> 
+          </p>
+          <br>
+          <p>
+            <b>Phone Number:</b> <%= shipper.phone_number %> 
+          </p>
+          <br>
+          <p>
+            <b>Contact Name:</b> <%= shipper.contact_first_name %> <%= agent.contact_last_name %>
+          </p>
+        </div>
+      </article>
+    </section>
+    <br>
+  </div>
+</div>

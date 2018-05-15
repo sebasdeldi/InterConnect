@@ -1,24 +1,28 @@
 <div class='panel-block'>
   <%= form_for operations_by_user, html: {class: "control"} do |f| %>
-  	<div class="field">
-  		<label class="label"><%= is_representative? ? 'Cargo Agent:' : 'Interworld Freight Representative' %></label>
-  	  <div class="control has-icons-left">
-  	    <div class="select full-select">
-  	    	<% if is_representative? %>
-  	    		<%= f.select :agent_id, options_for_select(agents.map{|agent| ["#{agent.company_name} <#{agent.email}>", agent.id]}), {include_blank: 'SELECT A CARGO AGENT'} ,{class: 'full-select'} %>
-  	    	<% elsif is_agent? %>
-  	    		<%= f.select :representative_id, options_from_collection_for_select(representatives, 'id', 'email'), {include_blank: 'Select an Interworld Freight representative'} ,{class: 'full-select'} %>
-  	    	<% end %>
-  	    </div>
-  	    <div class="icon is-small is-left">
-  	      <i class="fas fa-globe"></i>
-  	    </div>
-  	  </div>
-  	</div>
+
+
+    <label class="label">Cargo Agent:</label>
+    <div class="field is-grouped">
+      <div class="control has-icons-left">
+        <div class="select">
+          <%= f.select :agent_id, options_for_select(agents.map{|agent| ["#{agent.company_name} <#{agent.email}>", agent.id]}), {include_blank: 'SELECT A CARGO AGENT'} ,{class: ''} %>
+        </div>
+        <div class="icon is-small is-left">
+          <i class="fas fa-globe"></i>
+        </div>
+      </div>
+      <p class="control text-joiner"> OR </p>
+      <p class="control">
+        <a class="button is-link show-modal agent">
+          ADD NEW AGENT
+        </a>
+      </p>
+    </div>
+
 
 
     <label class="label">Shipper:</label>
-
     <div class="field is-grouped">
       <div class="control has-icons-left">
         <div class="select">
@@ -30,7 +34,7 @@
       </div>
       <p class="control text-joiner"> OR </p>
       <p class="control">
-        <a class="button is-link show-modal">
+        <a class="button is-link show-modal shipper">
           ADD NEW SHIPPER
         </a>
       </p>
@@ -43,7 +47,7 @@
       <div class="control has-icons-left">
         <div class="select full-select">
 
-          <%= select_tag :modality, options_for_select(["FCL – EXW"], "FCL – EXW"), class: 'full-select' %>
+          <%= select_tag :modality, options_for_select(["FCL - EXW"], "FCL - EXW"), class: 'full-select' %>
         </div>
         <div class="icon is-small is-left">
           <i class="fas fa-globe"></i>
@@ -72,158 +76,8 @@
 </div>
 
 
+<%= render 'new_user_modal', user_type: 'agent' %>
 
-<div class="modal">
-  <div class="modal-background"></div>
-  <div class="modal-card">
-    <header class="modal-card-head">
-      <p class="modal-card-title">CREATE NEW SHIPPER</p>
-      <button class="delete close-modal" aria-label="close"></button>
-    </header>
+<%= render 'new_user_modal', user_type: 'shipper' %>
 
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name) , remote: true, html: {class: "control shipper-registration" }) do |f| %>
-
-      <section class="modal-card-body">
-
-
-        <br>
-        <article class="message is-warning">
-          <div class="message-header">
-            <p><i class="fas fa-exclamation-triangle"> </i>   Warning</p>
-          </div>
-          <div class="message-body">
-            - The fields marked with an asterisk ('*') must be filled in.
-            <br>
-            <br>
-            - You may complete or update the other fields later.
-          </div>
-        </article>
-        <br>
-
-        <!--role hidden field-->  
-        <%= hidden_field_tag :role, 'shipper' %>
-
-
-        <div class="field shipper">
-          <label class= 'label'> * Email: </label>
-          <div class="control has-icons-left">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "email input shipper" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope email shipper"></i>
-            </span>
-          </div>
-        </div>
-
-        <div class="field shipper">
-          <label class= 'label'> * Company Name: </label>
-          <div class="control has-icons-left">
-            <%= f.text_field :company_name, autofocus: true, autocomplete: "email", class: "email input shipper" %>
-            <span class="icon is-small is-left">
-              <i class="far fa-building"></i>
-            </span>
-          </div>
-        </div>
-
-
-        <div class="field shipper">
-          <label class= 'label'> * Company Contact Phone Number: </label>
-          <div class="control has-icons-left">
-            <%= f.text_field :phone_number, autofocus: true, autocomplete: "email", class: "email input shipper" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-phone"></i>
-            </span>
-          </div>
-        </div>
-
-        <label class= 'label'> Company Contact Names: </label>
-        <div class="field is-grouped shipper">
-          <div class="control has-icons-left">
-            <%= f.text_field :contact_first_name, autofocus: true, autocomplete: "email", class: "email input shipper", placeholder: "FIRST NAME" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-user-circle"></i>
-            </span>
-          </div>
-          <div class="control has-icons-left">
-            <%= f.text_field :contact_first_name, autofocus: true, autocomplete: "email", class: "email input shipper", placeholder: "SECOND NAME" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-user-circle"></i>
-            </span>
-          </div>
-        </div>
-
-
-
-        <div class="field shipper">
-          <label class= 'label'> Address: </label>
-          <div class="control has-icons-left">
-            <%= f.text_field :address, autofocus: true, autocomplete: "email", class: "email input shipper" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-map-signs"></i>
-            </span>
-          </div>
-        </div>
-
-        <div class="field shipper">
-          <label class= 'label'> Country: </label>
-          <div class="control has-icons-left">
-            <%= f.text_field :country, autofocus: true, autocomplete: "email", class: "email input shipper" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-globe"></i>
-            </span>
-          </div>
-        </div>
-
-
-        <div class="field shipper">
-          <label class= 'label'> State: </label>
-          <div class="control has-icons-left">
-            <%= f.text_field :state, autofocus: true, autocomplete: "email", class: "email input shipper" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-globe"></i>
-            </span>
-          </div>
-        </div>
-
-
-        <div class="field shipper">
-          <label class= 'label'> City: </label>
-          <div class="control has-icons-left">
-            <%= f.text_field :city, autofocus: true, autocomplete: "email", class: "email input shipper" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-globe"></i>
-            </span>
-          </div>
-        </div>
-
-        <div class="field shipper">
-          <label class= 'label'>  Zip Code: </label>
-          <div class="control has-icons-left">
-            <%= f.text_field :zip_code, autofocus: true, autocomplete: "email", class: "email input shipper" %>
-            <span class="icon is-small is-left">
-              <i class="fas fa-globe"></i>
-            </span>
-          </div>
-        </div>
-
-      </section>
-
-      <footer class="modal-card-foot">
-        <%= f.button type: 'submit', class: 'button is-success' do %>
-          <span>CREATE</span>
-          <span class="icon is-small">
-            <i class="fas fa-check"></i>
-          </span>
-        <% end %>
-
-        <button class="button close-modal is-danger">
-          <span>CANCEL</span>
-          <span class="icon is-small">
-            <i class="fas fa-times"></i>
-          </span>
-        </button>
-      </footer>
-
-    <% end %>
-  </div>
-</div>

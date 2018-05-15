@@ -81,3 +81,5 @@ gem 'pg', '~> 0.18.4'
 gem 'delayed_job_active_record'
 
 gem 'jquery-ui-sass-rails'
+gem 'chartkick'
+gem 'groupdate'

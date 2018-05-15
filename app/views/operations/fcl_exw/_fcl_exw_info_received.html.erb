@@ -16,7 +16,7 @@
 		<br>
 		<p>
 			<center>
-				<i class="far fa-check-circle timeline-card-icon <%= is_fcl_exw_info_confirmed?(operation_id) ? 'step-completed-icon' : '' %>""></i>
+				<i class="far fa-file-alt timeline-card-icon <%= is_fcl_exw_info_confirmed?(operation_id) ? 'step-completed-icon' : '' %>""></i>
 			</center>
 
 			Please confirm that you have received the cargo information from your cargo agent
@@ -40,6 +40,6 @@
 				<%= hidden_field_tag 'agent_id', agent.id %>
 				<%= submit_tag 'CONFIRM', class: "button is-link #{is_fcl_exw_info_confirmed?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_info_confirmed?(operation_id)  %>
 			<% end %>
-
+		</p>
 	</div>
 </div>

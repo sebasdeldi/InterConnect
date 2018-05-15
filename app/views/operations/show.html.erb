@@ -1,4 +1,15 @@
-<% if is_representative? %>
+
+<% if is_representative? || is_admin? %>
+	<div class="container">
+		<br>
+		<br>
+		<nav class="breadcrumb" aria-label="breadcrumbs">
+		  <ul>
+		    <li><%= link_to "Operation Records List", is_admin? ? general_records_path : representative_path  %></li>
+		    <li class="is-active"><%= link_to "Operation Number " + @operation.id.to_s, operation_path(@operation.id) %></li>
+		  </ul>
+		</nav>
+	</div>
 	<%= render 'timeline', operation_id: @operation.id, agent: @agent, shipper: @shipper %>
 <% elsif is_agent? %>
 <% end %>

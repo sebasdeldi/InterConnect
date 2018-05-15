@@ -1,0 +1,52 @@
+<%= render 'shared/records_control_bar', status_content: status_content , modality_content: modality_content, search_content: search_content, operations: operations, path: path %>
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Identifier</th>
+      <th>Type</th>
+      <th>Progress</th>
+      <th>Status</th>
+      <th><%= is_representative? ? 'Agent' : 'Representative' %></th>
+      <th>Shipper</th>
+      <th>Creation Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% operations.each do |operation| %>
+      <tr class='row'>
+        <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+          <%= operation.operation_id %>
+        </td>
+        <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+          <%= operation.operation.modality %>
+        </td>
+        <td data-link="<%= operation_path(operation.operation_id) %>">
+          <div class="progress">
+            <span class="progress-val"><%= progress_percentage(operation.operation_id) %>%</span>
+            <span class="progress-bar"><span class="progress-in" style="width: <%= progress_percentage(operation.operation_id) %>%"></span></span>
+          </div>
+        </td>
+        <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+          <%= operation.operation.status %>
+        </td>
+        <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+          <%= is_representative? ? operation.agent.company_name : operation.representative.company_name %>
+        </td>
+        <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+          <%= operation.shipper.company_name %>
+        </td>
+        <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+          <%= operation.operation.created_at.to_date %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<div class="columns">
+	<div class="column">
+		<%= link_to 'NEW OPERATION', new_operations_by_user_path, class: 'button is-link fixed-bottom-button' %>
+	</div>
+</div>

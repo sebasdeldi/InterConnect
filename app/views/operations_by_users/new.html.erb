@@ -1,12 +1,22 @@
-<div class="columns">
-  <div class="column is-10 is-offset-1">
-    
-    <nav class= 'panel is-form-panel card-shadow'>
-      <p class="panel-heading">
-        Create new operation
-      </p>
-      <%= render 'new_form', operations_by_user: @operations_by_user, agents: @agents, representatives: @representatives, shippers: @shippers %>
-    </nav>
-   
-  </div>
+<div class="container is-widescreen"> 
+
+	<div class="columns">
+	  <div class="column is-10 is-offset-1">
+	    <br>
+	    <br>
+	    <nav class="breadcrumb" aria-label="breadcrumbs">
+	      <ul>
+	        <li><%= link_to "Home", representative_path  %></li>
+	        <li class="is-active"><%= link_to "New Operation", new_operations_by_user_path %></li>
+	      </ul>
+	    </nav>
+	    <nav class= 'panel is-form-panel card-shadow'>
+	      <p class="panel-heading">
+	        Create new operation
+	      </p>
+	      <%= render 'new_form', operations_by_user: @operations_by_user, agents: @agents, representatives: @representatives, shippers: @shippers %>
+	    </nav>
+	   
+	  </div>
+	</div>
 </div>

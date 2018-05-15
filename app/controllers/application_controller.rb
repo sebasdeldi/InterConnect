@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :resource_name, :resource, :devise_mapping, :resource_class, :is_admin?, :is_representative?, :is_shipper?,
-    :is_agent?, :is_operation_completed?, :is_fcl_exw?, :is_fcl_exw_info_stage_completed?, :is_fcl_exw_info_requested?, :is_fcl_exw_info_confirmed?
+    :is_agent?, :is_operation_completed?, :is_fcl_exw?, :is_fcl_exw_info_stage_completed?, :is_fcl_exw_info_requested?, :is_fcl_exw_info_confirmed?,
+    :is_pricing_representative?, :is_fcl_exw_quotation_confirmed?
 
 
 
@@ -22,6 +23,11 @@ class ApplicationController < ActionController::Base
   def is_agent?
   	current_role == 'agent' ? true : false
   end
+
+  def is_pricing_representative?
+    current_role == 'pricing_representative' ? true : false
+  end
+
 
 
   # Devise helpers
@@ -53,7 +59,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_fcl_exw?(operation_id)
-    Operation.find(operation_id).modality == 'FCL – EXW' ? true : false
+    Operation.find(operation_id).modality == 'FCL - EXW' ? true : false
   end
 
   def is_fcl_exw_info_requested?(operation_id)
@@ -62,6 +68,10 @@ class ApplicationController < ActionController::Base
 
   def is_fcl_exw_info_confirmed?(operation_id)
     Operation.find(operation_id).fcl_exw_info_confirmed
+  end
+
+  def is_fcl_exw_quotation_confirmed?(operation_id)
+    Operation.find(operation_id).fcl_exw_quotation_confirmed
   end
 
   private

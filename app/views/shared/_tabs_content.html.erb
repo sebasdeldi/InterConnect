@@ -1,11 +1,9 @@
 
-<div class="columns">
-	<div class="column">
     <div id="first-tab-content">
       <% if is_representative? || is_agent? %>
-        <%= render 'shared/representative&agent_operations.html' %>
+        <%= render 'shared/operations_records_list', status_content: status_content, modality_content: modality_content, search_content: search_content, path: representative_path, operations: operations %>
       <% else %>
-        <%= render 'shared/operations' %>
+        <%= render 'shared/charts_selector', modality_content: modality_content, search_content: search_content %>
       <% end %>
     </div>
 
@@ -20,5 +18,4 @@
     <div class="hidden" id="third-tab-content">
       <%= render 'shared/options' %>
     </div>
-	</div>
-</div>
+

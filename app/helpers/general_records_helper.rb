@@ -1,0 +1,2 @@
+module GeneralRecordsHelper
+end

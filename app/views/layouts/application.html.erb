@@ -22,8 +22,9 @@
       <% if flash[:notice] %>
         <%= javascript_tag "toastr.success('#{notice}', 'Success')" %>
       <% end %>
-      <%= yield %>   
     </div>
+    <%= yield %>   
+
   </body>
 </html>
 
