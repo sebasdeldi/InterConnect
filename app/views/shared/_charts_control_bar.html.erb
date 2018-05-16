@@ -38,22 +38,16 @@
         	<%= select_tag :modality, options_for_select([ "ALL", "FCL - EXW" ], modality_content ), { onchange: 'this.form.submit();' } %>
         </div>
       </div>
-
-      <div class="column">
-        <h1 class="title white-font">
-          Search
-        </h1>
-        <div class="field has-addons">
-          <div class="control">
-          	<%= text_field_tag :search, search_content, class: "input", placeholder: "Agent or Shipper" %>
-          </div>
-          <div class="control">
-          	<%= button_tag type: "submit", class: "button is-dark" do %>
-          	  <i class="fas fa-search"></i>
-          	<% end %>
+      <% if path == "/admin/representatives_charts"  %>
+        <div class="column">
+          <h1 class="title white-font">
+            Traffic
+          </h1>
+          <div class="select">
+            <%= select_tag :representative_id, options_for_select(User.representatives.map { |user| [user.company_name, user.id] }, representative_id ), { onchange: 'this.form.submit();' } %>
           </div>
         </div>
-	    </div>
+      <% end %>
   	<% end %>
   </div>
 </div>

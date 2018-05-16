@@ -32,13 +32,14 @@ class Operation < ApplicationRecord
 		sort_operations(sort_param, operations)
 	end
 
-	def fetch_charts (date_range ,modality_param=nil, search_param=nil)
+	def fetch_charts (date_range ,modality_param=nil, search_param=nil, representative_id_param=nil)
 		if modality_param == "ALL"
 			modality_param = nil
 		end
-		all_operations = query_operations(set_operations, date_range ,modality_param, search_param)
-		comleted_operations = query_operations(set_operations.where('operations.status =?', 'COMPLETED'), date_range ,modality_param, search_param)
-		in_progress_operations = query_operations(set_operations.where.not('operations.status =?', 'COMPLETED'), date_range ,modality_param, search_param)
+
+		all_operations = query_operations(set_operations, date_range ,modality_param, nil, search_param, representative_id_param, nil)
+		comleted_operations = query_operations(set_operations.where('operations.status =?', 'COMPLETED'), date_range ,modality_param, nil, search_param, representative_id_param, nil)
+		in_progress_operations = query_operations(set_operations.where.not('operations.status =?', 'COMPLETED'), date_range ,modality_param, nil,search_param, representative_id_param, nil)
 		charts_info = [
 			set_charts_date_range(all_operations, date_range), 
 			set_charts_date_range(comleted_operations, date_range), 
@@ -158,6 +159,17 @@ class Operation < ApplicationRecord
 				.references(:operations)
 		end
 
+		def query_by_representative(operations, representative_id)
+			operations.where(representative_id: representative_id)
+		end
+
+		def query_by_representative_and_modality(operations, representative_id_param, modality_param)
+			operations.where(representative_id: representative_id)
+				.where('operations.modality = ?', modality_param)
+				.includes(:operation)
+				.references(:operations)
+		end
+
 		def sort_operations(sort_param, operations)
 			if sort_param == "newest"
 				operations.order(created_at: :desc)
@@ -173,7 +185,11 @@ class Operation < ApplicationRecord
 		end
 
 
-		def query_operations(operations=nil, sort_param=nil ,modality_param=nil, status_param=nil, search_param=nil, current_user=nil)
+		def query_operations(operations=nil, sort_param=nil ,modality_param=nil, status_param=nil, search_param=nil, representative_id_param=nil, current_user=nil)
+			puts representative_id_param
+			puts modality_param
+			puts is_search_empty?(search_param)
+			puts status_param
 			if !modality_param.nil? && status_param.nil? && is_search_empty?(search_param)
 				query_by_modality(operations, modality_param)
 			elsif !status_param.nil? && modality_param.nil? && is_search_empty?(search_param)
@@ -188,6 +204,10 @@ class Operation < ApplicationRecord
 				query_by_status_and_search(operations, status_param, search_param, current_user)
 			elsif !status_param.nil? && !is_search_empty?(search_param) && !modality_param.nil?
 				query_by_status_and_modality_and_search(operations, modality_param, status_param, search_param, current_user)
+			elsif modality_param.nil? && !representative_id_param.nil?
+				query_by_representative(operations, representative_id_param)
+			elsif !modality_param.nil? && !representative_id_param.nil?
+				query_by_representative_and_modality(operations, representative_id_param, modality_param)
 			else
 				operations
 			end
