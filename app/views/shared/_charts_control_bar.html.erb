@@ -38,7 +38,7 @@
         	<%= select_tag :modality, options_for_select([ "ALL", "FCL - EXW" ], modality_content ), { onchange: 'this.form.submit();' } %>
         </div>
       </div>
-      <% if path == "/admin/representatives_charts"  %>
+      <% if path == representatives_charts_path  %>
         <div class="column">
           <h1 class="title white-font">
             Traffic
@@ -48,6 +48,18 @@
           </div>
         </div>
       <% end %>
+
+      <% if path == customers_charts_path  %>
+        <div class="column">
+          <h1 class="title white-font">
+            Customer
+          </h1>
+          <div class="select">
+            <%= select_tag :customer_id, options_for_select((User.agents + User.shippers).map { |user| [user.company_name, user.id] }, customer_id ), { onchange: 'this.form.submit();' } %>
+          </div>
+        </div>
+      <% end %>
+
   	<% end %>
   </div>
 </div>

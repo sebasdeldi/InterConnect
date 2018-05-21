@@ -5,9 +5,10 @@ class RepresentativesRecordsController < ApplicationController
 		@modality_content = cookies[:modality]
 		@status_content = cookies[:status]
 		@search_content = cookies[:search]
-		
+		@representative_id = cookies[:representative_id]
 		operation = Operation.new
-		@operations = operation.fetch_operations(cookies[:sort_param], @modality_content, @status_content, @search_content, nil)
+		@operations = operation.fetch_operations(cookies[:sort_param], @modality_content, @status_content, @search_content, nil, @representative_id)
+
   end
 
 

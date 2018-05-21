@@ -1,0 +1,18 @@
+
+<div class="breadcrumb-container">
+	<br>
+	<br>
+	<nav class="breadcrumb" aria-label="breadcrumbs">
+	  <ul>
+	    <li><%= link_to "Insights", admin_path %></li>
+	    <li><%= link_to "Traffics Charts", representatives_charts_path %></li>
+	    <li class="is-active"> <a href="#"><b><%= User.find(@representative_id).company_name %> </b></a></li>
+	  </ul>
+	</nav>
+</div>
+
+
+<div class="">
+	<%= render 'shared/operations_records_list', status_content: @status_content, modality_content: @modality_content, search_content: @search_content, path: representatives_records_path, operations: @operations %>
+</div>
+

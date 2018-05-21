@@ -6,10 +6,12 @@
       <th>Type</th>
       <th>Progress</th>
       <th>Status</th>
-      <th><%= is_representative? ? 'Agent' : 'Traffic' %></th>
-      <% if is_admin? %>
-        <th> Agent </th>
+
+      <% if is_admin? && path != representatives_records_path %>
+        <th>Traffic</th>
       <% end %>
+
+      <th> Agent </th>
       <th>Shipper</th>
       <th>Creation Date</th>
     </tr>
@@ -25,22 +27,22 @@
           <%= operation.operation.modality %>
         </td>
         <td data-link="<%= operation_path(operation.operation_id) %>">
-          <div class="progress">
-            <span class="progress-val"><%= progress_percentage(operation.operation_id) %>%</span>
-            <span class="progress-bar"><span class="progress-in" style="width: <%= progress_percentage(operation.operation_id) %>%"></span></span>
+          <div data-link="<%= operation_path(operation.operation_id) %>" class="progress">
+            <span data-link="<%= operation_path(operation.operation_id) %>" class="progress-val"><%= progress_percentage(operation.operation_id) %>%</span>
+            <span data-link="<%= operation_path(operation.operation_id) %>" class="progress-bar"><span class="progress-in" style="width: <%= progress_percentage(operation.operation_id) %>%"></span></span>
           </div>
         </td>
         <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
           <%= operation.operation.status %>
         </td>
-        <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
-          <%= is_representative? ? operation.agent.company_name : operation.representative.company_name %>
-        </td>
-        <% if is_admin? %>
+        <% if is_admin? && path != representatives_records_path %>
           <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
-            <%= operation.agent.company_name %>
+            <%= operation.representative.company_name %>
           </td>
         <% end %>
+        <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+          <%= operation.agent.company_name %>
+        </td>
         <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
           <%= operation.shipper.company_name %>
         </td>

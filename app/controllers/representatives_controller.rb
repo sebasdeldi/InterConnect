@@ -7,7 +7,7 @@ class RepresentativesController < ApplicationController
 		@search_content = cookies[:search]
 		
 		operation = Operation.new
-		@operations = operation.fetch_operations(cookies[:sort_param], @modality_content, @status_content, @search_content, current_user)
+		@operations = operation.fetch_operations(cookies[:sort_param], @modality_content, @status_content, @search_content, current_user, nil)
   end
 
 
