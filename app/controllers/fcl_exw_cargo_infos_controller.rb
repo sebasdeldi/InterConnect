@@ -32,14 +32,14 @@ class FclExwCargoInfosController < ApplicationController
 		shipper = User.find(params[:shipper_id])
 		agent = User.find(params[:agent_id])
 		FclExwOperationMailer.info_request(shipper, current_user, agent).deliver_later
-		if Operation.find(params[:operation_id]).update(fcl_exw_info_requested: true, status: 'In Progress: Cargo info requested to shipper', current_step: 2)
+		if Operation.find(params[:operation_id]).update(fcl_exw_info_requested: true, status: 'IN PROGRESS', status_message:'Cargo info requested to shipper', current_step: 2)
 			flash[:notice] = "An email sent to shipper:" + shipper.email + " from " + shipper.company_name
 			redirect_to operation_path params[:operation_id]
 		end
 	end
 
 	def confirm_info
-		if Operation.find(params[:operation_id]).update(fcl_exw_info_confirmed: true, status: 'In Progress: Cargo info confirmed by shipper', current_step: 3)
+		if Operation.find(params[:operation_id]).update(fcl_exw_info_confirmed: true, status: 'IN PROGRESS' ,status_message: 'Cargo info confirmed by shipper', current_step: 3)
 			flash[:notice] = "Step confirmed, no more reminders will be sent"
 			redirect_to operation_path params[:operation_id]
 		end
@@ -51,7 +51,7 @@ class FclExwCargoInfosController < ApplicationController
 			agent = User.find(params[:agent_id])
 			FclExwOperationMailer.issue_quotation(shipper, current_user, agent).deliver_later
 		else
-			if Operation.find(params[:operation_id]).update(fcl_exw_quotation_confirmed: true, status: 'In Progress: Quotation confirmed by agent', current_step: 1)
+			if Operation.find(params[:operation_id]).update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', status_message:'Quotation confirmed by agent', current_step: 1)
 				flash[:notice] = "Step confirmed, no more reminders will be sent"
 			end
 		end

@@ -44,7 +44,7 @@
             Traffic
           </h1>
           <div class="select">
-            <%= select_tag :representative_id, options_for_select(User.representatives.map { |user| [user.company_name, user.id] }, representative_id ), { onchange: 'this.form.submit();' } %>
+            <%= select_tag :representative_id, options_for_select(User.representatives.map { |user| [user.company_name, user.id] }, representative_id ), { include_blank: 'SELECT A TRAFFIC', onchange: 'this.form.submit();' } %>
           </div>
         </div>
       <% end %>
@@ -55,7 +55,7 @@
             Customer
           </h1>
           <div class="select">
-            <%= select_tag :customer_id, options_for_select((User.agents + User.shippers).map { |user| [user.company_name, user.id] }, customer_id ), { onchange: 'this.form.submit();' } %>
+            <%= select_tag :customer_id, options_for_select((User.agents + User.shippers).map { |user| [user.company_name, user.id] }, customer_id ), { include_blank: 'SELECT A CUSTOMER', onchange: 'this.form.submit();' } %>
           </div>
         </div>
       <% end %>

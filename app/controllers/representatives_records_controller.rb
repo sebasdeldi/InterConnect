@@ -8,31 +8,5 @@ class RepresentativesRecordsController < ApplicationController
 		@representative_id = cookies[:representative_id]
 		operation = Operation.new
 		@operations = operation.fetch_operations(cookies[:sort_param], @modality_content, @status_content, @search_content, nil, @representative_id)
-
   end
-
-
-  private
-  	def set_sorting_cookies(oldest, newest, more_progress, less_progress)
-  		if oldest
-  			cookies.permanent[:sort_param] = 'oldest'
-  		elsif newest
-  			cookies.permanent[:sort_param] = 'newest'
-  		elsif more_progress
-  			cookies.permanent[:sort_param] = 'more_progress'
-  		elsif less_progress
-  			cookies.permanent[:sort_param] = 'less_progress' 
-      else
-      	cookies.permanent[:sort_param] = 'newest'		
-  		end
-  	end
-
-  	def set_query_params_cookies(modality, status, search)
-  		@modality_content = nil
-  		@status_content = nil
-  		@search_content = nil
-  		cookies.permanent[:modality] = modality
-  		cookies.permanent[:status] = status
-  		cookies.permanent[:search] = search
-  	end
 end

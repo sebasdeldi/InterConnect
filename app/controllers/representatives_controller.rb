@@ -12,18 +12,6 @@ class RepresentativesController < ApplicationController
 
 
   private
-  	def set_sorting_cookies(oldest, newest, more_progress, less_progress)
-  		if oldest
-  			cookies.permanent[:sort_param] = 'oldest'
-  		elsif newest
-  			cookies.permanent[:sort_param] = 'newest'
-  		elsif more_progress
-  			cookies.permanent[:sort_param] = 'more_progress'
-  		elsif less_progress
-  			cookies.permanent[:sort_param] = 'less_progress'  			
-  		end
-  	end
-
   	def set_query_params_cookies(modality, status, search)
   		@modality_content = nil
   		@status_content = nil

@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20180409194330) do
     t.boolean "fcl_exw_info_requested", default: false
     t.boolean "fcl_exw_info_confirmed", default: false
     t.boolean "fcl_exw_quotation_confirmed", default: false
+    t.string "status_message", default: " "
   end
 
   create_table "operations_by_users", force: :cascade do |t|

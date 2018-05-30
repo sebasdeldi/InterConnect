@@ -117,7 +117,7 @@ class Operation < ApplicationRecord
 
 		def query_by_status (operations, status_param)
 			operations
-				.where('operations.status ilike ?', "%"+status_param+"%")
+				.where('operations.status = ?',status_param)
 				.references(:operations)
 		end
 
@@ -140,8 +140,8 @@ class Operation < ApplicationRecord
 
 		def query_by_modality_and_status (operations, modality_param, status_param)
 			operations
+				.where('operations.status = ?', status_param)
 				.where('operations.modality = ?', modality_param)
-				.where('operations.status ilike ?', "%"+status_param+"%")
 				.references(:operations)
 		end
 

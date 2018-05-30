@@ -1,4 +1,4 @@
-class GeneralCargoInfosController < ApplicationController
+=beginclass GeneralCargoInfosController < ApplicationController
 
 	before_action :set_up
 
@@ -69,3 +69,4 @@ class GeneralCargoInfosController < ApplicationController
       render json: errors_json
     end
 end
+=end

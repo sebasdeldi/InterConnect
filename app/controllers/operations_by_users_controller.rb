@@ -6,9 +6,9 @@ class OperationsByUsersController < ApplicationController
 
 	def create
 		if is_representative?
-			create_for_representatives
+			representative_operation_creation
 		elsif is_agent?
-			create_for_agents
+			agent_operation_creation
 		end
 	end
 
@@ -20,38 +20,32 @@ class OperationsByUsersController < ApplicationController
 			@representatives = User.representatives
 		end
 
-		def create_for_representatives
-
+		def representative_operation_creation
 			if params[:operations_by_user][:agent_id].present? && params[:operations_by_user][:shipper_id].present?
-				operation = create_operation(params[:modality])
-				@operations_by_user = OperationsByUser.create(strong_params_for_representatives.merge(operation_id: operation.id, representative_id: current_user.id))
-				flash[:notice] = "Operation successfuly created."
-				redirect_to authenticated_root_path
+				@operations_by_user.create_for_representatives(params[:modality], strong_params_for_representatives, current_user)
+				set_notice
 			else
-				flash[:alert] = "Please choose a valid agent and shipper."
-				render :new
+				set_alert
 			end
 		end
 
-		def create_operation(modality)
-			steps_number = 1
-			if modality == "FCL - EXW"
-				steps_number = 4
-				#TODO add other modality cases
-			end
-			operation = Operation.create(status: 'In Progress: Initializing operation', modality: modality, steps_number: steps_number, current_step: 0)
-		end
-
-		def create_for_agents
+		def agent_operation_creation
 			if params[:operations_by_user][:representative_id].present?
-				operation = Operation.create(status: 'In Progress: Initializing operation', modality: params[:modality])
-				@operations_by_user = OperationsByUser.create(strong_params_for_agents.merge(operation_id: operation.id, agent_id: current_user.id))
-				flash[:notice] = "Operation successfuly created."
-				redirect_to authenticated_root_path
+				@operations_by_user.create_for_agents(params[:modality], strong_params_for_agents, current_user)
+				set_notice
 			else
-				flash[:alert] = "Please choose a valid agent."
-				render :new
+				set_alert
 			end
+		end
+
+		def set_notice
+			flash[:notice] = "Operation successfuly created."
+			redirect_to authenticated_root_path
+		end
+
+		def set_alert
+			flash[:alert] = "Please choose a valid option."
+			render :new
 		end
 
 		def strong_params_for_representatives

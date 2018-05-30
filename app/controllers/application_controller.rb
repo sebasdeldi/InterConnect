@@ -74,6 +74,47 @@ class ApplicationController < ActionController::Base
     Operation.find(operation_id).fcl_exw_quotation_confirmed
   end
 
+
+  # Admin Charts helpers
+  def set_date_range_cookies(day, week, month, year)
+    if day
+      cookies.permanent[:date_range_param] = 'day'
+    elsif week
+      cookies.permanent[:date_range_param] = 'week'
+    elsif month
+      cookies.permanent[:date_range_param] = 'month'
+    elsif year
+      cookies.permanent[:date_range_param] = 'year' 
+    else    
+      cookies.permanent[:date_range_param] = 'day'
+    end
+  end
+
+
+  # Admin Records Lists helpers
+  def set_sorting_cookies(oldest, newest, more_progress, less_progress)
+    if oldest
+      cookies.permanent[:sort_param] = 'oldest'
+    elsif newest
+      cookies.permanent[:sort_param] = 'newest'
+    elsif more_progress
+      cookies.permanent[:sort_param] = 'more_progress'
+    elsif less_progress
+      cookies.permanent[:sort_param] = 'less_progress' 
+    else
+      cookies.permanent[:sort_param] = 'newest'   
+    end
+  end
+
+  def set_query_params_cookies(modality, status, search)
+    @modality_content = nil
+    @status_content = nil
+    @search_content = nil
+    cookies.permanent[:modality] = modality
+    cookies.permanent[:status] = status
+    cookies.permanent[:search] = search
+  end
+
   private
   	def current_role
   		current_role = current_user.nil? ? 'Not logged in' : Role.find(current_user.role_id).name 
