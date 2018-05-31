@@ -35,7 +35,7 @@
           Filter By Type
         </h1>
         <div class="select">
-        	<%= select_tag :modality, options_for_select([ "ALL", "FCL - EXW" ], modality_content ), { onchange: 'this.form.submit();' } %>
+        	<%= select_tag :modality, options_for_select([ "ALL", "FCL - EXW", 'LCL' ], modality_content ), { onchange: 'this.form.submit();' } %>
         </div>
       </div>
       <% if path == representatives_charts_path  %>

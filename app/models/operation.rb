@@ -37,6 +37,40 @@ class Operation < ApplicationRecord
 		sort_operations(sort_param, operations)
 	end
 
+	# query_params is an array where elements are:
+		# 1) modality
+		# 2) status
+		# 3) search
+	def fetch_general_operations(sort_param, query_params)
+		if query_params[0] == "ALL"
+			query_params[0] = nil
+		end
+
+		if query_params[1] == 'ALL'
+			query_params[1] = nil
+		end
+
+		operations = query_general_operations(set_general_operations, query_params)
+		sort_operations(sort_param, operations)
+	end
+
+	# query_params is an array where elements are:
+		# 1) modality
+		# 2) status
+		# 3) search
+	def fetch_representative_operations(sort_param, query_params, representative_id)
+		if query_params[0] == "ALL"
+			query_params[0] = nil
+		end
+
+		if query_params[1] == 'ALL'
+			query_params[1] = nil
+		end
+
+		operations = query_representative_operations(set_general_operations, query_params, representative_id)
+		sort_operations(sort_param, operations)
+	end 
+
 	def fetch_charts (date_range ,modality_param=nil, search_param=nil, representative_id_param=nil, customer_id_param=nil)
 		if modality_param == "ALL"
 			modality_param = nil
@@ -51,6 +85,36 @@ class Operation < ApplicationRecord
 			comleted_operations = comleted_operations.where(agent_id: customer_id_param).or(comleted_operations.where(shipper_id: customer_id_param))
 			in_progress_operations = in_progress_operations.where(agent_id: customer_id_param).or(in_progress_operations.where(shipper_id: customer_id_param))
 		end
+
+		charts_info = [
+			set_charts_date_range(all_operations, date_range), 
+			set_charts_date_range(comleted_operations, date_range), 
+			set_charts_date_range(in_progress_operations, date_range) 
+		]
+	end
+
+	def fetch_general_charts(date_range, modality)
+
+		all_operations = query_general_charts_operations(set_general_operations, modality)
+		comleted_operations = query_general_charts_operations(set_general_operations.where('operations.status =?', 'COMPLETED'), modality)
+		in_progress_operations = query_general_charts_operations(set_general_operations.where.not('operations.status =?', 'COMPLETED'), modality)
+
+		charts_info = [
+			set_charts_date_range(all_operations, date_range), 
+			set_charts_date_range(comleted_operations, date_range), 
+			set_charts_date_range(in_progress_operations, date_range) 
+		]
+	end
+
+	def fetch_representatives_charts(date_range, modality, representative)
+
+		all_operations = query_representatives_charts(set_general_operations, date_range ,modality, representative)
+		comleted_operations = query_representatives_charts(set_general_operations.where('operations.status =?', 'COMPLETED'), date_range, modality, representative)
+		in_progress_operations = query_representatives_charts(set_general_operations.where.not('operations.status =?', 'COMPLETED'), date_range, modality, representative)
+
+		puts '***********************************************************************************'
+		puts set_general_operations
+		puts '***********************************************************************************'
 
 		charts_info = [
 			set_charts_date_range(all_operations, date_range), 
@@ -101,6 +165,14 @@ class Operation < ApplicationRecord
 			operations
 		end
 
+		def set_general_operations
+			operations = OperationsByUser
+				.includes(:operation)
+				.includes(:agent)
+				.includes(:shipper)
+		end
+
+
 		def is_search_empty?(search_param)
 			if search_param.nil? || search_param == ''
 				true
@@ -121,7 +193,7 @@ class Operation < ApplicationRecord
 				.references(:operations)
 		end
 
-		def query_by_search (search_param, current_user)
+		def query_by_search (search_param, current_user=nil)
 			user_ids = User.where('company_name ilike ?', "%"+search_param+"%")
 			if current_user.nil?
 				OperationsByUser
@@ -145,7 +217,7 @@ class Operation < ApplicationRecord
 				.references(:operations)
 		end
 
-		def query_by_modality_and_search (operations, modality_param, search_param, current_user)
+		def query_by_modality_and_search (operations, modality_param, search_param, current_user=nil)
 			user_ids = User.where('company_name ilike ?', "%"+search_param+"%")
 			if current_user.nil?
 				OperationsByUser
@@ -165,7 +237,7 @@ class Operation < ApplicationRecord
 
 		end
 
-		def query_by_status_and_search (operations, status_param, search_param, current_user)
+		def query_by_status_and_search (operations, status_param, search_param, current_user=nil)
 			user_ids = User.where('company_name ilike ?', "%"+search_param+"%")
 			if current_user.nil?
 				OperationsByUser
@@ -184,7 +256,7 @@ class Operation < ApplicationRecord
 			end
 		end
 
-		def query_by_status_and_modality_and_search (operations, modality_param, status_param, search_param, current_user)
+		def query_by_status_and_modality_and_search (operations, modality_param, status_param, search_param, current_user=nil)
 			user_ids = User.where('company_name ilike ?', "%"+search_param+"%")
 			if current_user.nil?
 				OperationsByUser
@@ -210,7 +282,7 @@ class Operation < ApplicationRecord
 			operations.where(representative_id: representative_id)
 		end
 
-		def query_by_representative_and_modality(operations, representative_id_param, modality_param)
+		def query_by_representative_and_modality(operations, representative_id, modality_param)
 			operations.where(representative_id: representative_id)
 				.where('operations.modality = ?', modality_param)
 				.includes(:operation)
@@ -251,6 +323,85 @@ class Operation < ApplicationRecord
 				query_by_representative(operations, representative_id_param)
 			elsif !modality_param.nil? && !representative_id_param.nil?
 				query_by_representative_and_modality(operations, representative_id_param, modality_param)
+			else
+				operations
+			end
+		end
+
+		def query_general_charts_operations(operations, modality)
+			if modality == "ALL"
+				operations
+			else
+				query_by_modality(operations, modality)
+			end
+		end
+
+		def query_representatives_charts(operations, date_range, modality, representative)
+			if modality == "ALL"
+				operations
+			else
+				if modality.nil? && !representative.nil?
+					query_by_representative(operations, representative)
+				elsif !modality.nil? && !representative.nil?
+					query_by_representative_and_modality(operations, representative, modality)
+				else
+					operations
+				end
+			end
+		end
+
+		# query_params is an array where elements are:
+			# 1) modality
+			# 2) status
+			# 3) search
+		def query_general_operations(operations, query_params)
+			modality_param = query_params[0]
+			status_param = query_params[1]
+			search_param = query_params[2]
+
+			if !modality_param.nil? && status_param.nil? && is_search_empty?(search_param)
+				query_by_modality(operations, modality_param)
+			elsif !status_param.nil? && modality_param.nil? && is_search_empty?(search_param)
+				query_by_status(operations, status_param)
+			elsif !is_search_empty?(search_param) && modality_param.nil? && status_param.nil?
+				query_by_search(search_param)
+			elsif !modality_param.nil? && !status_param.nil? && is_search_empty?(search_param)
+				query_by_modality_and_status(operations, modality_param, status_param)
+			elsif !modality_param.nil? && !is_search_empty?(search_param) && status_param.nil?
+				query_by_modality_and_search(operations, modality_param, search_param)
+			elsif !status_param.nil? && !is_search_empty?(search_param) && modality_param.nil?
+				query_by_status_and_search(operations, status_param, search_param)
+			elsif !status_param.nil? && !is_search_empty?(search_param) && !modality_param.nil?
+				query_by_status_and_modality_and_search(operations, modality_param, status_param, search_param)
+			else
+				operations
+			end
+		end
+
+
+		# query_params is an array where elements are:
+			# 1) modality
+			# 2) status
+			# 3) search
+		def query_representative_operations(operations, query_params, representative_id)
+			modality_param = query_params[0]
+			status_param = query_params[1]
+			search_param = query_params[2]
+
+			if !modality_param.nil? && status_param.nil? && is_search_empty?(search_param)
+				query_by_modality(operations, modality_param)
+			elsif !status_param.nil? && modality_param.nil? && is_search_empty?(search_param)
+				query_by_status(operations, status_param)
+			elsif !is_search_empty?(search_param) && modality_param.nil? && status_param.nil?
+				query_by_search(search_param, representative_id)
+			elsif !modality_param.nil? && !status_param.nil? && is_search_empty?(search_param)
+				query_by_modality_and_status(operations, modality_param, status_param)
+			elsif !modality_param.nil? && !is_search_empty?(search_param) && status_param.nil?
+				query_by_modality_and_search(operations, modality_param, search_param, representative_id)
+			elsif !status_param.nil? && !is_search_empty?(search_param) && modality_param.nil?
+				query_by_status_and_search(operations, status_param, search_param, representative_id)
+			elsif !status_param.nil? && !is_search_empty?(search_param) && !modality_param.nil?
+				query_by_status_and_modality_and_search(operations, modality_param, status_param, search_param, representative_id)
 			else
 				operations
 			end

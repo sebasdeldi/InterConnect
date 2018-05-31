@@ -6,7 +6,7 @@ class RepresentativesChartsController < ApplicationController
 		@modality_content = cookies[:modality]
 		@representative_id = cookies[:representative_id]
 		operation = Operation.new
-		@operations = operation.fetch_charts(cookies[:date_range_param], @modality_content, nil , @representative_id)
+		@operations = operation.fetch_representatives_charts(cookies[:date_range_param], @modality_content , @representative_id)
 	end
 
 	private
