@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'tasks/index'
-
   resources :user_imports
 
 	resources :operations_by_users, only: [:new, :create]
@@ -23,6 +21,8 @@ Rails.application.routes.draw do
 	match "/admin/representatives_records", to: "representatives_records#index", as: "representatives_records", via: [:get, :post]
 
 	match "/representative", to: "representatives#index", as: "representative", via: [:get, :post]
+	match "/tasks", to: "tasks#index", as: "tasks", via: [:get, :post]
+
 
  	devise_for :users, controllers: {
     sessions: 'users/sessions',
