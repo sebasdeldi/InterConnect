@@ -5,8 +5,9 @@ class CustomersRecordsController < ApplicationController
     @modality_content = cookies[:modality]
     @status_content = cookies[:status]
     @search_content = cookies[:search]
+    query_params = [@modality_content, @status_content, @search_content]
     @customer_id = cookies[:customer_id]
     operation = Operation.new
-    @operations = operation.fetch_operations(cookies[:sort_param], @modality_content, @status_content, @search_content, nil, @customer_id)
+    @operations = operation.fetch_customers_operations(cookies[:sort_param], query_params, @customer_id)
   end
 end
