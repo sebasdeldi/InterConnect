@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'tasks/index'
+
   resources :user_imports
 
 	resources :operations_by_users, only: [:new, :create]

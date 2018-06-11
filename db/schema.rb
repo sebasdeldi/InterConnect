@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409194330) do
+ActiveRecord::Schema.define(version: 20180611200619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,16 @@ ActiveRecord::Schema.define(version: 20180409194330) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.string "note"
+    t.string "status"
+    t.date "due_date"
+    t.bigint "operations_by_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["operations_by_user_id"], name: "index_tasks_on_operations_by_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "company_name"
     t.string "contact_first_name"
@@ -146,5 +156,6 @@ ActiveRecord::Schema.define(version: 20180409194330) do
   add_foreign_key "general_cargo_infos", "operations"
   add_foreign_key "operations_by_users", "operations"
   add_foreign_key "pieces", "general_cargo_infos"
+  add_foreign_key "tasks", "operations_by_users"
   add_foreign_key "users", "roles"
 end
