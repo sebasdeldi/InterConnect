@@ -1,0 +1,25 @@
+<%= form_for :task, url: {controller:'tasks', action: action} do |f| %>
+  <div class="field">
+    <%= f.label :note, class: 'label' %>
+    <div class="control has-icons-left">
+      <%= f.text_area :note, autofocus: true, autocomplete: "note", class: "input note" %>
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :due_date, class: 'label' %>
+    <div class="control has-icons-left">
+      <%= f.text_field :due_date, autofocus: true, class: 'input due_datetime' %>
+      <span class="icon is-small is-left">
+        <i class="far fa-calendar-alt"></i>
+      </span>
+    </div>
+  </div>
+  <br>
+  <%= f.hidden_field :operation_id, value: operation_id %>
+
+  <%= f.submit "CREATE", class: 'button is-link' %>
+<% end %>

@@ -21,7 +21,10 @@ Rails.application.routes.draw do
 	match "/admin/representatives_records", to: "representatives_records#index", as: "representatives_records", via: [:get, :post]
 
 	match "/representative", to: "representatives#index", as: "representative", via: [:get, :post]
-	match "/tasks", to: "tasks#index", as: "tasks", via: [:get, :post]
+	get "/tasks_panel", to: "tasks#index"
+	get "/tasks/:id", to: "tasks#show", as: "task"
+	post "/tasks", to: "tasks#create", as: "tasks"
+	post "/update_tasks", to: "tasks#update", as: "update_tasks"
 
 
  	devise_for :users, controllers: {

@@ -1,0 +1,41 @@
+
+<div class="modal tasks">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">TASKS FOR OPERATION <%= operation_id %></p>
+      <button class="delete close-modal tasks" aria-label="close"></button>
+    </header>
+
+    <section class="modal-card-body">
+    	<article class="message is-primary">
+    	  <div class="message-header">
+    	    <p>Tasks List For <%= operation_id %></p>
+    	  </div>
+    	  <div class="message-body">
+    	  	<% tasks.each do |task|%>
+		  	    <%= link_to task_path(task.id), class: "panel-block is-active" do %>
+	  	  	    <span class="panel-icon">
+	  	  	      <i class="fas fa-book" aria-hidden="true"></i>
+	  	  	    </span>
+	  	  	    <p>
+	  	  	    	<%= task.note.truncate 45 %> || due: 
+	  	  	    	<b><%= task.due_date %></b>
+	  	  	    </p>
+	  	  	  <% end %>
+	  	  	<% end %>
+    	  </div>
+    	</article>
+
+      <article class="message is-primary">
+        <div class="message-header">
+          <p>Create Task For Operation <%= operation_id %></p>
+        </div>
+        <div class="message-body">
+          <%= render 'tasks/form', operation_id: operation_id, action: 'create' %>
+        </div>
+      </article>
+     	<br>
+    </section>
+  </div>
+</div>

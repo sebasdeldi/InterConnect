@@ -1,3 +1,5 @@
 class Task < ApplicationRecord
-  belongs_to :operations_by_user
+  belongs_to :operation
+
+  validates :note, :due_date, presence: true
 end

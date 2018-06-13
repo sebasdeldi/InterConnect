@@ -10,6 +10,7 @@
 		  </ul>
 		</nav>
 	</div>
-	<%= render 'timeline', operation_id: @operation.id, agent: @agent, shipper: @shipper %>
+	<br>
+	<%= render 'timeline', operation_id: @operation.id, agent: @agent, shipper: @shipper, tasks: @tasks  %>
 <% elsif is_agent? %>
 <% end %>

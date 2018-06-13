@@ -1,0 +1,19 @@
+<div class="container">
+	<br>
+	<br>
+	<nav class="breadcrumb" aria-label="breadcrumbs">
+	  <ul>
+	    <li><%= link_to "Operation Number " + @operation_id.to_s, operation_path(@operation_id)%></li>
+	    <li class="is-active"><%= link_to "Task", operation_path(@operation_id) %></li>
+	  </ul>
+	</nav>
+
+	<nav class="panel is-form-panel card-shadow">
+	  <div class="panel-block">
+	    <p>
+	    	<%= render 'tasks/form', operation_id: @operation_id, action: 'update' %>
+	    </p>
+	  </div>
+	</nav>
+</div>
+

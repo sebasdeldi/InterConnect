@@ -113,12 +113,12 @@ ActiveRecord::Schema.define(version: 20180611200619) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "note"
-    t.string "status"
+    t.string "status", default: "PENDING"
     t.date "due_date"
-    t.bigint "operations_by_user_id"
+    t.bigint "operation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["operations_by_user_id"], name: "index_tasks_on_operations_by_user_id"
+    t.index ["operation_id"], name: "index_tasks_on_operation_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -156,6 +156,6 @@ ActiveRecord::Schema.define(version: 20180611200619) do
   add_foreign_key "general_cargo_infos", "operations"
   add_foreign_key "operations_by_users", "operations"
   add_foreign_key "pieces", "general_cargo_infos"
-  add_foreign_key "tasks", "operations_by_users"
+  add_foreign_key "tasks", "operations"
   add_foreign_key "users", "roles"
 end
