@@ -1,4 +1,4 @@
-<%= form_for :task, url: {controller:'tasks', action: action} do |f| %>
+<%= form_for :task, url: {controller:'tasks', action: action}, html: { class: 'task-form' } do |f| %>
   <div class="field">
     <%= f.label :note, class: 'label' %>
     <div class="control has-icons-left">
@@ -19,7 +19,17 @@
     </div>
   </div>
   <br>
+  <% if controller_name == 'tasks' %>
+	  <div class="field">
+	  	<label class="checkbox">
+	  	  <%= f.check_box :status %>
+	  	  Mark as completed
+	  	</label>
+	  </div>
+	  <br>
+	<% end %>	
   <%= f.hidden_field :operation_id, value: operation_id %>
+  <%= f.hidden_field :id, value: id %>
 
   <%= f.submit "CREATE", class: 'button is-link' %>
 <% end %>

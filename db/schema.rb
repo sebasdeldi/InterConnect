@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 20180611200619) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "note"
-    t.string "status", default: "PENDING"
+    t.string "status", default: "0"
     t.date "due_date"
     t.bigint "operation_id"
     t.datetime "created_at", null: false

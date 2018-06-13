@@ -14,13 +14,15 @@ class TasksController < ApplicationController
   end
 
   def show
+    @id = params[:id]
     @task = Task.find params[:id]
     @operation_id = @task.operation_id
   end
 
   def update
-    puts '=================================================================='
-    puts params.inspect
-    puts '=================================================================='
+    task = Task.find params[:task][:id]
+    task.update(note: params[:task][:note], due_date: params[:task][:due_date], status: params[:task][:status] )
+    flash[:notice] = 'Record updated'
+    redirect_to operation_path params[:task][:operation_id]
   end
 end
