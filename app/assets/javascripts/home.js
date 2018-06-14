@@ -21,5 +21,6 @@ document.addEventListener("turbolinks:load", function() {
 	  $('#first-tab-content').addClass('hidden');
 	  $('#third-tab-content').addClass('hidden');
 	  $('#fourth-tab-content').addClass('hidden');
+	  $('#fifth-tab-content').addClass('hidden');
 	}
 });
