@@ -8,6 +8,8 @@ class RepresentativesController < ApplicationController
 		query_params = [@modality_content, @status_content, @search_content]
 		operation = Operation.new
     @operations = operation.fetch_representative_operations(cookies[:sort_param], query_params, current_user)
+
+    @tasks = Task.get_data(current_user)
   end
 
 
