@@ -6,7 +6,6 @@ class CustomersChartsController < ApplicationController
 		@modality_content = cookies[:modality]
 		@customer_id = cookies[:customer_id]
 		operation = Operation.new
-		#@operations = operation.fetch_charts(cookies[:date_range_param], @modality_content, nil ,nil, @customer_id)
 		@operations = operation.fetch_customers_charts(cookies[:date_range_param], @modality_content, @customer_id)
 	end
 

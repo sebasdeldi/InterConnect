@@ -19,7 +19,9 @@
   <%= render 'shared/options' %>
 </div>
 
-<div class="hidden" id="fifth-tab-content">
-  <%= render 'tasks/index' %>
-</div>
+<% if is_representative? %>
+	<div class="hidden" id="fifth-tab-content">
+	  <%= render 'tasks/index' %>
+	</div>
+<% end %>
 

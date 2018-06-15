@@ -115,6 +115,19 @@ class ApplicationController < ActionController::Base
     cookies.permanent[:search] = search
   end
 
+  # Tasks cookies settings
+  def set_tasks_cookies(today, this_week, this_month)
+    if today
+      cookies.permanent[:date_range_param] = 'today'
+    elsif this_week
+      cookies.permanent[:date_range_param] = 'this_week'
+    elsif this_month
+      cookies.permanent[:date_range_param] = 'this_month'
+    else
+      cookies.permanent[:date_range_param] = 'today'   
+    end
+  end
+
   private
   	def current_role
   		current_role = current_user.nil? ? 'Not logged in' : Role.find(current_user.role_id).name 

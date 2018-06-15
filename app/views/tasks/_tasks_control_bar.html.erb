@@ -1,0 +1,35 @@
+<div class="search-container">
+  <div class="columns">
+
+    <%= form_tag representative_path, class: 'field is-horizontal column is-12' do %>
+
+      <div class="column">
+        <h1 class="title white-font">
+          For
+        </h1>
+
+        <ul>
+          <li>
+            <%= button_tag type: "submit", class: "link-button", name: "today" do %>
+              <span id='today-tag' class="tag is-rounded inline-tag <%= is_active_date_range? ('today') %>">
+                <i class="far fa-calendar-alt tag-icon"></i> Today
+              </span>
+            <% end %>
+            <%= button_tag type: "submit", class: "link-button", name: "this_week" do %>
+              <span id='this-week-tag' class="tag is-rounded <%= is_active_date_range? ('this_week') %>">   <i class="far fa-calendar-alt tag-icon"></i> This Week
+              </span>
+            <% end %>
+          </li>
+          <br>
+          <li>
+            <%= button_tag type: "submit", class: "link-button", name: "this_month" do %>
+              <span id='more-progress-tag' class="tag is-rounded inline-tag <%= is_active_date_range? ('this_month') %>">
+                <i class="far fa-calendar-alt tag-icon"></i> This Month
+              </span>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>

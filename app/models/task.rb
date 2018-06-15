@@ -3,7 +3,7 @@ class Task < ApplicationRecord
 
   validates :note, :due_date, presence: true
 
-  def self.get_data(current_user)
+  def self.get_data(current_user, due_date)
 		Task.where(operation_id: OperationsByUser.where(representative_id: current_user), status: 0)
 	end
 end

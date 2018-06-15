@@ -14,4 +14,5 @@ module OperationsHelper
 			''
 		end
 	end
+
 end
