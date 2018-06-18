@@ -1,5 +1,5 @@
 
-<div id="first-tab-content">
+<div id="first-tab-content" class="<%= is_admin? ? '' : 'hidden' %>" >
   <% if is_representative? || is_agent? %>
     <%= render 'shared/operations_records_list', status_content: status_content, modality_content: modality_content, search_content: search_content, path: representative_path, operations: operations %>
   <% else %>
@@ -20,7 +20,7 @@
 </div>
 
 <% if is_representative? %>
-	<div class="hidden" id="fifth-tab-content">
+	<div id="fifth-tab-content">
 	  <%= render 'tasks/index' %>
 	</div>
 <% end %>

@@ -116,7 +116,7 @@ class ApplicationController < ActionController::Base
   end
 
   # Tasks cookies settings
-  def set_tasks_cookies(today, this_week, this_month)
+  def set_tasks_cookies(today, this_week, this_month, all)
     if today
       cookies.permanent[:date_range_param] = 'today'
     elsif this_week
@@ -124,7 +124,7 @@ class ApplicationController < ActionController::Base
     elsif this_month
       cookies.permanent[:date_range_param] = 'this_month'
     else
-      cookies.permanent[:date_range_param] = 'today'   
+      cookies.permanent[:date_range_param] = 'all'
     end
   end
 

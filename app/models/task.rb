@@ -16,6 +16,9 @@ class Task < ApplicationRecord
   		Task.where(operation_id: OperationsByUser.where(representative_id: current_user))
   			.where(status: 0)
   			.where('due_date < ?', Date.today + 30.days)
+    elsif due_date == 'all'
+      Task.where(operation_id: OperationsByUser.where(representative_id: current_user))
+        .where(status: 0)
   	end
  	end
 end

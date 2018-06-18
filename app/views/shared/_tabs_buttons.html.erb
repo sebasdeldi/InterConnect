@@ -3,21 +3,21 @@
 		<div class="column">
 			<div class="tabs is-centered">
 			  <ul>
-			    <li id='first-tab' class="tab is-active">
+	  	    <% if is_representative? %>
+	  		    <li id='fifth-tab' class="tab is-active">
+	  		    	<a>
+	  		    		<span class="icon is-small"><i class="fas fa-tasks"></i></span>
+	  		    		<span>Tasks</span>
+	  		    	</a>
+	  		    </li>
+	  		  <% end %>
+
+			    <li id='first-tab' class="tab <%= is_admin? ? 'is-active' : '' %>">
 			    	<a>
 			    		<span class="icon is-small"><i class="far fa-chart-bar"></i></span>
 			    		<span><%= is_admin? ? 'Insights' : 'Operations' %></span>
 			    	</a>
 			    </li>
-
-	        <% if is_representative? %>
-	    	    <li id='fifth-tab' class="tab">
-	    	    	<a>
-	    	    		<span class="icon is-small"><i class="fas fa-tasks"></i></span>
-	    	    		<span>Tasks</span>
-	    	    	</a>
-	    	    </li>
-	    	  <% end %>
 
 			    <li id='second-tab' class="tab">
 			    	<a>

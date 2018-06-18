@@ -10,18 +10,23 @@
 
         <ul>
           <li>
+            <%= button_tag type: "submit", class: "link-button", name: "all" do %>
+              <span id='all-tag' class="tag is-rounded <%= is_active_date_range? ('all') %>">   <i class="far fa-calendar-alt tag-icon"></i> All
+              </span>
+            <% end %>
+
             <%= button_tag type: "submit", class: "link-button", name: "today" do %>
               <span id='today-tag' class="tag is-rounded inline-tag <%= is_active_date_range? ('today') %>">
                 <i class="far fa-calendar-alt tag-icon"></i> Today
               </span>
             <% end %>
+          </li>
+          <br>
+          <li>
             <%= button_tag type: "submit", class: "link-button", name: "this_week" do %>
               <span id='this-week-tag' class="tag is-rounded <%= is_active_date_range? ('this_week') %>">   <i class="far fa-calendar-alt tag-icon"></i> This Week
               </span>
             <% end %>
-          </li>
-          <br>
-          <li>
             <%= button_tag type: "submit", class: "link-button", name: "this_month" do %>
               <span id='more-progress-tag' class="tag is-rounded inline-tag <%= is_active_date_range? ('this_month') %>">
                 <i class="far fa-calendar-alt tag-icon"></i> This Month
