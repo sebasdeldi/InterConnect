@@ -104,6 +104,7 @@ class ApplicationController < ActionController::Base
     else
       cookies.permanent[:sort_param] = 'newest'   
     end
+    cookies.permanent[:redirect_tab] = 'operations_tab'
   end
 
   def set_query_params_cookies(modality, status, search)
@@ -113,6 +114,7 @@ class ApplicationController < ActionController::Base
     cookies.permanent[:modality] = modality
     cookies.permanent[:status] = status
     cookies.permanent[:search] = search
+    cookies.permanent[:redirect_tab] = 'operations_tab'
   end
 
   # Tasks cookies settings

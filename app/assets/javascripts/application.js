@@ -34,6 +34,5 @@ document.addEventListener("turbolinks:load", function() {
   	var modal_type = this.classList[this.classList.length-1]
     $(".modal." + modal_type).removeClass("is-active");
   });
-
 });
 
