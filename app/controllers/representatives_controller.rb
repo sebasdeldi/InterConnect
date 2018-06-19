@@ -13,6 +13,11 @@ class RepresentativesController < ApplicationController
 		operation = Operation.new
     @operations = operation.fetch_representative_operations(cookies[:sort_param], query_params, current_user)
 
+    #handling tab behaviour by cookies
+    if params[:operations].present?
+      cookies.permanent[:redirect_tab] = 'operations_tab'
+    end
+
     @tasks = Task.get_data(current_user, date_range_param)
   end
 end

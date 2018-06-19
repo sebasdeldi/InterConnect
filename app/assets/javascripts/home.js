@@ -25,6 +25,8 @@ document.addEventListener("turbolinks:load", function() {
 	  $('#fifth-tab-content').addClass('hidden');
 	}
 
+	console.log(document.cookie.split(';'))
+
 	if (document.cookie.split(';').filter((item) => {
 	  return item.includes('redirect_tab=operations_tab')
 	}).length) {
