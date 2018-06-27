@@ -4,11 +4,11 @@ Rails.application.routes.draw do
 
 	resources :operations_by_users, only: [:new, :create]
 	resources :general_cargo_infos, only: [:new, :create]
-	resources :fcl_exw_cargo_infos, only: [:new, :create]
+	resources :fcl_exw_cargo_info_steps, only: [:new, :create]
 	resources :operations, only: [:show]
-	post "/fcl_exw_info", to: "fcl_exw_cargo_infos#request_info"
-	post "/fcl_exw_confirm_info", to: "fcl_exw_cargo_infos#confirm_info"
-	post "/fcl_exw_confirm_quotation", to: "fcl_exw_cargo_infos#confirm_quotation"
+	post "/fcl_exw_info", to: "fcl_exw_cargo_info_steps#request_info"
+	post "/fcl_exw_confirm_info", to: "fcl_exw_cargo_info_steps#confirm_info"
+	post "/fcl_exw_confirm_quotation", to: "fcl_exw_cargo_info_steps#confirm_quotation"
 	get '/admin', to: "admins#index", as: "admin"
 	
 	match "/admin/general_charts", to: "general_charts#index", as: "general_charts", via: [:get, :post]

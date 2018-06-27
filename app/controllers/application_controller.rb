@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
 
   # FCL-EXW helpers
   def is_fcl_exw_info_stage_completed?(operation_id)
-    FclExwCargoInfo.find_by(operation_id: operation_id).nil? ? false : true
+    FclExwCargoInfoStep.find_by(operation_id: operation_id).nil? ? false : true
   end
 
   def is_fcl_exw?(operation_id)
@@ -63,15 +63,15 @@ class ApplicationController < ActionController::Base
   end
 
   def is_fcl_exw_info_requested?(operation_id)
-    Operation.find(operation_id).fcl_exw_info_requested
+    FclExwInfoRequestedStep.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_info_confirmed?(operation_id)
-    Operation.find(operation_id).fcl_exw_info_confirmed
+    FclExwInfoConfirmedStep.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_quotation_confirmed?(operation_id)
-    Operation.find(operation_id).fcl_exw_quotation_confirmed
+    FclExwQuotationConfirmedStep.find_by(operation_id: operation_id).completed
   end
 
 

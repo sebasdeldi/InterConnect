@@ -1,5 +1,5 @@
-<div class="timeline-item">
-	<div class="timeline-icon">
+<div class="timeline-item ">
+	<div class="timeline-icon <%= is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : '' %>">
 		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="21px" height="20px" viewBox="0 0 21 20" enable-background="new 0 0 21 20" xml:space="preserve">
 			<path fill="#FFFFFF" d="M19.998,6.766l-5.759-0.544c-0.362-0.032-0.676-0.264-0.822-0.61l-2.064-4.999
 				c-0.329-0.825-1.5-0.825-1.83,0L7.476,5.611c-0.132,0.346-0.462,0.578-0.824,0.61L0.894,6.766C0.035,6.848-0.312,7.921,0.333,8.499
@@ -8,12 +8,14 @@
 				c-0.081-0.365,0.035-0.729,0.313-0.975l4.34-3.811C21.219,7.921,20.855,6.848,19.998,6.766z"/>
 		</svg>
 	</div>
-	<div class="timeline-content right">
-		<h2>CONFIRM THAT YOUR SHIPPER HAS RECEIVED & ACCEPTED A QUOTATION</h2>
+	<div class="timeline-content right <%= is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed-no-bg-right' : '' %>">
+		<h2 class="<%= is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : '' %>">
+			CONFIRM THAT YOUR SHIPPER HAS RECEIVED & ACCEPTED A QUOTATION
+		</h2>
 		<br>
 		<p>
 			<center>
-				<i class="far fa-money-bill-alt timeline-card-icon <%= is_fcl_exw_info_confirmed?(operation_id) ? 'step-completed-icon' : '' %>""></i>
+				<i class="far fa-money-bill-alt timeline-card-icon <%= is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed-icon' : '' %>""></i>
 			</center>
 
 			Please confirm that your shipper <b>(<%= shipper.company_name %>)</b> has received & accepted a quotation.
@@ -37,8 +39,8 @@
 				<%= hidden_field_tag 'shipper_id', shipper.id %>
 				<%= hidden_field_tag 'operation_id', operation_id %>
 				<%= hidden_field_tag 'agent_id', agent.id %>
-				<%= submit_tag 'CONFIRM', class: "button is-link #{is_fcl_exw_info_confirmed?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_info_confirmed?(operation_id)  %>
-				<%= submit_tag 'ISSUE', class: "button is-link", issue: true  %>
+				<%= submit_tag 'CONFIRM', class: "button is-link #{is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_quotation_confirmed?(operation_id)  %>
+				<%= submit_tag 'ISSUE', class: "button is-link #{is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : ''  }", issue: true, disabled: is_fcl_exw_quotation_confirmed?(operation_id)  %>
 			<% end %>
 		</p>
 		<br>

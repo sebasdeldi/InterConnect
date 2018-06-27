@@ -12,8 +12,12 @@
 		</svg>
 
 	</div>
+
 	<div class="timeline-content <%= is_fcl_exw_info_requested?(operation_id) ? 'step-completed-no-bg' : '' %>">
 		<h2 class="<%= is_fcl_exw_info_requested?(operation_id) ? 'step-completed' : '' %>"> SEND INFORMATION REQUEST TO SHIPPER </h2>
+		<h1>
+			<%= is_fcl_exw_info_requested?(operation_id) %>
+		</h1>
 		<br>
 		<p>
 			<center>

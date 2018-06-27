@@ -1,6 +1,6 @@
-class CreateFclExwCargoInfos < ActiveRecord::Migration[5.1]
+class CreateFclExwCargoInfoSteps < ActiveRecord::Migration[5.1]
   def change
-    create_table :fcl_exw_cargo_infos do |t|
+    create_table :fcl_exw_cargo_info_steps do |t|
       t.references :operation, foreign_key: true
       t.string :loading_address
       t.string :container_size

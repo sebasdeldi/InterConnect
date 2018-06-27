@@ -36,6 +36,6 @@
 			  </div>
 			</article>
 		</p>
-		<%= link_to is_fcl_exw_info_stage_completed?(operation_id) ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_cargo_info_path(operation_id: operation_id), class:is_fcl_exw_info_stage_completed?(operation_id) ? 'button step-completed' : 'button is-link'  %>
+		<%= link_to is_fcl_exw_info_stage_completed?(operation_id) ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_cargo_info_step_path(operation_id: operation_id), class:is_fcl_exw_info_stage_completed?(operation_id) ? 'button step-completed' : 'button is-link'  %>
 	</div>
 </div>

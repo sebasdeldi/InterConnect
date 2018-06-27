@@ -1,7 +1,6 @@
 class Operation < ApplicationRecord
 	has_one :general_cargo_info
 	has_many :operations_by_users
-	has_many :tasks
 
 	def self.send_fcl_exw_info_confirmation
 		operations = Operation.where(fcl_exw_info_requested: true, fcl_exw_info_confirmed: false)
