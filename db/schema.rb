@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180626151128) do
+ActiveRecord::Schema.define(version: 20180627200619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,10 +139,16 @@ ActiveRecord::Schema.define(version: 20180626151128) do
     t.string "note"
     t.string "status", default: "0"
     t.date "due_date"
-    t.bigint "operation_id"
+    t.bigint "fcl_exw_info_requested_steps_id"
+    t.bigint "fcl_exw_info_confirmed_steps_id"
+    t.bigint "fcl_exw_quotation_confirmed_steps_id"
+    t.bigint "fcl_exw_cargo_info_steps_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["operation_id"], name: "index_tasks_on_operation_id"
+    t.index ["fcl_exw_cargo_info_steps_id"], name: "index_tasks_on_fcl_exw_cargo_info_steps_id"
+    t.index ["fcl_exw_info_confirmed_steps_id"], name: "index_tasks_on_fcl_exw_info_confirmed_steps_id"
+    t.index ["fcl_exw_info_requested_steps_id"], name: "index_tasks_on_fcl_exw_info_requested_steps_id"
+    t.index ["fcl_exw_quotation_confirmed_steps_id"], name: "index_tasks_on_fcl_exw_quotation_confirmed_steps_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -183,6 +189,9 @@ ActiveRecord::Schema.define(version: 20180626151128) do
   add_foreign_key "general_cargo_infos", "operations"
   add_foreign_key "operations_by_users", "operations"
   add_foreign_key "pieces", "general_cargo_infos"
-  add_foreign_key "tasks", "operations"
+  add_foreign_key "tasks", "fcl_exw_cargo_info_steps", column: "fcl_exw_cargo_info_steps_id"
+  add_foreign_key "tasks", "fcl_exw_info_confirmed_steps", column: "fcl_exw_info_confirmed_steps_id"
+  add_foreign_key "tasks", "fcl_exw_info_requested_steps", column: "fcl_exw_info_requested_steps_id"
+  add_foreign_key "tasks", "fcl_exw_quotation_confirmed_steps", column: "fcl_exw_quotation_confirmed_steps_id"
   add_foreign_key "users", "roles"
 end
