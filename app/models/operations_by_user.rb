@@ -25,11 +25,14 @@ class OperationsByUser < ApplicationRecord
   		end
   		operation = Operation.create(status: 'IN PROGRESS', status_message:'Initializing operation', modality: modality, steps_number: steps_number, current_step: 0)
       create_steps(operation)
+      operation
     end
 
     def create_steps(operation)
       FclExwInfoConfirmedStep.create(operation: operation)
       FclExwQuotationConfirmedStep.create(operation: operation)
       FclExwInfoRequestedStep.create(operation: operation)
+      cargo_info = FclExwCargoInfoStep.new(operation: operation)
+      cargo_info.save(validate: false)
     end
 end

@@ -30,6 +30,15 @@
 	<% end %>	
   <%= f.hidden_field :operation_id, value: operation_id %>
   <%= f.hidden_field :id, value: id %>
+  <% if step == 'fcl_exw_cargo_info' %>
+    <%= f.hidden_field :fcl_exw_cargo_info_step, value: fcl_exw_cargo_info_step_id(operation_id) %>
+  <% elsif step == 'info_confirmed' %>
+    <%= f.hidden_field :fcl_exw_info_confirmed_step, value: fcl_exw_info_confirmed_step_id(operation_id) %>
+  <% elsif step == 'info_requested' %>
+    <%= f.hidden_field :fcl_exw_info_requested_step, value: fcl_exw_info_requested_step_id(operation_id) %>
+  <% elsif step == 'fcl_exw_quotation_confirmed' %>
+    <%= f.hidden_field :fcl_exw_quotation_confirmed_step, value: fcl_exw_quotation_confirmed_step_id(operation_id) %>
+  <% end %>
 
   <%= f.submit "SAVE", class: 'button is-link' %>
 <% end %>

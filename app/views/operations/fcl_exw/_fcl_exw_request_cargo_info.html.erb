@@ -15,9 +15,6 @@
 
 	<div class="timeline-content <%= is_fcl_exw_info_requested?(operation_id) ? 'step-completed-no-bg' : '' %>">
 		<h2 class="<%= is_fcl_exw_info_requested?(operation_id) ? 'step-completed' : '' %>"> SEND INFORMATION REQUEST TO SHIPPER </h2>
-		<h1>
-			<%= is_fcl_exw_info_requested?(operation_id) %>
-		</h1>
 		<br>
 		<p>
 			<center>
@@ -43,11 +40,37 @@
 		</ul>
 		<br>
 
+		
+
+	  <% if !info_requested_tasks.empty? %>
+    	<article class="message is-primary">
+    	  <div class="message-header">
+    	    <p><b><%= info_requested_tasks.count %> Tasks for this step</b></p>
+    	  </div>
+    	  <div class="message-body">
+    	  	<% info_requested_tasks.each do |task|%>
+		  	    <%= link_to task_path(task.id), class: "panel-block is-active" do %>
+	  	  	    <span class="panel-icon">
+	  	  	      <i class="fas fa-book" aria-hidden="true"></i>
+	  	  	    </span>
+	  	  	    <p>
+	  	  	    	<%= task.note.truncate 45 %> || due: 
+	  	  	    	<b><%= task.due_date %></b>
+	  	  	    </p>
+	  	  	  <% end %>
+	  	  	<% end %>
+    	  </div>
+    	</article>
+  	<% end %>
+
 		<%= form_tag ("/fcl_exw_info") do %>
 			<%= hidden_field_tag 'shipper_id', shipper.id %>
 			<%= hidden_field_tag 'operation_id', operation_id %>
 			<%= hidden_field_tag 'agent_id', agent.id %>
 			<%= submit_tag 'SEND REQUEST', class: "button is-link #{is_fcl_exw_info_requested?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_info_requested?(operation_id) %>
+			<a class="button is-warning right-button circle-button show-modal info_requested">
+				<i class="fas fa-tasks"></i>
+			</a>
 		<% end %>
 
 	</div>

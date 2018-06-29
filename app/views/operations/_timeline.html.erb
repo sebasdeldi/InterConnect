@@ -5,13 +5,20 @@
 			Tasks (<%= tasks.count %>)
 		</a>
 
-		<%= render 'operations/fcl_exw/fcl_exw_timeline', operation_id: operation_id, agent: agent, shipper: shipper %>
+		<%= render 'operations/fcl_exw/fcl_exw_timeline', operation_id: operation_id, agent: agent, shipper: shipper,
+		cargo_info_tasks: cargo_info_tasks, info_confirmed_tasks: info_confirmed_tasks, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks %>
 	<% else %>
 		<%= render 'other_timeline', operation_id: operation_id, agent: agent, shipper: shipper %>
 	<% end %>
 
 	<%= render 'relevant_info_modal', agent: agent, shipper: shipper %>
-	<%= render 'tasks/tasks_modal', agent: agent, shipper: shipper, operation_id: operation_id, tasks: tasks %>
+
+	<!-- Tasks modals -->
+	<%= render 'tasks/fcl_exw/cargo_info_step', agent: agent, shipper: shipper, operation_id: operation_id %>
+	<%= render 'tasks/fcl_exw/info_confirmed_step', agent: agent, shipper: shipper, operation_id: operation_id %>
+	<%= render 'tasks/fcl_exw/info_requested_step', agent: agent, shipper: shipper, operation_id: operation_id %>
+	<%= render 'tasks/fcl_exw/quotation_confirmed_step', agent: agent, shipper: shipper, operation_id: operation_id %>
+
 
 	<!-- Hidding this on purpose -->
 	<% render 'send_follow_up_mail_modal', agent: agent, shipper: shipper, operation_id: operation_id %>

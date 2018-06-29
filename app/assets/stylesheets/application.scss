@@ -9,6 +9,13 @@
 @import 'jquery.ui.all';
 @import 'tasks.scss';
 
+.circle-button{
+  border-radius: 50%;
+}
+.right-button{
+  float: right;
+}
+
 .is-3 {
   background-color: blue;
 }

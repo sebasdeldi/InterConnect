@@ -35,7 +35,32 @@
 			  	</ul>
 			  </div>
 			</article>
+
+
+		  <% if !cargo_info_tasks.empty? %>
+	    	<article class="message is-primary">
+	    	  <div class="message-header">
+	    	    <p><b><%= cargo_info_tasks.count %> Tasks for this step</b></p>
+	    	  </div>
+	    	  <div class="message-body">
+	    	  	<% cargo_info_tasks.each do |task|%>
+			  	    <%= link_to task_path(task.id), class: "panel-block is-active" do %>
+		  	  	    <span class="panel-icon">
+		  	  	      <i class="fas fa-book" aria-hidden="true"></i>
+		  	  	    </span>
+		  	  	    <p>
+		  	  	    	<%= task.note.truncate 45 %> || due: 
+		  	  	    	<b><%= task.due_date %></b>
+		  	  	    </p>
+		  	  	  <% end %>
+		  	  	<% end %>
+	    	  </div>
+	    	</article>
+    	<% end %>
 		</p>
 		<%= link_to is_fcl_exw_info_stage_completed?(operation_id) ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_cargo_info_step_path(operation_id: operation_id), class:is_fcl_exw_info_stage_completed?(operation_id) ? 'button step-completed' : 'button is-link'  %>
+		<a class="button is-warning right-button circle-button show-modal fcl_exw_cargo_info">
+			<i class="fas fa-tasks"></i>
+		</a>
 	</div>
 </div>

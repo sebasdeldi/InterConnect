@@ -143,12 +143,14 @@ ActiveRecord::Schema.define(version: 20180627200619) do
     t.bigint "fcl_exw_info_confirmed_steps_id"
     t.bigint "fcl_exw_quotation_confirmed_steps_id"
     t.bigint "fcl_exw_cargo_info_steps_id"
+    t.bigint "operation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["fcl_exw_cargo_info_steps_id"], name: "index_tasks_on_fcl_exw_cargo_info_steps_id"
     t.index ["fcl_exw_info_confirmed_steps_id"], name: "index_tasks_on_fcl_exw_info_confirmed_steps_id"
     t.index ["fcl_exw_info_requested_steps_id"], name: "index_tasks_on_fcl_exw_info_requested_steps_id"
     t.index ["fcl_exw_quotation_confirmed_steps_id"], name: "index_tasks_on_fcl_exw_quotation_confirmed_steps_id"
+    t.index ["operation_id"], name: "index_tasks_on_operation_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -193,5 +195,6 @@ ActiveRecord::Schema.define(version: 20180627200619) do
   add_foreign_key "tasks", "fcl_exw_info_confirmed_steps", column: "fcl_exw_info_confirmed_steps_id"
   add_foreign_key "tasks", "fcl_exw_info_requested_steps", column: "fcl_exw_info_requested_steps_id"
   add_foreign_key "tasks", "fcl_exw_quotation_confirmed_steps", column: "fcl_exw_quotation_confirmed_steps_id"
+  add_foreign_key "tasks", "operations"
   add_foreign_key "users", "roles"
 end

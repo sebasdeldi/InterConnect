@@ -32,8 +32,29 @@
 			  </div>
 			  <div class="message-body">
 			    We will send you reminders about this step via <b>email</b> every <b>24 hours</b> until you confirm that your shipper has received and accepted a quotation.</b>
-			  </div>
+			  </div>  	
 			</article>
+
+		  <% if !quotation_confirmed_tasks.empty? %>
+	    	<article class="message is-primary">
+	    	  <div class="message-header">
+	    	    <p><b><%= quotation_confirmed_tasks.count %> Tasks for this step</b></p>
+	    	  </div>
+	    	  <div class="message-body">
+	    	  	<% quotation_confirmed_tasks.each do |task|%>
+			  	    <%= link_to task_path(task.id), class: "panel-block is-active" do %>
+		  	  	    <span class="panel-icon">
+		  	  	      <i class="fas fa-book" aria-hidden="true"></i>
+		  	  	    </span>
+		  	  	    <p>
+		  	  	    	<%= task.note.truncate 45 %> || due: 
+		  	  	    	<b><%= task.due_date %></b>
+		  	  	    </p>
+		  	  	  <% end %>
+		  	  	<% end %>
+	    	  </div>
+	    	</article>
+    	<% end %>
 
 			<%= form_tag ("/fcl_exw_confirm_quotation") do %>
 				<%= hidden_field_tag 'shipper_id', shipper.id %>
@@ -41,6 +62,9 @@
 				<%= hidden_field_tag 'agent_id', agent.id %>
 				<%= submit_tag 'CONFIRM', class: "button is-link #{is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_quotation_confirmed?(operation_id)  %>
 				<%= submit_tag 'ISSUE', class: "button is-link #{is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : ''  }", issue: true, disabled: is_fcl_exw_quotation_confirmed?(operation_id)  %>
+				<a class="button is-primary right-button circle-button show-modal fcl_exw_quotation_confirmed">
+					<i class="fas fa-tasks"></i>
+				</a>
 			<% end %>
 		</p>
 		<br>

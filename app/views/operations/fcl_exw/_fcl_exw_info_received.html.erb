@@ -34,11 +34,35 @@
 			  </div>
 			</article>
 
+		  <% if !info_confirmed_tasks.empty? %>
+	    	<article class="message is-primary">
+	    	  <div class="message-header">
+	    	    <p><b><%= info_confirmed_tasks.count %> Tasks for this step</b></p>
+	    	  </div>
+	    	  <div class="message-body">
+	    	  	<% info_confirmed_tasks.each do |task|%>
+			  	    <%= link_to task_path(task.id), class: "panel-block is-active" do %>
+		  	  	    <span class="panel-icon">
+		  	  	      <i class="fas fa-book" aria-hidden="true"></i>
+		  	  	    </span>
+		  	  	    <p>
+		  	  	    	<%= task.note.truncate 45 %> || due: 
+		  	  	    	<b><%= task.due_date %></b>
+		  	  	    </p>
+		  	  	  <% end %>
+		  	  	<% end %>
+	    	  </div>
+	    	</article>
+    	<% end %>
+			    	
 			<%= form_tag ("/fcl_exw_confirm_info") do %>
 				<%= hidden_field_tag 'shipper_id', shipper.id %>
 				<%= hidden_field_tag 'operation_id', operation_id %>
 				<%= hidden_field_tag 'agent_id', agent.id %>
 				<%= submit_tag 'CONFIRM', class: "button is-link #{is_fcl_exw_info_confirmed?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_info_confirmed?(operation_id)  %>
+				<a class="button is-warning right-button circle-button show-modal info_confirmed">
+					<i class="fas fa-tasks"></i>
+				</a>
 			<% end %>
 		</p>
 	</div>
