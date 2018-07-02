@@ -40,6 +40,7 @@ class OperationsByUsersController < ApplicationController
 
 		def set_notice
 			flash[:notice] = "Operation successfuly created."
+			cookies.permanent[:redirect_tab] = 'operations_tab'
 			redirect_to authenticated_root_path
 		end
 

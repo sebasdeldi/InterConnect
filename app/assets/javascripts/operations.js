@@ -7,5 +7,8 @@ document.addEventListener("turbolinks:load", function() {
 		window.location = e.target.dataset.link;
 	});
 
+	$('.operations-redirection').on('click', (e) => {
+		document.cookie = "redirect_tab=operations_tab";
+	});
 });
 

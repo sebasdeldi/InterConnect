@@ -26,7 +26,6 @@ document.addEventListener("turbolinks:load", function() {
 
   $(".show-modal").click(function() {
   	var modal_type = this.classList[this.classList.length-1]
-  	console.log(modal_type)
     $(".modal." + modal_type).addClass("is-active");  
   });
 

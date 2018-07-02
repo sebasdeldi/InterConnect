@@ -5,7 +5,7 @@
 		<br>
 		<nav class="breadcrumb" aria-label="breadcrumbs">
 		  <ul>
-		    <li><%= link_to "Operation Records List", is_admin? ? general_records_path : representative_path  %></li>
+		    <li class='operations-redirection' ><%= link_to "Operation Records List", is_admin? ? general_records_path : representative_path %></li>
 		    <li class="is-active"><%= link_to "Operation Number " + @operation.id.to_s, operation_path(@operation.id) %></li>
 		  </ul>
 		</nav>
