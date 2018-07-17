@@ -102,16 +102,19 @@ ActiveRecord::Schema.define(version: 20180627200619) do
     t.boolean "fcl_exw_info_confirmed", default: false
     t.boolean "fcl_exw_quotation_confirmed", default: false
     t.string "status_message", default: " "
+    t.string "reference"
   end
 
   create_table "operations_by_users", force: :cascade do |t|
     t.bigint "agent_id"
     t.bigint "shipper_id"
     t.bigint "representative_id"
+    t.bigint "consignee_id"
     t.bigint "operation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_operations_by_users_on_agent_id"
+    t.index ["consignee_id"], name: "index_operations_by_users_on_consignee_id"
     t.index ["operation_id"], name: "index_operations_by_users_on_operation_id"
     t.index ["representative_id"], name: "index_operations_by_users_on_representative_id"
     t.index ["shipper_id"], name: "index_operations_by_users_on_shipper_id"

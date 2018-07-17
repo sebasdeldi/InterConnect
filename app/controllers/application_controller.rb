@@ -55,7 +55,11 @@ class ApplicationController < ActionController::Base
 
   # FCL-EXW helpers
   def is_fcl_exw_info_stage_completed?(operation_id)
-    FclExwCargoInfoStep.find_by(operation_id: operation_id).nil? ? false : true
+    if FclExwCargoInfoStep.find_by(operation_id: operation_id).created_at == FclExwCargoInfoStep.find_by(operation_id: operation_id).updated_at
+      false
+    else
+      true
+    end
   end
 
   def is_fcl_exw?(operation_id)

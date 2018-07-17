@@ -18,11 +18,12 @@ class OperationsByUsersController < ApplicationController
 			@agents = User.agents
 			@shippers = User.shippers
 			@representatives = User.representatives
+			@consignees = User.consignees
 		end
 
 		def representative_operation_creation
 			if params[:operations_by_user][:agent_id].present? && params[:operations_by_user][:shipper_id].present?
-				@operations_by_user.create_for_representatives(params[:modality], strong_params_for_representatives, current_user)
+				@operations_by_user.create_for_representatives(params[:reference], params[:modality], strong_params_for_representatives, current_user)
 				set_notice
 			else
 				set_alert
@@ -50,7 +51,7 @@ class OperationsByUsersController < ApplicationController
 		end
 
 		def strong_params_for_representatives
-			params.require(:operations_by_user).permit(:agent_id, :shipper_id)
+			params.require(:operations_by_user).permit(:agent_id, :shipper_id, :consignee_id)
 		end
 
 		def strong_params_for_agents

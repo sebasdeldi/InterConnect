@@ -12,7 +12,7 @@
 		<h2 class="<%= is_operation_completed?(operation_id) ? 'step-completed' : '' %>">CARGO GENERAL INFORMATION</h2>
 		<br>
 		<p>
-			This step will trigger an email to <%= agent.company_name %> and to their Shipper (if they enabled the option) letting them know that the operation is already being handled by you and asking them to verify the information if it hasn't been provided by the Cargo Agent.
+			This step will trigger an email to <%= agent.company_name %> and to their Shipper (if they enabled the option) letting them know that the operation is already being handled by you and asking them to verify the information if it hasn't been provided by the Destination Agent.
 		</p>
 		<br>
 		<%= link_to 'Go to step', new_general_cargo_info_path(operation_id: operation_id), class:is_operation_completed?(operation_id) ? 'button step-completed' : 'button is-link'  %>

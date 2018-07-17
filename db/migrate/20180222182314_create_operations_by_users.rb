@@ -4,6 +4,7 @@ class CreateOperationsByUsers < ActiveRecord::Migration[5.1]
       t.references :agent
       t.references :shipper
       t.references :representative
+      t.references :consignee
 
       t.references :operation, foreign_key: true
 

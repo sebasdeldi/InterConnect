@@ -5,8 +5,8 @@ class OperationsByUser < ApplicationRecord
   belongs_to :shipper, class_name: 'User', foreign_key: "shipper_id", optional: true
   validates :agent_id, :operation_id, presence: true
 
-  def create_for_representatives(modality, strong_params_for_representatives, current_user)
-		operation = create_operation(modality)
+  def create_for_representatives(reference, modality, strong_params_for_representatives, current_user)
+		operation = create_operation(modality, reference)
 		@operations_by_user = OperationsByUser.create(strong_params_for_representatives.merge(operation_id: operation.id, representative_id: current_user.id))
   end
 
@@ -17,13 +17,13 @@ class OperationsByUser < ApplicationRecord
   end
 
   private
-  	def create_operation(modality)
+  	def create_operation(modality, reference)
   		steps_number = 1
   		if modality == "FCL - EXW"
   			steps_number = 4
   			#TODO add other modality cases
   		end
-  		operation = Operation.create(status: 'IN PROGRESS', status_message:'Initializing operation', modality: modality, steps_number: steps_number, current_step: 0)
+  		operation = Operation.create(reference: reference, status: 'IN PROGRESS', status_message:'Initializing operation', modality: modality, steps_number: steps_number, current_step: 0)
       create_steps(operation)
       operation
     end

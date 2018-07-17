@@ -19,6 +19,7 @@ class User < ApplicationRecord
   scope :agents, -> { where(role_id: Role.find_by(name: 'agent').id) }
   scope :representatives, -> { where(role_id: Role.find_by(name: 'representative').id) }
   scope :shippers, -> { where(role_id: Role.find_by(name: 'shipper').id) }
+  scope :consignees, -> { where(role_id: Role.find_by(name: 'consignee').id) }
   scope :pricing_representatives, -> { where(role_id: Role.find_by(name: 'pricing_representatives').id) }
 
 

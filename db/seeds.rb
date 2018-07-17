@@ -6,7 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-roles = Role.create!([{name: 'admin'},{name: 'representative'},{name: 'agent'},{name: 'shipper'},{name: 'vendor'},{name: 'carrier'},{name: 'pricing_representative'}])
+roles = Role.create!([
+	{name: 'admin'},
+	{name: 'representative'},
+	{name: 'agent'},
+	{name: 'shipper'},
+	{name: 'vendor'},
+	{name: 'carrier'},
+	{name: 'pricing_representative'},
+	{name: 'consignee'}
+])
 
 users = User.create!([
 	{email: 'admin@admin.com', password: '12345678', role_id: 1, company_name: 'Interworld Freight', phone_number: '7862803736'},
@@ -15,6 +24,7 @@ users = User.create!([
 	{email: 'shipper@shipper.com', password: '12345678', role_id: 4, company_name: 'Super Sipper', phone_number: '7862803736'},
 	{email: 'naviera@naviera.com', password: '12345678', role_id: 5, company_name: 'Super Naviera', phone_number: '7862803736'},
 	{email: 'carrier@carrier.com', password: '12345678', role_id: 6, company_name: 'Super Carrier', phone_number: '7862803736'}, 
-	{email: 'pricing@pricing.com', password: '12345678', role_id: 7, company_name: 'IWF', phone_number: '7862803736'}
+	{email: 'pricing@pricing.com', password: '12345678', role_id: 7, company_name: 'IWF', phone_number: '7862803736'},
+	{email: 'consignee@consignee.com', password: '12345678', role_id: 8, company_name: 'Consigneelandia', phone_number: '7862803736'}
 ])
 
