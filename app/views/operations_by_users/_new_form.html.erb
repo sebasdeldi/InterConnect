@@ -1,7 +1,6 @@
 <div class='panel-block'>
   <%= form_for operations_by_user, html: {class: "control"} do |f| %>
 
-
     <div class="field">
       <%= f.label 'Reference code:', class: 'label' %>
       <div class="control has-icons-left">
@@ -29,8 +28,6 @@
         </a>
       </p>
     </div>
-
-
 
     <label class="label">Shipper:</label>
     <div class="field is-grouped">
@@ -68,18 +65,25 @@
       </p>
     </div>
 
-
-
     <div class="field">
       <label class="label">Operation Type:</label>
       <div class="control has-icons-left">
         <div class="select full-select">
-
-          <%= select_tag :modality, options_for_select(["FCL - EXW", "LCL"], "FCL - EXW"), class: 'full-select' %>
+          <%= select_tag :modality, options_for_select(["FCL - EXW", "LCL"], "FCL - EXW"), {include_blank: 'SELECT AN OPERATION TYPE', class: "full-select modality"}%>
         </div>
         <div class="icon is-small is-left">
           <i class="fas fa-globe"></i>
         </div>
+      </div>
+    </div>
+
+    <div class="field hidden pieces-number">
+      <%= f.label 'Pieces Number:', class: 'label' %>
+      <div class="control has-icons-left">
+        <%= number_field_tag :pieces_number, ' ', class: "input" %>
+        <span class="icon is-small is-left">
+          <i class="fas fa-box"></i>
+        </span>
       </div>
     </div>
 
@@ -113,3 +117,15 @@
 
 <br>
 <br>
+<script type="text/javascript">
+  $('.modality').prop('selectedIndex', 0); 
+
+  $('.modality').on('change', function() {
+    if ($('.modality').val() == 'FCL - EXW'){
+      $('.pieces-number').removeClass('hidden');
+    }else{
+      $('.modality').val() = '';
+      $('.pieces-number').addClass('hidden');
+    }
+  })
+</script>

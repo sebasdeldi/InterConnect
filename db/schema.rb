@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20180627200619) do
     t.string "status"
     t.float "steps_number"
     t.float "current_step"
+    t.float "pieces_number"
     t.boolean "fcl_exw_info_requested", default: false
     t.boolean "fcl_exw_info_confirmed", default: false
     t.boolean "fcl_exw_quotation_confirmed", default: false
