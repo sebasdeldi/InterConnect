@@ -4,7 +4,7 @@
     
     <nav class= 'panel is-form-panel hidden card-shadow grouped-info' id='grouped-info' >
       <p class="panel-heading">
-        General Cargo Information for operation <%= params[:operation_id] %> x
+        General Cargo Information for operation <%= Operation.find(params[:operation_id]).reference %> x
       </p>
 
       <div class='panel-block'>

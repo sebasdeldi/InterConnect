@@ -3,7 +3,7 @@
     <div class="column <%= is_fcl_exw_info_stage_completed?(params[:operation_id]) ? 'is-6' : 'is-half is-8 is-offset-2' %>">
       <nav class= 'panel is-form-panel card-shadow' >
         <p class="panel-heading">
-          FCL - EXW Cargo information for operation: <%= params[:operation_id] %>
+          FCL - EXW Cargo information for operation: <%= Operation.find(params[:operation_id]).reference %>
         </p>
 
         <div class='panel-block'>
@@ -138,7 +138,7 @@
       <div class="column is-6">
         <nav class= 'panel is-form-panel card-shadow' >
           <p class="panel-heading">
-            Alerts for operation <%= params[:operation_id] %>
+            Alerts for operation <%= Operation.find(params[:operation_id]).reference %>
           </p>
 
           <div class='panel-block'>

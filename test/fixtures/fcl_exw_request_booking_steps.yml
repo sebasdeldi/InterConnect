@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fcl_exw_request_booking_steps_id: MyString
+  integer: MyString
+
+two:
+  fcl_exw_request_booking_steps_id: MyString
+  integer: MyString

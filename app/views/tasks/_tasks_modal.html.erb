@@ -3,7 +3,7 @@
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">TASKS FOR OPERATION <%= operation_id %></p>
+      <p class="modal-card-title">TASKS FOR OPERATION <%= Operation.find(operation_id).reference %></p>
       <button class="delete close-modal <%= step %>" aria-label="close"></button>
     </header>
 

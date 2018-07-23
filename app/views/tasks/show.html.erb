@@ -3,7 +3,7 @@
 	<br>
 	<nav class="breadcrumb" aria-label="breadcrumbs">
 	  <ul>
-	    <li><%= link_to "Operation Number " + @operation_id.to_s, operation_path(@operation_id)%></li>
+	    <li><%= link_to "Operation " + Operation.find(@operation_id).reference, operation_path(@operation_id)%></li>
 	    <li class="is-active"><%= link_to "Task", operation_path(@operation_id) %></li>
 	  </ul>
 	</nav>

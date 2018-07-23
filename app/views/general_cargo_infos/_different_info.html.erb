@@ -3,7 +3,7 @@
   <div class="column <%= is_operation_completed?(params[:operation_id]) ? 'is-6' : 'is-half is-8 is-offset-2' %>">
     <nav class= 'panel is-form-panel hidden card-shadow different-info' id='different-info' >
       <p class="panel-heading">
-        General Cargo Information for operation <%= params[:operation_id] %>
+        General Cargo Information for operation <%= Operation.find(params[:operation_id]).reference %>
       </p>
 
       <div class='panel-block'>
@@ -78,7 +78,7 @@
     <div class="column is-6">
       <nav class= 'panel is-form-panel card-shadow different-info hidden' id='different-info' >
         <p class="panel-heading">
-          Alerts for operation <%= params[:operation_id] %>
+          Alerts for operation <%= Operation.find(params[:operation_id]).reference %>
         </p>
 
         <div class='panel-block'>

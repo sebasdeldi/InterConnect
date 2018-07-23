@@ -38,6 +38,8 @@
     <%= f.hidden_field :fcl_exw_info_requested_step, value: fcl_exw_info_requested_step_id(operation_id) %>
   <% elsif step == 'fcl_exw_quotation_confirmed' %>
     <%= f.hidden_field :fcl_exw_quotation_confirmed_step, value: fcl_exw_quotation_confirmed_step_id(operation_id) %>
+  <% elsif step == 'request_booking' %>
+    <%= f.hidden_field :fcl_exw_request_booking_step, value: fcl_exw_request_booking_step_id(operation_id) %>  
   <% end %>
 
   <%= f.submit "SAVE", class: 'button is-link' %>

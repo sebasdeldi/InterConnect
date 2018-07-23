@@ -39,6 +39,8 @@ class TasksController < ApplicationController
         Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_info_requested_steps_id: params[:fcl_exw_info_requested_step], operation_id: params[:operation_id] )
       elsif params[:fcl_exw_quotation_confirmed_step]
         Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_quotation_confirmed_steps_id: params[:fcl_exw_quotation_confirmed_step], operation_id: params[:operation_id] )
+      elsif params[:fcl_exw_request_booking_step]
+        Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_request_booking_steps_id: params[:fcl_exw_request_booking_step], operation_id: params[:operation_id] )
       end
     end
 end
