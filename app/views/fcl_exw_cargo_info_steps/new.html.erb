@@ -21,13 +21,32 @@
               </div>
             </div>  
 
+            <div class="field">
+              <%= f.label 'POL:', class: 'label' %>
+              <div class="control has-icons-left">
+                <%= f.text_field :pol, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.pol : '' %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-map-signs"></i>
+                </span>
+              </div>
+            </div>  
+
+            <div class="field">
+              <%= f.label 'POD:', class: 'label' %>
+              <div class="control has-icons-left">
+                <%= f.text_field :pod, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.pod : '' %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-map-signs"></i>
+                </span>
+              </div>
+            </div>  
 
             
             <div class="field">
               <%= f.label 'Container Type:', class: 'label' %>
               <div class="control has-icons-left">
                 <div class="select full-select">
-                  <%= f.select :container_size, options_for_select(["20'", "40'", "45'", "20' NOR", "40' NOR", "Flat Rack", "Open Top"], is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.container_size : ''), {include_blank: 'SELECT A TYPE'}, class: 'full-select' %>
+                  <%= f.select :container_size, options_for_select(["20'", "40'", "45'","20' HC ", "40' HC", "45' HC", "20' NOR", "40' NOR", "Flat Rack", "Open Top"], is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.container_size : ''), {include_blank: 'SELECT A TYPE'}, class: 'full-select' %>
                 </div>
                 <div class="icon is-small is-left">
                   <i class="fas fa-truck-loading"></i>

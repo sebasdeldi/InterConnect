@@ -33,7 +33,7 @@
           </div>
         </td>
         <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
-          <%= operation.operation.status %>
+          <%= operation.operation.status_message %>
         </td>
         <% if is_admin? && path != representatives_records_path %>
           <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">

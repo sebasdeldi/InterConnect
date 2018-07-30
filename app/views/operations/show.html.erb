@@ -12,7 +12,7 @@
 	</div>
 	<br>
 	<%= render 'timeline', operation_id: @operation.id, agent: @agent, shipper: @shipper, tasks: @tasks, cargo_info_tasks: @cargo_info_tasks, 
-	info_confirmed_tasks: @info_confirmed_tasks, info_requested_tasks: @info_requested_tasks, quotation_confirmed_tasks: @quotation_confirmed_tasks, request_booking_tasks: @request_booking_tasks %>
+	info_confirmed_tasks: @info_confirmed_tasks, info_requested_tasks: @info_requested_tasks, quotation_confirmed_tasks: @quotation_confirmed_tasks, request_booking_tasks: @request_booking_tasks, carriers: @carriers %>
 <% elsif is_agent? %>
 <% end %>
 

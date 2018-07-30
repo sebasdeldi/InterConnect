@@ -21,6 +21,7 @@ class User < ApplicationRecord
   scope :shippers, -> { where(role_id: Role.find_by(name: 'shipper').id) }
   scope :consignees, -> { where(role_id: Role.find_by(name: 'consignee').id) }
   scope :pricing_representatives, -> { where(role_id: Role.find_by(name: 'pricing_representatives').id) }
+  scope :carriers, -> { where(role_id: Role.find_by(name: 'carrier').id) }
 
 
 end

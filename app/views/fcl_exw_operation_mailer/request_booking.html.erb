@@ -1,0 +1,76 @@
+<div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060"></font></span></font></div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">&nbsp;</font></span></font></div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">
+
+Good day,
+<br>
+Please help us with a booking for the following cargo:
+
+<h2>Cargo info</h2>
+<ul>
+	<li>
+		<b>Reference: </b> <%= @operation[1].pickup_reference %>
+	</li>
+	<li>
+		<b>Pieces number:</b> <%= @operation[0].pieces_number %>
+	</li>
+	<li>
+		<b>Container Size:</b> <%= @operation[1].container_size %>
+	</li>
+	<li>
+		<b>POL:</b> <%= @operation[1].pol %>
+	</li>
+	<li>
+		<b>POD:</b> <%= @operation[1].pod %>
+	</li>
+	<li>
+		<b>Loading Date:</b> <%= @operation[1].loading_date %>
+	</li>
+	<li>
+		<b>Loading Time:</b> <%= @operation[1].loading_time %>
+	</li>
+	<li>
+		<b>Loading Address:</b> <%= @operation[1].loading_address %>
+	</li>
+	<li>
+		<b>Gross Weight:</b> <%= @operation[1].gross_weight %>
+	</li>
+	<li>
+		<b>Commercial Description:</b> <%= @operation[1].commercial_description %>
+	</li>
+	<li>
+		<b>Hazardous:</b> <%= @operation[1].cargo_hazardous %>
+	</li>
+	<li>
+		<b>Gross Weight:</b> <%= @operation[1].gross_weight %>
+	</li>
+	<li>
+		<b>Schedule B:</b> <%= @operation[1].schedule_b_number %>
+	</li>
+	<li>
+		<b>EIN:</b> <%= @operation[1].ein %>
+	</li>
+	<li>
+		<b>Shipper company name:</b> <%= @shipper.company_name %>
+	</li>
+	<li>
+		<b>Shipper company phone number:</b> <%= @shipper.phone_number %>
+	</li>
+	<li>
+		<b>Shipper company email:</b> <%= @shipper.email %>
+	</li>
+</ul>
+
+
+
+<p><%= @additional_message%></p>
+<%= image_tag(attachments['signature.png'].url, width:"100%", height: "150") %>
+
+<br>
+<br>
+
+<br>
+<font size="2" face="Calibri,sans-serif"><span style="font-size:11pt;"><font size="1" face="Century Gothic,sans-serif" color="#002060"><span style="font-size:8pt;"><b>OUR VALUES : Dependence - Obedience - Gratitude - Integrity - Exc</b></span></font><font size="1" face="Century Gothic,sans-serif" color="#002060"><span style="font-size:8pt;" lang="en-US"><b>ellence
+- Perseverance - Honor - Generosity - Humility - Generational Mentality</b></span></font></span></font>
+</div>

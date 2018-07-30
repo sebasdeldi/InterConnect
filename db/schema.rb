@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20190627200619) do
 
   create_table "fcl_exw_cargo_info_steps", force: :cascade do |t|
     t.bigint "operation_id"
+    t.string "pol"
+    t.string "pod"
     t.string "loading_address"
     t.string "container_size"
     t.date "loading_date"
@@ -75,6 +77,8 @@ ActiveRecord::Schema.define(version: 20190627200619) do
   create_table "fcl_exw_request_booking_steps", force: :cascade do |t|
     t.boolean "completed", default: false
     t.bigint "operation_id"
+    t.string "additional_message"
+    t.integer "carrier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_fcl_exw_request_booking_steps_on_operation_id"

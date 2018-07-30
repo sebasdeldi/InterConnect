@@ -6,7 +6,7 @@
 		</a>
 
 		<%= render 'operations/fcl_exw/fcl_exw_timeline', operation_id: operation_id, agent: agent, shipper: shipper,
-		cargo_info_tasks: cargo_info_tasks, info_confirmed_tasks: info_confirmed_tasks, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks, request_booking_tasks: request_booking_tasks %>
+		cargo_info_tasks: cargo_info_tasks, info_confirmed_tasks: info_confirmed_tasks, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks, request_booking_tasks: request_booking_tasks, carriers: carriers %>
 	<% else %>
 		<%= render 'other_timeline', operation_id: operation_id, agent: agent, shipper: shipper %>
 	<% end %>

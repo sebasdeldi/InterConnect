@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 	post "/fcl_exw_info", to: "fcl_exw_cargo_info_steps#request_info"
 	post "/fcl_exw_confirm_info", to: "fcl_exw_cargo_info_steps#confirm_info"
 	post "/fcl_exw_confirm_quotation", to: "fcl_exw_cargo_info_steps#confirm_quotation"
+	post "/fcl_exw_request_booking", to: "fcl_exw_cargo_info_steps#request_booking"
 	get '/admin', to: "admins#index", as: "admin"
 	
 	match "/admin/general_charts", to: "general_charts#index", as: "general_charts", via: [:get, :post]
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
 	get "/tasks/:id", to: "tasks#show", as: "task"
 	post "/tasks", to: "tasks#create", as: "tasks"
 	post "/update_tasks", to: "tasks#update", as: "update_tasks"
-
+	post "/carrier_info", to: "operations#carrier_info"
 
  	devise_for :users, controllers: {
     sessions: 'users/sessions',

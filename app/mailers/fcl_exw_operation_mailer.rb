@@ -48,4 +48,32 @@ class FclExwOperationMailer < ApplicationMailer
 	       delivery_method_options: delivery_options, from: 'no-reply@interwf.com')
 	end
 
+	def request_booking (shipper, operation, carrier, additional_message)
+		@shipper  = shipper
+		@operation = operation
+		@carrier = carrier
+		@additional_message = additional_message
+		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
+		delivery_options = { user_name: 'no-reply@interwf.com',
+		                     password: 'Nriwf**321'
+		                   }
+		mail(to: carrier.email,
+		     subject: "INTER WORLD FREIGHT BOOKING ORDER",
+		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com')
+	end
+
+	def request_booking_notification (agent, operation, carrier)
+		@agent  = agent
+		@operation = operation
+		@carrier = carrier
+
+		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
+		delivery_options = { user_name: 'no-reply@interwf.com',
+		                     password: 'Nriwf**321'
+		                   }
+		mail(to: agent.email,
+		     subject: "INTER WORLD FREIGHT BOOKING ORDER",
+		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com')
+	end
+
 end

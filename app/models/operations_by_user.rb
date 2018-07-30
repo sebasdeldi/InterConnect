@@ -13,7 +13,7 @@ class OperationsByUser < ApplicationRecord
   end
 
   def create_for_agents(modality, strong_params_for_agents, current_user)
-		operation = Operation.create(status: 'IN PROGRESS', status_message:'Initializing operation', modality: modality)
+		operation = Operation.create(status: 'IN PROGRESS', status_message:'Confirm quotation', modality: modality)
     create_steps(operation)
 		@operations_by_user = OperationsByUser.create(strong_params_for_agents.merge(operation_id: operation.id, agent_id: current_user.id))
   end
@@ -22,10 +22,10 @@ class OperationsByUser < ApplicationRecord
   	def create_operation(modality, reference, pieces_number)
   		steps_number = 1
   		if modality == "FCL - EXW"
-  			steps_number = 4
+  			steps_number = 5
   			#TODO add other modality cases
   		end
-  		operation = Operation.create(reference: reference, status: 'IN PROGRESS', status_message:'Initializing operation', 
+  		operation = Operation.create(reference: reference, status: 'IN PROGRESS', status_message:'Confirm quotation', 
         modality: modality, steps_number: steps_number, current_step: 0, pieces_number: pieces_number)
       create_steps(operation)
       operation

@@ -117,15 +117,3 @@
 
 <br>
 <br>
-<script type="text/javascript">
-  $('.modality').prop('selectedIndex', 0); 
-
-  $('.modality').on('change', function() {
-    if ($('.modality').val() == 'FCL - EXW'){
-      $('.pieces-number').removeClass('hidden');
-    }else{
-      $('.modality').val() = '';
-      $('.pieces-number').addClass('hidden');
-    }
-  })
-</script>
