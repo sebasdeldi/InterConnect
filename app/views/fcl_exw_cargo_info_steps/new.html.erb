@@ -39,21 +39,7 @@
                   <i class="fas fa-map-signs"></i>
                 </span>
               </div>
-            </div>  
-
-            
-            <div class="field">
-              <%= f.label 'Container Type:', class: 'label' %>
-              <div class="control has-icons-left">
-                <div class="select full-select">
-                  <%= f.select :container_size, options_for_select(["20'", "40'", "45'","20' HC ", "40' HC", "45' HC", "20' NOR", "40' NOR", "Flat Rack", "Open Top"], is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.container_size : ''), {include_blank: 'SELECT A TYPE'}, class: 'full-select' %>
-                </div>
-                <div class="icon is-small is-left">
-                  <i class="fas fa-truck-loading"></i>
-                </div>
-              </div>
             </div>
-
 
             <div class="field">
               <%= f.label 'Loading Date:', class: 'label' %>
@@ -74,41 +60,6 @@
                 </span>
               </div>
             </div> 
-
-            <div class="field">
-              <%= f.label 'Gross Weight (pounds):', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.number_field :gross_weight, autofocus: true, class: 'input', step: :any, value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.gross_weight : '' %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-weight"></i>
-                </span>
-              </div>
-            </div> 
-
-
-            <div class="field">
-              <%= f.label 'Commercial Description:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.text_field :commercial_description, autofocus: true , class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.commercial_description : '' %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-file-alt"></i>
-                </span>
-              </div>
-            </div> 
-
-
-
-            <div class="field">
-              <%= f.label 'Is Cargo Hazardous?', class: 'label' %>
-              <div class="control has-icons-left">
-                <div class="select full-select">
-                  <%= f.select :cargo_hazardous, options_for_select(["NO", "YES"], is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.cargo_hazardous : ''), {include_blank: 'SELECT IF HAZARDOUS'}, class: 'full-select' %>
-                </div>
-                <div class="icon is-small is-left">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </div>
-              </div>
-            </div>
 
             <div class="field">
               <%= f.label 'Schedule B Number or Tariff Code:', class: 'label' %>
@@ -140,11 +91,21 @@
               </div>
             </div>
 
-            <br>
-            <br>
 
+            <div class="field pieces-number-diff">
+              <%= f.label 'Number of containers', class: 'label' %>
+              <div class="control has-icons-left">
+                <%= f.number_field :pieces_number, autofocus: true, class: 'input pieces-number-diff', min: 0, placeholder: 3 %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope pieces-number-diff"></i>
+                </span>
+              </div>
+            </div>  
+
+            <br>
             <div id="container"></div>
             <div class="control">
+              <br>
               <%= f.submit is_fcl_exw_info_stage_completed?(params[:operation_id]) ? "UPDATE CARGO INFO" : "REGISTER CARGO INFO" , class: 'button is-link' %>
             </div>
             <br>
@@ -152,7 +113,7 @@
         </div>
       </nav>
     </div>
-
+    <br>
     <% if is_fcl_exw_info_stage_completed?(params[:operation_id]) %>
       <div class="column is-6">
         <nav class= 'panel is-form-panel card-shadow' >

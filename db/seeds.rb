@@ -14,12 +14,13 @@ roles = Role.create!([
 	{name: 'vendor'},
 	{name: 'carrier'},
 	{name: 'pricing_representative'},
-	{name: 'consignee'}
-	])
+	{name: 'consignee'},
+	{name: 'pricing'}
+])
 
 users = User.create!([
 	{email: 'admin@admin.com', password: '12345678', role_id: 1, company_name: 'Interworld Freight', phone_number: '7862803736'},
-	{email: 'sdelgado@interwf.com', password: '12345678', role_id: 2, company_name: 'Interworld Freight', phone_number: '7862803736', outlook_password: 'Sdiwf**321' },
+	{email: 'sdelgado@interwf.com', password: '12345678', role_id: 2, company_name: 'Interworld Freight', phone_number: '7862803736', outlook_password: 'Sdiwf**321', contact_first_name: 'Sebastián', contact_last_name: 'Delgado' },
 	{email: 'agent@agent.com', password: '12345678', role_id: 3 , company_name: 'Interworld Bogotá', phone_number: '7862803736'},
 	{email: 'shipper@shipper.com', password: '12345678', role_id: 4, company_name: 'Super Sipper', phone_number: '7862803736'},
 	{email: 'naviera@naviera.com', password: '12345678', role_id: 5, company_name: 'Super Naviera', phone_number: '7862803736'},

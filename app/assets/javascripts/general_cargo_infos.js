@@ -15,23 +15,6 @@ document.addEventListener("turbolinks:load", function() {
 	  $("#type-info").addClass("hidden");
 	}
 
-	// ERROR HANDLING LOGIC
-
-	$('.pieces-number-diff').on("change keydown paste input", () => {
-		addFields($('.input.pieces-number-diff').val())
-	});
-
-	var addFields = (fields_number) => {
-	  var container = document.getElementById('container');
-	  while (container.hasChildNodes()) {
-	    container.removeChild(container.lastChild);
-	  }
-	  for (i=0; i < fields_number; i++){
-	    var weight_field = document.createElement('div');
-	    weight_field.innerHTML = ("<div class='box card-shadow'><div class='field'><label class='label'>Piece # " + (i+1) + " Weight (pounds)</label><div class='control has-icons-left'><input class='input' name='weight-" + (i + 1) + "'" + "><span class='icon is-small is-left'><i class='fas fa-envelope email'></i></span></div></div><div class='field'><label class='label'>Piece # " + (i+1) + " Height (inches)</label><div class='control has-icons-left'><input class='input' name='height-" + (i + 1) + "'" +  "><span class='icon is-small is-left'><i class='fas fa-envelope email'></i></span></div></div><div class='field'><label class='label'>Piece # " + (i+1) + " Depth (inches)</label><div class='control has-icons-left'><input class='input' name='depth-" + (i + 1) + "'" +  "><span class='icon is-small is-left'><i class='fas fa-envelope email'></i></span></div></div><div class='field'><label class='label'>Piece # " + (i+1) + " Width (inches)</label><div class='control has-icons-left'><input class='input' name='width-" + (i + 1) + "'" +  "><span class='icon is-small is-left'><i class='fas fa-envelope email'></i></span></div></div><div class='field piece_type'><label class='label'>Piece # " + (i+1) + " Type</label><div class='control'><div class='select'><select name='piece-type-" + (i + 1) + "'" + "><option>Box</option><option>Pallet</option></select></div></div></div></div><br>");
-	    container.appendChild(weight_field);
-	  }
-	}
 
 	$("#different-info-form").on("ajax:success", function(event) {
 		var detail = event.detail;

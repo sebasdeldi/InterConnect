@@ -23,9 +23,15 @@ class OperationsByUsersController < ApplicationController
 
 		def representative_operation_creation
 			if params[:operations_by_user][:agent_id].present? && params[:operations_by_user][:shipper_id].present?
-				fields = [ params[:reference], params[:modality], strong_params_for_representatives, current_user, params[:pieces_number] ]
-				@operations_by_user.create_for_representatives(fields)
+				if Operation.last.nil?
+					reference = (current_user.contact_first_name[0..0] + current_user.contact_last_name[0..0] + "1").upcase
+				else
+					reference = (current_user.contact_first_name[0..0] + current_user.contact_last_name[0..0] + (Operation.last.id + 1).to_s).upcase
+				end
+				fields = [ reference, params[:modality], strong_params_for_representatives, current_user, params[:pieces_number] ]
+				new_operation = @operations_by_user.create_for_representatives(fields)
 				set_notice
+				redirect_to operation_path(new_operation)
 			else
 				set_alert
 			end
@@ -43,7 +49,6 @@ class OperationsByUsersController < ApplicationController
 		def set_notice
 			flash[:notice] = "Operation successfuly created."
 			cookies.permanent[:redirect_tab] = 'operations_tab'
-			redirect_to authenticated_root_path
 		end
 
 		def set_alert

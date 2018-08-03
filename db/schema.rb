@@ -35,16 +35,12 @@ ActiveRecord::Schema.define(version: 20190627200619) do
     t.string "pol"
     t.string "pod"
     t.string "loading_address"
-    t.string "container_size"
     t.date "loading_date"
     t.time "loading_time"
-    t.float "gross_weight"
-    t.text "commercial_description"
-    t.string "cargo_hazardous"
-    t.string "hazardous_document"
     t.string "schedule_b_number"
     t.string "ein"
     t.string "pickup_reference"
+    t.integer "pieces_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_fcl_exw_cargo_info_steps_on_operation_id"
@@ -134,15 +130,15 @@ ActiveRecord::Schema.define(version: 20190627200619) do
   end
 
   create_table "pieces", force: :cascade do |t|
+    t.bigint "fcl_exw_cargo_info_step_id"
     t.string "sort"
-    t.decimal "weight"
-    t.decimal "height"
-    t.decimal "width"
-    t.decimal "depth"
+    t.float "gross_weight"
+    t.text "commercial_description"
+    t.string "cargo_hazardous"
+    t.string "container_size"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "general_cargo_info_id"
-    t.index ["general_cargo_info_id"], name: "index_pieces_on_general_cargo_info_id"
+    t.index ["fcl_exw_cargo_info_step_id"], name: "index_pieces_on_fcl_exw_cargo_info_step_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -209,7 +205,7 @@ ActiveRecord::Schema.define(version: 20190627200619) do
   add_foreign_key "functionalities", "roles"
   add_foreign_key "general_cargo_infos", "operations"
   add_foreign_key "operations_by_users", "operations"
-  add_foreign_key "pieces", "general_cargo_infos"
+  add_foreign_key "pieces", "fcl_exw_cargo_info_steps"
   add_foreign_key "tasks", "fcl_exw_cargo_info_steps", column: "fcl_exw_cargo_info_steps_id"
   add_foreign_key "tasks", "fcl_exw_info_confirmed_steps", column: "fcl_exw_info_confirmed_steps_id"
   add_foreign_key "tasks", "fcl_exw_info_requested_steps", column: "fcl_exw_info_requested_steps_id"

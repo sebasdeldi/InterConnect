@@ -6,12 +6,19 @@ class FclExwCargoInfoStepsController < ApplicationController
 
 	def create
 		@fcl_cargo_info = FclExwCargoInfoStep.new
-	  if existing_fcl_cargo_info(params[:operation_id]).update(fcl_cargo_info_params.merge(operation_id: params[:operation_id]))
+		existing_cargo_info = existing_fcl_cargo_info(params[:operation_id])
+	  if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: params[:operation_id]))
 			Operation.find(params[:operation_id]).update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request booking order')
+			#Creating easy to loop params array
+			params_array = params.to_unsafe_h.to_a.drop(4)
+			params_array.pop(3)
+			params_array = params_array.each_slice(4).to_a
+			create_pieces(params_array, existing_cargo_info)
+
 			flash[:notice] = 'Information correctly updated'
 			redirect_to operation_path params[:operation_id]
 		else
-			flash[:alert] = 'Information could not be updated, please fill in all the information listed bellow'
+			flash[:alert] = 'Information could not be saved, please fill in all the information listed bellow'
 			redirect_to new_fcl_exw_cargo_info_step_path(operation_id: params[:operation_id])
 		end
 	end
@@ -78,5 +85,11 @@ class FclExwCargoInfoStepsController < ApplicationController
 			params.require(:fcl_exw_cargo_info_step).permit(:operation_id, :loading_address, :container_size, :loading_date, :loading_time, :gross_weight, :commercial_description, :cargo_hazardous, :hazardous_document,
 			 :schedule_b_number, :schedule_b_number, :ein, :pickup_reference, :contact_name, :contact_email, :contact_phone, :contact_company, :pol, :pod)
 		end
+
+	  def create_pieces (params_array, cargo_info)
+      params_array.each do |element|
+        piece = Piece.create(fcl_exw_cargo_info_step_id: cargo_info.id, gross_weight: element[0][1], commercial_description: element[1][1], container_size: element[2][1], cargo_hazardous: element[3][1])
+      end
+    end
 end
 
