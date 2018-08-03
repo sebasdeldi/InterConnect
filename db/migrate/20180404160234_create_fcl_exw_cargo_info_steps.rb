@@ -8,7 +8,6 @@ class CreateFclExwCargoInfoSteps < ActiveRecord::Migration[5.1]
       t.date :loading_date
       t.time :loading_time
       t.string :schedule_b_number
-      t.string :ein
       t.string :pickup_reference
       t.integer :pieces_number
       t.timestamps

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 	match "/representative", to: "representatives#index", as: "representative", via: [:get, :post]
 	get "/tasks_panel", to: "tasks#index"
 	get "/tasks/:id", to: "tasks#show", as: "task"
+	post "/pieces_for_cargo_info", to: "pieces#pieces_for_cargo_info", as: "pieces_for_cargo_info"
 	post "/tasks", to: "tasks#create", as: "tasks"
 	post "/update_tasks", to: "tasks#update", as: "update_tasks"
 	post "/carrier_info", to: "operations#carrier_info"

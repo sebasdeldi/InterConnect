@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20190627200619) do
     t.date "loading_date"
     t.time "loading_time"
     t.string "schedule_b_number"
-    t.string "ein"
     t.string "pickup_reference"
     t.integer "pieces_number"
     t.datetime "created_at", null: false

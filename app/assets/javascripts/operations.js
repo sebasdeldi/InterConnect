@@ -13,15 +13,6 @@ document.addEventListener("turbolinks:load", function() {
 
 	$('.modality').prop('selectedIndex', 0); 
 
-  $('.modality').on('change', function() {
-    if ($('.modality').val() == 'FCL - EXW'){
-      $('.pieces-number').removeClass('hidden');
-    }else{
-      $('.modality').val() = '';
-      $('.pieces-number').addClass('hidden');
-    }
-  })
-
 	$('.carrier-select').prop('selectedIndex', 0); 
 	
 	$('.carrier-select').on('change', function() {
