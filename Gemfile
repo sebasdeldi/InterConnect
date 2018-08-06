@@ -85,3 +85,4 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
+gem "strip_attributes"

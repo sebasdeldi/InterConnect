@@ -23,11 +23,18 @@ $timeline-color: $primary-color;
 	background-color: #1bb213 !important;
 }
 
+.step-incompleted {
+	background-color: #e84e02 !important;
+}
+
 .button.step-completed { color: white;}
+.button.step-incompleted { background-color: #e84e02 !important; color: white;}
 
 .step-completed-no-bg.timeline-content::before{ border-left: 7px solid #1bb213 !important; }
 .step-completed-no-bg-right.timeline-content::before{ border-right: 7px solid #1bb213 !important; }
 
+.step-incompleted-no-bg.timeline-content::before{ border-left: 7px solid #e84e02 !important; }
+.step-incompleted-no-bg-right.timeline-content::before{ border-right: 7px solid #e84e02 !important; }
 
 
 // Mixins and Placeholders
@@ -229,4 +236,8 @@ h1, h2, h3, h4 {
 
 .step-completed-icon {
 	color: #1bb213 !important;
+}
+
+.step-incompleted-icon {
+	color: #e84e02 !important;
 }

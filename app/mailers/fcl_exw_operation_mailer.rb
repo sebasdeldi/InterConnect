@@ -1,8 +1,9 @@
 class FclExwOperationMailer < ApplicationMailer
 
-	def info_request (shipper, representative, agent)
+	def info_request (shipper, representative, agent, secure_id)
 	  @shipper  = shipper
 	  @agent = agent
+	  @secure_id = secure_id
 	  attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
 	  delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password

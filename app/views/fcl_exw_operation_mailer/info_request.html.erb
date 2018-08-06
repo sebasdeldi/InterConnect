@@ -7,8 +7,13 @@ should have cargo ready to load into a container, if so please confirm the follo
 <ol style="margin-top:0;margin-bottom:0;">
 <li style="margin:0;"><font size="3" face="Calibri,sans-serif" color="#002060"><span style="font-size:12pt;"><span lang="es-CO">Loading Address:</span></span></font></li><li style="margin:0;"><font size="3" face="Calibri,sans-serif" color="#002060"><span style="font-size:12pt;"><span lang="es-CO">Container size:</span></span></font></li><li style="margin:0;"><font size="3" face="Calibri,sans-serif" color="#002060"><span style="font-size:12pt;"><span lang="es-CO">Loading date &amp; Docks Hours:</span></span></font></li><li style="margin:0;"><font size="3" face="Calibri,sans-serif" color="#002060"><span style="font-size:12pt;">Gross weight:</span></font></li><li style="margin:0;"><font size="3" face="Calibri,sans-serif" color="#002060"><span style="font-size:12pt;">Commercial Description:</span></font></li></ol>
 <div style="margin:0 0 0 18pt;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="red"><i>***Please confirm if cargo is Hazardous material and send us MSDS, IMDG or DGD</i></font></span></font></div>
+
 <ol start="6" style="margin-top:0;margin-bottom:0;">
 <li style="margin:0;"><font size="3" face="Calibri,sans-serif" color="#002060"><span style="font-size:12pt;">Schedule B# / Tariff Code:</span></font></li><li style="margin:0;"><font size="3" face="Calibri,sans-serif" color="#002060"><span style="font-size:12pt;">EIN:</span></font></li><li style="margin:0;"><font size="3" face="Calibri,sans-serif" color="#002060"><span style="font-size:12pt;"><span lang="es-CO">Pickup reference:</span></span></font></li><li style="margin:0;"><font size="3" face="Calibri,sans-serif" color="#002060"><span style="font-size:12pt;"><span lang="es-CO">Contact and phone number:</span></span></font></li></ol>
+<br>
+
+<b>We recommend submitting the cargo information through this form, this allow us to give you a better and faster service:</b>
+<%= link_to 'CARGO INFORMATION FORMULARY', "http://localhost:3000/fcl_exw_cargo_info_steps/new?operation_secure_id=" + @secure_id.to_s, class: "button is-link" %>
 <div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060"><span lang="es-CO">&nbsp;</span></font></span></font></div>
 <div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">Remember that goods valued over USD2,500.00 per commodity (Schedule B or HTSUSA), sent from one shipper to one consignee require filing in the
 </font><font color="#002060"><span style="background-color:white;">Automated Commercial Environment</span></font><font color="#002060"> (</font><font color="#002060">ACE) of the U.S. Customs and Border Protection to be able to be exported and failure to comply
@@ -22,7 +27,6 @@ origin, without exception***</font></span></font></div>
 <div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">&nbsp;</font></span></font></div>
 
 <%= image_tag(attachments['signature.png'].url, width:"100%", height: "150") %>
-
 <br>
 <br>
 

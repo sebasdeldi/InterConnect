@@ -1,4 +1,5 @@
 class FclExwCargoInfoStep < ApplicationRecord
+	strip_attributes
   belongs_to :operation
   has_many :tasks
   has_many :pieces, dependent: :destroy

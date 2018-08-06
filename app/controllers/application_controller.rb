@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
   protect_from_forgery with: :exception
 
   helper_method :resource_name, :resource, :devise_mapping, :resource_class, :is_admin?, :is_representative?, :is_shipper?,
@@ -6,6 +7,8 @@ class ApplicationController < ActionController::Base
     :is_pricing_representative?, :is_fcl_exw_quotation_confirmed?, :is_fcl_exw_booking_requested?
 
 
+  def save_nil
+  end
 
   # Roles detection helpers
   def is_admin?
@@ -56,10 +59,15 @@ class ApplicationController < ActionController::Base
   # FCL-EXW helpers
   def is_fcl_exw_info_stage_completed?(operation_secure_id)
     operation_id = Operation.find_by(secure_id: operation_secure_id).id
-    if FclExwCargoInfoStep.find_by(operation_id: operation_id).created_at == FclExwCargoInfoStep.find_by(operation_id: operation_id).updated_at
+    record = FclExwCargoInfoStep.find_by(operation_id: operation_id)
+    if record.created_at == record.updated_at
       false
     else
-      true
+      if (record.pol.nil? || record.pod.nil? || record.loading_address.nil? || record.loading_date.nil? || record.loading_time.nil? || record.schedule_b_number.nil? || record.pickup_reference.nil? || record.pieces_number.nil?)
+        'orange'
+      else
+        true
+      end
     end
   end
 

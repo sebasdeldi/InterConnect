@@ -9,7 +9,7 @@ class FclExwCargoInfoStepsController < ApplicationController
 		existing_cargo_info = existing_fcl_cargo_info(Operation.find_by(secure_id: params[:operation_secure_id]).id)
 	  if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id))
 	  	op = Operation.find_by(secure_id: params[:operation_secure_id])
-			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Requeoperation_secure_idst booking order')
+			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request booking order')
 			#Creating easy to loop params array
 			params_array = params.to_unsafe_h.to_a.drop(4)
 			params_array.pop(3)
@@ -27,8 +27,9 @@ class FclExwCargoInfoStepsController < ApplicationController
 	def request_info
 		shipper = User.find(params[:shipper_id])
 		agent = User.find(params[:agent_id])
-		FclExwOperationMailer.info_request(shipper, current_user, agent).deliver_later
-		if Operation.find(params[:operation_id]).update(status: 'IN PROGRESS', status_message:'Confirm cargo info received', current_step: 2)
+		op = Operation.find(params[:operation_id])
+		FclExwOperationMailer.info_request(shipper, current_user, agent, op.secure_id).deliver_later
+		if op.update(status: 'IN PROGRESS', status_message:'Confirm cargo info received', current_step: 2)
 			FclExwInfoRequestedStep.find_by(operation_id: params[:operation_id]).update(completed: true)
 			flash[:notice] = "An email sent to shipper:" + shipper.email + " from " + shipper.company_name
 			redirect_to operation_path params[:operation_id]
