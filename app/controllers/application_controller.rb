@@ -54,7 +54,8 @@ class ApplicationController < ActionController::Base
   end
 
   # FCL-EXW helpers
-  def is_fcl_exw_info_stage_completed?(operation_id)
+  def is_fcl_exw_info_stage_completed?(operation_secure_id)
+    operation_id = Operation.find_by(secure_id: operation_secure_id).id
     if FclExwCargoInfoStep.find_by(operation_id: operation_id).created_at == FclExwCargoInfoStep.find_by(operation_id: operation_id).updated_at
       false
     else

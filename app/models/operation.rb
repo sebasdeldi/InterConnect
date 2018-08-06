@@ -1,4 +1,5 @@
 class Operation < ApplicationRecord
+	before_create :randomize_id
 	has_one :general_cargo_info
 	has_many :operations_by_users
 
@@ -100,6 +101,13 @@ class Operation < ApplicationRecord
 	end
 
 	private
+
+
+		def randomize_id
+		  begin
+		    self.secure_id = SecureRandom.random_number(1_000_000)
+		  end while Operation.where(secure_id: self.secure_id).exists?
+		end
 
 		def set_charts_date_range(operations, date_range)
 			if date_range == "day"

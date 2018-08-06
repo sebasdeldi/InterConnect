@@ -1,14 +1,15 @@
 class FclExwCargoInfoStepsController < ApplicationController
 	def new
 		@fcl_cargo_info = FclExwCargoInfoStep.new
-		@existing_fcl_cargo_info = existing_fcl_cargo_info(params[:operation_id])
+		@existing_fcl_cargo_info = existing_fcl_cargo_info(Operation.find_by(secure_id: params[:operation_secure_id]).id)
 	end
 
 	def create
 		@fcl_cargo_info = FclExwCargoInfoStep.new
-		existing_cargo_info = existing_fcl_cargo_info(params[:operation_id])
-	  if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: params[:operation_id]))
-			Operation.find(params[:operation_id]).update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request booking order')
+		existing_cargo_info = existing_fcl_cargo_info(Operation.find_by(secure_id: params[:operation_secure_id]).id)
+	  if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id))
+	  	op = Operation.find_by(secure_id: params[:operation_secure_id])
+			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Requeoperation_secure_idst booking order')
 			#Creating easy to loop params array
 			params_array = params.to_unsafe_h.to_a.drop(4)
 			params_array.pop(3)
@@ -16,10 +17,10 @@ class FclExwCargoInfoStepsController < ApplicationController
 			create_pieces(params_array, existing_cargo_info)
 
 			flash[:notice] = 'Information correctly updated'
-			redirect_to operation_path params[:operation_id]
+			redirect_to operation_path op.id
 		else
 			flash[:alert] = 'Information could not be saved, please fill in all the information listed bellow'
-			redirect_to new_fcl_exw_cargo_info_step_path(operation_id: params[:operation_id])
+			redirect_to new_fcl_exw_cargo_info_step_path(operation_id: op.id)
 		end
 	end
 

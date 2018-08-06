@@ -12,6 +12,7 @@ class OperationsController < ApplicationController
 		@quotation_confirmed_tasks = Task.where(operation_id: @operation, status: '0',fcl_exw_quotation_confirmed_steps_id: FclExwQuotationConfirmedStep.find_by(operation_id: @operation.id))
 		@request_booking_tasks = Task.where(operation_id: @operation, status: '0',fcl_exw_request_booking_steps_id: FclExwRequestBookingStep.find_by(operation_id: @operation.id))
 		@carriers = User.carriers.all
+		@operation_secure_id = @operation.secure_id
 	end
 
 	def carrier_info

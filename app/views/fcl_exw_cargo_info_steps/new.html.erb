@@ -1,27 +1,26 @@
 <div class="container is-widescreen"> 
   <div class="columns">
-    <div class="column <%= is_fcl_exw_info_stage_completed?(params[:operation_id]) ? 'is-6' : 'is-half is-8 is-offset-2' %>">
+    <div class="column <%= is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? 'is-6' : 'is-half is-8 is-offset-2' %>">
       <br>
       <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-          <li><%= link_to "Operation Timeline", operation_path(params[:operation_id]) %></li>
+          <li><%= link_to "Operation Timeline", operation_path(Operation.find_by(secure_id: params[:operation_secure_id]).id) %></li>
           <li class="is-active"><a href="">Cargo Information </a></li>
         </ul>
       </nav>
       <nav class= 'panel is-form-panel card-shadow' >
         <p class="panel-heading">
-          FCL - EXW Cargo information for operation: <%= Operation.find(params[:operation_id]).reference %>
+          FCL - EXW Cargo information for operation: <%= Operation.find_by(secure_id: params[:operation_secure_id]).reference %>
         </p>
-
         <div class='panel-block'>
           <%= form_with model: @fcl_cargo_info, id: '', html: {class: "control"} do |f| %>
 
-            <%= hidden_field_tag :operation_id, params[:operation_id] %>
+            <%= hidden_field_tag :operation_secure_id, params[:operation_secure_id] %>
 
             <div class="field">
               <%= f.label 'Loading Address:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :loading_address, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.loading_address : '' %>
+                <%= f.text_field :loading_address, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.loading_address : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-map-signs"></i>
                 </span>
@@ -31,7 +30,7 @@
             <div class="field">
               <%= f.label 'POL:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :pol, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.pol : '' %>
+                <%= f.text_field :pol, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.pol : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-map-signs"></i>
                 </span>
@@ -41,7 +40,7 @@
             <div class="field">
               <%= f.label 'POD:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :pod, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.pod : '' %>
+                <%= f.text_field :pod, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.pod : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-map-signs"></i>
                 </span>
@@ -51,7 +50,7 @@
             <div class="field">
               <%= f.label 'Loading Date:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :loading_date, autofocus: true, class: 'input loading_datetime', value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.loading_date : '' %>
+                <%= f.text_field :loading_date, autofocus: true, class: 'input loading_datetime', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.loading_date : '' %>
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
                 </span>
@@ -71,7 +70,7 @@
             <div class="field">
               <%= f.label 'Schedule B Number or Tariff Code:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :schedule_b_number, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.schedule_b_number : '' %>
+                <%= f.text_field :schedule_b_number, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.schedule_b_number : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-file-alt"></i>
                 </span>
@@ -81,7 +80,7 @@
             <div class="field">
               <%= f.label 'Pick Up Reference:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :pickup_reference, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.pickup_reference : '' %>
+                <%= f.text_field :pickup_reference, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.pickup_reference : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-file-alt"></i>
                 </span>
@@ -92,18 +91,18 @@
             <div class="field pieces-number-diff">
               <%= f.label 'Number of containers', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.number_field :pieces_number, autofocus: true, class: 'input pieces-number-diff', min: 0, max: 50, value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.pieces_number : '' %>
+                <%= f.number_field :pieces_number, autofocus: true, class: 'input pieces-number-diff', min: 0, max: 50, value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.pieces_number : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope pieces-number-diff"></i>
                 </span>
               </div>
             </div>  
-            <%= f.hidden_field :fcl_exw_cargo_info_step_id, class: "fcl_exw_cargo_info_step_id", value: is_fcl_exw_info_stage_completed?(params[:operation_id]) ? @existing_fcl_cargo_info.id : '' %>
+            <%= f.hidden_field :fcl_exw_cargo_info_step_id, class: "fcl_exw_cargo_info_step_id", value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.id : '' %>
             <br>
             <div id="container"></div>
             <div class="control">
               <br>
-              <%= f.submit is_fcl_exw_info_stage_completed?(params[:operation_id]) ? "UPDATE CARGO INFO" : "REGISTER CARGO INFO" , class: 'button is-link' %>
+              <%= f.submit is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? "UPDATE CARGO INFO" : "REGISTER CARGO INFO" , class: 'button is-link' %>
             </div>
             <br>
           <% end %>
@@ -111,13 +110,13 @@
       </nav>
     </div>
     <br>
-    <% if is_fcl_exw_info_stage_completed?(params[:operation_id]) %>
+    <% if is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) %>
 
       <div class="column is-6">
 
         <nav class= 'panel is-form-panel card-shadow' >
           <p class="panel-heading">
-            Alerts for operation <%= Operation.find(params[:operation_id]).reference %>
+            Alerts for operation <%= Operation.find_by(secure_id: params[:operation_secure_id]).reference %>
           </p>
 
           <div class='panel-block'>
@@ -128,7 +127,7 @@
               </div>
               <div class="message-body">
                 <p>
-                  Please have in count that a record for this step of the <b>operation identified with the number <%= Operation.find(params[:operation_id]).reference %></b> was previously saved in our system, and by submiting new information, the old data would be overriden.  
+                  Please have in count that a record for this step of the <b>operation identified with the number <%= Operation.find_by(secure_id: params[:operation_secure_id]).reference %></b> was previously saved in our system, and by submiting new information, the old data would be overriden.  
                 </p>
               </div>
             </article>

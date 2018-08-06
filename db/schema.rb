@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 20190627200619) do
     t.boolean "fcl_exw_quotation_confirmed", default: false
     t.string "status_message", default: " "
     t.string "reference"
+    t.integer "secure_id"
   end
 
   create_table "operations_by_users", force: :cascade do |t|
