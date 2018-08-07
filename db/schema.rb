@@ -136,6 +136,8 @@ ActiveRecord::Schema.define(version: 20190627200619) do
     t.text "commercial_description"
     t.string "cargo_hazardous"
     t.string "container_size"
+    t.string "hazardous_class"
+    t.string "un_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["fcl_exw_cargo_info_step_id"], name: "index_pieces_on_fcl_exw_cargo_info_step_id"

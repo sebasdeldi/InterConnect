@@ -11,9 +11,8 @@ class FclExwCargoInfoStepsController < ApplicationController
 	  	op = Operation.find_by(secure_id: params[:operation_secure_id])
 			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request booking order')
 			#Creating easy to loop params array
-			params_array = params.to_unsafe_h.to_a.drop(4)
-			params_array.pop(3)
-			params_array = params_array.each_slice(4).to_a
+
+			params_array = params.to_unsafe_h.to_a
 			create_pieces(params_array, existing_cargo_info)
 
 			flash[:notice] = 'Information correctly updated'
@@ -90,8 +89,12 @@ class FclExwCargoInfoStepsController < ApplicationController
 
 	  def create_pieces (params_array, cargo_info)
 	  	Piece.where(fcl_exw_cargo_info_step_id: cargo_info.id).delete_all
-      params_array.each do |element|
-        piece = Piece.create(fcl_exw_cargo_info_step_id: cargo_info.id, gross_weight: element[0][1], commercial_description: element[1][1], container_size: element[2][1], cargo_hazardous: element[3][1])
+	  	params_array = params_array.drop(4)[0..-4]
+
+      (0..params_array.length).step(6) do |element|
+      	unless params_array[element].nil?
+        	piece = Piece.create(fcl_exw_cargo_info_step_id: cargo_info.id, gross_weight: params_array[element][1], commercial_description: params_array[element+1][1], container_size: params_array[element+2][1], cargo_hazardous: params_array[element+3][1], hazardous_class: params_array[element+4][1], un_code: params_array[element+5][1] )
+      	end
       end
     end
 end

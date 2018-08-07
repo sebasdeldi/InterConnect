@@ -9,6 +9,8 @@ class CreatePieces < ActiveRecord::Migration[5.1]
       t.text :commercial_description
       t.string :cargo_hazardous
       t.string :container_size
+      t.string :hazardous_class
+      t.string :un_code
       t.timestamps
     end
   end
