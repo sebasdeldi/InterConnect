@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :user_imports
 
 	resources :operations_by_users, only: [:new, :create]
@@ -11,6 +12,10 @@ Rails.application.routes.draw do
 	post "/fcl_exw_confirm_quotation", to: "fcl_exw_cargo_info_steps#confirm_quotation"
 	post "/fcl_exw_request_booking", to: "fcl_exw_cargo_info_steps#request_booking"
 	get '/admin', to: "admins#index", as: "admin"
+	post "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#update_pricing", as: "new_quotation"
+	post '/quotation_representative/:id', to: "fcl_exw_quotation_confirmed_steps#update_representative", as: "repre_quotation"
+	get  "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#new", as: "new_quotation_view"
+
 	
 	match "/admin/general_charts", to: "general_charts#index", as: "general_charts", via: [:get, :post]
 	match "/admin/general_records", to: "general_records#index", as: "general_records", via: [:get, :post]

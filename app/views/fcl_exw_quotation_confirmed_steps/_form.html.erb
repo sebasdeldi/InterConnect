@@ -1,0 +1,52 @@
+<%= form_tag new_quotation_path, class: "control full-select quotation" do |f| %>
+
+  <label class="label">Neta:</label>
+  <div class="field is-grouped full-select">
+    <div class="control has-icons-left full-select">
+      <div class="control full-select">
+        <%= number_field_tag :neta, {},class: 'input full-select', value: quotation.neta %>
+      </div>
+      <div class="icon is-small is-left">
+        <i class="fas fa-globe"></i>
+      </div>
+    </div>
+  </div>
+
+
+  <label class="label">Venta:</label>
+  <div class="field is-grouped">
+    <div class="control has-icons-left full-select">
+      <div class="control full-select">
+        <%= number_field_tag :venta,{} ,class: 'input full-select', value: quotation.venta %>
+      </div>
+      <div class="icon is-small is-left">
+        <i class="fas fa-globe"></i>
+      </div>
+    </div>
+  </div>
+
+
+
+  <label class="label">Additional Comment:</label>
+  <div class="field is-grouped">
+    <div class="control has-icons-left full-select">
+      <div class="control full-select">
+        <%= text_area_tag :additional_comment, quotation.additional_comment , class: 'input note full-select'%>
+      </div>
+      <div class="icon is-small is-left">
+        <i class="fas fa-globe"></i>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="control">
+  	<%= button_tag type: 'submit', class: 'button is-success' do %>
+      <span>SEND</span>
+      <span class="icon is-small">
+        <i class="fas fa-check"></i>
+      </span>
+    <% end %>
+  </div>
+<% end %>

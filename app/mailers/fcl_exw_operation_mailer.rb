@@ -25,9 +25,11 @@ class FclExwOperationMailer < ApplicationMailer
 	       delivery_method_options: delivery_options, from: 'no-reply@interwf.com')
 	end
 
-	def issue_quotation (shipper, representative, agent)
+	def issue_quotation (shipper, representative, agent, operation)
 	  @shipper  = shipper
 	  @agent = agent
+	  @operation = operation
+	  
 	  attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
 	  delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password

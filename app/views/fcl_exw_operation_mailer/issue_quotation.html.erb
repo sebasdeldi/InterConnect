@@ -15,6 +15,9 @@
 			<b>Correo electrónico: </b> <%= @shipper.email %>
 		</li>
 	</ul>
+	<b> Una vez diligenciada la cotización, por favor anviar la información a través del siguiente formulario: </b>
+	<%= link_to "FORMULARIO DE COTIZACIÓN", "http://localhost:3000/quotation/new/"+@operation.secure_id.to_s, class: "button is-link" %>
+
 	<p>Agradezco que me mantengan al tanto de la situación.</p>
 	<p>Muchas gracias.</p>
 </font></span></font></div>

@@ -24,6 +24,51 @@
 	    If the quotation hasn't been issued by our <b>pricing department</b> click the "ISSUE" button and follow the instructions to put in contact our <b>pricing department</b> with your customers.
 			<br>
 			<br>
+			<% quotation = FclExwQuotationConfirmedStep.find_by(operation_id: operation_id)%>
+			<%= form_tag repre_quotation_path, class: "control full-select quotation" do |f| %>
+
+			  <label class="label">Neta:</label>
+			  <div class="field is-grouped full-select">
+			    <div class="control has-icons-left full-select">
+			      <div class="control full-select">
+			        <%= number_field_tag :neta, {},class: 'input full-select', value: quotation.neta, disabled: is_fcl_exw_quotation_confirmed?(operation_id) %>
+			      </div>
+			      <div class="icon is-small is-left">
+			        <i class="fas fa-globe"></i>
+			      </div>
+			    </div>
+			  </div>
+
+
+			  <label class="label">Venta:</label>
+			  <div class="field is-grouped">
+			    <div class="control has-icons-left full-select">
+			      <div class="control full-select">
+			        <%= number_field_tag :venta,{} ,class: 'input full-select', value: quotation.venta, disabled: is_fcl_exw_quotation_confirmed?(operation_id) %>
+			      </div>
+			      <div class="icon is-small is-left">
+			        <i class="fas fa-globe"></i>
+			      </div>
+			    </div>
+			  </div>
+
+
+
+			  <label class="label">Additional Comment:</label>
+			  <div class="field is-grouped">
+			    <div class="control has-icons-left full-select">
+			      <div class="control full-select">
+			        <%= text_area_tag :additional_comment, quotation.additional_comment , class: 'input note full-select', disabled: is_fcl_exw_quotation_confirmed?(operation_id)%>
+			      </div>
+			      <div class="icon is-small is-left">
+			        <i class="fas fa-globe"></i>
+			      </div>
+			    </div>
+			  </div>
+
+			<% end %>
+
+			<br>
 			<article class="message is-warning">
 			  <div class="message-header">
 			  	<p>
@@ -60,7 +105,7 @@
 				<%= hidden_field_tag 'shipper_id', shipper.id %>
 				<%= hidden_field_tag 'operation_id', operation_id %>
 				<%= hidden_field_tag 'agent_id', agent.id %>
-				<%= submit_tag 'CONFIRM', class: "button is-link #{is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_quotation_confirmed?(operation_id)  %>
+				<%= submit_tag 'CONFIRM', class: "button is-link confirm #{is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_quotation_confirmed?(operation_id)  %>
 				<%= submit_tag 'ISSUE', class: "button is-link #{is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : ''  }", issue: true, disabled: is_fcl_exw_quotation_confirmed?(operation_id)  %>
 				<a class="button is-primary right-button circle-button show-modal fcl_exw_quotation_confirmed">
 					<i class="fas fa-tasks"></i>
@@ -70,3 +115,10 @@
 		<br>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$('.confirm').on('click', function(){
+		alert('hello')
+		$('.quotation').submit();
+	});
+</script>

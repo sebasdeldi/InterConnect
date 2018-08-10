@@ -1,0 +1,25 @@
+<div class="container is-widescreen"> 
+	<div class="columns">
+	  <div class="column is-10 is-offset-1">
+	    <br>
+	    <br>
+	   
+	    <nav class= 'panel is-form-panel card-shadow'>
+	      <p class="panel-heading">
+	        Create new quotation for operation <%= @operation.reference %>
+	      </p>
+	      
+
+	      <div class='panel-block'>
+	        <%= render "form", quotation: @quotation %>
+	      </div>
+
+
+	      <br>
+	      <br>
+
+	    </nav>
+	   
+	  </div>
+	</div>
+</div>
