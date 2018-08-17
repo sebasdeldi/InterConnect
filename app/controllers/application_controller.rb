@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
     if record.created_at == record.updated_at
       false
     else
-      if (record.pol.nil? || record.pod.nil? || record.loading_address.nil? || record.loading_date.nil? || record.loading_time.nil? || record.schedule_b_number.nil? || record.pickup_reference.nil? || record.pieces_number.nil?)
+      if (record.contact_email.nil? || record.contact_number.nil? || record.loading_address.nil? || record.loading_date.nil? || record.loading_time.nil? || record.schedule_b_number.nil? || record.pickup_reference.nil? || record.pieces_number.nil?)
         'orange'
       else
         true

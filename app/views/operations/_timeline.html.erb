@@ -1,12 +1,83 @@
+<br>
+<br>
 <div class="container is-widescreen"> 
 	<% if is_fcl_exw? operation_id %>
-		<br>
-		<a class="show-modal button is-link is-outlined tasks-button tasks">
-			Tasks (<%= tasks.count %>)
-		</a>
 
-		<%= render 'operations/fcl_exw/fcl_exw_timeline',operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper,
-		cargo_info_tasks: cargo_info_tasks, info_confirmed_tasks: info_confirmed_tasks, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks, request_booking_tasks: request_booking_tasks, carriers: carriers %>
+		<section class="full-section">
+			<div class="tile is-ancestor">
+			  <div class="tile is-vertical is-8">
+			    <div class="tile">
+			      <div class="tile is-parent is-vertical">
+			        <article class="tile is-child notification step-completed show-modal fcl-initial">      
+		        		<p class="title"> 
+		        			<span class="numberCircle"><span>1</span></span>
+		        			FCL - EXW
+		        		</p>
+		        		<rp></rp>
+		          	<p class="subtitle">New process</p>
+			        </article>
+
+			        <article class="tile is-child notification step-not-completed <%= is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : '' %> show-modal quotation">
+			        		<p class="title">
+			        			<span class="numberCircle"><span>2</span></span>
+			        			Quotation
+			        		</p>
+			        		<rp></rp>
+			        		<p class="subtitle"> Check agent's quotation status  </p>
+			        </article>
+			      </div>
+			      <div class="tile is-parent">
+			        <article class="tile is-child notification step-not-completed <%= is_fcl_exw_info_confirmed?(operation_id) ? 'step-completed' : '' %> show-modal fcl-info-received">
+			          <p class="title">
+			          	<span class="numberCircle"><span>4</span></span>
+			          	Information response
+			          </p>
+			          <rp></rp>
+			          <p class="subtitle">Confirm shipper's information response</p>
+			        </article>
+			      </div>
+			    </div>
+			    <div class="tile is-parent">
+			      <article class="tile is-child notification <%= is_fcl_exw_info_requested?(operation_id) ? 'step-completed' : '' %> step-not-completed show-modal fcl-request-info ">
+			        <p class="title">
+			        	<span class="numberCircle"><span>3</span></span>
+			        	Cargo information request
+			        </p>
+			        <rp></rp>
+			        <p class="subtitle">Request cargo's info to shipper</p>
+			        <div class="content">
+			          <!-- Content -->
+			        </div>
+			      </article>
+			    </div>
+			  </div>
+			  <div class="tile is-parent is-vertical">
+			    <article class="tile is-child notification step-not-completed <%= is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'step-completed' : '' %>  <%= is_fcl_exw_info_stage_completed?(operation_secure_id) == 'orange' ? 'step-incompleted' : '' %> show-modal fcl-load-info">
+			      <p class="title">
+			      	<span class="numberCircle"><span>5</span></span>
+			      	Fill in info
+			      </p>
+			      <rp></rp>
+			      <p class="subtitle">Load cargo info to the system</p>
+			    </article>
+			    <article class="tile is-child notification step-not-completed <%= is_fcl_exw_booking_requested?(operation_id) ? 'step-completed' : '' %> show-modal fcl-booking">
+			      <p class="title">
+			      	<span class="numberCircle"><span>6</span></span>
+			      	Request booking
+			    	</p>
+			    	<rp></rp>
+			      <p class="subtitle">Request a cargo booking order</p>
+			    </article>
+			  </div>
+			</div>
+		</section>
+
+
+		<section id="timeline-section">
+			<%= render 'operations/fcl_exw/fcl_exw_timeline',operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper,
+			cargo_info_tasks: cargo_info_tasks, info_confirmed_tasks: info_confirmed_tasks, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks, request_booking_tasks: request_booking_tasks, carriers: carriers %>
+		</section>
+
 	<% else %>
 		<%= render 'other_timeline', operation_id: operation_id, agent: agent, shipper: shipper %>
 	<% end %>
@@ -20,7 +91,18 @@
 	<%= render 'tasks/fcl_exw/quotation_confirmed_step', agent: agent, shipper: shipper, operation_id: operation_id %>
 	<%= render 'tasks/fcl_exw/request_booking_step', agent: agent, shipper: shipper, operation_id: operation_id %>
 
+	<!-- Steps modals -->
+
 
 	<!-- Hidding this on purpose -->
 	<% render 'send_follow_up_mail_modal', agent: agent, shipper: shipper, operation_id: operation_id %>
 </div>
+
+<script type="text/javascript">
+	$(function() {
+	  $('.scroll-button').on('click', function(e) {
+	    e.preventDefault();
+	    $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+	  });
+	});
+</script>

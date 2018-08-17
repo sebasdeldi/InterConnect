@@ -9,6 +9,64 @@
 @import 'jquery.ui.all';
 @import 'tasks.scss';
 
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 250px;
+  background-color: black;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+article a {
+  text-decoration: none !important;
+}
+
+.numberCircle {
+  display:inline-block;
+  line-height:0px;
+  border-radius:50%;
+  border:2px solid;
+  font-size:32px;
+}
+
+.numberCircle span {
+  display:inline-block;
+  padding-top:50%;
+  padding-bottom:50%;
+  margin-left:8px;
+  margin-right:8px;
+}
+
+.full-section {
+  height: 100vh;
+}
+
+.tile{
+  color: white;
+}
+.step-not-completed {
+  background-color: #3273dc;
+}
+
 .circle-button{
   border-radius: 50%;
 }

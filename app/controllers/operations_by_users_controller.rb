@@ -28,7 +28,7 @@ class OperationsByUsersController < ApplicationController
 				else
 					reference = (current_user.contact_first_name[0..0] + current_user.contact_last_name[0..0] + (Operation.last.id + 1).to_s).upcase
 				end
-				fields = [ reference, params[:modality], strong_params_for_representatives, current_user, params[:pieces_number] ]
+				fields = [ reference, params[:modality], strong_params_for_representatives, current_user, params[:pieces_number], params[:po_number], params[:reference_number] ]
 				new_operation = @operations_by_user.create_for_representatives(fields)
 				set_notice
 				redirect_to operation_path(new_operation)

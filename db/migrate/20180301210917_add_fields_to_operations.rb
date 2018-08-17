@@ -10,6 +10,8 @@ class AddFieldsToOperations < ActiveRecord::Migration[5.1]
     add_column :operations, :fcl_exw_quotation_confirmed, :boolean, default: false
     add_column :operations, :status_message, :string, default: " "
     add_column :operations, :reference, :string
+    add_column :operations, :po_number, :string
+    add_column :operations, :reference_number, :string
     add_column :operations, :secure_id, :integer
   end
 end

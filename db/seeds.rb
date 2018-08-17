@@ -23,10 +23,23 @@ users = User.create!([
 	{email: 'sdelgado@interwf.com', password: '12345678', role_id: 2, company_name: 'Interworld Freight', phone_number: '7862803736', outlook_password: 'Sdiwf**321', contact_first_name: 'Sebastián', contact_last_name: 'Delgado' },
 	{email: 'agent@agent.com', password: '12345678', role_id: 3 , company_name: 'Interworld Bogotá', phone_number: '7862803736'},
 	{email: 'shipper@shipper.com', password: '12345678', role_id: 4, company_name: 'Super Sipper', phone_number: '7862803736'},
-	{email: 'naviera@naviera.com', password: '12345678', role_id: 5, company_name: 'Super Naviera', phone_number: '7862803736'},
-	{email: 'carrier@carrier.com', password: '12345678', role_id: 6, company_name: 'Super Carrier', phone_number: '7862803736'}, 
-	{email: 'carrier2@carrier2.com', password: '12345678', role_id: 6, company_name: 'Super2 Carrier2', phone_number: '22222222222222'}, 
 	{email: 'pricing@pricing.com', password: '12345678', role_id: 7, company_name: 'IWF', phone_number: '7862803736'},
-	{email: 'consignee@consignee.com', password: '12345678', role_id: 8, company_name: 'Consigneelandia', phone_number: '7862803736'}
+	{email: 'consignee@consignee.com', password: '12345678', role_id: 8, company_name: 'Consigneelandia', phone_number: '7862803736'},
+	{email: 'naviera1@naviera.com', password: '12345678', role_id: 6, company_name: 'Hapag', phone_number: '7862803736', vendor_operation_mode: 'web', website: 'http://www.hapag.com'},
+	{email: 'naviera2@naviera.com', password: '12345678', role_id: 6, company_name: 'Sealand- Maersk', phone_number: '7862803736', vendor_operation_mode: 'web', website: 'http://www.maersk.com'},
+	{email: 'naviera3@naviera.com', password: '12345678', role_id: 6, company_name: 'CMA', phone_number: '7862803736', vendor_operation_mode: 'web', website: 'http://www.cma.com'},
+	{email: 'naviera4@naviera.com', password: '12345678', role_id: 6, company_name: 'Crowley', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera5@naviera.com', password: '12345678', role_id: 6, company_name: 'Seaboard', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera6@naviera.com', password: '12345678', role_id: 6, company_name: 'MSC', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera7@naviera.com', password: '12345678', role_id: 6, company_name: 'Evergreen', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera8@naviera.com', password: '12345678', role_id: 6, company_name: 'King Ocean', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera9@naviera.com', password: '12345678', role_id: 6, company_name: 'One', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera10@naviera.com', password: '12345678', role_id: 6, company_name: 'Dole', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera11@naviera.com', password: '12345678', role_id: 6, company_name: 'APL', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera12@naviera.com', password: '12345678', role_id: 6, company_name: 'Antillean', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera13@naviera.com', password: '12345678', role_id: 6, company_name: 'Tropical', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera14@naviera.com', password: '12345678', role_id: 6, company_name: 'ECU', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera15@naviera.com', password: '12345678', role_id: 6, company_name: 'Shipco', phone_number: '7862803736', vendor_operation_mode: 'email'},
+	{email: 'naviera16@naviera.com', password: '12345678', role_id: 6, company_name: 'Hamburg Sud', phone_number: '7862803736', vendor_operation_mode: 'email'}
 ])
 

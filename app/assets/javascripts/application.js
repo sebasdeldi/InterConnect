@@ -33,5 +33,13 @@ document.addEventListener("turbolinks:load", function() {
   	var modal_type = this.classList[this.classList.length-1]
     $(".modal." + modal_type).removeClass("is-active");
   });
+
+  $(document).on('page:fetch', function() {
+    return $('#content').fadeOut('slow');
+  });
+
+  $(document).on('page:restore', function() {
+    return $('#content').fadeIn('slow');
+  });
 });
 

@@ -1,5 +1,10 @@
 @import "https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700";
 
+
+#timeline .timeline-item .timeline-content {
+	width: 100% !important;
+}
+
 // Variables
 $bg-body: #f9f9f9;
 
@@ -89,23 +94,7 @@ h1, h2, h3, h4 {
   padding: 0 10px;
 	@include prefix(transition, all .4s ease);
 
-	&:before {
-		content:"";
-		width: 3px;
-		height: 100%;
-		background: $timeline-color;
-		left: 50%;
-		top: 0;
-		position: absolute;
-	}
 
-	&:after {
-		content: "";
-		clear: both;
-		display: table;
-		width: 100%;
-	}
-	
 	.timeline-item {
 		margin-bottom: 50px;
 		position: relative;

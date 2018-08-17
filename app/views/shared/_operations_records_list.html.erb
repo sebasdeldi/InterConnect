@@ -21,7 +21,14 @@
     <% operations.each do |operation| %>
       <tr class='row'>
         <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
-          <%= Operation.find(operation.operation_id).reference %>
+          <p class="tooltip">
+            <%= Operation.find(operation.operation_id).reference %>
+            <span class="tooltiptext">
+              PO #: <%= Operation.find(operation.operation_id).po_number %>
+              <br>
+              Reference #: <%= Operation.find(operation.operation_id).reference_number %>
+            </span>
+          </p>
         </td>
         <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
           <%= operation.operation.modality %>

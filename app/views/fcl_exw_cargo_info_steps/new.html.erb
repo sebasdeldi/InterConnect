@@ -28,9 +28,9 @@
             </div>  
 
             <div class="field">
-              <%= f.label 'POL:', class: 'label' %>
+              <%= f.label 'Contact Email:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :pol, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.pol : '' %>
+                <%= f.text_field :contact_email, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.contact_email : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-map-signs"></i>
                 </span>
@@ -38,9 +38,9 @@
             </div>  
 
             <div class="field">
-              <%= f.label 'POD:', class: 'label' %>
+              <%= f.label 'Contant Phone:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :pod, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.pod : '' %>
+                <%= f.text_field :contact_number, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.contact_number : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-map-signs"></i>
                 </span>

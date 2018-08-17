@@ -1,21 +1,7 @@
+<%= render 'operations/fcl_exw/fcl_exw_initial_timeline_item', operation_id: operation_id, agent: agent, shipper: shipper %>
+<%= render 'operations/fcl_exw/fcl_exw_request_cargo_info' , operation_id: operation_id, agent: agent, shipper: shipper, info_requested_tasks: info_requested_tasks%>
+<%= render 'operations/fcl_exw/fcl_exw_confirm_quotation' , operation_id: operation_id, agent: agent, shipper: shipper, quotation_confirmed_tasks: quotation_confirmed_tasks %>
+<%= render 'operations/fcl_exw/fcl_exw_info_received', operation_id: operation_id, agent: agent, shipper: shipper, info_confirmed_tasks: info_confirmed_tasks %>
+<%= render 'operations/fcl_exw/fcl_exw_info_timeline_item', operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, cargo_info_tasks: cargo_info_tasks %>
+<%= render 'operations/fcl_exw/fcl_exw_request_booking_timeline_item', operation_id: operation_id, agent: agent, shipper: shipper, request_booking_tasks: request_booking_tasks, carriers: carriers %>
 
-<div class='timeline'>
-	<div class="container">
-    <h1 class="project-name">
-    	OPERATION : <b><%= Operation.find(operation_id).reference %></b> 
-    	<br>
-    	DESTINATION AGENT: <b><%= agent.company_name.upcase %> </b> 
-    	<br>
-    	SHIPPER: <b><%= shipper.company_name.upcase %> </b>  
-    </h1>
-		<div id="timeline">
-			<%= render 'operations/fcl_exw/fcl_exw_initial_timeline_item', operation_id: operation_id, agent: agent, shipper: shipper %>
-			<%= render 'operations/fcl_exw/fcl_exw_confirm_quotation' , operation_id: operation_id, agent: agent, shipper: shipper, quotation_confirmed_tasks: quotation_confirmed_tasks %>
-			<%= render 'operations/fcl_exw/fcl_exw_request_cargo_info' , operation_id: operation_id, agent: agent, shipper: shipper, info_requested_tasks: info_requested_tasks%>
-			<%= render 'operations/fcl_exw/fcl_exw_info_received', operation_id: operation_id, agent: agent, shipper: shipper, info_confirmed_tasks: info_confirmed_tasks %>
-			<%= render 'operations/fcl_exw/fcl_exw_info_timeline_item', operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, cargo_info_tasks: cargo_info_tasks %>
-			<%= render 'operations/fcl_exw/fcl_exw_request_booking_timeline_item', operation_id: operation_id, agent: agent, shipper: shipper, request_booking_tasks: request_booking_tasks, carriers: carriers %>
-		</div>
-	</div>	
-</div>
-	

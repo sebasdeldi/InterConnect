@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20190627200619) do
 
   create_table "fcl_exw_cargo_info_steps", force: :cascade do |t|
     t.bigint "operation_id"
-    t.string "pol"
-    t.string "pod"
+    t.string "contact_email"
+    t.string "contact_number"
     t.string "loading_address"
     t.date "loading_date"
     t.time "loading_time"
@@ -114,6 +114,8 @@ ActiveRecord::Schema.define(version: 20190627200619) do
     t.boolean "fcl_exw_quotation_confirmed", default: false
     t.string "status_message", default: " "
     t.string "reference"
+    t.string "po_number"
+    t.string "reference_number"
     t.integer "secure_id"
   end
 
@@ -186,6 +188,8 @@ ActiveRecord::Schema.define(version: 20190627200619) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "outlook_password"
+    t.string "vendor_operation_mode"
+    t.string "website"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
