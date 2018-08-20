@@ -15,8 +15,8 @@ class OperationsByUsersController < ApplicationController
 	private
 		def set_variables
 			@operations_by_user = OperationsByUser.new
-			@agents = User.agents
-			@shippers = User.shippers
+			@agents = current_user.relateds.where(role_id: 3)
+			@shippers = current_user.relateds.where(role_id: 4)
 			@representatives = User.representatives
 			@consignees = User.consignees
 		end

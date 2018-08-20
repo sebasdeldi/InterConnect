@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
 
 
+  get 'users_relationship/new/:representative_id', to: 'users_relationship#new', as: 'new_relationship'
+  post 'users_relationship/create', as: 'create_relation'
+
+  delete 'users_relationship/destroy', as: 'destroy_relation'
+  get 'users_relationship/index_representatives', to: 'users_relationship#index_representatives', as: 'representatives_list'
+
+
   resources :user_imports
 
 	resources :operations_by_users, only: [:new, :create]

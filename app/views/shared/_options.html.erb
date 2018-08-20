@@ -1,3 +1,5 @@
+<br>
+<br>
 <div class="container is-widescreen"> 
   <nav class="panel">
     <p class="panel-heading">
@@ -17,6 +19,12 @@
   	    </span>
   	    Import Users 
   	  <% end %>
+      <%= link_to(representatives_list_path, class: "panel-block is-active" ) do %>        
+        <span class="panel-icon">
+          <i class="fas fa-users"></i>
+        </span>
+        Manage Representatives 
+      <% end %>
   	<% end %>
   </nav>
 </div>

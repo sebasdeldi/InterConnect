@@ -1,0 +1,22 @@
+<br>
+<br>
+<br>
+<div class="container is-widescreen"> 
+  <nav class="panel">
+    <p class="panel-heading">
+      Representatives
+    </p>
+
+
+    <% if is_admin? %>
+      <%  @representatives.each do |rep| %>
+        <%= link_to(new_relationship_path(rep), class: "panel-block is-active" ) do %>        
+          <span class="panel-icon">
+            <i class="fas fa-users"></i>
+          </span>
+          <%= rep.contact_first_name + ' ' + rep.contact_last_name %>
+        <% end %>
+      <% end %>
+  	<% end %>
+  </nav>
+</div>

@@ -9,6 +9,17 @@
 @import 'jquery.ui.all';
 @import 'tasks.scss';
 
+.button-icon{
+  margin-left: 30px;
+}
+
+.button-icon.add {
+  color: green;
+}
+
+.button-icon.remove {
+  color: red;
+}
 
 .tooltip {
   position: relative;

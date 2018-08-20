@@ -12,7 +12,8 @@ class User < ApplicationRecord
   has_many :shipper, class_name: 'OperationsByUser'
   has_many :representative, class_name: 'OperationsByUser'
   has_many :pricing_representatives, class_name: 'OperationsByUser'
-
+  has_many :users_relationships
+  has_many :relateds, through: 'users_relationships'
 
   belongs_to :roles , optional: true
 
