@@ -3,6 +3,8 @@
 	  <div class="column is-10 is-offset-1">
 	    <br>
 	    <br>
+
+
 	   
 	    <nav class= 'panel is-form-panel card-shadow'>
 	      <p class="panel-heading">
@@ -11,7 +13,7 @@
 	      
 
 	      <div class='panel-block'>
-	        <%= render "form", quotation: @quotation %>
+	        <%= render "form", quotation: @quotation, shipper: OperationsByUser.find_by(operation_id: @operation.id).shipper %>
 	      </div>
 
 

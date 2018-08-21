@@ -6,6 +6,7 @@ class CreateFclExwQuotationConfirmedSteps < ActiveRecord::Migration[5.1]
       t.text :additional_comment
       t.float :neta
       t.float :venta
+      t.json :files
       t.timestamps
     end
   end

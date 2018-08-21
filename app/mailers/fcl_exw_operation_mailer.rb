@@ -34,9 +34,9 @@ class FclExwOperationMailer < ApplicationMailer
 	  delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password
 	                     }
-	  mail(to: 'pricing@interwf.com',
+	  mail(to: agent.email,
 	       subject: "Quotation request from shipper " + shipper.company_name,
-	       delivery_method_options: delivery_options, from: representative.email, cc: representative.email)
+	       delivery_method_options: delivery_options, from: representative.email, cc: 'pricing@interwf.com')
 	end
 
 	def quotation_confirmation (shipper, representative, agent)

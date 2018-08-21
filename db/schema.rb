@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20190627200620) do
     t.text "additional_comment"
     t.float "neta"
     t.float "venta"
+    t.json "files"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_fcl_exw_quotation_confirmed_steps_on_operation_id"
