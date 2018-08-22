@@ -68,6 +68,15 @@
 			    	<rp></rp>
 			      <p class="subtitle">Request a cargo booking order</p>
 			    </article>
+
+			    <article class="tile is-child notification step-not-completed <%= is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'step-completed' : '' %>  <%= is_fcl_exw_info_stage_completed?(operation_secure_id) == 'orange' ? 'step-incompleted' : '' %> show-modal fcl-load-info">
+			      <p class="title">
+			      	<span class="numberCircle"><span>7</span></span>
+			      	Fill in info
+			      </p>
+			      <rp></rp>
+			      <p class="subtitle">Booking Information</p>
+			    </article>
 			  </div>
 			</div>
 		</section>

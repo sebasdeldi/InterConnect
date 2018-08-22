@@ -2,6 +2,12 @@
 <br>
 <br>
 <div class="container is-widescreen"> 
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li><%= link_to "Home", admin_path  %></li>
+      <li class="is-active"><a href="">Manage Representatives</a></li>
+    </ul>
+  </nav>
   <nav class="panel">
     <p class="panel-heading">
       <%= @representative.contact_first_name + ' ' + @representative.contact_last_name %>
