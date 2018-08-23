@@ -1,5 +1,18 @@
 class FclExwOperationMailer < ApplicationMailer
 
+	def booking_info (agent, representative, info)
+	  @agent = agent
+	  @info = info
+	  attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
+	  delivery_options = { user_name: representative.email,
+	                       password: representative.outlook_password
+	                     }
+	  mail(to: agent.email,
+	       subject: "Booking information updated",
+	       delivery_method_options: delivery_options, from: representative.email, cc: representative.email)
+	end
+
+
 	def info_request (shipper, representative, agent, secure_id)
 	  @shipper  = shipper
 	  @agent = agent

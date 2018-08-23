@@ -1,0 +1,78 @@
+<div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060"></font></span></font></div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">&nbsp;</font></span></font></div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">
+
+	Good morning, this is the booking information:
+	<br>
+	<ul>
+		<li>
+			<b>Booking Number: </b> 
+			<%= @info.booking_number %>
+		</li>
+		<br>
+		<li>
+			<b>Vessel: </b> 
+			<%= @info.vessel %>
+		</li>
+		<br>
+		<li>
+			<b>Voyage: </b> 
+			<%= @info.voyage %>
+		</li>
+		<br>
+		<li>
+			<b>Document cut off date: </b> 
+			<%= @info.doc_cut_off_date %>
+
+		</li>
+		<br>
+		<li>
+			<b>Document cut off time: </b> 
+			<%= @info.doc_cut_off_time.hour.to_s + ':' + @info.doc_cut_off_time.min.to_s%>
+		</li>
+		<br>
+		<li>
+			<b>Cargo cut off date: </b> 
+			<%= @info.cargo_cut_off_date %>
+		</li>
+		<br>
+		<li>
+			<b>Cargo cut off time: </b> 
+			<%= @info.cargo_cut_off_time.hour.to_s + ':' + @info.cargo_cut_off_time.min.to_s%>
+		</li>
+		<br>
+		<li>
+			<b>Expected sailing date: </b> 
+			<%= @info.sailing_date %>
+		</li>
+		<br>
+		<li>
+			<b>Expected sailing time: </b> 
+			<%= @info.sailing_time.hour.to_s + ':' + @info.sailing_time.min.to_s%>
+		</li>
+		<br>
+		<li>
+			<b>Expected arrival date: </b> 
+			<%= @info.arrival_date %>
+		</li>
+		<br>
+		<li>
+			<b>Expected arrival time: </b> 
+			<%= @info.arrival_time.hour.to_s + ':' + @info.arrival_time.min.to_s %>
+		</li>
+
+	</ul>
+
+</font></span></font></div>
+
+
+<%= image_tag(attachments['signature.png'].url, width:"100%", height: "150") %>
+
+<br>
+<br>
+
+<br>
+<font size="2" face="Calibri,sans-serif"><span style="font-size:11pt;"><font size="1" face="Century Gothic,sans-serif" color="#002060"><span style="font-size:8pt;"><b>OUR VALUES : Dependence - Obedience - Gratitude - Integrity - Exc</b></span></font><font size="1" face="Century Gothic,sans-serif" color="#002060"><span style="font-size:8pt;" lang="en-US"><b>ellence
+- Perseverance - Honor - Generosity - Humility - Generational Mentality</b></span></font></span></font>
+</div>

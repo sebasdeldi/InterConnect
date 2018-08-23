@@ -3,6 +3,10 @@ module TasksHelper
 		FclExwCargoInfoStep.find_by(operation_id: operation_id).id
 	end
 
+	def fcl_exw_booking_info_step_id(operation_id)
+		FclExwBookingInfoStep.find_by(operation_id: operation_id).id
+	end
+
 	def fcl_exw_info_confirmed_step_id(operation_id)
 		FclExwInfoConfirmedStep.find_by(operation_id: operation_id).id
 	end

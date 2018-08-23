@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   get 'users_relationship/new/:representative_id', to: 'users_relationship#new', as: 'new_relationship'
   post 'users_relationship/create', as: 'create_relation'
 
@@ -13,6 +12,7 @@ Rails.application.routes.draw do
 	resources :operations_by_users, only: [:new, :create]
 	resources :general_cargo_infos, only: [:new, :create]
 	resources :fcl_exw_cargo_info_steps, only: [:new, :create]
+	resources :fcl_exw_booking_info_steps, only: [:new, :create]
 	resources :operations, only: [:show]
 	post "/fcl_exw_info", to: "fcl_exw_cargo_info_steps#request_info"
 	post "/fcl_exw_confirm_info", to: "fcl_exw_cargo_info_steps#confirm_info"

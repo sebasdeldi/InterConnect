@@ -60,12 +60,17 @@
             <div class="field">
               <%= f.label 'Loading Time:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.time_select :loading_time, {  }, { class: 'input time-input' } %>
+                <%= f.time_select :loading_time, { }, { class: 'input time-input'} %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-clock"></i>
                 </span>
               </div>
             </div> 
+
+            <% unless @existing_fcl_cargo_info.loading_time.nil? %>
+              <p class="hour hidden"><%= @existing_fcl_cargo_info.loading_time.hour %></p>
+              <p class="mins hidden"><%= @existing_fcl_cargo_info.loading_time.min %></p>
+            <% end %>
 
             <div class="field">
               <%= f.label 'Schedule B Number or Tariff Code:', class: 'label' %>
@@ -76,6 +81,8 @@
                 </span>
               </div>
             </div> 
+
+
 
             <div class="field">
               <%= f.label 'Pick Up Reference:', class: 'label' %>

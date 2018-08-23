@@ -1,0 +1,2 @@
+module FclExwBookingInfosHelper
+end

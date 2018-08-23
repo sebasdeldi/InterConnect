@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190627200620) do
+ActiveRecord::Schema.define(version: 20210627200619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,24 @@ ActiveRecord::Schema.define(version: 20190627200620) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "fcl_exw_booking_info_steps", force: :cascade do |t|
+    t.bigint "operation_id"
+    t.string "booking_number"
+    t.string "vessel"
+    t.string "voyage"
+    t.date "doc_cut_off_date"
+    t.time "doc_cut_off_time"
+    t.date "cargo_cut_off_date"
+    t.time "cargo_cut_off_time"
+    t.date "sailing_date"
+    t.time "sailing_time"
+    t.date "arrival_date"
+    t.time "arrival_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["operation_id"], name: "index_fcl_exw_booking_info_steps_on_operation_id"
   end
 
   create_table "fcl_exw_cargo_info_steps", force: :cascade do |t|
@@ -164,9 +182,11 @@ ActiveRecord::Schema.define(version: 20190627200620) do
     t.bigint "fcl_exw_quotation_confirmed_steps_id"
     t.bigint "fcl_exw_cargo_info_steps_id"
     t.bigint "fcl_exw_request_booking_steps_id"
+    t.bigint "fcl_exw_booking_info_steps_id"
     t.bigint "operation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["fcl_exw_booking_info_steps_id"], name: "index_tasks_on_fcl_exw_booking_info_steps_id"
     t.index ["fcl_exw_cargo_info_steps_id"], name: "index_tasks_on_fcl_exw_cargo_info_steps_id"
     t.index ["fcl_exw_info_confirmed_steps_id"], name: "index_tasks_on_fcl_exw_info_confirmed_steps_id"
     t.index ["fcl_exw_info_requested_steps_id"], name: "index_tasks_on_fcl_exw_info_requested_steps_id"
@@ -214,6 +234,7 @@ ActiveRecord::Schema.define(version: 20190627200620) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "fcl_exw_booking_info_steps", "operations"
   add_foreign_key "fcl_exw_cargo_info_steps", "operations"
   add_foreign_key "fcl_exw_info_confirmed_steps", "operations"
   add_foreign_key "fcl_exw_info_requested_steps", "operations"
@@ -223,6 +244,7 @@ ActiveRecord::Schema.define(version: 20190627200620) do
   add_foreign_key "general_cargo_infos", "operations"
   add_foreign_key "operations_by_users", "operations"
   add_foreign_key "pieces", "fcl_exw_cargo_info_steps"
+  add_foreign_key "tasks", "fcl_exw_booking_info_steps", column: "fcl_exw_booking_info_steps_id"
   add_foreign_key "tasks", "fcl_exw_cargo_info_steps", column: "fcl_exw_cargo_info_steps_id"
   add_foreign_key "tasks", "fcl_exw_info_confirmed_steps", column: "fcl_exw_info_confirmed_steps_id"
   add_foreign_key "tasks", "fcl_exw_info_requested_steps", column: "fcl_exw_info_requested_steps_id"

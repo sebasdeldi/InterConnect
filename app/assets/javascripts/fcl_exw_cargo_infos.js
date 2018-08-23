@@ -4,7 +4,22 @@ document.addEventListener("turbolinks:load", function() {
   	dateFormat: "yy-mm-dd"
 	});
 
+	if (($('.hour')[0] == undefined) || ($('.mins')[0] == undefined)){
+		var hours = $('.hour')[0].innerHTML
+		var minutes = $('.mins')[0].innerHTML
 
+		if (hours.length == 1){
+		  hours = '0' + hours
+		}
+		
+		if (minutes.length == 1){
+		  minutes = '0' + minutes
+		}
+
+		$('#fcl_exw_cargo_info_step_loading_time_4i').val(hours);
+		$('#fcl_exw_cargo_info_step_loading_time_5i').val(minutes);
+	}
+	
 	var addFields = (fields_number, data) => {
 		console.log(data)
 		var container = document.getElementById('container');

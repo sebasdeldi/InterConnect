@@ -55,10 +55,10 @@
 			    <article class="tile is-child notification step-not-completed <%= is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'step-completed' : '' %>  <%= is_fcl_exw_info_stage_completed?(operation_secure_id) == 'orange' ? 'step-incompleted' : '' %> show-modal fcl-load-info">
 			      <p class="title">
 			      	<span class="numberCircle"><span>5</span></span>
-			      	Fill in info
+			      	Cargo info
 			      </p>
 			      <rp></rp>
-			      <p class="subtitle">Load cargo info to the system</p>
+			      <p class="subtitle">Fill in info</p>
 			    </article>
 			    <article class="tile is-child notification step-not-completed <%= is_fcl_exw_booking_requested?(operation_id) ? 'step-completed' : '' %> show-modal fcl-booking">
 			      <p class="title">
@@ -69,13 +69,13 @@
 			      <p class="subtitle">Request a cargo booking order</p>
 			    </article>
 
-			    <article class="tile is-child notification step-not-completed <%= is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'step-completed' : '' %>  <%= is_fcl_exw_info_stage_completed?(operation_secure_id) == 'orange' ? 'step-incompleted' : '' %> show-modal fcl-load-info">
+			    <article class="tile is-child notification step-not-completed <%= is_fcl_exw_booking_info_completed?(operation_secure_id) ? 'step-completed' : '' %>  <%= is_fcl_exw_booking_info_completed?(operation_secure_id) == 'orange' ? 'step-incompleted' : '' %> show-modal fcl-booking-info">
 			      <p class="title">
 			      	<span class="numberCircle"><span>7</span></span>
-			      	Fill in info
+			      	Booking info
 			      </p>
 			      <rp></rp>
-			      <p class="subtitle">Booking Information</p>
+			      <p class="subtitle">Fill in info</p>
 			    </article>
 			  </div>
 			</div>
@@ -84,7 +84,7 @@
 
 		<section id="timeline-section">
 			<%= render 'operations/fcl_exw/fcl_exw_timeline',operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper,
-			cargo_info_tasks: cargo_info_tasks, info_confirmed_tasks: info_confirmed_tasks, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks, request_booking_tasks: request_booking_tasks, carriers: carriers %>
+			cargo_info_tasks: cargo_info_tasks, booking_info_tasks: booking_info_tasks ,info_confirmed_tasks: info_confirmed_tasks, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks, request_booking_tasks: request_booking_tasks, carriers: carriers %>
 		</section>
 
 	<% else %>
@@ -95,6 +95,7 @@
 
 	<!-- Tasks modals -->
 	<%= render 'tasks/fcl_exw/cargo_info_step', agent: agent, shipper: shipper, operation_id: operation_id %>
+	<%= render 'tasks/fcl_exw/booking_info_step', agent: agent, shipper: shipper, operation_id: operation_id %>
 	<%= render 'tasks/fcl_exw/info_confirmed_step', agent: agent, shipper: shipper, operation_id: operation_id %>
 	<%= render 'tasks/fcl_exw/info_requested_step', agent: agent, shipper: shipper, operation_id: operation_id %>
 	<%= render 'tasks/fcl_exw/quotation_confirmed_step', agent: agent, shipper: shipper, operation_id: operation_id %>
@@ -107,11 +108,3 @@
 	<% render 'send_follow_up_mail_modal', agent: agent, shipper: shipper, operation_id: operation_id %>
 </div>
 
-<script type="text/javascript">
-	$(function() {
-	  $('.scroll-button').on('click', function(e) {
-	    e.preventDefault();
-	    $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
-	  });
-	});
-</script>

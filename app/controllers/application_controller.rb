@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :resource_name, :resource, :devise_mapping, :resource_class, :is_admin?, :is_representative?, :is_shipper?,
     :is_agent?, :is_operation_completed?, :is_fcl_exw?, :is_fcl_exw_info_stage_completed?, :is_fcl_exw_info_requested?, :is_fcl_exw_info_confirmed?,
-    :is_pricing_representative?, :is_fcl_exw_quotation_confirmed?, :is_fcl_exw_booking_requested?
+    :is_pricing_representative?, :is_fcl_exw_quotation_confirmed?, :is_fcl_exw_booking_requested?, :is_fcl_exw_booking_info_completed?
 
 
   def save_nil
@@ -64,6 +64,20 @@ class ApplicationController < ActionController::Base
       false
     else
       if (record.contact_email.nil? || record.contact_number.nil? || record.loading_address.nil? || record.loading_date.nil? || record.loading_time.nil? || record.schedule_b_number.nil? || record.pickup_reference.nil? || record.pieces_number.nil?)
+        'orange'
+      else
+        true
+      end
+    end
+  end
+
+  def is_fcl_exw_booking_info_completed?(operation_secure_id)
+    operation_id = Operation.find_by(secure_id: operation_secure_id).id
+    record = FclExwBookingInfoStep.find_by(operation_id: operation_id)
+    if record.created_at == record.updated_at
+      false
+    else
+      if (record.booking_number.nil? || record.vessel.nil? || record.doc_cut_off_date.nil? || record.doc_cut_off_time.nil? || record.cargo_cut_off_date.nil? || record.cargo_cut_off_time.nil? || record.sailing_date.nil? || record.sailing_time.nil? || record.arrival_date.nil? || record.arrival_time.nil? )
         'orange'
       else
         true
