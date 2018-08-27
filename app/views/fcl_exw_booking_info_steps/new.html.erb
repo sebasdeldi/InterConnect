@@ -152,7 +152,7 @@
 
        
 
-            <%= f.hidden_field :fcl_exw_cargo_info_step_id, class: "fcl_exw_cargo_info_step_id", value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? @existing_fcl_booking_info.id : '' %>
+            <%= f.hidden_field :fcl_exw_booking_info_step_id, class: "fcl_exw_booking_info_step_id", value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? @existing_fcl_booking_info.id : '' %>
             <br>
             <div id="container"></div>
             <div class="control">

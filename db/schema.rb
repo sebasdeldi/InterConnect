@@ -176,6 +176,7 @@ ActiveRecord::Schema.define(version: 20210627200619) do
   create_table "tasks", force: :cascade do |t|
     t.string "note"
     t.string "status", default: "0"
+    t.string "subject"
     t.date "due_date"
     t.bigint "fcl_exw_info_requested_steps_id"
     t.bigint "fcl_exw_info_confirmed_steps_id"
