@@ -35,7 +35,7 @@
         </td>
         <td data-link="<%= operation_path(operation.operation_id) %>">
           <div data-link="<%= operation_path(operation.operation_id) %>" class="progress">
-            <span data-link="<%= operation_path(operation.operation_id) %>" class="progress-val"><%= progress_percentage(operation.operation_id) %>%</span>
+            <span data-link="<%= operation_path(operation.operation_id) %>" class="progress-val"><%= progress_percentage(operation.operation_id).to_i %>%</span>
             <span data-link="<%= operation_path(operation.operation_id) %>" class="progress-bar"><span class="progress-in" style="width: <%= progress_percentage(operation.operation_id) %>%"></span></span>
           </div>
         </td>
