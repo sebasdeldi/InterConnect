@@ -24,50 +24,48 @@
                 If the quotation hasn't been issued by our <b>pricing department</b> click the "ISSUE" in order to notify your agent <b>(<%= agent.company_name %>)</b> and our <b>pricing department</b>.
                 <br>
                 <br>
-                <%= form_tag repre_quotation_path(operation_id), class: "control full-select quotation", multipart: true  do |f| %>
+
+                <%= form_tag ("/fcl_exw_confirm_quotation"), class: "control full-select quotation", multipart: true do %>
                   <%= file_field_tag 'files[]', multiple: true, disabled:  is_fcl_exw_quotation_confirmed?(operation_id) ? true : false %>
-                <% end %>
+                  <ul>
+                    <% FclExwQuotationConfirmedStep.find_by(operation_id: operation_id).files.each do |file| %>
+                      <li> <%= link_to file.path.split("/").last, file.url, target: 'blank' %>  </li>
+                    <% end %>
+                  </ul>
 
-                <ul>
-                  <% FclExwQuotationConfirmedStep.find_by(operation_id: operation_id).files.each do |file| %>
-                    <li> <%= link_to file.path.split("/").last, file.url, target: 'blank' %>  </li>
-                  <% end %>
-                </ul>
-
-                <br>
-                <article class="message is-warning">
-                  <div class="message-header">
-                    <p>
-                      <i class="fas fa-exclamation-triangle"></i>  Warning
-                    </p>
-                  </div>
-                  <div class="message-body">
-                    We will send you reminders about this step via <b>email</b> every <b>24 hours</b> until you confirm that your shipper has received and accepted a quotation.</b>
-                  </div>    
-                </article>
-
-                <% if !quotation_confirmed_tasks.empty? %>
-                  <article class="message is-primary">
+                  <br>
+                  <article class="message is-warning">
                     <div class="message-header">
-                      <p><b><%= quotation_confirmed_tasks.count %> Tasks for this step</b></p>
+                      <p>
+                        <i class="fas fa-exclamation-triangle"></i>  Warning
+                      </p>
                     </div>
                     <div class="message-body">
-                      <% quotation_confirmed_tasks.each do |task|%>
-                        <%= link_to task_path(task.id), class: "panel-block is-active" do %>
-                          <span class="panel-icon">
-                            <i class="fas fa-book" aria-hidden="true"></i>
-                          </span>
-                          <p>
-                            <%= task.note.truncate 45 %> || due: 
-                            <b><%= task.due_date %></b>
-                          </p>
-                        <% end %>
-                      <% end %>
-                    </div>
+                      We will send you reminders about this step via <b>email</b> every <b>24 hours</b> until you confirm that your shipper has received and accepted a quotation.</b>
+                    </div>    
                   </article>
-                <% end %>
 
-                <%= form_tag ("/fcl_exw_confirm_quotation") do %>
+                  <% if !quotation_confirmed_tasks.empty? %>
+                    <article class="message is-primary">
+                      <div class="message-header">
+                        <p><b><%= quotation_confirmed_tasks.count %> Tasks for this step</b></p>
+                      </div>
+                      <div class="message-body">
+                        <% quotation_confirmed_tasks.each do |task|%>
+                          <%= link_to task_path(task.id), class: "panel-block is-active" do %>
+                            <span class="panel-icon">
+                              <i class="fas fa-book" aria-hidden="true"></i>
+                            </span>
+                            <p>
+                              <%= task.note.truncate 45 %> || due: 
+                              <b><%= task.due_date %></b>
+                            </p>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    </article>
+                  <% end %>
+
                   <%= hidden_field_tag 'shipper_id', shipper.id %>
                   <%= hidden_field_tag 'operation_id', operation_id %>
                   <%= hidden_field_tag 'agent_id', agent.id %>
@@ -88,9 +86,3 @@
     </section>
   </div>
 </div>
-
-<script type="text/javascript">
-  $('.confirm').on('click', function(){
-    $('.quotation').submit();
-  });
-</script>

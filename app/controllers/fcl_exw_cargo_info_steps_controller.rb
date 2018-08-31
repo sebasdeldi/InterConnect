@@ -51,7 +51,7 @@ class FclExwCargoInfoStepsController < ApplicationController
 			FclExwOperationMailer.issue_quotation(shipper, current_user, agent, operation).deliver_later
 		else
 			if operation.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', status_message:'Request cargo info to shipper', current_step: 1)
-				FclExwQuotationConfirmedStep.find_by(operation_id: params[:operation_id]).update(completed: true)
+				FclExwQuotationConfirmedStep.find_by(operation_id: params[:operation_id]).update(completed: true, files: params[:files])
 				flash[:notice] = "Step confirmed, no more reminders will be sent"
 			end
 		end
