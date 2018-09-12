@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :resource_name, :resource, :devise_mapping, :resource_class, :is_admin?, :is_representative?, :is_shipper?,
     :is_agent?, :is_operation_completed?, :is_fcl_exw?, :is_fcl_exw_info_stage_completed?, :is_fcl_exw_info_requested?, :is_fcl_exw_info_confirmed?,
-    :is_pricing_representative?, :is_fcl_exw_quotation_confirmed?, :is_fcl_exw_booking_requested?, :is_fcl_exw_booking_info_completed?
+    :is_pricing_representative?, :is_fcl_exw_quotation_confirmed?, :is_fcl_exw_booking_requested?, :is_fcl_exw_booking_info_completed?, :is_leader?
 
 
   def save_nil
@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
 
   def is_pricing_representative?
     current_role == 'pricing_representative' ? true : false
+  end
+
+  def is_leader?
+    current_role == 'team_leader' ? true : false    
   end
 
 

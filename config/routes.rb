@@ -34,6 +34,11 @@ Rails.application.routes.draw do
 	match "/admin/representatives_records", to: "representatives_records#index", as: "representatives_records", via: [:get, :post]
 
 	match "/representative", to: "representatives#index", as: "representative", via: [:get, :post]
+	match "/team_leader", to: "team#index", as: "team", via: [:get, :post]
+	get "/team_leader/:id", to: "team#show", as: "team_member"
+	post "/team_leader/change_representative", to: "team#change_representative", as: "change_representative"
+
+
 	get "/tasks_panel", to: "tasks#index"
 	get "/tasks/:id", to: "tasks#show", as: "task"
 	post "/pieces_for_cargo_info", to: "pieces#pieces_for_cargo_info", as: "pieces_for_cargo_info"

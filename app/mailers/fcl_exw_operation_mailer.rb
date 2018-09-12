@@ -66,7 +66,9 @@ class FclExwOperationMailer < ApplicationMailer
 
 	def request_booking (shipper, operation, carrier, additional_message)
 		@shipper  = shipper
-		@operation = operation
+		@operation = operation	
+
+		@pieces = operation[1].pieces
 		@carrier = carrier
 		@additional_message = additional_message
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")

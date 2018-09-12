@@ -3,6 +3,7 @@ class OperationsByUser < ApplicationRecord
   belongs_to :representative, class_name: 'User', foreign_key: "representative_id"
   belongs_to :agent, class_name: 'User', foreign_key: "agent_id", optional: true
   belongs_to :shipper, class_name: 'User', foreign_key: "shipper_id", optional: true
+  belongs_to :consignee, class_name: 'User', foreign_key: "consignee_id", optional: true
   validates :agent_id, :operation_id, presence: true
 
   # fields is an array conteining [ reference, modality, strong_params_for_representatives, current_user, pieces_number ]

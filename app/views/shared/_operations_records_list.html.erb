@@ -20,16 +20,18 @@
   <tbody>
     <% operations.each do |operation| %>
       <tr class='row'>
+
         <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
-          <p class="tooltip">
+          <p data-link="<%= operation_path(operation.operation_id) %>" class="tooltip">
             <%= Operation.find(operation.operation_id).reference %>
-            <span class="tooltiptext">
+            <span data-link="<%= operation_path(operation.operation_id) %>" class="tooltiptext">
               PO #: <%= Operation.find(operation.operation_id).po_number %>
               <br>
-              Reference #: <%= Operation.find(operation.operation_id).reference_number %>
+              Customer's Reference #: <%= Operation.find(operation.operation_id).reference_number %>
             </span>
           </p>
         </td>
+
         <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
           <%= operation.operation.modality %>
         </td>
@@ -39,6 +41,7 @@
             <span data-link="<%= operation_path(operation.operation_id) %>" class="progress-bar"><span class="progress-in" style="width: <%= progress_percentage(operation.operation_id) %>%"></span></span>
           </div>
         </td>
+
         <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
           <%= operation.operation.status_message %>
         </td>

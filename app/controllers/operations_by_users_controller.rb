@@ -24,6 +24,7 @@ class OperationsByUsersController < ApplicationController
 		  	if ref.length == 1
 		  		ref = '0' + ref
 		  	end
+		  	ref
 		  end
 		end
 

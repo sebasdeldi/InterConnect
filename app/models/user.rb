@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :relateds, through: 'users_relationships'
 
   belongs_to :roles , optional: true
+  belongs_to :teams, optional: true
 
   scope :agents, -> { where(role_id: Role.find_by(name: 'agent').id) }
   scope :representatives, -> { where(role_id: Role.find_by(name: 'representative').id) }
@@ -24,5 +25,7 @@ class User < ApplicationRecord
   scope :pricing_representatives, -> { where(role_id: Role.find_by(name: 'pricing_representatives').id) }
   scope :carriers, -> { where(role_id: Role.find_by(name: 'carrier').id) }
 
-
+  def name_with_last_name
+    "#{contact_first_name} #{contact_last_name}"
+  end
 end

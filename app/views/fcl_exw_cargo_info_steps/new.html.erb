@@ -95,6 +95,17 @@
             </div>
 
 
+            <div class="field">
+              <%= f.label 'EIN:', class: 'label' %>
+              <div class="control has-icons-left">
+                <%= f.text_field :ein, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.ein : '' %>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-file-alt"></i>
+                </span>
+              </div>
+            </div>
+
+
             <div class="field pieces-number-diff">
               <%= f.label 'Number of containers', class: 'label' %>
               <div class="control has-icons-left">

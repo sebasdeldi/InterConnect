@@ -1,0 +1,78 @@
+
+<br>
+<br>
+<br>
+
+<div class="container">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li><%= link_to "Main Page", authenticated_root_path %></li>
+      <li class="is-active"><%= link_to @representative.contact_first_name + " " + @representative.contact_last_name + ' Operations' %></li>
+    </ul>
+  </nav>
+
+  <table class="table is-fullwidth">
+    <thead>
+      <tr>
+        <th>Following Up #</th>
+        <th>Type</th>
+        <th>Progress</th>
+        <th>Status</th>
+
+        <% if is_admin? && path != representatives_records_path %>
+          <th>Traffic</th>
+        <% end %>
+
+        <th> Agent </th>
+        <th>Shipper</th>
+        <th>Creation Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @operations.each do |operation| %>
+        <tr class='row'>
+
+          <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+            <p data-link="<%= operation_path(operation.operation_id) %>" class="tooltip">
+              <%= Operation.find(operation.operation_id).reference %>
+              <span data-link="<%= operation_path(operation.operation_id) %>" class="tooltiptext">
+                PO #: <%= Operation.find(operation.operation_id).po_number %>
+                <br>
+                Customer's Reference #: <%= Operation.find(operation.operation_id).reference_number %>
+              </span>
+            </p>
+          </td>
+
+          <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+            <%= operation.operation.modality %>
+          </td>
+          <td data-link="<%= operation_path(operation.operation_id) %>">
+            <div data-link="<%= operation_path(operation.operation_id) %>" class="progress">
+              <span data-link="<%= operation_path(operation.operation_id) %>" class="progress-val"><%= progress_percentage(operation.operation_id).to_i %>%</span>
+              <span data-link="<%= operation_path(operation.operation_id) %>" class="progress-bar"><span class="progress-in" style="width: <%= progress_percentage(operation.operation_id) %>%"></span></span>
+            </div>
+          </td>
+
+          <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+            <%= operation.operation.status_message %>
+          </td>
+          <% if is_admin? && path != representatives_records_path %>
+            <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+              <%= operation.representative.company_name %>
+            </td>
+          <% end %>
+          <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+            <%= operation.agent.company_name %>
+          </td>
+          <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+            <%= operation.shipper.company_name %>
+          </td>
+          <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
+            <%= operation.operation.created_at.to_date %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -6,18 +6,16 @@
 Good day,
 <br>
 Please help us with a booking for the following cargo:
-
+<br>
 <h2>Cargo info</h2>
 <ul>
 	<li>
-		<b>Reference: </b> <%= @operation[1].pickup_reference %>
+		<b>Pickup Reference: </b> <%= @operation[0].reference_number %>
 	</li>
 	<li>
-		<b>Pieces number:</b> <%= @operation[0].pieces_number %>
+		<b>Pieces Number:</b> <%= @operation[0].pieces_number %>
 	</li>
-	<li>
-		<b>Container Size:</b> <%= @operation[1].container_size %>
-	</li>
+
 	<li>
 		<b>Contact Email:</b> <%= @operation[1].contact_email %>
 	</li>
@@ -34,22 +32,7 @@ Please help us with a booking for the following cargo:
 		<b>Loading Address:</b> <%= @operation[1].loading_address %>
 	</li>
 	<li>
-		<b>Gross Weight:</b> <%= @operation[1].gross_weight %>
-	</li>
-	<li>
-		<b>Commercial Description:</b> <%= @operation[1].commercial_description %>
-	</li>
-	<li>
-		<b>Hazardous:</b> <%= @operation[1].cargo_hazardous %>
-	</li>
-	<li>
-		<b>Gross Weight:</b> <%= @operation[1].gross_weight %>
-	</li>
-	<li>
 		<b>Schedule B:</b> <%= @operation[1].schedule_b_number %>
-	</li>
-	<li>
-		<b>EIN:</b> <%= @operation[1].ein %>
 	</li>
 	<li>
 		<b>Shipper company name:</b> <%= @shipper.company_name %>
@@ -60,6 +43,33 @@ Please help us with a booking for the following cargo:
 	<li>
 		<b>Shipper company email:</b> <%= @shipper.email %>
 	</li>
+</ul>
+<br>
+<h2>
+	Pieces
+</h2>
+<ul>
+	<% @pieces.each_with_index do |piece, index| %>
+		<li>
+			<b>Container Size Piece <%= index + 1 %>:</b> <%= piece.container_size %>
+		</li>
+
+		<li>
+			<b>Gross Weight Piece <%= index +1 %>:</b> <%= piece.gross_weight %>
+		</li>
+
+		<li>
+			<b>Commercial Description Piece <%= index + 1 %>:</b> <%= piece.commercial_description %>
+		</li>
+
+		<li>
+			<b>Hazardous Piece <%= index + 1 %>:</b> <%= piece.cargo_hazardous %>
+		</li>
+
+		<li>
+			<b>Commercial Description Piece <%= index + 1 %>:</b> <%= piece.un_code %>
+		</li>
+	<% end %>
 </ul>
 
 

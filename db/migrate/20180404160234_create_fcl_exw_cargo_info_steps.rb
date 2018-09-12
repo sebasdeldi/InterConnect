@@ -5,6 +5,7 @@ class CreateFclExwCargoInfoSteps < ActiveRecord::Migration[5.1]
       t.string :contact_email
       t.string :contact_number
       t.string :loading_address
+      t.string :ein
       t.date :loading_date
       t.time :loading_time
       t.string :schedule_b_number

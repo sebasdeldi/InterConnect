@@ -41,5 +41,10 @@ document.addEventListener("turbolinks:load", function() {
   $(document).on('page:restore', function() {
     return $('#content').fadeIn('slow');
   });
+
+  $('.panel-block').hover(
+    function(){ $(this).addClass('is-active') },
+    function(){ $(this).removeClass('is-active') }
+  )
 });
 

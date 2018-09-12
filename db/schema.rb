@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210627200619) do
+ActiveRecord::Schema.define(version: 20210627200621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20210627200619) do
     t.string "contact_email"
     t.string "contact_number"
     t.string "loading_address"
+    t.string "ein"
     t.date "loading_date"
     t.time "loading_time"
     t.string "schedule_b_number"
@@ -196,6 +197,12 @@ ActiveRecord::Schema.define(version: 20210627200619) do
     t.index ["operation_id"], name: "index_tasks_on_operation_id"
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.integer "team_leader"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "company_name"
     t.string "contact_first_name"
@@ -223,9 +230,11 @@ ActiveRecord::Schema.define(version: 20210627200619) do
     t.bigint "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "team_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["role_id"], name: "index_users_on_role_id"
+    t.index ["team_id"], name: "index_users_on_team_id"
   end
 
   create_table "users_relationships", force: :cascade do |t|
@@ -253,4 +262,5 @@ ActiveRecord::Schema.define(version: 20210627200619) do
   add_foreign_key "tasks", "fcl_exw_request_booking_steps", column: "fcl_exw_request_booking_steps_id"
   add_foreign_key "tasks", "operations"
   add_foreign_key "users", "roles"
+  add_foreign_key "users", "teams"
 end

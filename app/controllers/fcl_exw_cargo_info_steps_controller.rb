@@ -84,8 +84,8 @@ class FclExwCargoInfoStepsController < ApplicationController
 		end
 
 		def fcl_cargo_info_params
-			params.require(:fcl_exw_cargo_info_step).permit(:operation_id, :loading_address, :container_size, :loading_date, :loading_time, :gross_weight, :commercial_description, :cargo_hazardous, :hazardous_document,
-			 :schedule_b_number, :schedule_b_number, :pickup_reference, :contact_name, :contact_email, :contact_number, :contact_company, :pieces_number)
+			params.require(:fcl_exw_cargo_info_step).permit(:operation_id, :loading_address, :loading_date, :loading_time, :gross_weight, :commercial_description, :cargo_hazardous, :hazardous_document,
+			 :schedule_b_number, :schedule_b_number, :pickup_reference, :contact_name, :contact_email, :contact_number, :contact_company, :pieces_number, :ein)
 		end
 
 	  def create_pieces (params_array, cargo_info)

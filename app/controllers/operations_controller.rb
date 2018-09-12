@@ -4,6 +4,7 @@ class OperationsController < ApplicationController
 		@operation = Operation.find params[:id]
 		@agent = OperationsByUser.where(operation_id: params[:id]).joins(:agent).first.agent
 		@shipper = OperationsByUser.where(operation_id: params[:id]).joins(:shipper).first.shipper
+		@consignee = OperationsByUser.where(operation_id: params[:id]).joins(:consignee).first.consignee
 		@tasks = Task.where(operation_id: @operation, status: '0')
 
 		@cargo_info_tasks = Task.where(operation_id: @operation, status: '0', fcl_exw_cargo_info_steps_id: FclExwCargoInfoStep.find_by(operation_id: @operation.id))

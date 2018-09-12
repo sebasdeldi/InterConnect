@@ -1,17 +1,24 @@
 
-<% if is_representative? || is_admin? %>
+<% if is_representative? || is_admin? || is_leader? %>
 	<div class="container">
 		<br>
 		<br>
 		<nav class="breadcrumb" aria-label="breadcrumbs">
 		  <ul>
-		    <li class='operations-redirection' ><%= link_to "Operation Records List", is_admin? ? general_records_path : representative_path %></li>
+		  	<% if is_admin? %>
+		  		<li class='operations-redirection' ><%= link_to "Operation Records List", general_records_path %></li>
+		  	<% elsif is_leader? %>
+		  		<li class='operations-redirection' ><%= link_to "Main Page", authenticated_root_path %></li>
+		  	<% elsif is_representative? %>
+		  		<li class='operations-redirection' ><%= link_to "Operation Records List", representative_path %></li>
+		  	<% end %>
+
 		    <li class="is-active"><%= link_to "Operation " + @operation.reference, operation_path(@operation.id) %></li>
 		  </ul>
 		</nav>
 	</div>
 	<br>
-	<%= render 'timeline', operation_secure_id: @operation_secure_id, operation_id: @operation.id, agent: @agent, shipper: @shipper, tasks: @tasks, cargo_info_tasks: @cargo_info_tasks, booking_info_tasks: @booking_info_tasks, info_confirmed_tasks: @info_confirmed_tasks, info_requested_tasks: @info_requested_tasks, quotation_confirmed_tasks: @quotation_confirmed_tasks, request_booking_tasks: @request_booking_tasks, carriers: @carriers %>
+	<%= render 'timeline', operation_secure_id: @operation_secure_id, operation_id: @operation.id, agent: @agent, shipper: @shipper, tasks: @tasks, cargo_info_tasks: @cargo_info_tasks, booking_info_tasks: @booking_info_tasks, info_confirmed_tasks: @info_confirmed_tasks, info_requested_tasks: @info_requested_tasks, quotation_confirmed_tasks: @quotation_confirmed_tasks, request_booking_tasks: @request_booking_tasks, carriers: @carriers, consignee: @consignee %>
 <% elsif is_agent? %>
 <% end %>
 

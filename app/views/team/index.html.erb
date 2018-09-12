@@ -1,0 +1,85 @@
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+	<div class="columns">
+	  <div class="column">
+	  	<nav class="panel">
+	  	  <p class="panel-heading">
+	  	    <b>MODIFY TEAM</b>
+	  	  </p>
+	  	  <% @representatives.each_with_index do |representative, index| %>
+		  	  <a class="panel-block">
+		  	    <span class="panel-icon">
+		  	      <i class="fas fa-user" aria-hidden="true"></i>
+		  	    </span>
+		  	    <%= representative.contact_first_name + ' ' + representative.contact_last_name %>
+            <% unless representative.team_id == @team.id %>
+              <% add_agent = 'add_agent_'+index.to_s %>
+  	          <%= form_tag team_path, class: add_agent do %>
+  	          	<%= hidden_field_tag 'representative_id', representative.id %>
+  	          	<i class="fas fa-plus add button-icon" onclick='$(".add_agent_<%= index %>").submit();'></i>
+  	          <% end %>
+  	        <% else %>
+  	        	<% remove_agent = 'remove_agent_'+index.to_s %>
+  	          <%= form_tag team_path, class: remove_agent do %>
+  	          	<%= hidden_field_tag 'representative_id', representative.id %>
+  	          	<%= hidden_field_tag 'delete', 'delete' %>
+  	          	<i class="fas fa-minus remove button-icon" onclick='$(".remove_agent_<%= index %>").submit();'></i>
+  	          <% end %>
+  	        <% end %>
+		  	  </a>
+		  	<% end %>
+	 	  </nav>
+	  </div>
+
+	  <div class="column">
+	  	<nav class="panel">
+	  	  <p class="panel-heading">
+	  	    <b>CURRENT TEAM</b>
+	  	  </p>
+	  	
+	  	  <% @team_members.each do |member| %>
+	  	  	<%= link_to team_member_path(member.id), class: 'panel-block' do %>  	    
+	  	  		<span class="panel-icon">
+	  	  		  <i class="fas fa-user" aria-hidden="true"></i>
+	  	  		</span>
+	  	  		<%= member.contact_first_name + ' ' + member.contact_last_name %>
+	  	  	<% end %>
+		  	<% end %>
+	  	</nav>
+	  </div>
+	</div>
+
+	<div class="columns">
+	  <br>
+
+    <div class="column">
+    	
+    </div>
+
+    <div class="column">
+    	<nav class="panel">
+    	  <p class="panel-heading">
+    	    <b>OPERATIONS</b>
+    	  </p>
+    	
+    	  <% @operations.each do |operation| %>
+    	  	<a class= 'panel-block' >  	    
+    	  		<span class="panel-icon">
+    	  		  <i class="fas fa-user" aria-hidden="true"></i>
+    	  		</span>
+    	  		<%= Operation.find(operation.operation_id).reference %>
+    	  		<span class="button-icon">Representative:</span> 
+    	  		<%= form_tag change_representative_path, class: 'button-icon representative_select' do %>
+    	  			<%= select_tag "representative", options_from_collection_for_select(@team_members, :id, :name_with_last_name, operation.representative_id), { onchange: 'this.form.submit();' } %>
+    	  			<%= hidden_field_tag 'operation_id', operation.id %>
+    	  		<% end %>
+    	  	</a>
+  	  	<% end %>
+    	</nav>
+    </div>
+	</div>
+</div>
+

@@ -11,10 +11,16 @@
   			<div id="">
   				<div class="timeline-item" id="fcl_exw_initial_timeline_item">
   					<div class="timeline-content step-completed-no-bg">
-  						<p>
-  							You have initiated a new process for the destination agent <b><%= agent.company_name %></b> and the shipper <b><%= shipper.company_name %></b>, the shipper will be notified that you will be in charge of their operation in the next step.
-  						</p>
+              You have initiated a new process for:
+              <br>
+              <ul>
+                <li><b>Agent: </b><%= agent.company_name %></li>
+                <li><b>Shipper: </b><%= shipper.company_name %></li>
+                <li><b>Consignee: </b><%= consignee.company_name %></li>
+              </ul>
   						<br>
+              The shipper will be notified that you will be in charge of their operation in the next step.
+
   					</div>
   				</div>
   			</div>

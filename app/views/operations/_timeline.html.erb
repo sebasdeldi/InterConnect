@@ -84,14 +84,14 @@
 
 		<section id="timeline-section">
 			<%= render 'operations/fcl_exw/fcl_exw_timeline',operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper,
-			cargo_info_tasks: cargo_info_tasks, booking_info_tasks: booking_info_tasks ,info_confirmed_tasks: info_confirmed_tasks, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks, request_booking_tasks: request_booking_tasks, carriers: carriers %>
+			cargo_info_tasks: cargo_info_tasks, booking_info_tasks: booking_info_tasks ,info_confirmed_tasks: info_confirmed_tasks, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks, request_booking_tasks: request_booking_tasks, carriers: carriers, consignee: consignee %>
 		</section>
 
 	<% else %>
 		<%= render 'other_timeline', operation_id: operation_id, agent: agent, shipper: shipper %>
 	<% end %>
 
-	<%= render 'relevant_info_modal', agent: agent, shipper: shipper %>
+	<%= render 'relevant_info_modal', agent: agent, shipper: shipper, consignee: consignee %>
 
 	<!-- Tasks modals -->
 	<%= render 'tasks/fcl_exw/cargo_info_step', agent: agent, shipper: shipper, operation_id: operation_id %>
