@@ -64,7 +64,7 @@ class FclExwOperationMailer < ApplicationMailer
 	       delivery_method_options: delivery_options, from: 'no-reply@interwf.com')
 	end
 
-	def request_booking (shipper, operation, carrier, additional_message)
+	def request_booking (shipper, operation, carrier, additional_message, representative)
 		@shipper  = shipper
 		@operation = operation	
 
@@ -72,26 +72,55 @@ class FclExwOperationMailer < ApplicationMailer
 		@carrier = carrier
 		@additional_message = additional_message
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
-		delivery_options = { user_name: 'no-reply@interwf.com',
-		                     password: 'Nriwf**321'
-		                   }
+		delivery_options = { user_name: representative.email,
+                     password: representative.outlook_password
+                   }
 		mail(to: carrier.email,
-		     subject: "INTER WORLD FREIGHT BOOKING ORDER",
+		     subject: "INTERWORLD FREIGHT BOOKING ORDER",
 		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com')
 	end
 
-	def request_booking_notification (agent, operation, carrier)
+	def request_booking_notification (agent, operation, carrier, representative)
 		@agent  = agent
 		@operation = operation
 		@carrier = carrier
 
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
-		delivery_options = { user_name: 'no-reply@interwf.com',
-		                     password: 'Nriwf**321'
-		                   }
+		delivery_options = { user_name: representative.email,
+                     password: representative.outlook_password
+                   }
 		mail(to: agent.email,
-		     subject: "INTER WORLD FREIGHT BOOKING ORDER",
+		     subject: "INTERWORLD FREIGHT BOOKING ORDER",
 		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com')
+	end
+
+	def container_loading (agent, operation,shipper, representative)
+		@agent  = agent
+		@operation = operation
+		@shipper = shipper
+		@pickup = FclExwCargoInfoStep.find_by(operation_id: @operation).pickup_reference
+		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
+		delivery_options = { user_name: representative.email,
+	                       password: representative.outlook_password
+	                     }
+		mail(to: agent.email,
+		     subject: "Cargo loading confirmation",
+		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com', cc: shipper.email)
+	end
+
+	def container_delivery (agent, operation, shipper, representative)
+		@agent  = agent
+		@operation = operation
+		@shipper = shipper
+		@pickup = FclExwCargoInfoStep.find_by(operation_id: @operation).pickup_reference
+
+		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
+		delivery_options = { user_name: representative.email,
+	                       password: representative.outlook_password
+	                     }
+		mail(to: agent.email,
+		     subject: "Cargo delivery confirmation",
+		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com', cc: shipper.email)
 	end
 
 end

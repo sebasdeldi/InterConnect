@@ -44,22 +44,35 @@ class FclExwCargoInfoStepsController < ApplicationController
 	end
 
 	def confirm_loading
+		shipper = User.find(params[:shipper_id])
+		agent = User.find(params[:agent_id])
+		op = Operation.find(params[:operation_id])
 		if Operation.find(params[:operation_id]).update(status: 'IN PROGRESS' ,status_message: 'Confirm container delivery', current_step: 7)
 			FclExwContainerLoading.find_by(operation_id: params[:operation_id]).update(completed: true)
+			FclExwOperationMailer.container_loading(agent, op, shipper, current_user).deliver_later
+
 			flash[:notice] = "Step confirmed"
 			redirect_to operation_path params[:operation_id]
 		end
 	end
 
 	def confirm_delivery
+		shipper = User.find(params[:shipper_id])
+		agent = User.find(params[:agent_id])
+		op = Operation.find(params[:operation_id])
 		if Operation.find(params[:operation_id]).update(status: 'COMPLETED' ,status_message: 'Completed', current_step: 8)
 			FclExwContainerDelivery.find_by(operation_id: params[:operation_id]).update(completed: true)
+			FclExwOperationMailer.container_delivery(agent, op, shipper, current_user).deliver_later
+
 			flash[:notice] = "Step confirmed"
 			redirect_to operation_path params[:operation_id]
 		end
 	end
 
 	def confirm_quotation
+		shipper = User.find(params[:shipper_id])
+		agent = User.find(params[:agent_id])
+		op = Operation.find(params[:operation_id])
 		operation =  Operation.find(params[:operation_id])
 		if params[:commit] == 'ISSUE'
 			shipper = User.find(params[:shipper_id])
@@ -83,8 +96,8 @@ class FclExwCargoInfoStepsController < ApplicationController
 		carrier = User.find(params[:carrier_id])
 		additional_message = params[:additional_message]
 
-		FclExwOperationMailer.request_booking(shipper, operation, carrier, additional_message).deliver_later
-		FclExwOperationMailer.request_booking_notification(agent, step, carrier).deliver_later
+		FclExwOperationMailer.request_booking(shipper, operation, carrier, additional_message, current_user).deliver_later
+		FclExwOperationMailer.request_booking_notification(agent, step, carrier, current_user).deliver_later
 
 		if op.update(status: 'COMPLETED', status_message:'Booking order sent to ', current_step: 5, status_message:'Completed')
 			FclExwRequestBookingStep.find_by(operation_id: params[:operation_id]).update(completed: true, additional_message: params[:additional_message], carrier_id: params[:carrier_id])
