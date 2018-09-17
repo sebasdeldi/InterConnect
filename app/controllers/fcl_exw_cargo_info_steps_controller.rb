@@ -43,6 +43,22 @@ class FclExwCargoInfoStepsController < ApplicationController
 		end
 	end
 
+	def confirm_loading
+		if Operation.find(params[:operation_id]).update(status: 'IN PROGRESS' ,status_message: 'Confirm container delivery', current_step: 7)
+			FclExwContainerLoading.find_by(operation_id: params[:operation_id]).update(completed: true)
+			flash[:notice] = "Step confirmed"
+			redirect_to operation_path params[:operation_id]
+		end
+	end
+
+	def confirm_delivery
+		if Operation.find(params[:operation_id]).update(status: 'COMPLETED' ,status_message: 'Completed', current_step: 8)
+			FclExwContainerDelivery.find_by(operation_id: params[:operation_id]).update(completed: true)
+			flash[:notice] = "Step confirmed"
+			redirect_to operation_path params[:operation_id]
+		end
+	end
+
 	def confirm_quotation
 		operation =  Operation.find(params[:operation_id])
 		if params[:commit] == 'ISSUE'

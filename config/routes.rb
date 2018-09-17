@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 	resources :fcl_exw_cargo_info_steps, only: [:new, :create]
 	resources :fcl_exw_booking_info_steps, only: [:new, :create]
 	resources :operations, only: [:show]
+	post "/fcl_exw_confirm_loading", to: "fcl_exw_cargo_info_steps#confirm_loading"
+	post "/fcl_exw_confirm_delivery", to: "fcl_exw_cargo_info_steps#confirm_delivery"
+
 	post "/fcl_exw_info", to: "fcl_exw_cargo_info_steps#request_info"
 	post "/fcl_exw_confirm_info", to: "fcl_exw_cargo_info_steps#confirm_info"
 	post "/fcl_exw_confirm_quotation", to: "fcl_exw_cargo_info_steps#confirm_quotation"
@@ -46,6 +49,7 @@ Rails.application.routes.draw do
 	post "/update_tasks", to: "tasks#update", as: "update_tasks"
 	post "/carrier_info", to: "operations#carrier_info"
 
+	post "/change_difficulty", to: "operations#change_difficulty", as: "change_difficulty"
  	devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'

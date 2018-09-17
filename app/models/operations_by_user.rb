@@ -23,7 +23,7 @@ class OperationsByUser < ApplicationRecord
   	def create_operation(modality, reference, pieces_number, po_number, reference_number)
   		steps_number = 1
   		if modality == "FCL - EXW"
-  			steps_number = 6
+  			steps_number = 8
   			#TODO add other modality cases
   		end
   		operation = Operation.create(reference: reference, status: 'IN PROGRESS', status_message:'Confirm quotation', 
@@ -33,6 +33,8 @@ class OperationsByUser < ApplicationRecord
     end
 
     def create_steps(operation)
+      FclExwContainerDelivery.create(operation: operation)
+      FclExwContainerLoading.create(operation: operation)
       FclExwInfoConfirmedStep.create(operation: operation)
       FclExwQuotationConfirmedStep.create(operation: operation)
       FclExwInfoRequestedStep.create(operation: operation)

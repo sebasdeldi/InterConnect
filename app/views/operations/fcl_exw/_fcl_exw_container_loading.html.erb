@@ -1,0 +1,65 @@
+<div class="modal fcl-container-loading">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title"> CHECK CONTAINER LOADING STATUS </p>
+      <button class="delete close-modal fcl-container-loading" aria-label="close"></button>
+    </header>
+
+    <section class="modal-card-body">
+    	<div class=''>
+  			<div id="">
+  				<div class="timeline-item" id="fcl_exw_request_cargo_info">
+  					<div class="timeline-content <%= is_fcl_exw_loading_confirmed?(operation_id) ? 'step-completed-no-bg' : '' %>">
+  						<p>
+  							<center>
+  								<i class="fas fa-truck-loading timeline-card-icon <%= is_fcl_exw_loading_confirmed?(operation_id) ? 'step-completed-icon' : '' %>""></i>
+  							</center>
+  							<br>
+  							By completing this step an email will be automatically sent to your shipper <b> (<%= shipper.company_name %>) </b> and agent <b> (<%= agent.company_name %>) </b>, confirming that the loading process of the related containers has been completed.
+  						</p>
+  						<br>
+  					
+
+  					  <% if !fcl_exw_container_loading_tasks.empty? %>
+  				    	<article class="message is-primary">
+  				    	  <div class="message-header">
+  				    	    <p><b><%= fcl_exw_container_loading_tasks.count %> Tasks for this step</b></p>
+  				    	  </div>
+  				    	  <div class="message-body">
+  				    	  	<% fcl_exw_container_loading_tasks.each do |task|%>
+  						  	    <%= link_to task_path(task.id), class: "panel-block is-active" do %>
+  					  	  	    <span class="panel-icon">
+  					  	  	      <i class="fas fa-book" aria-hidden="true"></i>
+  					  	  	    </span>
+  					  	  	    <p>
+  					  	  	    	<%= task.note.truncate 45 %> || due: 
+  					  	  	    	<b><%= task.due_date %></b>
+  					  	  	    </p>
+  					  	  	  <% end %>
+  					  	  	<% end %>
+  				    	  </div>
+  				    	</article>
+  				  	<% end %>
+
+  						<%= form_tag ("/fcl_exw_confirm_loading") do %>
+  							<%= hidden_field_tag 'shipper_id', shipper.id %>
+  							<%= hidden_field_tag 'operation_id', operation_id %>
+  							<%= hidden_field_tag 'agent_id', agent.id %>
+  							<%= submit_tag 'CONFIRM', class: "button is-link #{is_fcl_exw_loading_confirmed?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_loading_confirmed?(operation_id) %>
+  							<a class="button is-primary right-button circle-button show-modal fcl_container_loading">
+  								<i class="fas fa-tasks"></i>
+  							</a>
+  						<% end %>
+
+  					</div>
+  				</div>
+  			</div>
+    	</div>
+     	<br>
+    </section>
+  </div>
+</div>
+
+
+

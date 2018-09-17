@@ -13,5 +13,6 @@ class AddFieldsToOperations < ActiveRecord::Migration[5.1]
     add_column :operations, :po_number, :string
     add_column :operations, :reference_number, :string
     add_column :operations, :secure_id, :integer
+    add_column :operations, :difficulty, :string
   end
 end

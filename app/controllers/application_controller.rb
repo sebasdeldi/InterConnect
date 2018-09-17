@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :resource_name, :resource, :devise_mapping, :resource_class, :is_admin?, :is_representative?, :is_shipper?,
     :is_agent?, :is_operation_completed?, :is_fcl_exw?, :is_fcl_exw_info_stage_completed?, :is_fcl_exw_info_requested?, :is_fcl_exw_info_confirmed?,
-    :is_pricing_representative?, :is_fcl_exw_quotation_confirmed?, :is_fcl_exw_booking_requested?, :is_fcl_exw_booking_info_completed?, :is_leader?
+    :is_pricing_representative?, :is_fcl_exw_quotation_confirmed?, :is_fcl_exw_booking_requested?, :is_fcl_exw_booking_info_completed?, :is_leader?,
+    :is_fcl_exw_loading_confirmed?, :is_fcl_exw_delivery_confirmed?
 
 
   def save_nil
@@ -95,6 +96,14 @@ class ApplicationController < ActionController::Base
 
   def is_fcl_exw_info_requested?(operation_id)
     FclExwInfoRequestedStep.find_by(operation_id: operation_id).completed
+  end
+
+  def is_fcl_exw_loading_confirmed?(operation_id)
+    FclExwContainerLoading.find_by(operation_id: operation_id).completed
+  end
+
+  def is_fcl_exw_delivery_confirmed?(operation_id)
+    FclExwContainerDelivery.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_info_confirmed?(operation_id)

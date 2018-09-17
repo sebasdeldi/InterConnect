@@ -2,6 +2,17 @@
 <br>
 <br>
 <br>
+<div class="columns">
+	<div class="column"></div>
+	<div class="column">
+		<%= link_to(destroy_user_session_path, method: :delete, class: "button is-danger leader-logout") do %>        
+		  <span class="panel-icon">
+		    <i class="fas fa-power-off"></i>
+		  </span>
+		  Log Out 
+		<% end %>
+	</div>
+</div>
 <div class="container">
 	<div class="columns">
 	  <div class="column">
@@ -56,13 +67,31 @@
 	  <br>
 
     <div class="column">
-    	
+	  	<nav class="panel">
+	  	  <p class="panel-heading">
+	  	    <b>DIFFICULT OPERATIONS</b>
+	  	  </p>
+	  	
+	  	  <% @difficult_operations.each do |operation| %>
+	  	  	<%= link_to operation_path(operation.id), class: 'panel-block' do %>
+	  	  		<span class="panel-icon">
+	  	  		  <i class="fas fa-user" aria-hidden="true"></i>
+	  	  		</span>
+	  	  		<%= Operation.find(operation.operation_id).reference %>
+	  	  		<span class="button-icon">Representative:</span> 
+	  	  		<%= form_tag change_representative_path, class: 'button-icon representative_select' do %>
+	  	  			<%= select_tag "representative", options_from_collection_for_select(@team_members, :id, :name_with_last_name, operation.representative_id), { onchange: 'this.form.submit();', disabled: true } %>
+	  	  			<%= hidden_field_tag 'operation_id', operation.id %>
+	  	  		<% end %>
+	  	  	<% end %>
+		  	<% end %>
+	  	</nav>
     </div>
 
     <div class="column">
     	<nav class="panel">
     	  <p class="panel-heading">
-    	    <b>OPERATIONS</b>
+    	    <b>CHANGE REPRESENTATIVE FOR OPERATION</b>
     	  </p>
     	
     	  <% @operations.each do |operation| %>
@@ -83,3 +112,12 @@
 	</div>
 </div>
 
+<style type="text/css">
+	.leader-logout {
+		margin-top: 50px;
+		margin-right: 50px;
+		position: absolute;
+		right:0;
+		top:0;
+	}
+</style>

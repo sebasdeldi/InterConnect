@@ -15,10 +15,16 @@
 
 		    <li class="is-active"><%= link_to "Operation " + @operation.reference, operation_path(@operation.id) %></li>
 		  </ul>
+		  <b>Difficulty:</b>
+		  <%= form_tag change_difficulty_path, class: 'button-icon' do %>
+		  	<%= select_tag "difficulty", options_for_select([['EASY', 'EASY'], ['MEDIUM','MEDIUM'], ['HARD','HARD']], @operation.difficulty), { onchange: 'this.form.submit();' } %>
+		  	<%= hidden_field_tag 'operation_id', params[:id] %>
+		  <% end %>
 		</nav>
 	</div>
 	<br>
-	<%= render 'timeline', operation_secure_id: @operation_secure_id, operation_id: @operation.id, agent: @agent, shipper: @shipper, tasks: @tasks, cargo_info_tasks: @cargo_info_tasks, booking_info_tasks: @booking_info_tasks, info_confirmed_tasks: @info_confirmed_tasks, info_requested_tasks: @info_requested_tasks, quotation_confirmed_tasks: @quotation_confirmed_tasks, request_booking_tasks: @request_booking_tasks, carriers: @carriers, consignee: @consignee %>
+	<%= render 'timeline', operation_secure_id: @operation_secure_id, operation_id: @operation.id, agent: @agent, shipper: @shipper, tasks: @tasks, cargo_info_tasks: @cargo_info_tasks, booking_info_tasks: @booking_info_tasks, info_confirmed_tasks: @info_confirmed_tasks, info_requested_tasks: @info_requested_tasks, quotation_confirmed_tasks: @quotation_confirmed_tasks, request_booking_tasks: @request_booking_tasks, carriers: @carriers, consignee: @consignee, fcl_exw_container_loading_tasks: @fcl_exw_container_loading_tasks,
+	 fcl_exw_container_delivery_tasks: @fcl_exw_container_delivery_tasks %>
 <% elsif is_agent? %>
 <% end %>
 

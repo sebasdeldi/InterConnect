@@ -13,6 +13,7 @@ class TeamController < ApplicationController
 		end
 
 		@operations = OperationsByUser.where(representative_id: User.where(team_id: Team.where(team_leader: current_user.id)))
+		@difficult_operations = @operations.where('operations.difficulty = ?', 'HARD').includes(:operation).references(:operation) 
 	end
 
 	def show
