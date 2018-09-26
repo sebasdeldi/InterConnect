@@ -11,6 +11,10 @@ class CreatePieces < ActiveRecord::Migration[5.1]
       t.string :container_size
       t.string :hazardous_class
       t.string :un_code
+      t.string :container_number
+      t.string :seal_number
+      t.float :tare_weight
+
       t.timestamps
     end
   end

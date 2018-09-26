@@ -109,7 +109,7 @@
             <div class="field pieces-number-diff">
               <%= f.label 'Number of containers', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.number_field :pieces_number, autofocus: true, class: 'input pieces-number-diff', min: 0, max: 50, value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.pieces_number : '' %>
+                <%= f.number_field :pieces_number, autofocus: true, class: 'input pieces-number-diff', min: 0, value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.pieces_number : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope pieces-number-diff"></i>
                 </span>

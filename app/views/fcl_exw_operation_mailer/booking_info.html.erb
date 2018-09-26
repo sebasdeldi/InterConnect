@@ -3,7 +3,7 @@
 <div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">&nbsp;</font></span></font></div>
 <div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">
 
-	Good morning, this is the booking information:
+	Good morning, this is the booking information regarding the operation <%= @reference_number %>:
 	<br>
 	<ul>
 		<li>
@@ -29,7 +29,9 @@
 		<br>
 		<li>
 			<b>Document cut off time: </b> 
-			<%= @info.doc_cut_off_time.hour.to_s + ':' + @info.doc_cut_off_time.min.to_s%>
+			<%= @info.doc_cut_off_time.hour.to_s.length == 1 ? '0' + @info.doc_cut_off_time.hour.to_s : @info.doc_cut_off_time.hour.to_s %> 
+			:
+			<%= @info.doc_cut_off_time.min.to_s.length == 1 ? '0' + @info.doc_cut_off_time.min.to_s : @info.doc_cut_off_time.min.to_s %>
 		</li>
 		<br>
 		<li>
@@ -39,7 +41,9 @@
 		<br>
 		<li>
 			<b>Cargo cut off time: </b> 
-			<%= @info.cargo_cut_off_time.hour.to_s + ':' + @info.cargo_cut_off_time.min.to_s%>
+			<%= @info.cargo_cut_off_time.hour.to_s.length == 1 ? '0' + @info.cargo_cut_off_time.hour.to_s : @info.cargo_cut_off_time.hour.to_s %> 
+			:
+			<%= @info.cargo_cut_off_time.min.to_s.length == 1 ? '0' + @info.cargo_cut_off_time.min.to_s : @info.cargo_cut_off_time.min.to_s %>
 		</li>
 		<br>
 		<li>
@@ -49,7 +53,9 @@
 		<br>
 		<li>
 			<b>Expected sailing time: </b> 
-			<%= @info.sailing_time.hour.to_s + ':' + @info.sailing_time.min.to_s%>
+			<%= @info.sailing_time.hour.to_s.length == 1 ? '0' + @info.sailing_time.hour.to_s : @info.sailing_time.hour.to_s %> 
+			:
+			<%= @info.sailing_time.min.to_s.length == 1 ? '0' + @info.sailing_time.min.to_s : @info.sailing_time.min.to_s %>
 		</li>
 		<br>
 		<li>
@@ -59,11 +65,75 @@
 		<br>
 		<li>
 			<b>Expected arrival time: </b> 
-			<%= @info.arrival_time.hour.to_s + ':' + @info.arrival_time.min.to_s %>
+			<%= @info.arrival_time.hour.to_s.length == 1 ? '0' + @info.arrival_time.hour.to_s : @info.arrival_time.hour.to_s %> 
+			:
+			<%= @info.arrival_time.min.to_s.length == 1 ? '0' + @info.arrival_time.min.to_s : @info.arrival_time.min.to_s %>
 		</li>
-
+		<% if !@info.ramp.nil? %>
+			<br>
+			<li>
+				<b>Ramp needed: </b> 
+				Yes
+			</li>
+			<br>
+			<li>
+				<b>Ramp cut off date </b> 
+				<%= @info.ramp_cut_off_date %>
+			</li>
+		<% end %>
 	</ul>
-
+	<br>
+	<% @pieces.each_with_index do |piece, i| %>
+		Container <%= i + 1 %>
+		<ul>
+			<li>
+				<b>Gross Weight: </b> 
+				<%= piece.gross_weight %>
+			</li>
+			<br>
+			<li>
+				<b>Commercial Description: </b> 
+				<%= piece.commercial_description %>
+			</li>
+			<br>
+			<li>
+				<b>Container Size: </b> 
+				<%= piece.container_size %>
+			</li>
+			<br>
+			<li>
+				<b>Cargo Hazardous: </b> 
+				<%= piece.cargo_hazardous %>
+			</li>
+			<br>
+			<li>
+				<b>Hazardous Class: </b> 
+				<%= piece.hazardous_class %>
+			</li>
+			<br>
+			<li>
+				<b>UN Code: </b> 
+				<%= piece.un_code %>
+			</li>
+			<br>
+			<li>
+				<b>Container Number: </b> 
+				<%= piece.container_number %>
+			</li>
+			<br>
+			<li>
+				<b>Seal Number: </b> 
+				<%= piece.seal_number %>
+			</li>
+			<br>
+			<li>
+				<b>Tare Weight: </b> 
+				<%= piece.tare_weight %>
+			</li>
+			<br>
+			<br>
+		</ul>
+	<% end %>
 </font></span></font></div>
 
 

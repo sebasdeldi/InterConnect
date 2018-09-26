@@ -136,12 +136,47 @@
               </div>
             </div> 
 
+            <div class="field">
+              <%= f.label 'Ramp needed ?:', class: 'label' %>
+              <div class="control has-icons-left">
+                <div class="select">
+                  <%= f.select :ramp, options_for_select([['NO', nil], ['YES', true]], is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? @existing_fcl_booking_info.ramp : '' ), {}, class: 'input loading_datetime ramp'  %>
+                </div>
+                <span class="icon is-small is-left">
+                  <i class="far fa-calendar-alt"></i>
+                </span>
+              </div>
+            </div> 
+
+            <div class="field hidden ramp-cut-off-container">
+              <%= f.label 'Ramp cut off date:', class: 'label' %>
+              <div class="control has-icons-left">
+                <%= f.text_field :ramp_cut_off_date, autofocus: true, class: 'input loading_datetime ramp-cut-off', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? @existing_fcl_booking_info.ramp_cut_off_date : '' %>
+                <span class="icon is-small is-left">
+                  <i class="far fa-calendar-alt"></i>
+                </span>
+              </div>
+            </div> 
+
             <p class="arrival_hour hidden"><%= @existing_fcl_booking_info.arrival_time.nil? ? '00' : @existing_fcl_booking_info.arrival_time.hour %></p>
             <p class="arrival_mins hidden"><%= @existing_fcl_booking_info.arrival_time.nil? ? '00' : @existing_fcl_booking_info.arrival_time.min %></p>
  
             <%= f.hidden_field :fcl_exw_booking_info_step_id, class: "fcl_exw_booking_info_step_id", value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? @existing_fcl_booking_info.id : '' %>
             <br>
-            <div id="container"></div>
+
+            <% if !(@existing_fcl_cargo_info.nil? || @existing_fcl_cargo_info.pieces_number.nil?) %>
+              <div class="field pieces-number-booking">
+                <%= f.label 'Number of containers', class: 'label' %>
+                <div class="control has-icons-left">
+                  <%= f.number_field :pieces_number, autofocus: true, class: 'input pieces-number-booking', min: 0, value: @pieces_number %>
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-envelope pieces-number-booking"></i>
+                  </span>
+                </div>
+              </div>  
+              <%= f.hidden_field :fcl_exw_cargo_info_step_id, class: "fcl_exw_cargo_info_step_id", value: is_fcl_exw_info_stage_completed?(@operation.secure_id) ? @existing_fcl_cargo_info.id : '' %>
+              <div id="pieces-container"></div>
+            <% end %>
             <div class="control">
               <br>
               <%= f.submit is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? "UPDATE CARGO INFO" : "REGISTER CARGO INFO" , class: 'button is-link' %>
@@ -181,6 +216,23 @@
 </div>
 
 <script type="text/javascript">
+
+  function showRamp(){
+    if ($(".ramp").val() == 'true'){
+      $(".ramp-cut-off-container").removeClass('hidden');
+    } else {
+      $(".ramp-cut-off").val('');
+      $(".ramp-cut-off-container").addClass('hidden');
+    }
+  }
+
+  showRamp();
+
+  $(".ramp").on('change', function(){
+    showRamp();
+  })
+
+
   var doc_hours = $('.doc_hour')[0].innerHTML
   var doc_minutes = $('.doc_mins')[0].innerHTML
 

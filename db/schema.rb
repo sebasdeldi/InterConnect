@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20210927200619) do
     t.time "sailing_time"
     t.date "arrival_date"
     t.time "arrival_time"
+    t.boolean "ramp"
+    t.date "ramp_cut_off_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_fcl_exw_booking_info_steps_on_operation_id"
@@ -180,6 +182,9 @@ ActiveRecord::Schema.define(version: 20210927200619) do
     t.string "container_size"
     t.string "hazardous_class"
     t.string "un_code"
+    t.string "container_number"
+    t.string "seal_number"
+    t.float "tare_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["fcl_exw_cargo_info_step_id"], name: "index_pieces_on_fcl_exw_cargo_info_step_id"

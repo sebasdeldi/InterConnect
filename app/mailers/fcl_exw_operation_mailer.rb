@@ -3,6 +3,9 @@ class FclExwOperationMailer < ApplicationMailer
 	def booking_info (agent, representative, info)
 	  @agent = agent
 	  @info = info
+	  @operation = Operation.find(info.operation_id)
+	  @pieces = FclExwCargoInfoStep.find_by(operation_id: @operation.id).pieces
+	  @reference_number = @operation.reference_number
 	  attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
 	  delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password
@@ -97,6 +100,7 @@ class FclExwOperationMailer < ApplicationMailer
 	def container_loading (agent, operation,shipper, representative)
 		@agent  = agent
 		@operation = operation
+		@pieces = FclExwCargoInfoStep.find_by(operation_id: @operation.id).pieces
 		@shipper = shipper
 		@pickup = FclExwCargoInfoStep.find_by(operation_id: @operation).pickup_reference
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")

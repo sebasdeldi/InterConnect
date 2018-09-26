@@ -1,13 +1,20 @@
 class FclExwBookingInfoStepsController < ApplicationController
   def new
   	@fcl_booking_info = FclExwBookingInfoStep.new
-  	@existing_fcl_booking_info = existing_fcl_booking_info(Operation.find_by(secure_id: params[:operation_secure_id]).id)
+  	@operation = Operation.find_by(secure_id: params[:operation_secure_id])
+  	@existing_fcl_booking_info = existing_fcl_booking_info(@operation.id)
+  	@existing_fcl_cargo_info  = FclExwCargoInfoStep.find_by(operation_id: @operation.id)
+  	@pieces_number = @existing_fcl_cargo_info.pieces_number.to_i
   end
 
   def create
+  	
 		@fcl_booking_info = FclExwBookingInfoStep.new
 		existing_booking_info = existing_fcl_booking_info(Operation.find_by(secure_id: params[:operation_secure_id]).id)
-
+		params_array = params.to_unsafe_h.to_a
+		@operation = Operation.find_by(secure_id: params[:operation_secure_id])
+		@cargo_info = FclExwCargoInfoStep.find_by(operation_id: @operation.id)
+		create_pieces(params_array, @cargo_info)
 
 		if (params[:fcl_exw_booking_info_step][:doc_cut_off_date].present?)
 			if existing_booking_info.doc_cut_off_date.nil?
@@ -29,8 +36,10 @@ class FclExwBookingInfoStepsController < ApplicationController
 		if (params[:fcl_exw_booking_info_step][:sailing_date].present?)
 			if existing_booking_info.sailing_date.nil?
 				Task.create(note: 'Expected sailing date set.', due_date: params[:fcl_exw_booking_info_step][:sailing_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'sailing_date' )
+				Task.create(note: 'Check if cargo is on port and ready to sail', due_date: (params[:fcl_exw_booking_info_step][:arrival_date]).to_date - 3.days, fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'cargo_on_port' )
 			else
 				Task.where(subject: 'sailing_date', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:sailing_date], status: '0')
+				Task.where(subject: 'cargo_on_port', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: (params[:fcl_exw_booking_info_step][:sailing_date]).to_date - 3.days, status: '0')
 			end
 		end
 
@@ -40,6 +49,16 @@ class FclExwBookingInfoStepsController < ApplicationController
 			else
 				Task.where(subject: 'arrival_date', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:arrival_date], status: '0')
 			end
+		end
+	
+		if (params[:fcl_exw_booking_info_step][:ramp].present?)
+			if existing_booking_info.ramp.nil? 
+				Task.create(note: 'Verify that container was included in ramp transportation.', due_date: (params[:fcl_exw_booking_info_step][:ramp_cut_off_date]).to_date + 1.day , fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'ramp_cut_off' )
+			else
+				Task.where(subject: 'ramp_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:ramp_cut_off_date], status: '0')
+			end
+		else
+			Task.where(subject: 'ramp_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.delete
 		end
 
 	  if existing_booking_info.update(fcl_booking_info_params.merge(operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id))
@@ -63,6 +82,17 @@ class FclExwBookingInfoStepsController < ApplicationController
 			
 		def fcl_booking_info_params
 			params.require(:fcl_exw_booking_info_step).permit(:operation_id, :booking_number, :vessel, :voyage, :doc_cut_off_date, :doc_cut_off_time, 
-				:cargo_cut_off_date, :cargo_cut_off_time, :sailing_date, :sailing_time, :arrival_date, :arrival_time)
+				:cargo_cut_off_date, :cargo_cut_off_time, :sailing_date, :sailing_time, :arrival_date, :arrival_time, :ramp, :ramp_cut_off_date)
 		end
+
+		def create_pieces (params_array, cargo_info)
+	  	Piece.where(fcl_exw_cargo_info_step_id: cargo_info.id).delete_all
+	  	params_array = params_array.drop(4)[0..-4]
+
+      (0..params_array.length).step(9) do |element|
+      	unless params_array[element].nil?
+        	piece = Piece.create(fcl_exw_cargo_info_step_id: cargo_info.id, gross_weight: params_array[element][1], commercial_description: params_array[element+1][1], container_size: params_array[element+2][1], cargo_hazardous: params_array[element+3][1], hazardous_class: params_array[element+4][1], un_code: params_array[element+5][1], container_number: params_array[element+6][1], seal_number: params_array[element+7][1], tare_weight: params_array[element+8][1] )
+      	end
+      end
+    end
 end

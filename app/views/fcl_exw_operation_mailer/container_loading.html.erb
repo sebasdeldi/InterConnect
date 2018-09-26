@@ -8,7 +8,60 @@
 	We are glad to confirm that the cargo with the pick up reference:<b> <%= @pickup %>,</b> has been correctly loaded and it's ready for delivery. 
 	<br>
 	<br>
+	Cargo Information:
 	<br>
+	<br>
+	<% @pieces.each_with_index do |piece, i| %>
+		Container <%= i + 1 %>
+		<ul>
+			<li>
+				<b>Gross Weight: </b> 
+				<%= piece.gross_weight %>
+			</li>
+			<br>
+			<li>
+				<b>Commercial Description: </b> 
+				<%= piece.commercial_description %>
+			</li>
+			<br>
+			<li>
+				<b>Container Size: </b> 
+				<%= piece.container_size %>
+			</li>
+			<br>
+			<li>
+				<b>Cargo Hazardous: </b> 
+				<%= piece.cargo_hazardous %>
+			</li>
+			<br>
+			<li>
+				<b>Hazardous Class: </b> 
+				<%= piece.hazardous_class %>
+			</li>
+			<br>
+			<li>
+				<b>UN Code: </b> 
+				<%= piece.un_code %>
+			</li>
+			<br>
+			<li>
+				<b>Container Number: </b> 
+				<%= piece.container_number %>
+			</li>
+			<br>
+			<li>
+				<b>Seal Number: </b> 
+				<%= piece.seal_number %>
+			</li>
+			<br>
+			<li>
+				<b>Tare Weight: </b> 
+				<%= piece.tare_weight %>
+			</li>
+			<br>
+			<br>
+		</ul>
+	<% end %>
 	
 
 

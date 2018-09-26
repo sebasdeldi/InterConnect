@@ -4,10 +4,9 @@ document.addEventListener("turbolinks:load", function() {
   	dateFormat: "yy-mm-dd"
 	});
 
+	var container = document.getElementById('container');
 
 	var addFields = (fields_number, data) => {
-		console.log(data)
-		var container = document.getElementById('container');
 	  while (container.hasChildNodes()) {
 	    container.removeChild(container.lastChild);
 	  }
@@ -34,22 +33,25 @@ document.addEventListener("turbolinks:load", function() {
 		addFields($('.input.pieces-number-diff').val(), []);
 	});
 
-	$.ajax({
-	  type: "POST",
-	  url: "/pieces_for_cargo_info",
-	  data: { fcl_exw_cargo_info_step_id: $('.fcl_exw_cargo_info_step_id').val() },
-	  success: function(data){
+	if (container !== null ){
+		$.ajax({
+		  type: "POST",
+		  url: "/pieces_for_cargo_info",
+		  data: { fcl_exw_cargo_info_step_id: $('.fcl_exw_cargo_info_step_id').val() },
+		  success: function(data){
 
-	  	if(data[data.length-1] === 'update'){
-	  		addFields($('.input.pieces-number-diff').val(), data);
-	  	}else{
+		  	if(data[data.length-1] === 'update'){
+		  		addFields($('.input.pieces-number-diff').val(), data);
+		  	}else{
 
-	  	}
-		},
-		error: function(data){
-  		console.log('error')
-		}   
-	});
+		  	}
+			},
+			error: function(data){
+	  		console.log('error')
+			}   
+		});
+	}
+
 	
 
 
