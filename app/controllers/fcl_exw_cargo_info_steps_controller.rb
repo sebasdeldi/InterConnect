@@ -9,17 +9,26 @@ class FclExwCargoInfoStepsController < ApplicationController
 		existing_cargo_info = existing_fcl_cargo_info(Operation.find_by(secure_id: params[:operation_secure_id]).id)
 	  if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id))
 	  	op = Operation.find_by(secure_id: params[:operation_secure_id])
-			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request booking order')
+			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request Booking Order')
 			#Creating easy to loop params array
 
 			params_array = params.to_unsafe_h.to_a
 			create_pieces(params_array, existing_cargo_info)
 
 			flash[:notice] = 'Information correctly updated'
-			redirect_to operation_path op.id
+			if current_user
+				redirect_to operation_path op.id
+			else
+				redirect_back(fallback_location: unauthenticated_root_path)
+			end
+			
 		else
 			flash[:alert] = 'Information could not be saved, please fill in all the information listed bellow'
-			redirect_to new_fcl_exw_cargo_info_step_path(operation_id: op.id)
+			if current_user
+				redirect_to new_fcl_exw_cargo_info_step_path(operation_id: op.id)
+			else
+				redirect_back(fallback_location: unauthenticated_root_path)
+			end
 		end
 	end
 
@@ -28,7 +37,7 @@ class FclExwCargoInfoStepsController < ApplicationController
 		agent = User.find(params[:agent_id])
 		op = Operation.find(params[:operation_id])
 		FclExwOperationMailer.info_request(shipper, current_user, agent, op.secure_id).deliver_later
-		if op.update(status: 'IN PROGRESS', status_message:'Confirm cargo info received', current_step: 2)
+		if op.update(status: 'IN PROGRESS', status_message:'Confirm Cargo Info Received', current_step: 2)
 			FclExwInfoRequestedStep.find_by(operation_id: params[:operation_id]).update(completed: true)
 			flash[:notice] = "An email sent to shipper:" + shipper.email + " from " + shipper.company_name
 			redirect_to operation_path params[:operation_id]
@@ -36,7 +45,7 @@ class FclExwCargoInfoStepsController < ApplicationController
 	end
 
 	def confirm_info
-		if Operation.find(params[:operation_id]).update(fcl_exw_info_confirmed: true, status: 'IN PROGRESS' ,status_message: 'Upload cargo info to system', current_step: 3)
+		if Operation.find(params[:operation_id]).update(fcl_exw_info_confirmed: true, status: 'IN PROGRESS' ,status_message: 'Upload Cargo Info To System', current_step: 3)
 			FclExwInfoConfirmedStep.find_by(operation_id: params[:operation_id]).update(completed: true)
 			flash[:notice] = "Step confirmed, no more reminders will be sent"
 			redirect_to operation_path params[:operation_id]
@@ -47,7 +56,7 @@ class FclExwCargoInfoStepsController < ApplicationController
 		shipper = User.find(params[:shipper_id])
 		agent = User.find(params[:agent_id])
 		op = Operation.find(params[:operation_id])
-		if Operation.find(params[:operation_id]).update(status: 'IN PROGRESS' ,status_message: 'Confirm container delivery', current_step: 7)
+		if Operation.find(params[:operation_id]).update(status: 'IN PROGRESS' ,status_message: 'Confirm Container Delivery', current_step: 7)
 			FclExwContainerLoading.find_by(operation_id: params[:operation_id]).update(completed: true)
 			FclExwOperationMailer.container_loading(agent, op, shipper, current_user).deliver_later
 
@@ -79,7 +88,7 @@ class FclExwCargoInfoStepsController < ApplicationController
 			agent = User.find(params[:agent_id])
 			FclExwOperationMailer.issue_quotation(shipper, current_user, agent, operation).deliver_later
 		else
-			if operation.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', status_message:'Request cargo info to shipper', current_step: 1)
+			if operation.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', status_message:'Request Cargo Info To Shipper', current_step: 1)
 				FclExwQuotationConfirmedStep.find_by(operation_id: params[:operation_id]).update(completed: true, files: params[:files])
 				flash[:notice] = "Step confirmed, no more reminders will be sent"
 			end
@@ -99,7 +108,7 @@ class FclExwCargoInfoStepsController < ApplicationController
 		FclExwOperationMailer.request_booking(shipper, operation, carrier, additional_message, current_user).deliver_later
 		FclExwOperationMailer.request_booking_notification(agent, step, carrier, current_user).deliver_later
 
-		if op.update(status: 'COMPLETED', status_message:'Booking order sent to ', current_step: 5, status_message:'Completed')
+		if op.update(status: 'IN PROGRESS', status_message:'Booking order sent to ', current_step: 5, status_message:'Fill In Booking Info')
 			FclExwRequestBookingStep.find_by(operation_id: params[:operation_id]).update(completed: true, additional_message: params[:additional_message], carrier_id: params[:carrier_id])
 			flash[:notice] = "An email sent to the shipping company:" + shipper.email + " from " + shipper.company_name
 			redirect_to operation_path params[:operation_id]

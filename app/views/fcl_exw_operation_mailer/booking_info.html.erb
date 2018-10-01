@@ -106,16 +106,18 @@
 				<%= piece.cargo_hazardous %>
 			</li>
 			<br>
-			<li>
-				<b>Hazardous Class: </b> 
-				<%= piece.hazardous_class %>
-			</li>
-			<br>
-			<li>
-				<b>UN Code: </b> 
-				<%= piece.un_code %>
-			</li>
-			<br>
+			<% if piece.cargo_hazardous == "YES" %>
+				<li>
+					<b>Hazardous Class: </b> 
+					<%= piece.hazardous_class %>
+				</li>
+				<br>
+				<li>
+					<b>UN Code: </b> 
+					<%= piece.un_code %>
+				</li>
+				<br>
+			<% end %>
 			<li>
 				<b>Container Number: </b> 
 				<%= piece.container_number %>

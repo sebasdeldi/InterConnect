@@ -52,18 +52,21 @@ class FclExwBookingInfoStepsController < ApplicationController
 		end
 	
 		if (params[:fcl_exw_booking_info_step][:ramp].present?)
+			existing_task = Task.where(subject: 'ramp_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first
 			if existing_booking_info.ramp.nil? 
 				Task.create(note: 'Verify that container was included in ramp transportation.', due_date: (params[:fcl_exw_booking_info_step][:ramp_cut_off_date]).to_date + 1.day , fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'ramp_cut_off' )
 			else
-				Task.where(subject: 'ramp_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:ramp_cut_off_date], status: '0')
+				existing_task.update(due_date: params[:fcl_exw_booking_info_step][:ramp_cut_off_date], status: '0')
 			end
 		else
-			Task.where(subject: 'ramp_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.delete
+			unless existing_task.nil?
+				existing_task.delete
+			end
 		end
 
 	  if existing_booking_info.update(fcl_booking_info_params.merge(operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id))
 	  	op = Operation.find_by(secure_id: params[:operation_secure_id])
-			op.update(fcl_exw_quotation_confirmed: true, status: 'COMPLETED', current_step: 6, status_message: 'Job Done!')
+			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 6, status_message: 'Confirm Container Loading')
 			agent = OperationsByUser.find_by(operation_id: op.id).agent
 			FclExwOperationMailer.booking_info(agent, current_user, existing_booking_info).deliver_later
 			flash[:notice] = 'Information correctly updated'

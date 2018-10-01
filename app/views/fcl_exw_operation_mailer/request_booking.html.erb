@@ -47,29 +47,37 @@ I need all your collaboration to get a booking and spot container under below in
 <h2>
 	Pieces
 </h2>
-<ul>
 	<% @pieces.each_with_index do |piece, index| %>
-		<li>
-			<b>Container Size Piece <%= index + 1 %>:</b> <%= piece.container_size %>
-		</li>
+		Container <%= index + 1 %>
+		<ul>
+			<li>
+				<b>Container Size Piece <%= index + 1 %>:</b> <%= piece.container_size %>
+			</li>
 
-		<li>
-			<b>Gross Weight Piece <%= index +1 %>:</b> <%= piece.gross_weight %>
-		</li>
+			<li>
+				<b>Gross Weight Piece <%= index +1 %>:</b> <%= piece.gross_weight %>
+			</li>
 
-		<li>
-			<b>Commercial Description Piece <%= index + 1 %>:</b> <%= piece.commercial_description %>
-		</li>
+			<li>
+				<b>Commercial Description Piece <%= index + 1 %>:</b> <%= piece.commercial_description %>
+			</li>
 
-		<li>
-			<b>Hazardous Piece <%= index + 1 %>:</b> <%= piece.cargo_hazardous %>
-		</li>
+			<li>
+				<b>Hazardous Piece <%= index + 1 %>:</b> <%= piece.cargo_hazardous %>
+			</li>
 
-		<li>
-			<b>Commercial Description Piece <%= index + 1 %>:</b> <%= piece.un_code %>
-		</li>
+			<% if piece.cargo_hazardous == "YES" %>
+				<li>
+					<b>Hazardous Class Piece<%= index + 1 %>:</b> <%= piece.hazardous_class %>
+				</li>
+				<li>
+					<b>UN Code Piece <%= index + 1 %>:</b> <%= piece.un_code %>
+				</li>
+			<% end %>
+			<br>
+		</ul>
 	<% end %>
-</ul>
+<br>
 <br>
 Thank you very much for your help and prompt answer!
 <br>
