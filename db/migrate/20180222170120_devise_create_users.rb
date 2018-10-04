@@ -19,6 +19,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :outlook_password
       t.string :vendor_operation_mode
       t.string :website
+      t.string :ein
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at

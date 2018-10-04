@@ -15,9 +15,12 @@
 
 		    <li class="is-active"><%= link_to "Operation " + @operation.reference, operation_path(@operation.id) %></li>
 		  </ul>
-		  <b>Difficulty:</b>
+		  <%= link_to "Booking Sheet", booking_sheet_path(@operation.id, format: 'pdf'), target: "_blank", class: "button is-link is-outlined booking-sheet-btn" %>
+		  <b class="diff-label">Difficulty:</b>
 		  <%= form_tag change_difficulty_path, class: 'button-icon' do %>
-		  	<%= select_tag "difficulty", options_for_select([['EASY', 'EASY'], ['MEDIUM','MEDIUM'], ['HARD','HARD']], @operation.difficulty), { onchange: 'this.form.submit();' } %>
+			  <div class="select">
+			    <%= select_tag "difficulty", options_for_select([['EASY', 'EASY'], ['MEDIUM','MEDIUM'], ['HARD','HARD']], @operation.difficulty), { onchange: 'this.form.submit();' } %>
+			  </div>
 		  	<%= hidden_field_tag 'operation_id', params[:id] %>
 		  <% end %>
 		</nav>

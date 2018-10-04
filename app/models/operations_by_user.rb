@@ -9,7 +9,7 @@ class OperationsByUser < ApplicationRecord
   # fields is an array conteining [ reference, modality, strong_params_for_representatives, current_user, pieces_number ]
 
   def create_for_representatives(fields)
-		operation = create_operation(fields[1], fields[0], fields[4], fields[5], fields[6])
+		operation = create_operation(fields[1], fields[0], fields[4], fields[5], fields[6], fields[7], fields[8], fields[9], fields[10])
 		@operations_by_user = OperationsByUser.create(fields[2].merge(operation_id: operation.id, representative_id: fields[3].id))
   end
 
@@ -20,14 +20,15 @@ class OperationsByUser < ApplicationRecord
   end
 
   private
-  	def create_operation(modality, reference, pieces_number, po_number, reference_number)
+  	def create_operation(modality, reference, pieces_number, po_number, reference_number, pol, pod, origin, destination)
   		steps_number = 1
   		if modality == "FCL - EXW"
   			steps_number = 8
   			#TODO add other modality cases
   		end
   		operation = Operation.create(reference: reference, status: 'IN PROGRESS', status_message:'Confirm quotation', 
-        modality: modality, steps_number: steps_number, current_step: 0, pieces_number: pieces_number, po_number: po_number, reference_number: reference_number)
+        modality: modality, steps_number: steps_number, current_step: 0, pieces_number: pieces_number, po_number: po_number, reference_number: reference_number,
+        pol: pol, pod: pod, origin: origin, destination: destination)
       create_steps(operation)
       operation
     end

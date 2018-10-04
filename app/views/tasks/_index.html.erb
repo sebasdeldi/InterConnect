@@ -8,7 +8,9 @@
         <li class="sticky-element">
           <%= link_to task_path(task.id), class: 'sticky-anchor' do  %>
             <h2 class="sticky-header">Task for: Operation <%= Operation.find(task.operation_id).reference %></h2>
-            <p class="sticky-paragraph"><%= task.note.truncate(180) %></p>
+            <p class="sticky-paragraph">
+              <%= task.note.truncate(180) %>
+            </p>
             <br>
             <p class="sticky-paragraph"><b><i class="fas fa-calendar-alt"></i> <%= task.due_date %></b></p>
           <% end %>

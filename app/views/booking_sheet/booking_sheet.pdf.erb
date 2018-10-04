@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<%= wicked_pdf_stylesheet_link_tag "booking_sheet" %>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	</head>
+	<body>
+		<center>
+			<h3 class="title is-4">BOOKING SHEET PARA SEGUIMIENTO</h3>
+		</center>
+		<br>
+
+		<div class="container">
+			<div class="row">
+				<div class="column">
+					<% if @agent.company_name.nil? %>
+				    <p>
+				    	AGENT: 
+							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+				    </p>
+			    <% else %>
+		        <p>
+		        	AGENT: 
+		    			<span style="text-decoration: underline; white-space: pre;"><%= @agent.company_name %></span>
+		        </p>
+			    <% end %>
+
+			    <% if @shipper.company_name.nil? %>
+				    <p>
+				    	SHIPPER: 
+				    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+				    </p>
+				  <% else %>
+					  <p>
+					  	SHIPPER: 
+					  	<span style="text-decoration: underline; white-space: pre;"><%= @shipper.company_name %></span>
+					  </p>
+				  <% end %>
+
+				  <% if @shipper.email.nil? %>
+				    <p>
+				    	CTC: 
+				    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+				    </p>
+				  <% else %>
+				  	<p>
+				  		CTC: 
+				  		<span style="text-decoration: underline; white-space: pre;"><%= @shipper.email %></span>
+				  	</p>
+				  <% end %>
+
+				  <% if @shipper.phone_number.nil? %>
+			    <p>
+			    	PH: 
+			    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+			    </p>
+			    <% else %>
+			    	<p>
+			    		PH: 
+			    		<span style="text-decoration: underline; white-space: pre;"><%= @shipper.phone_number %></span>
+			    	</p>
+			    <% end %>
+			    <p>
+			    	REF: 
+			    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+			    </p>
+
+			    <% if @consignee.company_name.nil? %>
+				    <p>
+				    	CONSIGNEE: 
+				    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+				    </p>
+				  <% else %>
+					  <p>
+					  	CONSIGNEE: 
+					  	<span style="text-decoration: underline; white-space: pre;"><%= @consignee.company_name %></span>
+					  </p>
+				  <% end %>
+
+			    <p>
+			    	REF#: 
+			    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+			    </p>
+
+			    <% if @operation.modality.nil? %>
+				    <p>
+				    	INCOTERM: 
+				    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+				    </p>
+				  <% else %>
+				  	<p>
+				  		INCOTERM: 
+				  		<span style="text-decoration: underline; white-space: pre;"><%= @operation.modality %></span>
+				  	</p>
+				  <% end %>	
+				</div>
+
+				<div class="column">
+				  <p>
+				  	REF#: 
+				  	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+				  </p>
+				  <p>El contacto con el proveedor debe ser telefónico y vía e-mail para asegurarnos que sí reciba nuestra información. Así mismo, se deben usar las firmas predeterminadas para que nos suministren la información necesaria para realizar debidamente las coordinaciones.</p>
+				  <p>CONSOL#: 
+				  	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+				  </p>
+				  <p>MASTER#: 
+				  	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+				  </p>
+				  <p>HOUSE#: 
+				  	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+				  </p>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="column-third">
+					<p>
+						<% if @contacted_customer %>
+							¿CONTACTÓ PROVEEDOR?
+							<input type="checkbox" checked> SÍ
+		  				<input type="checkbox"> <t class="right-space">NO</t>
+		  			<% else %>
+							¿CONTACTÓ PROVEEDOR?
+							<input type="checkbox"> SÍ
+		  				<input type="checkbox"> <t class="right-space">NO</t>
+		  			<% end %>
+					</p>
+
+					<p>
+						¿DEBEMOS TRANSMITIR?
+						<input type="checkbox"> SÍ
+						<input type="checkbox"> <t class="right-space">NO</t>
+					</p>
+				</div>
+
+				<div class="column-third">
+					<p>
+						¿SOLICITÓ INVOICE?
+						<input type="checkbox"> SÍ
+	  				<input type="checkbox"> <t class="right-space">NO</t>
+					</p>
+
+					<p>
+						¿SOLICITÓ SLI?
+						<input type="checkbox"> SÍ
+						<input type="checkbox"> <t class="right-space">NO</t>
+					</p>
+				</div>
+
+				<div class="column-third">
+					<p>
+						¿NECESITA SED?
+						<input type="checkbox"> SÍ
+						<input type="checkbox"> <t class="right-space">NO</t>
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="column">
+					<% if @shipper.ein.nil? %>
+						<p>
+							SHIPPER EIN#: 
+							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+						</p>
+					<% else %>
+						<p>
+							SHIPPER EIN#: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @shipper.ein %></span>
+						</p>
+					<% end %>
+
+
+					<% if @operation.origin.nil? %>
+						<p> 
+							ORIGIN: 
+							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+						</p>
+					<% else %>
+						<p> 
+							ORIGIN: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @operation.origin %></span>
+						</p>
+					<% end %>
+
+					<% if @operation.pol.nil? %>
+						<p>
+							POL: 
+							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+						</p>
+					<% else %>
+						<p>
+							POL: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @operation.pol %></span>
+						</p>
+					<% end %>
+
+					<p>
+						<b>MASTER FREIGHT:</b> 
+						<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+					</p>		
+				</div>
+
+				<div class="column">			
+					<% if @operation.destination.nil? %>
+						<p>
+							DESTINATION: 
+							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+						</p>
+					<% else %>
+						<p>
+							DESTINATION: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @operation.destination %></span>
+						</p>
+					<% end %>
+
+					<% if @operation.pod.nil? %>
+						<p>
+							POD: 
+							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+						</p>
+					<% else %>
+						<p>
+							POD: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @operation.pod %></span>
+						</p>
+					<% end %>
+
+					<p>
+						<b>HOUSE FREIGHT:</b> 
+						<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+					</p>		
+				</div>
+			</div>
+
+
+			<div class="booking-container top">
+				<div class="row">
+					<div class="column">
+						<p>
+							<b>COTIZADO & APROBADO</b>
+								<input type="checkbox"> SÍ
+			  				<input type="checkbox"> <t class="right-space">NO</t>
+							</div>
+						</p>
+				</div>
+			</div>
+
+			<% @pieces.each do |piece| %>
+				<div class="booking-container bottom">
+					<div class="row">
+						<div class="column-third">
+							<% if piece.container_number.nil? || piece.container_number == "" %>
+								<p>
+									CONT#: 
+									<span style="text-decoration: underline; white-space: pre;">                                                        </span>
+								</p>
+							<% else %>
+								<p>
+									CONT#: 
+									<span style="text-decoration: underline; white-space: pre;"><%= piece.container_number %></span>
+								</p>
+							<% end %>
+							
+							<% if piece.commercial_description.nil? || piece.commercial_description == "" %>
+								<p>
+									CARGO DESCRIPTION: 
+									<span style="text-decoration: underline; white-space: pre;">                               </span>
+								</p>
+							<% else %>
+								<p>
+									CARGO DESCRIPTION: 
+									<span style="text-decoration: underline; white-space: pre;"><%= piece.commercial_description %></span>
+								</p>
+							<% end %>
+
+							<% if piece.hazardous_class.nil? || piece.hazardous_class == "" %>
+								<% if piece.cargo_hazardous == "NO" %>
+									<p>
+										HAZARDOUS CLASS: 
+										<span style="text-decoration: underline; white-space: pre;">NO APLICA</span>
+									</p>
+								<% else %>
+									<p>
+										HAZARDOUS CLASS: 
+										<span style="text-decoration: underline; white-space: pre;">                             </span>
+									</p>
+								<% end %>
+							<% else %>
+								<% if piece.cargo_hazardous == "NO" %>
+									<p>
+										HAZARDOUS CLASS: 
+										<span style="text-decoration: underline; white-space: pre;">NO APLICA</span>
+									</p>
+								<% else %>
+									<p>
+										HAZARDOUS CLASS: 
+										<span style="text-decoration: underline; white-space: pre;"><%= piece.hazardous_class %></span>
+									</p>
+								<% end %>
+							<% end %>
+
+							<p>
+								¿ES BONDED?
+								<input type="checkbox"> SÍ
+								<input type="checkbox"> <t class="right-space">NO</t>
+							</p>
+
+							<p>
+								¿VALIDÓ CON BROKER?
+								<input type="checkbox"> SÍ
+								<input type="checkbox"> <t class="right-space">NO</t>
+							</p>
+
+							<% if piece.gross_weight.nil? || piece.gross_weight == "" %>
+								<p>
+									GROSS WEIGHT: 
+									<span style="text-decoration: underline; white-space: pre;">                                  </span>
+								</p>
+							<% else %>
+								<p>
+									GROSS WEIGHT: 
+									<span style="text-decoration: underline; white-space: pre;"><%= piece.gross_weight %></span>
+								</p>
+							<% end %>
+						</div>
+
+						<div class="column-third">
+							<% if piece.container_size.nil? || piece.container_size == "" %>
+								<p>
+									SIZE: 
+									<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+								</p>
+							<% else %>
+								<p>
+									SIZE: 
+									<span style="text-decoration: underline; white-space: pre;"><%= piece.container_size %></span>
+								</p>
+							<% end %>
+
+							<p>
+								<% if piece.cargo_hazardous.nil? %>
+									¿HAZMAT?
+									<input type="checkbox"> SÍ
+				  				<input type="checkbox"> <t class="right-space">NO</t>
+				  			<% elsif piece.cargo_hazardous == 'YES' %>
+									¿HAZMAT?
+									<input type="checkbox" checked> SÍ
+				  				<input type="checkbox"> <t class="right-space">NO</t>
+				  			<% else %>
+									¿HAZMAT?
+									<input type="checkbox"> SÍ
+				  				<input type="checkbox" checked> <t class="right-space">NO</t>
+				  			<% end %>
+							</p>
+
+							<p>
+								<% if piece.un_code.nil? || piece.un_code == "" %>
+									<% if piece.cargo_hazardous == "NO" %>
+										UN CODE: 
+										<span style="text-decoration: underline; white-space: pre;">NO APLICA</span>
+									<% else %>
+										UN CODE: 
+										<span style="text-decoration: underline; white-space: pre;">                                           </span>
+									<% end %>
+								<% else %>
+									<% if piece.cargo_hazardous == "NO" %>
+										UN CODE: 
+										<span style="text-decoration: underline; white-space: pre;">NO APLICA</span>
+									<% else %>
+										UN CODE: 
+										<span style="text-decoration: underline; white-space: pre;"><%= piece.un_code %></span>
+									<% end %>
+								<% end %>	
+							</p>
+						
+							<p>
+								¿VALIDÓ CON IMPORTS?
+								<input type="checkbox"> SÍ
+								<input type="checkbox"> <t class="right-space">NO</t>
+							</p>
+
+							<p>
+								¿SOLICITARON SEGURO?
+								<input type="checkbox"> SÍ
+								<input type="checkbox"> <t class="right-space">NO</t>
+							</p>
+
+							<% if piece.seal_number.nil? || piece.seal_number == "" %>
+								<p>
+									SEAL NUMBER: 
+									<span style="text-decoration: underline; white-space: pre;">                                   </span>
+								</p>
+							<% else %>
+								<p>
+									SEAL NUMBER: 
+									<span style="text-decoration: underline; white-space: pre;"><%= piece.seal_number %></span>
+								</p>
+							<% end %>
+						</div>
+
+						<div class="column-third">
+		
+							<p>
+								PCS: 
+								<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+							</p>
+
+							<p>
+								¿TIENE DOC HAZ?
+								<input type="checkbox"> SÍ
+			  				<input type="checkbox"> <t class="right-space">NO</t>		
+							</p>
+
+							<p>
+								¿ES SELF PROPELLED?
+								<input type="checkbox"> SÍ
+								<input type="checkbox"> <t class="right-space">NO</t>
+							</p>	
+
+							<p>
+								¿SE EMITIÓ PÓLIZA?
+								<input type="checkbox"> SÍ
+								<input type="checkbox"> <t class="right-space">NO</t>
+							</p>
+
+							<% if piece.tare_weight.nil? || piece.tare_weight == "" %>
+								<p>
+									TARE WEIGHT: 
+									<span style="text-decoration: underline; white-space: pre;">                                </span>
+								</p>
+							<% else %>
+								<p>
+									TARE WEIGHT: 
+									<span style="text-decoration: underline; white-space: pre;"><%= piece.tare_weight %></span>
+								</p>
+							<% end %>	
+						</div>
+					</div>
+				</div>
+			<% end %>
+			<br>
+			<div class="row">
+				<div class="column-third">
+					<% if @booking_info.doc_cut_off_date.nil? || @booking_info.doc_cut_off_time.nil? %>
+						<p>
+							DOC CUT OFF: 
+							<span style="text-decoration: underline; white-space: pre;">                                             </span>
+						</p>
+					<% else %>
+						<p>
+							DOC CUT OFF: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.doc_cut_off_date %> <%= @booking_info.time(@booking_info.doc_cut_off_time) %></span>
+						</p>
+					<% end %>
+
+					<% if @booking_info.sailing_date.nil? || @booking_info.sailing_time.nil? %>
+						<p>
+							ETD: 
+							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+						</p>
+					<% else %>
+						<p>
+							ETD: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.sailing_date %> <%= @booking_info.time(@booking_info.sailing_time) %></span>
+						</p>
+					<% end %>
+
+					<p>
+						MODE OF TRANSPORT: 
+						<span style="text-decoration: underline; white-space: pre;">                                 </span>
+					</p>
+
+					<% if @booking_info.vessel.nil? || @booking_info.vessel == "" %>
+						<p>
+							STEAMSHIP/VESSEL: 
+							<span style="text-decoration: underline; white-space: pre;">                                       </span>
+						</p>
+					<% else %>
+						<p>
+							STEAMSHIP/VESSEL: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.vessel %></span>
+						</p>
+					<% end %>
+
+					<% if @cargo_info.pickup_reference.nil? || @cargo_info.pickup_reference == "" %>
+						<p>
+							PICKUP REFERENCE: 
+							<span style="text-decoration: underline; white-space: pre;">                                       </span>
+						</p>
+					<% else %>
+						<p>
+							PICKUP REFERENCE: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @cargo_info.pickup_reference %></span>
+						</p>
+					<% end %>
+				</div>
+
+				<div class="column-third">
+					<% if @booking_info.cargo_cut_off_date.nil? || @booking_info.cargo_cut_off_time.nil? %>
+						<p>
+							CARGO CUT OFF: 
+							<span style="text-decoration: underline; white-space: pre;">                                     </span>
+						</p>
+					<% else %>
+						<p>
+							CARGO CUT OFF: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.cargo_cut_off_date %> <%= @booking_info.time(@booking_info.cargo_cut_off_time) %></span>
+						</p>
+					<% end %>
+
+					<% if @booking_info.arrival_date.nil? %>
+						<p>
+							ETA: 
+							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+						</p>
+					<% else %>
+						<p>
+							ETA: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.arrival_date %> <%= @booking_info.time(@booking_info.arrival_time) %></span>
+						</p>
+					<% end %>
+
+					<% if @booking_info.booking_number.nil? %>
+						<p>
+							BOOKING#: 
+							<span style="text-decoration: underline; white-space: pre;">                                                      </span>
+						</p>
+					<% else %>
+						<p>
+							BOOKING#: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.booking_number %></span>
+						</p>
+					<% end %>
+
+					<% if @booking_info.ramp.nil? %>
+						<p>
+							INLAND MODE: 
+							<span style="text-decoration: underline; white-space: pre;">                                              </span>
+						</p>
+					<% elsif @booking_info.ramp %>
+						<p>
+							INLAND MODE: 
+							<span style="text-decoration: underline; white-space: pre;">RAIL TRUCK</span>
+						</p>
+					<% else %>
+						<p>
+							INLAND MODE: 
+							<span style="text-decoration: underline; white-space: pre;">ALL TRUCK</span>
+						</p>
+					<% end %>
+
+					<% if @cargo_info.schedule_b_number.nil? || @cargo_info.schedule_b_number == "" %>
+						<p>
+							SCHEDULE B: 
+							<span style="text-decoration: underline; white-space: pre;">                                          </span>
+						</p>
+					<% else %>
+						<p>
+							SCHEDULE B: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @cargo_info.schedule_b_number %></span>
+						</p>
+					<% end %>
+				</div>
+
+				<div class="column-third">
+					<p>
+						VGM CUT OFF: 
+						<span style="text-decoration: underline; white-space: pre;">                                                </span>
+					</p>
+
+					<% if @booking_info.voyage.nil? %>
+						<p>
+							VOYAGE: 
+							<span style="text-decoration: underline; white-space: pre;">                                                    </span>
+						</p>
+					<% else %>
+						<p>
+							VOYAGE: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.voyage %></span>
+						</p>
+					<% end %>
+
+					<% if @cargo_info.loading_date.nil? || @cargo_info.loading_time.nil?  %>
+						<p>
+							SPOTTING DATE: 
+							<span style="text-decoration: underline; white-space: pre;">                                          </span>
+						</p>
+					<% else %>
+						<p>
+							SPOTTING DATE: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @cargo_info.loading_date %> <%= @cargo_info.time(@cargo_info.loading_time) %></span>
+						</p>
+					<% end %>
+
+					<% if @booking_info.ramp_cut_off_date.nil? || @booking_info.ramp_cut_off_date == "" %>
+						<% if @booking_info.ramp %>
+							<p>
+								RAMP CUT OFF DATE: 
+								<span style="text-decoration: underline; white-space: pre;">                                          </span>
+							</p>
+						<% else %>
+							<p>
+								RAMP CUT OFF DATE: 
+								<span style="text-decoration: underline; white-space: pre;">NO APLICA</span>
+							</p>
+						<% end %>
+					<% else %>
+						<% if @booking_info.ramp %>
+							<p>
+								RAMP CUT OFF DATE: 
+								<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.ramp_cut_off_date %></span>
+							</p>
+						<% else %>
+							<p>
+								RAMP CUT OFF DATE: 
+								<span style="text-decoration: underline; white-space: pre;">NO APLICA</span>
+							</p>
+						<% end %>
+					<% end %>
+
+				</div>
+			</div>
+			<div class="row">
+				<p>
+					WAREHOUSE #'S: 
+					<span style="text-decoration: underline; white-space: pre;">                                                                                                                                                                                                                             </span>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

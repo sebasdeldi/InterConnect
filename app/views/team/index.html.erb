@@ -80,7 +80,9 @@
 	  	  		<%= Operation.find(operation.operation_id).reference %>
 	  	  		<span class="button-icon">Representative:</span> 
 	  	  		<%= form_tag change_representative_path, class: 'button-icon representative_select' do %>
-	  	  			<%= select_tag "representative", options_from_collection_for_select(@team_members, :id, :name_with_last_name, operation.representative_id), { onchange: 'this.form.submit();', disabled: true } %>
+		  	  		<div class="select">
+		  	  			<%= select_tag "representative", options_from_collection_for_select(@team_members, :id, :name_with_last_name, operation.representative_id), { onchange: 'this.form.submit();', disabled: true } %>
+		  	  		</div>
 	  	  			<%= hidden_field_tag 'operation_id', operation.id %>
 	  	  		<% end %>
 	  	  	<% end %>
@@ -102,7 +104,9 @@
     	  		<%= Operation.find(operation.operation_id).reference %>
     	  		<span class="button-icon">Representative:</span> 
     	  		<%= form_tag change_representative_path, class: 'button-icon representative_select' do %>
-    	  			<%= select_tag "representative", options_from_collection_for_select(@team_members, :id, :name_with_last_name, operation.representative_id), { onchange: 'this.form.submit();' } %>
+	    	  		<div class="select">
+	    	  			<%= select_tag "representative", options_from_collection_for_select(@team_members, :id, :name_with_last_name, operation.representative_id), { onchange: 'this.form.submit();' } %>
+	    	  		</div>
     	  			<%= hidden_field_tag 'operation_id', operation.id %>
     	  		<% end %>
     	  	</a>

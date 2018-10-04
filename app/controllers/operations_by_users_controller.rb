@@ -40,7 +40,8 @@ class OperationsByUsersController < ApplicationController
 			if params[:operations_by_user][:agent_id].present? && params[:operations_by_user][:shipper_id].present?
 				date_arr = Date.today.to_s.split('-') 
 				reference = (current_user.contact_first_name[0..0] + current_user.contact_last_name[0..0] + date_arr[2] + date_arr[1] + date_arr[0][2..4] + last_digits).upcase
-				fields = [ reference, params[:modality], strong_params_for_representatives, current_user, params[:pieces_number], params[:po_number], params[:reference_number] ]
+				fields = [ reference, params[:modality], strong_params_for_representatives, current_user, params[:pieces_number], params[:po_number], params[:reference_number],
+					params[:pol], params[:pod], params[:origin], params[:destination] ]
 				new_operation = @operations_by_user.create_for_representatives(fields)
 				set_notice
 				redirect_to operation_path(new_operation)

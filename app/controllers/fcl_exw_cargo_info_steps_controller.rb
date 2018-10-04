@@ -1,7 +1,9 @@
 class FclExwCargoInfoStepsController < ApplicationController
 	def new
 		@fcl_cargo_info = FclExwCargoInfoStep.new
-		@existing_fcl_cargo_info = existing_fcl_cargo_info(Operation.find_by(secure_id: params[:operation_secure_id]).id)
+		@operation = Operation.find_by(secure_id: params[:operation_secure_id])
+		@existing_fcl_cargo_info = existing_fcl_cargo_info(@operation.id)
+		@ein = OperationsByUser.find_by(operation_id: @operation.id).shipper.ein
 	end
 
 	def create
@@ -10,6 +12,10 @@ class FclExwCargoInfoStepsController < ApplicationController
 	  if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id))
 	  	op = Operation.find_by(secure_id: params[:operation_secure_id])
 			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request Booking Order')
+			shipper = OperationsByUser.find_by(operation_id: op.id).shipper
+			if shipper.ein != params[:fcl_exw_cargo_info_step][:ein]
+				shipper.update!(ein: params[:fcl_exw_cargo_info_step][:ein])
+			end
 			#Creating easy to loop params array
 
 			params_array = params.to_unsafe_h.to_a

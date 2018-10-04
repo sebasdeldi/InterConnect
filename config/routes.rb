@@ -49,6 +49,8 @@ Rails.application.routes.draw do
 	post "/update_tasks", to: "tasks#update", as: "update_tasks"
 	post "/carrier_info", to: "operations#carrier_info"
 
+	get "/booking_sheet/:operation_id", to: "booking_sheet#show", as: "booking_sheet"
+
 	post "/change_difficulty", to: "operations#change_difficulty", as: "change_difficulty"
  	devise_for :users, controllers: {
     sessions: 'users/sessions',

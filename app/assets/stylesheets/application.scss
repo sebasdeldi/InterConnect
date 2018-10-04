@@ -205,9 +205,17 @@ $major-blue: #3273dc;
 .inline-tag { margin-right: 10px; }
 
 .link-button { 
-     background: none;
-     border: none;
-     color: #0066ff;
-     text-decoration: underline;
-     cursor: pointer; 
+   background: none;
+   border: none;
+   color: #0066ff;
+   text-decoration: underline;
+   cursor: pointer; 
+}
+
+.booking-sheet-btn {
+  margin-right: 40px;
+}
+
+.diff-label{
+  line-height: 2;
 }

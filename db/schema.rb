@@ -156,6 +156,10 @@ ActiveRecord::Schema.define(version: 20210927200619) do
     t.string "reference_number"
     t.integer "secure_id"
     t.string "difficulty"
+    t.string "pol"
+    t.string "pod"
+    t.string "origin"
+    t.string "destination"
   end
 
   create_table "operations_by_users", force: :cascade do |t|
@@ -245,6 +249,7 @@ ActiveRecord::Schema.define(version: 20210927200619) do
     t.string "outlook_password"
     t.string "vendor_operation_mode"
     t.string "website"
+    t.string "ein"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
