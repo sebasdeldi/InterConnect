@@ -628,4 +628,93 @@
 			</div>
 		</div>
 	</body>
+	<style type="text/css">
+		body{
+			font-size: 12px;
+		}
+
+		/* Create two equal columns that floats next to each other */
+		.column {
+		  float: left;
+		  width: 50%;
+		}
+
+		.column-third{
+			float: left;
+			width: 33.33333%;
+		}
+
+		/* Clear floats after the columns */
+		.row:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+
+		span{
+			margin-left: 10px;
+			margin-right: 25px;
+			text-transform: uppercase;
+		}
+
+		.right-space{
+			margin-right: 30px;
+		}
+
+		.top{
+			border: 2px solid black;
+
+			margin-top: 25px;
+
+			padding-left: 10px;
+		}
+
+		.bottom{
+			border-right: 2px solid black;
+			border-bottom: 2px solid black;
+			border-left: 2px solid black;
+			padding: 10px;
+		}
+
+		.with-border{
+			border: 2px solid black;
+			margin-left: 5px;
+		}
+
+		.with-border-right{
+			border-top: 2px solid black; 
+			border-right: 2px solid black;
+			border-bottom: 2px solid black;
+		}
+
+		.with-top-border{
+			border-top: 2px solid black;
+		}
+
+		.with-left-border{
+			border-left: 2px solid black;
+		}
+
+		.column.with-border, .column.with-border-right, .column.small{
+			width: 49% !important;
+		}
+
+		.padded{
+			padding: 10px;
+		}
+
+		.full{
+			width: 100% !important; 
+		}
+
+		table, th, td {
+		  border: 2px solid black;
+		  text-align: center;
+		}
+
+		table{
+			width: 100%;
+			border-collapse: collapse;
+		}
+	</style>
 </html>
