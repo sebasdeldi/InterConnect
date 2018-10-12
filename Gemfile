@@ -87,3 +87,4 @@ gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 gem "strip_attributes"
 gem 'carrierwave', '~> 1.0'
+gem 'wkhtmltopdf-heroku'
