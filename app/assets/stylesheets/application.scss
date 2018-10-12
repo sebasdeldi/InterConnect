@@ -8,6 +8,7 @@
 @import 'bulma_mods.scss';
 @import 'jquery.ui.all';
 @import 'tasks.scss';
+@import 'sli.scss';
 
 .button-icon{
   margin-left: 30px;
@@ -218,4 +219,21 @@ $major-blue: #3273dc;
 
 .diff-label{
   line-height: 2;
+}
+
+.margin-left{
+  margin-left: 5px;
+}
+
+.difficulty, .fa-file-pdf{
+  color: #3273dc !important;
+}
+
+
+.difficulty:hover, .fa-file-pdf:hover{
+  color: black !important;
+}
+
+.booking-sheet-btn{
+  margin-left: 40px;
 }

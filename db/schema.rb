@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210927200619) do
+ActiveRecord::Schema.define(version: 20210927200620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20210927200619) do
     t.time "sailing_time"
     t.date "arrival_date"
     t.time "arrival_time"
-    t.boolean "ramp"
+    t.string "ramp"
     t.date "ramp_cut_off_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20210927200619) do
     t.string "schedule_b_number"
     t.string "pickup_reference"
     t.integer "pieces_number"
+    t.json "files"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_fcl_exw_cargo_info_steps_on_operation_id"
@@ -200,6 +201,27 @@ ActiveRecord::Schema.define(version: 20210927200619) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "slis", force: :cascade do |t|
+    t.bigint "operation_id"
+    t.json "files"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["operation_id"], name: "index_slis_on_operation_id"
+  end
+
+  create_table "tariff_groups", force: :cascade do |t|
+    t.bigint "sli_id"
+    t.string "schedule_b"
+    t.string "code"
+    t.integer "units"
+    t.float "value"
+    t.float "weight"
+    t.string "eccn"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sli_id"], name: "index_tariff_groups_on_sli_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "note"
     t.string "status", default: "0"
@@ -287,6 +309,8 @@ ActiveRecord::Schema.define(version: 20210927200619) do
   add_foreign_key "general_cargo_infos", "operations"
   add_foreign_key "operations_by_users", "operations"
   add_foreign_key "pieces", "fcl_exw_cargo_info_steps"
+  add_foreign_key "slis", "operations"
+  add_foreign_key "tariff_groups", "slis"
   add_foreign_key "tasks", "fcl_exw_booking_info_steps", column: "fcl_exw_booking_info_steps_id"
   add_foreign_key "tasks", "fcl_exw_cargo_info_steps", column: "fcl_exw_cargo_info_steps_id"
   add_foreign_key "tasks", "fcl_exw_container_deliveries"

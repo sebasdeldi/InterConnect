@@ -13,7 +13,7 @@
           FCL - EXW Cargo information for operation: <%= Operation.find_by(secure_id: params[:operation_secure_id]).reference %>
         </p>
         <div class='panel-block'>
-          <%= form_with model: @fcl_cargo_info, id: '', html: {class: "control"} do |f| %>
+          <%= form_with model: @fcl_cargo_info, id: '', html: {class: "control"}, multipart: true do |f| %>
 
             <%= hidden_field_tag :operation_secure_id, params[:operation_secure_id] %>
 
@@ -118,6 +118,17 @@
             <%= f.hidden_field :fcl_exw_cargo_info_step_id, class: "fcl_exw_cargo_info_step_id", value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.id : '' %>
             <br>
             <div id="container"></div>
+
+            <%= f.label 'Upload all the HAZMAT related documents', class: 'label' %>
+            <%= f.file_field :files, multiple: true %>
+            <ul>
+              <% @existing_fcl_cargo_info.files.each do |file| %>
+                <li> <%= link_to file.path.split("/").last, file.url, target: 'blank' %>  </li>
+              <% end %>
+            </ul>
+
+
+            <br>
             <div class="control">
               <br>
               <%= f.submit is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? "UPDATE CARGO INFO" : "REGISTER CARGO INFO" , class: 'button is-link' %>

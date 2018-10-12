@@ -46,5 +46,14 @@ document.addEventListener("turbolinks:load", function() {
     function(){ $(this).addClass('is-active') },
     function(){ $(this).removeClass('is-active') }
   )
+
+  $('select.sli').val("SLI");
+
+  $('select.sli').on('change', function() {
+    window.open("http://" + window.location.host + "/" + this.value, '_blank');
+    $('select.sli').val("SLI");
+  });  
+
+  
 });
 

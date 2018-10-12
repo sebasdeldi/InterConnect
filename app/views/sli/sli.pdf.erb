@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<%= wicked_pdf_stylesheet_link_tag "pdfs" %>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	</head>
+	<body>
+		<center>
+			<h2 class="title is-4">SHIPPER'S LETTER OF INSTRUCTION</h2>
+		</center>
+		<br>
+
+		<div class="container">
+			<div class="row">
+				<div class="column with-border">
+					<p class="padded">
+						<b>EXPORTER/SHIPPER (Name and address including ZIP code)</b>
+						<br>
+						<%= @shipper.company_name %> 
+						<br>
+						Phone: <%= @shipper.phone_number %>
+						<br>
+						Address: <%= @shipper.address %>
+					</p>
+					<div class="with-top-border">
+						<div class="column small">
+							<p class="padded">
+								<b>EXPORTER'S EIN (IRS) NO </b>
+								<br>
+								<%= @shipper.ein %>
+							</p>	
+						</div>
+
+						<div class="column small with-left-border">
+							<p class="padded">
+								<b>PARTIES TO TRANSACTION </b>
+								<br>	
+								RELATED <input type="checkbox">
+								NON RELATED <input type="checkbox" checked> 
+							</p>
+						</div>
+					</div>
+
+					<div class="column with-top-border full">
+						<p class="padded">
+							<b>CONSIGNEE</b>
+							<br>
+							<%= @consignee.company_name %> 
+							<% if !@consignee.address.nil? %>
+								<br>
+								<%= @consignee.address %>
+							<% end %>
+						</p>
+					</div>
+
+					<div class="column with-top-border full">
+						<p class="padded">
+							<b>FORWARDING AGENT</b>
+							<br>
+							<%= @agent.company_name %> 
+						</p>
+					</div>
+
+					<div class="column small with-top-border">
+						<p class="padded">
+							<b>LOADING PIER </b>
+							<br>
+							<%= @operation.pol %>
+						</p>	
+					</div>
+
+					<div class="column small with-left-border with-top-border">
+						<p class="padded">
+							<b>MODE OF TRANSPORT </b>
+							<br>	
+							<% if @booking_info.ramp == "YES" %>
+								FCL-EXW RAMP NEEDED
+							<% else %>
+								FCL-WXW NO RAMP NEEDED
+							<% end %>
+						</p>
+					</div>
+
+					<div class="column small with-top-border">
+						<p class="padded">
+							<b>EXPORTING CARRIER </b>
+							<br>
+							<%= @steamship %>
+						</p>	
+					</div>
+
+					<div class="column small with-left-border with-top-border">
+						<p class="padded">
+							<b>PORT OF EXPORT </b>
+							<br>	
+							<%= @operation.pol %>
+						</p>
+					</div>
+
+					<div class="column small with-top-border">
+						<p class="padded">
+							<b>PORT OF UNLOADING </b>
+							<br>
+							<%= @operation.pod %>
+						</p>	
+					</div>
+
+					<div class="column small with-left-border with-top-border">
+						<p class="padded">
+							<b>CONTAINERIZED </b>
+							<br>	
+							YES <input type="checkbox" checked> 
+							NO <input type="checkbox"> 
+						</p>
+					</div>
+				</div>
+
+
+
+				<div class="column with-border-right">
+					<div class="column small">
+						<p class="padded">
+							<b>POINT (STATE) OF ORIGIN OR FTZ NO </b>
+							<br>
+							<%= @operation.origin %>
+						</p>	
+					</div>
+
+					<div class="column small with-left-border">
+						<p class="padded">
+							<b>COUNTRY OF ULTIMATE DESTINATION </b>
+							<br>
+							<%= @operation.destination %>
+						</p>
+					</div>
+
+					<div class="column with-top-border full">
+						<p class="padded">
+							<b>OPERATION PAYMENT </b>
+							<br>	
+							PREPAID <input type="checkbox" checked> 
+							COLLECT <input type="checkbox"> 
+							C.O.D <input type="checkbox"> 
+							<span>$3242532</span>
+						</p>
+
+						<p class="padded">
+							<b>SHIP VIA </b>
+							<br>	
+							AIR <input type="checkbox"> 
+							OCEAN <input type="checkbox" checked> 
+							CONSOLIDATE <input type="checkbox"> 
+							DIRECT <input type="checkbox"> 
+						</p>
+
+						<p class="padded">
+							<b>SHIPPER'S INSTRUCTIONS IN CASE OF INABILITY TO DELIVER CONSIGNMENT AS ASSIGNET </b>
+							<br>	
+							ABANDON <input type="checkbox"> 
+							RETURN TO SHIPPER <input type="checkbox" checked> 
+							DELIVER TO <input type="checkbox"> 
+						</p>
+
+						<div class="column with-top-border full">
+							<p class="padded">
+								<b>SHIPPER REQUESTS INSURANCE</b>
+								<br>
+								YES <input type="checkbox"> 
+								NO <input type="checkbox" checked> 
+								<span>$0</span>						
+							</p>
+						</div>
+
+						<div class="column with-top-border full">
+							<p class="padded">
+								<b>SHIPPER'S REFERENCE NUMBER</b>
+								<br>
+								<%= @operation.reference_number %>				
+							</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<br>
+			<br>
+			<table>
+				<tr>
+					<th>D/F</th>
+					<th>SCHEDULE-B</th>
+					<th>QUANTITY</th>
+					<th>SHIPPING WEIGHT (LBS)</th>
+					<th>VALUE (USD)</th>
+					<th>ECCN</th>
+				</tr>
+
+				<% unless @tariff_groups.nil? %>
+					<% @tariff_groups.each do |tariff| %>
+						<tr>
+							<td><%= tariff.code %></td>
+							<td><%= tariff.schedule_b %></td>
+							<td><%= tariff.weight %></td>
+							<td><%= tariff.units %></td>
+							<td><%= tariff.value %></td>
+							<td><%= tariff.eccn %></td>
+						</tr>
+					<% end %>
+				<% end %>
+			</table>
+		</div>
+	</body>
+</html>

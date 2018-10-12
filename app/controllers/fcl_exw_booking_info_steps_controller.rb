@@ -51,18 +51,20 @@ class FclExwBookingInfoStepsController < ApplicationController
 			end
 		end
 	
-		if (params[:fcl_exw_booking_info_step][:ramp].present?)
-			existing_task = Task.where(subject: 'ramp_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first
-			if existing_booking_info.ramp.nil? 
+		existing_task = Task.where(subject: 'ramp_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first
+		if (params[:fcl_exw_booking_info_step][:ramp] == "YES")
+			if existing_task.nil? && !(params[:fcl_exw_booking_info_step][:ramp_cut_off_date]).nil?
 				Task.create(note: 'Verify that container was included in ramp transportation.', due_date: (params[:fcl_exw_booking_info_step][:ramp_cut_off_date]).to_date + 1.day , fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'ramp_cut_off' )
-			else
+			elsif !(params[:fcl_exw_booking_info_step][:ramp_cut_off_date]).nil?
 				existing_task.update(due_date: params[:fcl_exw_booking_info_step][:ramp_cut_off_date], status: '0')
 			end
-		else
+		elsif (params[:fcl_exw_booking_info_step][:ramp] == "NO")
 			unless existing_task.nil?
 				existing_task.delete
 			end
 		end
+
+
 
 	  if existing_booking_info.update(fcl_booking_info_params.merge(operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id))
 	  	op = Operation.find_by(secure_id: params[:operation_secure_id])

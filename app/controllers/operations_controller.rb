@@ -22,6 +22,8 @@ class OperationsController < ApplicationController
 
 		@carriers = User.carriers.all
 		@operation_secure_id = @operation.secure_id
+
+		@sli = Sli.find_by(operation_id: @operation.id)
 	end
 
 	def carrier_info

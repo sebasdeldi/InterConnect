@@ -8,7 +8,12 @@ class BookingSheetController < ApplicationController
 		@cargo_info = FclExwCargoInfoStep.find_by(operation_id: @operation.id)
 		@pieces = @cargo_info.pieces
 		@booking_info = FclExwBookingInfoStep.find_by(operation_id: @operation.id)
-
+		request_id = FclExwRequestBookingStep.find_by(operation_id: @operation.id).carrier_id
+		unless request_id.nil?
+			@steamship = User.find(request_id).company_name
+		else
+			@steamship = nil
+		end
 		@contacted_customer = FclExwInfoRequestedStep.find_by(operation_id: @operation.id).completed
 	    respond_to do |format|
 	      format.html

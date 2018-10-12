@@ -11,6 +11,7 @@ class CreateFclExwCargoInfoSteps < ActiveRecord::Migration[5.1]
       t.string :schedule_b_number
       t.string :pickup_reference
       t.integer :pieces_number
+      t.json :files
       t.timestamps
     end
   end

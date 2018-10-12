@@ -2,12 +2,12 @@
 <html>
 	<head>
 		<title></title>
-		<%= wicked_pdf_stylesheet_link_tag "booking_sheet" %>
+		<%= wicked_pdf_stylesheet_link_tag "pdfs" %>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	</head>
 	<body>
 		<center>
-			<h3 class="title is-4">BOOKING SHEET PARA SEGUIMIENTO</h3>
+			<h2 class="title is-4">BOOKING SHEET PARA SEGUIMIENTO</h2>
 		</center>
 		<br>
 
@@ -61,10 +61,6 @@
 			    		<span style="text-decoration: underline; white-space: pre;"><%= @shipper.phone_number %></span>
 			    	</p>
 			    <% end %>
-			    <p>
-			    	REF: 
-			    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
-			    </p>
 
 			    <% if @consignee.company_name.nil? %>
 				    <p>
@@ -77,11 +73,6 @@
 					  	<span style="text-decoration: underline; white-space: pre;"><%= @consignee.company_name %></span>
 					  </p>
 				  <% end %>
-
-			    <p>
-			    	REF#: 
-			    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
-			    </p>
 
 			    <% if @operation.modality.nil? %>
 				    <p>
@@ -97,10 +88,6 @@
 				</div>
 
 				<div class="column">
-				  <p>
-				  	REF#: 
-				  	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
-				  </p>
 				  <p>El contacto con el proveedor debe ser telefónico y vía e-mail para asegurarnos que sí reciba nuestra información. Así mismo, se deben usar las firmas predeterminadas para que nos suministren la información necesaria para realizar debidamente las coordinaciones.</p>
 				  <p>CONSOL#: 
 				  	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -120,41 +107,41 @@
 					<p>
 						<% if @contacted_customer %>
 							¿CONTACTÓ PROVEEDOR?
-							<input type="checkbox" checked> SÍ
-		  				<input type="checkbox"> <t class="right-space">NO</t>
+							SÍ <input type="checkbox" checked> 
+		  				NO<input type="checkbox"> 
 		  			<% else %>
 							¿CONTACTÓ PROVEEDOR?
-							<input type="checkbox"> SÍ
-		  				<input type="checkbox"> <t class="right-space">NO</t>
+							SÍ<input type="checkbox"> 
+		  				NO <input type="checkbox"> 
 		  			<% end %>
 					</p>
 
 					<p>
 						¿DEBEMOS TRANSMITIR?
-						<input type="checkbox"> SÍ
-						<input type="checkbox"> <t class="right-space">NO</t>
+						SÍ <input type="checkbox"> 
+						NO <input type="checkbox">
 					</p>
 				</div>
 
 				<div class="column-third">
 					<p>
 						¿SOLICITÓ INVOICE?
-						<input type="checkbox"> SÍ
-	  				<input type="checkbox"> <t class="right-space">NO</t>
+						SÍ <input type="checkbox">
+	  				NO <input type="checkbox">
 					</p>
 
 					<p>
 						¿SOLICITÓ SLI?
-						<input type="checkbox"> SÍ
-						<input type="checkbox"> <t class="right-space">NO</t>
+						SÍ <input type="checkbox">
+	  				NO <input type="checkbox">
 					</p>
 				</div>
 
 				<div class="column-third">
 					<p>
 						¿NECESITA SED?
-						<input type="checkbox"> SÍ
-						<input type="checkbox"> <t class="right-space">NO</t>
+						SÍ <input type="checkbox">
+	  				NO <input type="checkbox">
 					</p>
 				</div>
 			</div>
@@ -242,8 +229,8 @@
 					<div class="column">
 						<p>
 							<b>COTIZADO & APROBADO</b>
-								<input type="checkbox"> SÍ
-			  				<input type="checkbox"> <t class="right-space">NO</t>
+								SÍ <input type="checkbox">
+			  				NO <input type="checkbox">
 							</div>
 						</p>
 				</div>
@@ -305,14 +292,14 @@
 
 							<p>
 								¿ES BONDED?
-								<input type="checkbox"> SÍ
-								<input type="checkbox"> <t class="right-space">NO</t>
+								SÍ <input type="checkbox">
+								NO <input type="checkbox">
 							</p>
 
 							<p>
 								¿VALIDÓ CON BROKER?
-								<input type="checkbox"> SÍ
-								<input type="checkbox"> <t class="right-space">NO</t>
+								SÍ <input type="checkbox">
+								NO <input type="checkbox">
 							</p>
 
 							<% if piece.gross_weight.nil? || piece.gross_weight == "" %>
@@ -323,7 +310,7 @@
 							<% else %>
 								<p>
 									GROSS WEIGHT: 
-									<span style="text-decoration: underline; white-space: pre;"><%= piece.gross_weight %></span>
+									<span style="text-decoration: underline; white-space: pre;"><%= piece.gross_weight.to_s + " lbs" %></span>
 								</p>
 							<% end %>
 						</div>
@@ -344,16 +331,16 @@
 							<p>
 								<% if piece.cargo_hazardous.nil? %>
 									¿HAZMAT?
-									<input type="checkbox"> SÍ
-				  				<input type="checkbox"> <t class="right-space">NO</t>
+									SÍ <input type="checkbox"> 
+				  				NO <input type="checkbox">
 				  			<% elsif piece.cargo_hazardous == 'YES' %>
 									¿HAZMAT?
-									<input type="checkbox" checked> SÍ
-				  				<input type="checkbox"> <t class="right-space">NO</t>
+									SÍ <input type="checkbox" checked> SÍ
+				  				NO <input type="checkbox">
 				  			<% else %>
 									¿HAZMAT?
-									<input type="checkbox"> SÍ
-				  				<input type="checkbox" checked> <t class="right-space">NO</t>
+									SÍ <input type="checkbox">
+				  				NO <input type="checkbox" checked>
 				  			<% end %>
 							</p>
 
@@ -379,14 +366,14 @@
 						
 							<p>
 								¿VALIDÓ CON IMPORTS?
-								<input type="checkbox"> SÍ
-								<input type="checkbox"> <t class="right-space">NO</t>
+								SÍ <input type="checkbox">
+								NO <input type="checkbox">
 							</p>
 
 							<p>
 								¿SOLICITARON SEGURO?
-								<input type="checkbox"> SÍ
-								<input type="checkbox"> <t class="right-space">NO</t>
+								SÍ <input type="checkbox">
+								NO <input type="checkbox">
 							</p>
 
 							<% if piece.seal_number.nil? || piece.seal_number == "" %>
@@ -409,22 +396,30 @@
 								<span style="text-decoration: underline; white-space: pre;">                                                               </span>
 							</p>
 
-							<p>
-								¿TIENE DOC HAZ?
-								<input type="checkbox"> SÍ
-			  				<input type="checkbox"> <t class="right-space">NO</t>		
-							</p>
+							<% if @cargo_info.files.empty? %>
+								<p>
+									¿TIENE DOC HAZ?
+									SÍ <input type="checkbox"> 
+				  				NO <input type="checkbox">		
+								</p>
+							<% else %>
+								<p>
+									¿TIENE DOC HAZ?
+									SÍ <input type="checkbox" checked> 
+				  				NO <input type="checkbox">		
+								</p>
+							<% end %>
 
 							<p>
 								¿ES SELF PROPELLED?
-								<input type="checkbox"> SÍ
-								<input type="checkbox"> <t class="right-space">NO</t>
+								SÍ <input type="checkbox"> 
+								NO <input type="checkbox">
 							</p>	
 
 							<p>
 								¿SE EMITIÓ PÓLIZA?
-								<input type="checkbox"> SÍ
-								<input type="checkbox"> <t class="right-space">NO</t>
+								SÍ <input type="checkbox">
+								NO <input type="checkbox">
 							</p>
 
 							<% if piece.tare_weight.nil? || piece.tare_weight == "" %>
@@ -435,7 +430,7 @@
 							<% else %>
 								<p>
 									TARE WEIGHT: 
-									<span style="text-decoration: underline; white-space: pre;"><%= piece.tare_weight %></span>
+									<span style="text-decoration: underline; white-space: pre;"><%= piece.tare_weight.to_s + " lbs" %></span>
 								</p>
 							<% end %>	
 						</div>
@@ -474,22 +469,22 @@
 						<span style="text-decoration: underline; white-space: pre;">                                 </span>
 					</p>
 
-					<% if @booking_info.vessel.nil? || @booking_info.vessel == "" %>
+					<% if @steamship.nil? || @steamship == "" %>
 						<p>
-							STEAMSHIP/VESSEL: 
+							STEAMSHIP: 
 							<span style="text-decoration: underline; white-space: pre;">                                       </span>
 						</p>
 					<% else %>
 						<p>
-							STEAMSHIP/VESSEL: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.vessel %></span>
+							STEAMSHIP: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @steamship %></span>
 						</p>
 					<% end %>
 
 					<% if @cargo_info.pickup_reference.nil? || @cargo_info.pickup_reference == "" %>
 						<p>
 							PICKUP REFERENCE: 
-							<span style="text-decoration: underline; white-space: pre;">                                       </span>
+							<span style="text-decoration: underline; white-space: pre;">                             </span>
 						</p>
 					<% else %>
 						<p>
@@ -536,34 +531,44 @@
 						</p>
 					<% end %>
 
-					<% if @booking_info.ramp.nil? %>
+					<% if @booking_info.vessel.nil? || @booking_info.vessel == "" %>
 						<p>
-							INLAND MODE: 
-							<span style="text-decoration: underline; white-space: pre;">                                              </span>
-						</p>
-					<% elsif @booking_info.ramp %>
-						<p>
-							INLAND MODE: 
-							<span style="text-decoration: underline; white-space: pre;">RAIL TRUCK</span>
+							VESSEL/VOYAGE: 
+							<span style="text-decoration: underline; white-space: pre;">                                       </span>
 						</p>
 					<% else %>
 						<p>
-							INLAND MODE: 
-							<span style="text-decoration: underline; white-space: pre;">ALL TRUCK</span>
+							VESSEL/VOYAGE: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.vessel %></span>
 						</p>
 					<% end %>
 
-					<% if @cargo_info.schedule_b_number.nil? || @cargo_info.schedule_b_number == "" %>
-						<p>
-							SCHEDULE B: 
-							<span style="text-decoration: underline; white-space: pre;">                                          </span>
-						</p>
+					<% if @booking_info.ramp_cut_off_date.nil? || @booking_info.ramp_cut_off_date == "" %>
+						<% if @booking_info.ramp == "YES" %>
+							<p>
+								RAMP CUT OFF DATE: 
+								<span style="text-decoration: underline; white-space: pre;">                                  </span>
+							</p>
+						<% else %>
+							<p>
+								RAMP CUT OFF DATE: 
+								<span style="text-decoration: underline; white-space: pre;">NO APLICA</span>
+							</p>
+						<% end %>
 					<% else %>
-						<p>
-							SCHEDULE B: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @cargo_info.schedule_b_number %></span>
-						</p>
+						<% if @booking_info.ramp %>
+							<p>
+								RAMP CUT OFF DATE: 
+								<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.ramp_cut_off_date %></span>
+							</p>
+						<% else %>
+							<p>
+								RAMP CUT OFF DATE: 
+								<span style="text-decoration: underline; white-space: pre;">NO APLICA</span>
+							</p>
+						<% end %>
 					<% end %>
+
 				</div>
 
 				<div class="column-third">
@@ -596,30 +601,21 @@
 						</p>
 					<% end %>
 
-					<% if @booking_info.ramp_cut_off_date.nil? || @booking_info.ramp_cut_off_date == "" %>
-						<% if @booking_info.ramp %>
-							<p>
-								RAMP CUT OFF DATE: 
-								<span style="text-decoration: underline; white-space: pre;">                                          </span>
-							</p>
-						<% else %>
-							<p>
-								RAMP CUT OFF DATE: 
-								<span style="text-decoration: underline; white-space: pre;">NO APLICA</span>
-							</p>
-						<% end %>
+					<% if @booking_info.ramp.nil? %>
+						<p>
+							INLAND MODE: 
+							<span style="text-decoration: underline; white-space: pre;">                                              </span>
+						</p>
+					<% elsif @booking_info.ramp == "YES" %>
+						<p>
+							INLAND MODE: 
+							<span style="text-decoration: underline; white-space: pre;">RAIL TRUCK</span>
+						</p>
 					<% else %>
-						<% if @booking_info.ramp %>
-							<p>
-								RAMP CUT OFF DATE: 
-								<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.ramp_cut_off_date %></span>
-							</p>
-						<% else %>
-							<p>
-								RAMP CUT OFF DATE: 
-								<span style="text-decoration: underline; white-space: pre;">NO APLICA</span>
-							</p>
-						<% end %>
+						<p>
+							INLAND MODE: 
+							<span style="text-decoration: underline; white-space: pre;">ALL TRUCK</span>
+						</p>
 					<% end %>
 
 				</div>

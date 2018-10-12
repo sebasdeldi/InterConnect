@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  schedule_b: MyString
+  code: MyString
+  units: 1
+  value: 1.5
+  comment: MyString
+
+two:
+  schedule_b: MyString
+  code: MyString
+  units: 1
+  value: 1.5
+  comment: MyString

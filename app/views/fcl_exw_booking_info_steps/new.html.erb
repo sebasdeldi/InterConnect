@@ -140,7 +140,7 @@
               <%= f.label 'Ramp needed ?:', class: 'label' %>
               <div class="control has-icons-left">
                 <div class="select">
-                  <%= f.select :ramp, options_for_select([['NO', nil], ['YES', true]], is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? @existing_fcl_booking_info.ramp : '' ), {}, class: 'input loading_datetime ramp'  %>
+                  <%= f.select :ramp, options_for_select([['NO', 'NO'], ['YES', 'YES']], is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? @existing_fcl_booking_info.ramp : '' ), {}, class: 'input loading_datetime ramp'  %>
                 </div>
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
@@ -218,7 +218,7 @@
 <script type="text/javascript">
 
   function showRamp(){
-    if ($(".ramp").val() == 'true'){
+    if ($(".ramp").val() == 'YES'){
       $(".ramp-cut-off-container").removeClass('hidden');
     } else {
       $(".ramp-cut-off").val('');
