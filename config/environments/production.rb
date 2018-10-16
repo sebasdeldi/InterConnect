@@ -92,10 +92,12 @@ Rails.application.configure do
     :address        => 'smtp.office365.com',
     :port           => '587',
     :authentication => :login,
-    :domain         => 'interwf.com',
+    :domain => 'http://interworldfreight.herokuapp.com/',
     :user_name      => 'sdelgado@interwf.com',
     :password       => 'Sdiwf**321',
-    :enable_starttls_auto => true
+    :authentication => :plain,
+    :enable_starttls_auto => true,
+    :openssl_verify_mode => 'none'
   }
   config.action_mailer.perform_deliveries = true
   
