@@ -95,7 +95,6 @@ Rails.application.configure do
     :domain => 'interwf.com',
     :user_name      => 'sdelgado@interwf.com',
     :password       => 'Sdiwf**321',
-    :authentication => :plain,
     :enable_starttls_auto => true,
     :openssl_verify_mode => 'none'
   }
