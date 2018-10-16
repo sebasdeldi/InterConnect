@@ -93,10 +93,7 @@ Rails.application.configure do
     :port           => '587',
     :authentication => :login,
     :domain => 'interwf.com',
-    :user_name      => 'sdelgado@interwf.com',
-    :password       => 'Ron10373',
-    :enable_starttls_auto => true,
-    :openssl_verify_mode => 'none'
+    :enable_starttls_auto => true
   }
   config.action_mailer.perform_deliveries = true
   
