@@ -86,6 +86,19 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # Mailer settings
+  #config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address        => 'smtp.office365.com',
+    :port           => '587',
+    :authentication => :login,
+    :domain         => 'interwf.com',
+    :enable_starttls_auto => true
+  }
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
+  
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end

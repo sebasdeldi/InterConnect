@@ -12,22 +12,31 @@ class FclExwCargoInfoStepsController < ApplicationController
 	  if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id))
 	  	op = Operation.find_by(secure_id: params[:operation_secure_id])
 			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request Booking Order')
+=begin
+			if params[:fcl_exw_cargo_info_step][:bonded] == true
+				Task.create(note: 'Verify Bonded Docummentation', due_date:, subject:'bonded_doc')
+			elsif params[:fcl_exw_cargo_info_step][:bonded] == false
+				
+			end
+			if params[:fcl_exw_cargo_info_step][:self_propelled] == true
+				Task.create(note:, due_date:, subject:)
+			elsif params[:fcl_exw_cargo_info_step][:bonded] == false
+				
+			end
+=end
 			shipper = OperationsByUser.find_by(operation_id: op.id).shipper
 			if shipper.ein != params[:fcl_exw_cargo_info_step][:ein]
 				shipper.update!(ein: params[:fcl_exw_cargo_info_step][:ein])
 			end
 			#Creating easy to loop params array
-
 			params_array = params.to_unsafe_h.to_a
 			create_pieces(params_array, existing_cargo_info)
-
 			flash[:notice] = 'Information correctly updated'
 			if current_user
 				redirect_to operation_path op.id
 			else
 				redirect_back(fallback_location: unauthenticated_root_path)
 			end
-			
 		else
 			flash[:alert] = 'Information could not be saved, please fill in all the information listed bellow'
 			if current_user
@@ -65,7 +74,6 @@ class FclExwCargoInfoStepsController < ApplicationController
 		if Operation.find(params[:operation_id]).update(status: 'IN PROGRESS' ,status_message: 'Confirm Container Delivery', current_step: 7)
 			FclExwContainerLoading.find_by(operation_id: params[:operation_id]).update(completed: true)
 			FclExwOperationMailer.container_loading(agent, op, shipper, current_user).deliver_later
-
 			flash[:notice] = "Step confirmed"
 			redirect_to operation_path params[:operation_id]
 		end
@@ -78,7 +86,6 @@ class FclExwCargoInfoStepsController < ApplicationController
 		if Operation.find(params[:operation_id]).update(status: 'COMPLETED' ,status_message: 'Completed', current_step: 8)
 			FclExwContainerDelivery.find_by(operation_id: params[:operation_id]).update(completed: true)
 			FclExwOperationMailer.container_delivery(agent, op, shipper, current_user).deliver_later
-
 			flash[:notice] = "Step confirmed"
 			redirect_to operation_path params[:operation_id]
 		end
@@ -110,10 +117,8 @@ class FclExwCargoInfoStepsController < ApplicationController
 		operation = [op, step]
 		carrier = User.find(params[:carrier_id])
 		additional_message = params[:additional_message]
-
 		FclExwOperationMailer.request_booking(shipper, operation, carrier, additional_message, current_user).deliver_later
 		FclExwOperationMailer.request_booking_notification(agent, step, carrier, current_user).deliver_later
-
 		if op.update(status: 'IN PROGRESS', status_message:'Booking order sent to ', current_step: 5, status_message:'Fill In Booking Info')
 			FclExwRequestBookingStep.find_by(operation_id: params[:operation_id]).update(completed: true, additional_message: params[:additional_message], carrier_id: params[:carrier_id])
 			flash[:notice] = "An email sent to the shipping company:" + shipper.email + " from " + shipper.company_name
@@ -122,21 +127,17 @@ class FclExwCargoInfoStepsController < ApplicationController
 	end
 
 	private
-
 		def existing_fcl_cargo_info (operation_id)
 		  FclExwCargoInfoStep.find_by(operation_id: operation_id)
 		end
 
 		def fcl_cargo_info_params
-
-			params.require(:fcl_exw_cargo_info_step).permit({files: []}, :operation_id, :loading_address, :loading_date, :loading_time, :gross_weight, :commercial_description, :cargo_hazardous, :hazardous_document,
-			 :schedule_b_number, :schedule_b_number, :pickup_reference, :contact_name, :contact_email, :contact_number, :contact_company, :pieces_number, :ein)
+			params.require(:fcl_exw_cargo_info_step).permit({files: []}, :operation_id, :loading_address, :loading_date, :loading_time, :gross_weight, :commercial_description, :cargo_hazardous, :hazardous_document, :pickup_reference, :contact_name, :contact_email, :contact_number, :contact_company, :pieces_number, :bonded, :self_propelled)
 		end
 
 	  def create_pieces (params_array, cargo_info)
 	  	Piece.where(fcl_exw_cargo_info_step_id: cargo_info.id).delete_all
 	  	params_array = params_array.drop(4)[0..-4]
-
       (0..params_array.length).step(6) do |element|
       	unless params_array[element].nil?
         	piece = Piece.create(fcl_exw_cargo_info_step_id: cargo_info.id, gross_weight: params_array[element][1], commercial_description: params_array[element+1][1], container_size: params_array[element+2][1], cargo_hazardous: params_array[element+3][1], hazardous_class: params_array[element+4][1], un_code: params_array[element+5][1] )

@@ -289,11 +289,27 @@
 								<% end %>
 							<% end %>
 
-							<p>
-								¿ES BONDED?
-								SÍ <input type="checkbox">
-								NO <input type="checkbox">
-							</p>
+							<% if @cargo_info.bonded.nil? %>
+								<p>
+									¿ES BONDED?
+									SÍ <input type="checkbox">
+									NO <input type="checkbox">
+								</p>	
+							<% else %>
+								<% if @cargo_info.bonded? %>
+									<p>
+										¿ES BONDED?
+										SÍ <input type="checkbox" checked>
+										NO <input type="checkbox">
+									</p>
+								<% else %>
+									<p>
+										¿ES BONDED?
+										SÍ <input type="checkbox">
+										NO <input type="checkbox" checked>
+									</p>
+								<% end %>
+							<% end %>
 
 							<p>
 								¿VALIDÓ CON BROKER?
@@ -409,11 +425,27 @@
 								</p>
 							<% end %>
 
-							<p>
-								¿ES SELF PROPELLED?
-								SÍ <input type="checkbox"> 
-								NO <input type="checkbox">
-							</p>	
+							<% if @cargo_info.self_propelled.nil? %>
+								<p>
+									¿ES SELF PROPELLED?
+									SÍ <input type="checkbox"> 
+									NO <input type="checkbox">
+								</p>	
+							<% else %>
+								<% if @cargo_info.self_propelled? %>
+									<p>
+										¿ES SELF PROPELLED?
+										SÍ <input type="checkbox" checked> 
+										NO <input type="checkbox">
+									</p>
+								<% else %>
+									<p>
+										¿ES SELF PROPELLED?
+										SÍ <input type="checkbox"> 
+										NO <input type="checkbox" checked>
+									</p>
+								<% end %>
+							<% end %>
 
 							<p>
 								¿SE EMITIÓ PÓLIZA?

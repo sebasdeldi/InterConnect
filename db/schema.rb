@@ -55,12 +55,12 @@ ActiveRecord::Schema.define(version: 20210927200620) do
     t.string "contact_email"
     t.string "contact_number"
     t.string "loading_address"
-    t.string "ein"
     t.date "loading_date"
     t.time "loading_time"
-    t.string "schedule_b_number"
     t.string "pickup_reference"
     t.integer "pieces_number"
+    t.boolean "bonded"
+    t.boolean "self_propelled"
     t.json "files"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

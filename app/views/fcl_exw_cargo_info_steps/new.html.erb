@@ -73,18 +73,6 @@
             <% end %>
 
             <div class="field">
-              <%= f.label 'Schedule B Number or Tariff Code:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.text_field :schedule_b_number, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.schedule_b_number : '' %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-file-alt"></i>
-                </span>
-              </div>
-            </div> 
-
-
-
-            <div class="field">
               <%= f.label 'Pick Up Reference:', class: 'label' %>
               <div class="control has-icons-left">
                 <%= f.text_field :pickup_reference, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.pickup_reference : '' %>
@@ -105,6 +93,29 @@
               </div>
             </div>
 
+            <div class="field">
+              <%= f.label 'Bonded:', class: 'label' %>
+              <div class="control has-icons-left">
+                <div class="select">
+                  <%= f.select :bonded, options_for_select([['NO', false], ['YES', true]], is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.bonded : '' ), {}, class: 'input'  %>
+                </div>
+                <span class="icon is-small is-left">
+                  <i class="far fa-calendar-alt"></i>
+                </span>
+              </div>
+            </div> 
+
+            <div class="field">
+              <%= f.label 'Self Propelled:', class: 'label' %>
+              <div class="control has-icons-left">
+                <div class="select">
+                  <%= f.select :self_propelled, options_for_select([['NO', false], ['YES', true]], is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.self_propelled : '' ), {}, class: 'input'  %>
+                </div>
+                <span class="icon is-small is-left">
+                  <i class="far fa-calendar-alt"></i>
+                </span>
+              </div>
+            </div> 
 
             <div class="field pieces-number-diff">
               <%= f.label 'Number of containers', class: 'label' %>
@@ -119,7 +130,7 @@
             <br>
             <div id="container"></div>
 
-            <%= f.label 'Upload all the HAZMAT related documents', class: 'label' %>
+            <%= f.label 'Upload documents related to the cargo HAZMAT, SELF PROPELLED, BONDED, ETC...', class: 'label' %>
             <%= f.file_field :files, multiple: true %>
             <ul>
               <% @existing_fcl_cargo_info.files.each do |file| %>
