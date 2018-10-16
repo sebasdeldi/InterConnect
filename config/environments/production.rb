@@ -92,7 +92,7 @@ Rails.application.configure do
     :address        => 'smtp.office365.com',
     :port           => '587',
     :authentication => :login,
-    :domain => 'http://interworldfreight.herokuapp.com/',
+    :domain => 'interwf.com',
     :user_name      => 'sdelgado@interwf.com',
     :password       => 'Sdiwf**321',
     :authentication => :plain,
