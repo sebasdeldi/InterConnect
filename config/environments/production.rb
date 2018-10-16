@@ -87,7 +87,7 @@ Rails.application.configure do
   end
 
   # Mailer settings
-  #config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address        => 'smtp.office365.com',
     :port           => '587',
