@@ -91,7 +91,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address        => 'smtp.office365.com',
     :port           => '587',
-    :authentication => :login,
+    :authentication => :plain,
     :domain => 'interwf.com',
     :enable_starttls_auto => true
   }
