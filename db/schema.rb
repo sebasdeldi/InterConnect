@@ -204,6 +204,7 @@ ActiveRecord::Schema.define(version: 20210927200620) do
   create_table "slis", force: :cascade do |t|
     t.bigint "operation_id"
     t.json "files"
+    t.boolean "requested", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_slis_on_operation_id"

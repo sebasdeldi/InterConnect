@@ -12,18 +12,29 @@ class FclExwCargoInfoStepsController < ApplicationController
 	  if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id))
 	  	op = Operation.find_by(secure_id: params[:operation_secure_id])
 			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request Booking Order')
-=begin
-			if params[:fcl_exw_cargo_info_step][:bonded] == true
-				Task.create(note: 'Verify Bonded Docummentation', due_date:, subject:'bonded_doc')
-			elsif params[:fcl_exw_cargo_info_step][:bonded] == false
-				
+			existing_bonded = Task.where(operation_id: op.id, subject: 'bonded_doc').first
+			existing_self_propelled = Task.where(operation_id: op.id, subject: 'self_propelled_doc').first
+
+			if params[:fcl_exw_cargo_info_step][:bonded] == 'true'
+				if existing_bonded.nil?
+					Task.create(operation_id: op.id, note: 'Verify bonded docummentation', due_date: Time.now + 1.weeks , subject:'bonded_doc')				
+				else
+					existing_bonded.update(status: '0')
+				end
+			else
+				existing_bonded.update(status: '1')
 			end
-			if params[:fcl_exw_cargo_info_step][:self_propelled] == true
-				Task.create(note:, due_date:, subject:)
-			elsif params[:fcl_exw_cargo_info_step][:bonded] == false
-				
+
+			if params[:fcl_exw_cargo_info_step][:self_propelled] == 'true'
+				if existing_self_propelled.nil?
+					Task.create(operation_id: op.id, note: "Send self propelled docummentation (tittle/bill of sells original & notarized, power of attorney, copy of power of attorney signer's id) to broker", due_date: Time.now + 1.weeks , subject:'self_propelled_doc')				
+				else
+					existing_self_propelled.update(status: '0')
+				end
+			else
+				existing_self_propelled.update(status: '1')
 			end
-=end
+
 			shipper = OperationsByUser.find_by(operation_id: op.id).shipper
 			if shipper.ein != params[:fcl_exw_cargo_info_step][:ein]
 				shipper.update!(ein: params[:fcl_exw_cargo_info_step][:ein])

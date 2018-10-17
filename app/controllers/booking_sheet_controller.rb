@@ -8,6 +8,8 @@ class BookingSheetController < ApplicationController
 		@cargo_info = FclExwCargoInfoStep.find_by(operation_id: @operation.id)
 		@pieces = @cargo_info.pieces
 		@booking_info = FclExwBookingInfoStep.find_by(operation_id: @operation.id)
+		@sli = Sli.find_by(operation_id: @operation.id)
+		@self_propelled_task = Task.where(operation_id: @operation.id, subject: 'self_propelled_doc').first
 		request_id = FclExwRequestBookingStep.find_by(operation_id: @operation.id).carrier_id
 		unless request_id.nil?
 			@steamship = User.find(request_id).company_name

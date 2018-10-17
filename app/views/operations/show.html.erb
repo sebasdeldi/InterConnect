@@ -23,15 +23,18 @@
 		          <option disabled>SLI</option>
 		          <% if @sli.nil? || @sli.files.empty? %>
 			          <option value="slis/<%= params[:id] %>.pdf">
-		          	  See Document
+		          	  See SLI
 			          </option>
 			        <% else %>
   		          <option value="<%= @sli.files.first.url %>">
-  	          	  See Document
+  	          	  See SLI
   		          </option>
 			        <% end %>
 		          <option value="slis/new/<%= Operation.find(params[:id]).secure_id %>">
-		          	Request Document
+		          	SLI Form
+		          </option>
+		          <option value="slis/request_sli/<%= Operation.find(params[:id]).secure_id %>">
+		          	Request SLI Form
 		          </option>
 		        </select>
 		      </div>

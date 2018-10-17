@@ -50,10 +50,16 @@ document.addEventListener("turbolinks:load", function() {
   $('select.sli').val("SLI");
 
   $('select.sli').on('change', function() {
-    window.open("http://" + window.location.host + "/" + this.value, '_blank');
+    if(this.value.includes("request_sli") === true){
+      $.post(
+        "http://" + window.location.host + "/" + this.value,
+        { secure_id: this.value, link: "http://" + window.location.host + "/slis/new/" + this.value.split('/').pop() }
+      );
+    }else{
+      alert(this.value)
+      window.open("http://" + window.location.host + "/" + this.value, '_blank');
+    }
     $('select.sli').val("SLI");
   });  
-
-  
 });
 

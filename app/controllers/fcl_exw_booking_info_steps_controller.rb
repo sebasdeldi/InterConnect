@@ -30,7 +30,6 @@ class FclExwBookingInfoStepsController < ApplicationController
 			else
 				Task.where(subject: 'cargo_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:cargo_cut_off_date], status: '0')
 			end
-
 		end
 
 		if (params[:fcl_exw_booking_info_step][:sailing_date].present?)

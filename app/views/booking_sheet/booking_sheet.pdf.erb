@@ -131,8 +131,13 @@
 
 					<p>
 						¿SOLICITÓ SLI?
-						SÍ <input type="checkbox">
-	  				NO <input type="checkbox">
+						<% if !@sli.nil? && @sli.requested %>
+							SÍ <input type="checkbox" checked>
+		  				NO <input type="checkbox"> 
+		  			<% else %> 
+							SÍ<input type="checkbox"> 
+		  				NO <input type="checkbox">
+		  			<% end %>
 					</p>
 				</div>
 
@@ -310,12 +315,20 @@
 									</p>
 								<% end %>
 							<% end %>
-
-							<p>
-								¿VALIDÓ CON BROKER?
-								SÍ <input type="checkbox">
-								NO <input type="checkbox">
-							</p>
+ 
+							<% if !@self_propelled_task.nil? && @self_propelled_task.status == '1' %>
+								<p>
+									¿VALIDÓ CON BROKER?
+									SÍ <input type="checkbox" checked>
+									NO <input type="checkbox">
+								</p>
+							<% else %>
+								<p>
+									¿VALIDÓ CON BROKER?
+									SÍ <input type="checkbox">
+									NO <input type="checkbox">
+								</p>
+							<% end %>
 
 							<% if piece.gross_weight.nil? || piece.gross_weight == "" %>
 								<p>
@@ -378,13 +391,7 @@
 									<% end %>
 								<% end %>	
 							</p>
-						
-							<p>
-								¿VALIDÓ CON IMPORTS?
-								SÍ <input type="checkbox">
-								NO <input type="checkbox">
-							</p>
-
+				
 							<p>
 								¿SOLICITARON SEGURO?
 								SÍ <input type="checkbox">
@@ -405,11 +412,6 @@
 						</div>
 
 						<div class="column-third">
-		
-							<p>
-								PCS: 
-								<span style="text-decoration: underline; white-space: pre;">                                                               </span>
-							</p>
 
 							<% if @cargo_info.files.empty? %>
 								<p>
@@ -495,10 +497,23 @@
 						</p>
 					<% end %>
 
-					<p>
-						MODE OF TRANSPORT: 
-						<span style="text-decoration: underline; white-space: pre;">                                 </span>
-					</p>
+					<% if @booking_info.ramp.nil? %>
+						<p>
+							MODE OF TRANSPORT: 
+							<span style="text-decoration: underline; white-space: pre;">                                 </span>
+						</p>
+					<% elsif @booking_info.ramp == false %>
+						<p>
+							MODE OF TRANSPORT: 
+							<span style="text-decoration: underline; white-space: pre;">OCEAN-NO RAMP</span>
+						</p>
+					<% else %>
+						<p>
+							MODE OF TRANSPORT: 
+							<span style="text-decoration: underline; white-space: pre;">OCEAN-RAMP</span>
+						</p>
+					<% end %>
+
 
 					<% if @steamship.nil? || @steamship == "" %>
 						<p>

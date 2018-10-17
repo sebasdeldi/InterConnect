@@ -42,17 +42,21 @@ class SliController < ApplicationController
 
   def create
     if Sli.find_by(operation_id: Operation.find_by(secure_id: params[:secure_id]).id)
-      if Sli.update(sli_params)
+      if Sli.update(sli_params.merge(requested: true))
         redirect(Operation.find_by(secure_id: params[:secure_id]).id)
       end
     else
-      if Sli.create(sli_params)
+      if Sli.create(sli_params.merge(requested: true))
         redirect(Operation.find_by(secure_id: params[:secure_id]).id)
       end
     end
   end
 
   def request_sli
+    op = Operation.find_by(secure_id: params[:secure_id])
+    @shipper = OperationsByUser.find_by(operation_id: op.id).shipper
+    FclExwOperationMailer.request_sli(@shipper, current_user, params[:link]).deliver_later
+    redirect(op.id, true)
   end
 
   def tariff_group
@@ -63,8 +67,13 @@ class SliController < ApplicationController
   end
 
   private
-    def redirect(operation_id)
-      flash[:notice] = 'Information correctly saved'
+    def redirect(operation_id, email=false)
+      if email
+        message = 'Email correctly sent'
+      else
+        message = 'Information correctly saved'
+      end
+      flash[:notice] = message
       if current_user
         redirect_to operation_path operation_id
       else
@@ -73,12 +82,8 @@ class SliController < ApplicationController
     end
 
     def create_tariff_groups (params_array, sli)
+      sli.update(requested: true)
       TariffGroup.where(sli_id: sli.id).delete_all
-      puts '========================================================================'
-      puts '========================================================================'
-      puts params_array.inspect
-      puts '========================================================================'
-      puts '========================================================================'
       (0..params_array.length).step(6) do |element|
         unless params_array[element].nil?
           tariff_group = TariffGroup.create!(sli_id: sli.id, code: params_array[element][1], schedule_b: params_array[element+1][1], units: params_array[element+2][1], weight:params_array[element+3][1], value: params_array[element+4][1], eccn: params_array[element+5][1] )

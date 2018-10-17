@@ -53,7 +53,7 @@ Rails.application.routes.draw do
 	get "/slis/:operation_id", to: "sli#show", as: "sli"
 	get "/slis/new/:secure_id", to: "sli#new", as: "new_sli"
 	post "/slis/create/:secure_id", to: "sli#create", as: "create_sli"
-	post "/slis/request", to: "sli#request", as: "request_sli"
+	post "/slis/request_sli/:secure_id", to: "sli#request_sli", as: "request_sli"
 	post "/slis/tariff_group", to: "sli#tariff_group", as: "tariff_group"
 
 	post "/change_difficulty", to: "operations#change_difficulty", as: "change_difficulty"

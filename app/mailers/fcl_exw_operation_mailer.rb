@@ -127,4 +127,16 @@ class FclExwOperationMailer < ApplicationMailer
 		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com', cc: shipper.email)
 	end
 
+	def request_sli(shipper, representative, link)
+		@shipper = shipper
+		@link = link
+		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
+		delivery_options = { user_name: representative.email,
+	                       password: representative.outlook_password
+	                     }
+		mail(to: shipper.email,
+		     subject: "Please provide us your SLI information",
+		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com', cc: shipper.email)
+	end
+
 end

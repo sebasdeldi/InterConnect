@@ -7,7 +7,7 @@
 	  		    <li id='fifth-tab' class="tab is-active">
 	  		    	<a>
 	  		    		<span class="icon is-small"><i class="fas fa-tasks"></i></span>
-	  		    		<span>Tasks</span>
+	  		    		<span>Tasks (<%= tasks_count.to_s %>)</span>
 	  		    	</a>
 	  		    </li>
 	  		  <% end %>
@@ -15,7 +15,7 @@
 			    <li id='first-tab' class="tab <%= is_admin? ? 'is-active' : '' %>">
 			    	<a>
 			    		<span class="icon is-small"><i class="far fa-chart-bar"></i></span>
-			    		<span><%= is_admin? ? 'Insights' : 'Operations' %></span>
+			    		<span><%= is_admin? ? 'Insights' : 'Operations (' + operations_count.to_s + ')' %></span>
 			    	</a>
 			    </li>
 
