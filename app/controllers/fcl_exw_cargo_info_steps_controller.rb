@@ -22,7 +22,9 @@ class FclExwCargoInfoStepsController < ApplicationController
 					existing_bonded.update(status: '0')
 				end
 			else
-				existing_bonded.update(status: '1')
+				if !existing_bonded.nil?
+					existing_bonded.update(status: '1')
+				end
 			end
 
 			if params[:fcl_exw_cargo_info_step][:self_propelled] == 'true'
@@ -32,8 +34,12 @@ class FclExwCargoInfoStepsController < ApplicationController
 					existing_self_propelled.update(status: '0')
 				end
 			else
-				existing_self_propelled.update(status: '1')
+				if !existing_self_propelled.nil?
+					existing_self_propelled.update(status: '1')
+				end
 			end
+
+			Task.create(note: "Please verify that your POD, POL, container size, loading address and hazmat status match the operation's quotation. Also be aware of any overweight extra fee (20' bellow 35.000lbs, 40' and 45' bellow 42.000)", due_date: Time.now + 4.days, operation_id: op.id, subject: 'quotation_review' )
 
 			shipper = OperationsByUser.find_by(operation_id: op.id).shipper
 			if shipper.ein != params[:fcl_exw_cargo_info_step][:ein]

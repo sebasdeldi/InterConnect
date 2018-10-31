@@ -18,24 +18,38 @@
 
 		  <div class="field">
 		    <div class="control has-icons-left">
-		      <div class="select sli">
-		        <select class="sli difficulty" >
-		          <option disabled>SLI</option>
+		      <div class="select sli margin-right">
+		        <select class="sli difficulty outline-select">
+		          <option disabled>DOCUMENTS</option>
 		          <% if @sli.nil? || @sli.files.empty? %>
 			          <option value="slis/<%= params[:id] %>.pdf">
 		          	  See SLI
 			          </option>
 			        <% else %>
   		          <option value="<%= @sli.files.first.url %>">
-  	          	  See SLI
+  	          		See SLI
   		          </option>
 			        <% end %>
 		          <option value="slis/new/<%= Operation.find(params[:id]).secure_id %>">
 		          	SLI Form
 		          </option>
 		          <option value="slis/request_sli/<%= Operation.find(params[:id]).secure_id %>">
-		          	Request SLI Form
+		          	Request SLI
 		          </option>
+              <% unless @invoice.nil? || @invoice.files.empty? %>
+    	          <option value="<%= @invoice.files.first.url %>">
+              		See Invoice
+    	          </option>
+    	        <% end %>
+    	        <option value="invoices/new/<%= Operation.find(params[:id]).secure_id %>">
+    	        	Invoice Form
+    	        </option>
+    	        <option value="invoices/request_invoice/<%= Operation.find(params[:id]).secure_id %>">
+    	        	Request Invoice
+    	        </option>
+    	        <option value="<%= booking_sheet_path(@operation.id, format: 'pdf') %>">
+    	        	See Booking Sheet
+    	        </option>
 		        </select>
 		      </div>
 		      <div class="icon is-small is-left">
@@ -44,13 +58,11 @@
 		    </div>
 		  </div>
 
+		  <%= link_to insurance_form_path(@operation_secure_id) , class: "button is-link is-outlined margin-right" do %>
+			  <i class="fas fa-file-pdf"></i>
+			  <span class="margin-left">INSURANCE</span>
+			<% end %>
 
-
-
-		  <%= link_to booking_sheet_path(@operation.id, format: 'pdf'), target: "_blank", class: "button booking-sheet-btn " do %>
-		  	<i class="fas fa-file-pdf"></i>
-		  	<span class="margin-left">Booking Sheet</span>
-		  <% end %>
 		  <b class="diff-label">Difficulty:</b>
 		  <%= form_tag change_difficulty_path, class: 'button-icon' do %>
 			  <div class="select">

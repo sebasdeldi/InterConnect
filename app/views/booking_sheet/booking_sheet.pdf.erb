@@ -9,7 +9,7 @@
 			<h2 class="title is-4">BOOKING SHEET PARA SEGUIMIENTO</h2>
 		</center>
 		<br>
-
+		<br>
 		<div class="container">
 			<div class="row">
 				<div class="column">
@@ -72,22 +72,23 @@
 					  	<span style="text-decoration: underline; white-space: pre;"><%= @consignee.company_name %></span>
 					  </p>
 				  <% end %>
-
-			    <% if @operation.modality.nil? %>
-				    <p>
-				    	INCOTERM: 
-				    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
-				    </p>
-				  <% else %>
-				  	<p>
-				  		INCOTERM: 
-				  		<span style="text-decoration: underline; white-space: pre;"><%= @operation.modality %></span>
-				  	</p>
-				  <% end %>	
 				</div>
 
 				<div class="column">
 				  <p>El contacto con el proveedor debe ser telefónico y vía e-mail para asegurarnos que sí reciba nuestra información. Así mismo, se deben usar las firmas predeterminadas para que nos suministren la información necesaria para realizar debidamente las coordinaciones.</p>
+
+		      <% if @operation.modality.nil? %>
+		  	    <p>
+		  	    	INCOTERM: 
+		  	    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+		  	    </p>
+		  	  <% else %>
+		  	  	<p>
+		  	  		INCOTERM: 
+		  	  		<span style="text-decoration: underline; white-space: pre;"><%= @operation.modality %></span>
+		  	  	</p>
+		  	  <% end %>	
+				  <!--
 				  <p>CONSOL#: 
 				  	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
 				  </p>
@@ -97,10 +98,11 @@
 				  <p>HOUSE#: 
 				  	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
 				  </p>
+				-->
 				</div>
 			</div>
-
-
+			<br>
+			<br>
 			<div class="row">
 				<div class="column-third">
 					<p>
@@ -125,8 +127,13 @@
 				<div class="column-third">
 					<p>
 						¿SOLICITÓ INVOICE?
-						SÍ <input type="checkbox">
-	  				NO <input type="checkbox">
+						<% if !@invoice.nil? && @invoice.requested %>
+							SÍ <input type="checkbox" checked>
+		  				NO <input type="checkbox"> 
+		  			<% else %> 
+							SÍ<input type="checkbox"> 
+		  				NO <input type="checkbox">
+		  			<% end %>
 					</p>
 
 					<p>
@@ -149,7 +156,8 @@
 					</p>
 				</div>
 			</div>
-
+			<br>
+			<br>
 			<div class="row">
 				<div class="column">
 					<% if @shipper.ein.nil? %>
@@ -188,13 +196,13 @@
 							<span style="text-decoration: underline; white-space: pre;"><%= @operation.pol %></span>
 						</p>
 					<% end %>
-
+					<!--
 					<p>
 						<b>MASTER FREIGHT:</b> 
 						<span style="text-decoration: underline; white-space: pre;">                                                               </span>
-					</p>		
+					</p>
+					-->		
 				</div>
-
 				<div class="column">			
 					<% if @operation.destination.nil? %>
 						<p>
@@ -219,15 +227,16 @@
 							<span style="text-decoration: underline; white-space: pre;"><%= @operation.pod %></span>
 						</p>
 					<% end %>
-
+					<!--
 					<p>
 						<b>HOUSE FREIGHT:</b> 
 						<span style="text-decoration: underline; white-space: pre;">                                                               </span>
-					</p>		
+					</p>
+					-->		
 				</div>
 			</div>
-
-
+			<br>
+			<br>
 			<div class="booking-container top">
 				<div class="row">
 					<div class="column">
@@ -471,6 +480,8 @@
 				</div>
 			<% end %>
 			<br>
+			<br>
+			<br>
 			<div class="row">
 				<div class="column-third">
 					<% if @booking_info.doc_cut_off_date.nil? || @booking_info.doc_cut_off_time.nil? %>
@@ -618,10 +629,17 @@
 				</div>
 
 				<div class="column-third">
-					<p>
-						VGM CUT OFF: 
-						<span style="text-decoration: underline; white-space: pre;">                                                </span>
-					</p>
+					<% if @booking_info.voyage.nil? %>
+						<p>
+							VGM CUT OFF: 
+							<span style="text-decoration: underline; white-space: pre;">                                                </span>
+						</p>
+					<% else %>
+						<p>
+							VGM CUT OFF: 
+							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.vgm_cut_off_date %></span>
+						</p>
+					<% end %>
 
 					<% if @booking_info.voyage.nil? %>
 						<p>
@@ -666,12 +684,14 @@
 
 				</div>
 			</div>
+			<!--
 			<div class="row">
 				<p>
 					WAREHOUSE #'S: 
 					<span style="text-decoration: underline; white-space: pre;">                                                                                                                                                                                                                             </span>
 				</p>
 			</div>
+		-->
 		</div>
 	</body>
 	<style type="text/css">

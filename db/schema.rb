@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210927200620) do
+ActiveRecord::Schema.define(version: 20210927200622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20210927200620) do
     t.time "sailing_time"
     t.date "arrival_date"
     t.time "arrival_time"
+    t.date "vgm_cut_off_date"
     t.string "ramp"
     t.date "ramp_cut_off_date"
     t.datetime "created_at", null: false
@@ -138,6 +139,44 @@ ActiveRecord::Schema.define(version: 20210927200620) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_general_cargo_infos_on_operation_id"
+  end
+
+  create_table "insurances", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "country"
+    t.string "modality"
+    t.string "origin"
+    t.string "destination"
+    t.string "incoterm"
+    t.string "etd"
+    t.string "carrier"
+    t.string "commodities"
+    t.string "marks"
+    t.float "commercial_value"
+    t.float "freight"
+    t.float "duties"
+    t.float "other_costs"
+    t.float "voluntary_coverage"
+    t.float "lost_profit"
+    t.bigint "operation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["operation_id"], name: "index_insurances_on_operation_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "operation_id"
+    t.json "files"
+    t.boolean "requested", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["operation_id"], name: "index_invoices_on_operation_id"
   end
 
   create_table "operations", force: :cascade do |t|
@@ -308,6 +347,8 @@ ActiveRecord::Schema.define(version: 20210927200620) do
   add_foreign_key "fcl_exw_request_booking_steps", "operations"
   add_foreign_key "functionalities", "roles"
   add_foreign_key "general_cargo_infos", "operations"
+  add_foreign_key "insurances", "operations"
+  add_foreign_key "invoices", "operations"
   add_foreign_key "operations_by_users", "operations"
   add_foreign_key "pieces", "fcl_exw_cargo_info_steps"
   add_foreign_key "slis", "operations"

@@ -1,0 +1,49 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  phone: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  country: MyString
+  modality: MyString
+  origin: MyString
+  destination: MyString
+  incoterm: MyString
+  etd: MyString
+  carrier: MyString
+  commodities: MyString
+  marks: MyString
+  commercial_value: 1.5
+  freight: 1.5
+  duties: 1.5
+  other_costs: 1.5
+  voluntary_coverage: 1.5
+  lost_profit: 1.5
+
+two:
+  name: MyString
+  email: MyString
+  phone: MyString
+  address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  country: MyString
+  modality: MyString
+  origin: MyString
+  destination: MyString
+  incoterm: MyString
+  etd: MyString
+  carrier: MyString
+  commodities: MyString
+  marks: MyString
+  commercial_value: 1.5
+  freight: 1.5
+  duties: 1.5
+  other_costs: 1.5
+  voluntary_coverage: 1.5
+  lost_profit: 1.5

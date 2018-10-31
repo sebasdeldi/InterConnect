@@ -40,6 +40,7 @@ class OperationsByUser < ApplicationRecord
       FclExwQuotationConfirmedStep.create(operation: operation)
       FclExwInfoRequestedStep.create(operation: operation)
       FclExwRequestBookingStep.create(operation: operation)
+      Insurance.create(operation: operation)
       cargo_info = FclExwCargoInfoStep.new(operation: operation)
       cargo_info.save(validate: false)
       booking_info = FclExwBookingInfoStep.new(operation: operation)

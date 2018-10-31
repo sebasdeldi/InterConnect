@@ -90,6 +90,16 @@
               </div>
             </div> 
 
+            <div class="field">
+              <%= f.label 'VGM cut off date:', class: 'label' %>
+              <div class="control has-icons-left">
+                <%= f.text_field :vgm_cut_off_date, autofocus: true, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? @existing_fcl_booking_info.vgm_cut_off_date : '' %>
+                <span class="icon is-small is-left">
+                  <i class="far fa-calendar-alt"></i>
+                </span>
+              </div>
+            </div> 
+
             <p class="cargo_hour hidden"><%= @existing_fcl_booking_info.cargo_cut_off_time.nil? ? '00' : @existing_fcl_booking_info.cargo_cut_off_time.hour %></p>
             <p class="cargo_mins hidden"><%= @existing_fcl_booking_info.cargo_cut_off_time.nil? ? '00' : @existing_fcl_booking_info.cargo_cut_off_time.min %></p>
 

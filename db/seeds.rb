@@ -22,7 +22,8 @@ roles = Role.create!([
 users = User.create!([
 	{email: 'admin@admin.com', password: '12345678', role_id: 1, company_name: 'Interworld Freight', phone_number: '7862803736', contact_first_name: 'Pepito', contact_last_name: 'Perez'},
 	{email: 'leader@leader.com', password: '12345678', role_id: 10, company_name: 'Interworld Freight', phone_number: '7862803736', contact_first_name: 'Daniel', contact_last_name: 'Zapata'},
-	{email: 'sdelgado@interwf.com', password: '12345678', role_id: 2, company_name: 'Interworld Freight', phone_number: '7862803736', outlook_password: 'Sdiwf**321', contact_first_name: 'Sebastián', contact_last_name: 'Delgado' },
+	{email: 'sdelgado@interwf.com', password: '12345678', role_id: 2, company_name: 'Interworld Freight', phone_number: '7862803736', outlook_password: 'Sdiwf**321', contact_first_name: 'Sebastián', contact_last_name: 'Delgado',
+	address: '7741 nw 7th st', state: 'Florida', country: 'USA', city: 'Miami', zip_code: 33126 },
 	{email: 'maria@interwf.com', password: '12345678', role_id: 2, company_name: 'Interworld Freight', phone_number: '7862803736', outlook_password: 'Sdiwf**321', contact_first_name: 'Maria', contact_last_name: 'Dolores' },
 	{email: 'juan@interwf.com', password: '12345678', role_id: 2, company_name: 'Interworld Freight', phone_number: '7862803736', outlook_password: 'Sdiwf**321', contact_first_name: 'Juanito', contact_last_name: 'Pérez' },
 	{email: 'agent@agent.com', password: '12345678', role_id: 3 , company_name: 'Interworld Bogotá', phone_number: '7862803736', contact_first_name: 'J', contact_last_name: 'Balvin'},
@@ -35,7 +36,8 @@ users = User.create!([
 	{email: 'shipper2@shipper.com', password: '12345678', role_id: 4, company_name: 'Super Sipper', phone_number: '7862803736', contact_first_name: 'Fulanita', contact_last_name: 'Pulido'},
 
 	{email: 'pricing@pricing.com', password: '12345678', role_id: 7, company_name: 'IWF', phone_number: '7862803736'},
-	{email: 'consignee@consignee.com', password: '12345678', role_id: 8, company_name: 'Consigneelandia', phone_number: '7862803736'},
+	{email: 'consignee@consignee.com', password: '12345678', role_id: 8, company_name: 'Consigneelandia', phone_number: '7862803736', outlook_password: 'Sdiwf**321', contact_first_name: 'Sebastián', contact_last_name: 'Delgado',
+	address: '7741 nw 7th st', state: 'Florida', country: 'USA', city: 'Miami', zip_code: 33126},
 	{email: 'naviera1@naviera.com', password: '12345678', role_id: 6, company_name: 'Hapag', phone_number: '7862803736', vendor_operation_mode: 'web', website: 'http://www.hapag.com'},
 	{email: 'naviera2@naviera.com', password: '12345678', role_id: 6, company_name: 'Sealand- Maersk', phone_number: '7862803736', vendor_operation_mode: 'web', website: 'http://www.maersk.com'},
 	{email: 'naviera3@naviera.com', password: '12345678', role_id: 6, company_name: 'CMA', phone_number: '7862803736', vendor_operation_mode: 'web', website: 'http://www.cma.com'},

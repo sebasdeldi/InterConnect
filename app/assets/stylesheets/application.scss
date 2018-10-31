@@ -9,6 +9,7 @@
 @import 'jquery.ui.all';
 @import 'tasks.scss';
 @import 'sli.scss';
+@import 'autocomplete.scss';
 
 .button-icon{
   margin-left: 30px;
@@ -225,6 +226,10 @@ $major-blue: #3273dc;
   margin-left: 5px;
 }
 
+.margin-right{
+  margin-right: 55px;
+}
+
 .difficulty, .fa-file-pdf{
   color: #3273dc !important;
 }
@@ -236,4 +241,24 @@ $major-blue: #3273dc;
 
 .booking-sheet-btn{
   margin-left: 40px;
+}
+
+.outline-select{
+  background-color: transparent !important;
+  border-color: #3273dc !important;
+  color: #3273dc !important;
+}
+
+.outline-select:hover{
+  background-color: #3273dc !important;
+  border-color: #3273dc !important;
+  color: white !important;
+}
+
+.padding-box{
+  padding: 30px;
+}
+
+.insurance-cargo-info{
+  margin-top: 100px;
 }

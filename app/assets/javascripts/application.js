@@ -18,11 +18,32 @@
 //= require toastr
 //= require Chart.bundle
 //= require chartkick
+//= require autocomplete
 //= require_tree .
 
 
 document.addEventListener("turbolinks:load", function() {
   FontAwesome.dom.i2svg();
+
+  var options = {
+
+    url: "/ports.json",
+
+    getValue: "full_name",
+
+    list: { 
+      match: {
+        enabled: true
+      }
+    },
+
+    theme: "square"
+  };
+
+  $("#port-discharge").easyAutocomplete(options);
+  $("#port-loading").easyAutocomplete(options);
+
+
 
   $(".show-modal").click(function() {
   	var modal_type = this.classList[this.classList.length-1]
@@ -47,7 +68,7 @@ document.addEventListener("turbolinks:load", function() {
     function(){ $(this).removeClass('is-active') }
   )
 
-  $('select.sli').val("SLI");
+  $('select.sli').val("DOCUMENTS");
 
   $('select.sli').on('change', function() {
     if(this.value.includes("request_sli") === true){
@@ -55,11 +76,15 @@ document.addEventListener("turbolinks:load", function() {
         "http://" + window.location.host + "/" + this.value,
         { secure_id: this.value, link: "http://" + window.location.host + "/slis/new/" + this.value.split('/').pop() }
       );
+    }else if(this.value.includes("request_invoice") === true){
+      $.post(
+        "http://" + window.location.host + "/" + this.value,
+        { secure_id: this.value, link: "http://" + window.location.host + "/invoices/new/" + this.value.split('/').pop() }
+      );
     }else{
-      alert(this.value)
       window.open("http://" + window.location.host + "/" + this.value, '_blank');
     }
-    $('select.sli').val("SLI");
+    $('select.sli').val("DOCUMENTS");
   });  
 });
 

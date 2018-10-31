@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
     if record.created_at == record.updated_at
       false
     else
-      if (record.booking_number.nil? || record.vessel.nil? || record.doc_cut_off_date.nil? || record.doc_cut_off_time.nil? || record.cargo_cut_off_date.nil? || record.cargo_cut_off_time.nil? || record.sailing_date.nil? || record.sailing_time.nil? || record.arrival_date.nil? || record.arrival_time.nil? )
+      if (record.booking_number.nil? || record.vessel.nil? || record.doc_cut_off_date.nil? || record.doc_cut_off_time.nil? || record.cargo_cut_off_date.nil? || record.cargo_cut_off_time.nil? || record.sailing_date.nil? || record.sailing_time.nil? || record.arrival_date.nil? || record.arrival_time.nil? || record.vgm_cut_off_date.nil?)
         'orange'
       else
         true

@@ -1,0 +1,33 @@
+<br>
+<div class="container">
+  <div class="">
+    <div class="column">
+      <%= form_for(:invoice, url: create_invoice_path(params[:secure_id])) do |f| %>
+        <div>
+          <%= f.label 'Please upload your Invoice here:', class: 'label' %>
+          <%= f.file_field :files, multiple: true %>
+          <%= f.hidden_field :operation_id, value: Operation.find_by(secure_id: params[:secure_id]).id%>
+          <%= hidden_field_tag :secure_id,  value: params[:secure_id]%>
+        </div>
+        <br>
+
+        <% unless @invoice.files.empty? %>
+          <ul>
+            <label class="label">
+              Uploaded Invoice docs:
+            </label>
+            <% @invoice.files.each do |file| %>
+              <li> <%= link_to file.path.split("/").last, file.url, target: 'blank' %> </li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <br>
+  
+        <div class="actions">
+          <%= f.submit "Upload" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

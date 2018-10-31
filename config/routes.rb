@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  get 'insurance/new/:secure_id', to: 'insurance#new', as: 'insurance_form'
+
+  get 'insurance/view_pdf/:secure_id', to: 'insurance#view_pdf', as: 'insurance_pdf'
+
+  post 'insurance/create', to: 'insurance#create', as: 'insurance_create'
+  post 'insurance/send_info/:operation_id', to: 'insurance#send_info', as: 'insurance_send_info'
+
   get 'users_relationship/new/:representative_id', to: 'users_relationship#new', as: 'new_relationship'
   post 'users_relationship/create', as: 'create_relation'
 
@@ -55,6 +62,10 @@ Rails.application.routes.draw do
 	post "/slis/create/:secure_id", to: "sli#create", as: "create_sli"
 	post "/slis/request_sli/:secure_id", to: "sli#request_sli", as: "request_sli"
 	post "/slis/tariff_group", to: "sli#tariff_group", as: "tariff_group"
+
+	get "/invoices/new/:secure_id", to: "invoice#new", as: "new_invoice"
+	post "/invoices/create/:secure_id", to: "invoice#create", as: "create_invoice"
+	post "/invoices/request_invoice/:secure_id", to: "invoice#request_invoice", as: "request_invoice"
 
 	post "/change_difficulty", to: "operations#change_difficulty", as: "change_difficulty"
  	devise_for :users, controllers: {

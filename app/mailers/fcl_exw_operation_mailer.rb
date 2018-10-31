@@ -80,7 +80,7 @@ class FclExwOperationMailer < ApplicationMailer
                    }
 		mail(to: carrier.email,
 		     subject: "INTERWORLD FREIGHT BOOKING ORDER",
-		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com')
+		     delivery_method_options: delivery_options, from: representative.email)
 	end
 
 	def request_booking_notification (agent, operation, carrier, representative)
@@ -94,7 +94,7 @@ class FclExwOperationMailer < ApplicationMailer
                    }
 		mail(to: agent.email,
 		     subject: "INTERWORLD FREIGHT BOOKING ORDER",
-		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com')
+		     delivery_method_options: delivery_options, from: representative.email)
 	end
 
 	def container_loading (agent, operation,shipper, representative)
@@ -109,7 +109,7 @@ class FclExwOperationMailer < ApplicationMailer
 	                     }
 		mail(to: agent.email,
 		     subject: "Cargo loading confirmation",
-		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com', cc: shipper.email)
+		     delivery_method_options: delivery_options, from: representative.email, cc: shipper.email)
 	end
 
 	def container_delivery (agent, operation, shipper, representative)
@@ -124,7 +124,7 @@ class FclExwOperationMailer < ApplicationMailer
 	                     }
 		mail(to: agent.email,
 		     subject: "Cargo delivery confirmation",
-		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com', cc: shipper.email)
+		     delivery_method_options: delivery_options, from: representative.email, cc: shipper.email)
 	end
 
 	def request_sli(shipper, representative, link)
@@ -136,7 +136,31 @@ class FclExwOperationMailer < ApplicationMailer
 	                     }
 		mail(to: shipper.email,
 		     subject: "Please provide us your SLI information",
-		     delivery_method_options: delivery_options, from: 'no-reply@interwf.com', cc: shipper.email)
+		     delivery_method_options: delivery_options, from: representative.email, cc: shipper.email)
+	end
+
+	def request_invoice(shipper, representative, link)
+		@shipper = shipper
+		@link = link
+		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
+		delivery_options = { user_name: representative.email,
+	                       password: representative.outlook_password
+	                     }
+		mail(to: shipper.email,
+		     subject: "Please provide us your Invoice information",
+		     delivery_method_options: delivery_options, from: representative.email, cc: shipper.email)
+	end
+
+	def send_insurance_info(link, operation, representative)
+		@link = link
+		@operation = operation
+		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
+		delivery_options = { user_name: representative.email,
+	                       password: representative.outlook_password
+	                     }
+		mail(to: 'daniel@daniel.com',
+		     subject: "Insurance Information",
+		     delivery_method_options: delivery_options, from: representative.email, cc: 'sebas@sebas.com')
 	end
 
 end

@@ -32,6 +32,14 @@ class FclExwBookingInfoStepsController < ApplicationController
 			end
 		end
 
+		if (params[:fcl_exw_booking_info_step][:vgm_cut_off_date].present?)
+			if existing_booking_info.vgm_cut_off_date.nil?
+				Task.create(note: 'VGM cut off date set.', due_date: params[:fcl_exw_booking_info_step][:vgm_cut_off_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'vgm_cut_off' )
+			else
+				Task.where(subject: 'vgm_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:vgm_cut_off_date], status: '0')
+			end
+		end
+
 		if (params[:fcl_exw_booking_info_step][:sailing_date].present?)
 			if existing_booking_info.sailing_date.nil?
 				Task.create(note: 'Expected sailing date set.', due_date: params[:fcl_exw_booking_info_step][:sailing_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'sailing_date' )
@@ -85,7 +93,7 @@ class FclExwBookingInfoStepsController < ApplicationController
 		end
 			
 		def fcl_booking_info_params
-			params.require(:fcl_exw_booking_info_step).permit(:operation_id, :booking_number, :vessel, :voyage, :doc_cut_off_date, :doc_cut_off_time, 
+			params.require(:fcl_exw_booking_info_step).permit(:operation_id, :vgm_cut_off_date, :booking_number, :vessel, :voyage, :doc_cut_off_date, :doc_cut_off_time, 
 				:cargo_cut_off_date, :cargo_cut_off_time, :sailing_date, :sailing_time, :arrival_date, :arrival_time, :ramp, :ramp_cut_off_date)
 		end
 
