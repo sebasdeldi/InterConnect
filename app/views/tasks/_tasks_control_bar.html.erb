@@ -35,6 +35,26 @@
           </li>
         </ul>
       </div>
+
+      <div class="column">
+        <h1 class="title white-font">
+          Operation Reference
+        </h1>
+
+        <div class="select">
+          <%= select_tag :operation_id, options_for_select((operations_by_repre.map { |op| [op.reference, op.id] }).to_a.push('ALL').reverse, cookies[:operation_task_search]), {class: 'full-select', onchange: 'this.form.submit();'} %>
+        </div>
+      </div>
+
+      <div class="column">
+        <h1 class="title white-font">
+          Task Type
+        </h1>
+
+        <div class="select">
+          <%= select_tag :task_subject, options_for_select((task_subject).to_a.push('ALL').reverse, cookies[:operation_task_subject]), {class: 'full-select', onchange: 'this.form.submit();'} %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

@@ -18,50 +18,50 @@ class FclExwBookingInfoStepsController < ApplicationController
 
 		if (params[:fcl_exw_booking_info_step][:doc_cut_off_date].present?)
 			if existing_booking_info.doc_cut_off_date.nil?
-				Task.create(note: 'Document cut off date set.' , due_date: params[:fcl_exw_booking_info_step][:doc_cut_off_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'doc_cut_off' )
+				Task.create(note: 'Document cut off date set.' , due_date: params[:fcl_exw_booking_info_step][:doc_cut_off_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'Documments Cut Off Date' )
 			else
-				Task.where(subject: 'doc_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:doc_cut_off_date], status: '0')
+				Task.where(subject: 'Documments Cut Off Date', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:doc_cut_off_date], status: '0')
 			end
 		end
 
 		if (params[:fcl_exw_booking_info_step][:cargo_cut_off_date].present?)
 			if existing_booking_info.cargo_cut_off_date.nil?
-				Task.create(note: 'Cargo cut off date set.', due_date: params[:fcl_exw_booking_info_step][:cargo_cut_off_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'cargo_cut_off' )
+				Task.create(note: 'Cargo cut off date set.', due_date: params[:fcl_exw_booking_info_step][:cargo_cut_off_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'Cargo Cut Off Date' )
 			else
-				Task.where(subject: 'cargo_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:cargo_cut_off_date], status: '0')
+				Task.where(subject: 'Cargo Cut Off Date', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:cargo_cut_off_date], status: '0')
 			end
 		end
 
 		if (params[:fcl_exw_booking_info_step][:vgm_cut_off_date].present?)
 			if existing_booking_info.vgm_cut_off_date.nil?
-				Task.create(note: 'VGM cut off date set.', due_date: params[:fcl_exw_booking_info_step][:vgm_cut_off_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'vgm_cut_off' )
+				Task.create(note: 'VGM cut off date set.', due_date: params[:fcl_exw_booking_info_step][:vgm_cut_off_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'VGM Cut Off Date' )
 			else
-				Task.where(subject: 'vgm_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:vgm_cut_off_date], status: '0')
+				Task.where(subject: 'VGM Cut Off Date', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:vgm_cut_off_date], status: '0')
 			end
 		end
 
 		if (params[:fcl_exw_booking_info_step][:sailing_date].present?)
 			if existing_booking_info.sailing_date.nil?
-				Task.create(note: 'Expected sailing date set.', due_date: params[:fcl_exw_booking_info_step][:sailing_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'sailing_date' )
-				Task.create(note: 'Check if cargo is on port and ready to sail', due_date: (params[:fcl_exw_booking_info_step][:arrival_date]).to_date - 3.days, fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'cargo_on_port' )
+				Task.create(note: 'Expected sailing date set.', due_date: params[:fcl_exw_booking_info_step][:sailing_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'Sailing Date' )
+				Task.create(note: 'Check if cargo is on port and ready to sail', due_date: (params[:fcl_exw_booking_info_step][:arrival_date]).to_date - 3.days, fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'Cargo On Port' )
 			else
-				Task.where(subject: 'sailing_date', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:sailing_date], status: '0')
-				Task.where(subject: 'cargo_on_port', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: (params[:fcl_exw_booking_info_step][:sailing_date]).to_date - 3.days, status: '0')
+				Task.where(subject: 'Sailing Date', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:sailing_date], status: '0')
+				Task.where(subject: 'Cargo On Port', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: (params[:fcl_exw_booking_info_step][:sailing_date]).to_date - 3.days, status: '0')
 			end
 		end
 
 		if (params[:fcl_exw_booking_info_step][:arrival_date].present?)
 			if existing_booking_info.arrival_date.nil?
-				Task.create(note: 'Expected arrival date set.', due_date: params[:fcl_exw_booking_info_step][:arrival_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'arrival_date' )
+				Task.create(note: 'Expected arrival date set.', due_date: params[:fcl_exw_booking_info_step][:arrival_date], fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'Arrival Date' )
 			else
-				Task.where(subject: 'arrival_date', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:arrival_date], status: '0')
+				Task.where(subject: 'Arrival Date', fcl_exw_booking_info_steps_id: existing_booking_info.id).first.update(due_date: params[:fcl_exw_booking_info_step][:arrival_date], status: '0')
 			end
 		end
 	
-		existing_task = Task.where(subject: 'ramp_cut_off', fcl_exw_booking_info_steps_id: existing_booking_info.id).first
+		existing_task = Task.where(subject: 'Ramp Cut Off Date', fcl_exw_booking_info_steps_id: existing_booking_info.id).first
 		if (params[:fcl_exw_booking_info_step][:ramp] == "YES")
 			if existing_task.nil? && !(params[:fcl_exw_booking_info_step][:ramp_cut_off_date]).nil?
-				Task.create(note: 'Verify that container was included in ramp transportation.', due_date: (params[:fcl_exw_booking_info_step][:ramp_cut_off_date]).to_date + 1.day , fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'ramp_cut_off' )
+				Task.create(note: 'Verify that container was included in ramp transportation.', due_date: (params[:fcl_exw_booking_info_step][:ramp_cut_off_date]).to_date + 1.day , fcl_exw_booking_info_steps_id: existing_booking_info.id, operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id, subject: 'Ramp Cut Off Date' )
 			elsif !(params[:fcl_exw_booking_info_step][:ramp_cut_off_date]).nil?
 				existing_task.update(due_date: params[:fcl_exw_booking_info_step][:ramp_cut_off_date], status: '0')
 			end

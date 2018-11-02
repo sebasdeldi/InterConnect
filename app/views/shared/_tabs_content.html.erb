@@ -21,7 +21,7 @@
 
 <% if is_representative? %>
 	<div id="fifth-tab-content">
-	  <%= render 'tasks/index' %>
+	  <%= render 'tasks/index', operations_by_repre: operations_by_repre, task_subject: task_subject %>
 	</div>
 <% end %>
 

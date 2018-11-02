@@ -12,12 +12,12 @@ class FclExwCargoInfoStepsController < ApplicationController
 	  if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id))
 	  	op = Operation.find_by(secure_id: params[:operation_secure_id])
 			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request Booking Order')
-			existing_bonded = Task.where(operation_id: op.id, subject: 'bonded_doc').first
-			existing_self_propelled = Task.where(operation_id: op.id, subject: 'self_propelled_doc').first
+			existing_bonded = Task.where(operation_id: op.id, subject: 'Bonded Docummentation').first
+			existing_self_propelled = Task.where(operation_id: op.id, subject: 'Self Propelled Docummentation').first
 
 			if params[:fcl_exw_cargo_info_step][:bonded] == 'true'
 				if existing_bonded.nil?
-					Task.create(operation_id: op.id, note: 'Verify bonded docummentation', due_date: Time.now + 1.weeks , subject:'bonded_doc')				
+					Task.create(operation_id: op.id, note: 'Verify bonded docummentation', due_date: Time.now + 1.weeks , subject:'Bonded Docummentation')				
 				else
 					existing_bonded.update(status: '0')
 				end
@@ -29,7 +29,7 @@ class FclExwCargoInfoStepsController < ApplicationController
 
 			if params[:fcl_exw_cargo_info_step][:self_propelled] == 'true'
 				if existing_self_propelled.nil?
-					Task.create(operation_id: op.id, note: "Send self propelled docummentation (tittle/bill of sells original & notarized, power of attorney, copy of power of attorney signer's id) to broker", due_date: Time.now + 1.weeks , subject:'self_propelled_doc')				
+					Task.create(operation_id: op.id, note: "Send self propelled docummentation (tittle/bill of sells original & notarized, power of attorney, copy of power of attorney signer's id) to broker", due_date: Time.now + 1.weeks , subject:'Self Propelled Docummentation')				
 				else
 					existing_self_propelled.update(status: '0')
 				end
@@ -39,7 +39,7 @@ class FclExwCargoInfoStepsController < ApplicationController
 				end
 			end
 
-			Task.create(note: "Please verify that your POD, POL, container size, loading address and hazmat status match the operation's quotation. Also be aware of any overweight extra fee (20' bellow 35.000lbs, 40' and 45' bellow 42.000)", due_date: Time.now + 4.days, operation_id: op.id, subject: 'quotation_review' )
+			Task.create(note: "Please verify that your POD, POL, container size, loading address and hazmat status match the operation's quotation. Also be aware of any overweight extra fee (20' bellow 35.000lbs, 40' and 45' bellow 42.000)", due_date: Time.now + 4.days, operation_id: op.id, subject: 'Quotation Review' )
 
 			shipper = OperationsByUser.find_by(operation_id: op.id).shipper
 			if shipper.ein != params[:fcl_exw_cargo_info_step][:ein]
