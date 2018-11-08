@@ -171,15 +171,31 @@
 							</p>
 						</div>
 
-						<div class="column with-top-border full">
+						<div class="column small with-top-border">
+							<p class="padded">
+								<b>AGENT'S REFERENCE NUMBER</b>
+								<br>
+								<%= @operation.agent_reference %>				
+							</p>
+						</div>
+
+						<div class="column small with-left-border with-top-border">
 							<p class="padded">
 								<b>SHIPPER'S REFERENCE NUMBER</b>
 								<br>
-								<%= @operation.reference_number %>				
+								<%= @operation.shipper_reference %>				
 							</p>
 						</div>
-					</div>
 
+						<div class="column with-top-border full">
+							<p class="padded">
+								<b>CONSIGNEE'S REFERENCE NUMBER</b>
+								<br>
+								<%= @operation.consignee_reference %>				
+							</p>
+						</div>
+
+					</div>
 				</div>
 			</div>
 			<br>

@@ -10,8 +10,7 @@ class RepresentativesController < ApplicationController
     date_range_param = cookies[:date_range_param]
 
 		query_params = [@modality_content, @status_content, @search_content]
-		operation = Operation.new
-    @operations = operation.fetch_representative_operations(cookies[:sort_param], query_params, current_user)
+    @operations = Operation.fetch_representative_operations(cookies[:sort_param], query_params, current_user)
     @operations_by_repre =  Operation.where(id: OperationsByUser.where(representative_id: current_user))
     @task_subject = Task.distinct.pluck(:subject)
 

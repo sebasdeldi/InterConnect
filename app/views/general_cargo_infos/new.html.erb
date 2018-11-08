@@ -1,7 +1,7 @@
 <div class="container is-widescreen"> 
-	<%= render 'type_of_info' %>
-	<%= render 'different_info' %>
-	<%= render 'grouped_info' %>
+	<%= render 'type_of_info', operation: @operation %>
+	<%= render 'different_info', operation: @operation %>
+	<%= render 'grouped_info', operation: @operation %>
 	<%= link_to 'Back', operation_path(params[:operation_id]), class: 'button is-link' %>
 </div>
 

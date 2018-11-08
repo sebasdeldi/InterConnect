@@ -3,6 +3,7 @@ class FclExwQuotationConfirmedStepsController < ApplicationController
 	def new
 		@operation = Operation.find_by(secure_id: params[:secure_id])
 		@quotation = FclExwQuotationConfirmedStep.find_by(operation_id: @operation.id)
+		@shipper = OperationsByUser.find_by(operation_id: @operation.id).shipper
 	end
 
 	def update_pricing

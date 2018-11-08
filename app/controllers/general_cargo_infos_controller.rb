@@ -4,6 +4,7 @@
   	before_action :set_up
 
     def new
+      @operation = Operation.find(params[:operation_id])
     end
 
     def create

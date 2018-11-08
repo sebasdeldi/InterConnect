@@ -5,8 +5,7 @@ class RepresentativesChartsController < ApplicationController
 		set_query_params_cookies(params[:modality], params[:representative_id])
 		@modality_content = cookies[:modality]
 		@representative_id = cookies[:representative_id]
-		operation = Operation.new
-		@operations = operation.fetch_representatives_charts(cookies[:date_range_param], @modality_content , @representative_id)
+		@operations = RepresentativeChart.fetch_representatives_charts(cookies[:date_range_param], @modality_content , @representative_id)
 	end
 
 	private

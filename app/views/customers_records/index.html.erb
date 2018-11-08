@@ -6,7 +6,7 @@
 	  <ul>
 	    <li><%= link_to "Insights", admin_path %></li>
 	    <li><%= link_to "Traffics Charts", customers_charts_path %></li>
-	    <li class="is-active"> <a href="#"><b><%= User.find(@customer_id).company_name %> </b></a></li>
+	    <li class="is-active"> <a href="#"><b><%= company_name(cookies[:customer_id]) %> </b></a></li>
 	  </ul>
 	</nav>
 </div>

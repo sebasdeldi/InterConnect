@@ -13,7 +13,7 @@
 	      
 
 	      <div class='panel-block'>
-	        <%= render "form", quotation: @quotation, shipper: OperationsByUser.find_by(operation_id: @operation.id).shipper %>
+	        <%= render "form", quotation: @quotation, shipper: @shipper %>
 	      </div>
 
 

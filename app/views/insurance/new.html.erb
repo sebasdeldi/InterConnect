@@ -7,10 +7,10 @@
 	      <br>
 	      <nav class="breadcrumb" aria-label="breadcrumbs">
 	        <ul>
-	          <li><%= link_to "Operation Timeline", operation_path(Operation.find_by(secure_id: params[:secure_id]).id) %></li>
+	          <li><%= link_to "Operation Timeline", operation_path(@operation.id) %></li>
 	          <li class="is-active">
 	          	<a href="">
-	          		Insurance for operation: <%= Operation.find_by(secure_id: params[:secure_id]).reference %>
+	          		Insurance for operation: <%= @operation.reference %>
 							</a>
 						</li>
 	        </ul>

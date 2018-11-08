@@ -149,13 +149,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_query_params_cookies(modality, status, search)
+  def set_query_params_cookies(modality, status, search, customer_id=nil)
     @modality_content = nil
     @status_content = nil
     @search_content = nil
-    cookies.permanent[:modality] = modality
-    cookies.permanent[:status] = status
-    cookies.permanent[:search] = search
+    cookies.permanent[:modality] = modality unless modality.nil?
+    cookies.permanent[:status] = status unless status.nil?
+    cookies.permanent[:search] = search unless search.nil?
+    cookies.permanent[:customer_id] = customer_id unless customer_id.nil?
   end
 
   # Tasks cookies settings

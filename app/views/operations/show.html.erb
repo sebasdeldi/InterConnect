@@ -12,7 +12,6 @@
 		  	<% elsif is_representative? %>
 		  		<li class='operations-redirection' ><%= link_to "Operation Records List", representative_path %></li>
 		  	<% end %>
-
 		    <li class="is-active"><%= link_to "Operation " + @operation.reference, operation_path(@operation.id) %></li>
 		  </ul>
 
@@ -30,10 +29,10 @@
   	          		See SLI
   		          </option>
 			        <% end %>
-		          <option value="slis/new/<%= Operation.find(params[:id]).secure_id %>">
+		          <option value="slis/new/<%= @operation.secure_id %>">
 		          	SLI Form
 		          </option>
-		          <option value="slis/request_sli/<%= Operation.find(params[:id]).secure_id %>">
+		          <option value="slis/request_sli/<%= @operation.secure_id %>">
 		          	Request SLI
 		          </option>
               <% unless @invoice.nil? || @invoice.files.empty? %>
@@ -41,10 +40,10 @@
               		See Invoice
     	          </option>
     	        <% end %>
-    	        <option value="invoices/new/<%= Operation.find(params[:id]).secure_id %>">
+    	        <option value="invoices/new/<%= @operation.secure_id %>">
     	        	Invoice Form
     	        </option>
-    	        <option value="invoices/request_invoice/<%= Operation.find(params[:id]).secure_id %>">
+    	        <option value="invoices/request_invoice/<%= @operation.secure_id %>">
     	        	Request Invoice
     	        </option>
     	        <option value="<%= booking_sheet_path(@operation.id, format: 'pdf') %>">

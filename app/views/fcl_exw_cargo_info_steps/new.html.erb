@@ -4,13 +4,13 @@
       <br>
       <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-          <li><%= link_to "Operation Timeline", operation_path(Operation.find_by(secure_id: params[:operation_secure_id]).id) %></li>
+          <li><%= link_to "Operation Timeline", operation_path(@operation) %></li>
           <li class="is-active"><a href="">Cargo Information </a></li>
         </ul>
       </nav>
       <nav class= 'panel is-form-panel card-shadow' >
         <p class="panel-heading">
-          FCL - EXW Cargo information for operation: <%= Operation.find_by(secure_id: params[:operation_secure_id]).reference %>
+          FCL - EXW Cargo information for operation: <%= @operation.reference %>
         </p>
         <div class='panel-block'>
           <%= form_with model: @fcl_cargo_info, id: '', html: {class: "control"}, multipart: true do |f| %>
@@ -156,7 +156,7 @@
 
         <nav class= 'panel is-form-panel card-shadow' >
           <p class="panel-heading">
-            Alerts for operation <%= Operation.find_by(secure_id: params[:operation_secure_id]).reference %>
+            Alerts for operation <%= @operation.reference %>
           </p>
 
           <div class='panel-block'>
@@ -167,7 +167,7 @@
               </div>
               <div class="message-body">
                 <p>
-                  Please have in count that a record for this step of the <b>operation identified with the number <%= Operation.find_by(secure_id: params[:operation_secure_id]).reference %></b> was previously saved in our system, and by submiting new information, the old data would be overriden.  
+                  Please have in count that a record for this step of the <b>operation identified with the number <%= @operation.reference %></b> was previously saved in our system, and by submiting new information, the old data would be overriden.  
                 </p>
               </div>
             </article>

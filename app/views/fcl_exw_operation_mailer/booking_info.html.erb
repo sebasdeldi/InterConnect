@@ -3,7 +3,25 @@
 <div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">&nbsp;</font></span></font></div>
 <div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">
 
-	Good morning, this is the booking information regarding the operation <%= @reference_number %>:
+	Good morning, this is the booking information regarding the operation with the following references:
+	<br>
+	<ul>
+		<li>
+			<b>Agent's Reference Number: </b> 
+			<%= @agent_reference %>
+		</li>
+		<br>
+		<li>
+			<b>Shipper's Reference Number: </b> 
+			<%= @shipper_reference %>
+		</li>
+		<br>
+		<li>
+			<b>Consignee's Reference Number: </b> 
+			<%= @consignee_reference %> 
+		</li>
+	</ul>
+	<hr>
 	<br>
 	<ul>
 		<li>
@@ -13,8 +31,8 @@
 		<br>
 		<li>
 			<b>Vessel: </b> 
-			<%= @info.vessel %>
-		</li>
+			<%= @info.vessel %> 
+		</li> 
 		<br>
 		<li>
 			<b>Voyage: </b> 

@@ -13,7 +13,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="column">
-					<% if @agent.company_name.nil? %>
+					<% if agent(@operation).company_name.nil? %>
 				    <p>
 				    	AGENT: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -21,11 +21,11 @@
 			    <% else %>
 		        <p>
 		        	AGENT: 
-		    			<span style="text-decoration: underline; white-space: pre;"><%= @agent.company_name %></span>
+		    			<span style="text-decoration: underline; white-space: pre;"><%= agent(@operation).company_name %></span>
 		        </p>
 			    <% end %>
 
-			    <% if @shipper.company_name.nil? %>
+			    <% if shipper(@operation).company_name.nil? %>
 				    <p>
 				    	SHIPPER: 
 				    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -33,11 +33,11 @@
 				  <% else %>
 					  <p>
 					  	SHIPPER: 
-					  	<span style="text-decoration: underline; white-space: pre;"><%= @shipper.company_name %></span>
+					  	<span style="text-decoration: underline; white-space: pre;"><%= shipper(@operation).company_name %></span>
 					  </p>
 				  <% end %>
 
-				  <% if @shipper.email.nil? %>
+				  <% if shipper(@operation).email.nil? %>
 				    <p>
 				    	CTC: 
 				    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -45,11 +45,11 @@
 				  <% else %>
 				  	<p>
 				  		CTC: 
-				  		<span style="text-decoration: underline; white-space: pre;"><%= @shipper.email %></span>
+				  		<span style="text-decoration: underline; white-space: pre;"><%= shipper(@operation).email %></span>
 				  	</p>
 				  <% end %>
 
-				  <% if @shipper.phone_number.nil? %>
+				  <% if shipper(@operation).phone_number.nil? %>
 			    <p>
 			    	PH: 
 			    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -57,11 +57,11 @@
 			    <% else %>
 			    	<p>
 			    		PH: 
-			    		<span style="text-decoration: underline; white-space: pre;"><%= @shipper.phone_number %></span>
+			    		<span style="text-decoration: underline; white-space: pre;"><%= shipper(@operation).phone_number %></span>
 			    	</p>
 			    <% end %>
 
-			    <% if @consignee.company_name.nil? %>
+			    <% if consignee(@operation).company_name.nil? %>
 				    <p>
 				    	CONSIGNEE: 
 				    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -69,7 +69,7 @@
 				  <% else %>
 					  <p>
 					  	CONSIGNEE: 
-					  	<span style="text-decoration: underline; white-space: pre;"><%= @consignee.company_name %></span>
+					  	<span style="text-decoration: underline; white-space: pre;"><%= consignee(@operation).company_name %></span>
 					  </p>
 				  <% end %>
 				</div>
@@ -106,7 +106,7 @@
 			<div class="row">
 				<div class="column-third">
 					<p>
-						<% if @contacted_customer %>
+						<% if contacted_customer(@operation) %>
 							¿CONTACTÓ PROVEEDOR?
 							SÍ <input type="checkbox" checked> 
 		  				NO<input type="checkbox"> 
@@ -127,7 +127,7 @@
 				<div class="column-third">
 					<p>
 						¿SOLICITÓ INVOICE?
-						<% if !@invoice.nil? && @invoice.requested %>
+						<% if !invoice(@operation).nil? && invoice(@operation).requested %>
 							SÍ <input type="checkbox" checked>
 		  				NO <input type="checkbox"> 
 		  			<% else %> 
@@ -138,7 +138,7 @@
 
 					<p>
 						¿SOLICITÓ SLI?
-						<% if !@sli.nil? && @sli.requested %>
+						<% if !sli(@operation).nil? && sli(@operation).requested %>
 							SÍ <input type="checkbox" checked>
 		  				NO <input type="checkbox"> 
 		  			<% else %> 
@@ -160,7 +160,7 @@
 			<br>
 			<div class="row">
 				<div class="column">
-					<% if @shipper.ein.nil? %>
+					<% if shipper(@operation).ein.nil? %>
 						<p>
 							SHIPPER EIN#: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -168,7 +168,7 @@
 					<% else %>
 						<p>
 							SHIPPER EIN#: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @shipper.ein %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= shipper(@operation).ein %></span>
 						</p>
 					<% end %>
 
@@ -249,7 +249,7 @@
 				</div>
 			</div>
 
-			<% @pieces.each do |piece| %>
+			<% pieces(@operation).each do |piece| %>
 				<div class="booking-container bottom">
 					<div class="row">
 						<div class="column-third">
@@ -303,14 +303,14 @@
 								<% end %>
 							<% end %>
 
-							<% if @cargo_info.bonded.nil? %>
+							<% if cargo_info(@operation).bonded.nil? %>
 								<p>
 									¿ES BONDED?
 									SÍ <input type="checkbox">
 									NO <input type="checkbox">
 								</p>	
 							<% else %>
-								<% if @cargo_info.bonded? %>
+								<% if cargo_info(@operation).bonded? %>
 									<p>
 										¿ES BONDED?
 										SÍ <input type="checkbox" checked>
@@ -325,7 +325,7 @@
 								<% end %>
 							<% end %>
  
-							<% if !@self_propelled_task.nil? && @self_propelled_task.status == '1' %>
+							<% if !self_propelled_task(@operation).nil? && self_propelled_task(@operation).status == '1' %>
 								<p>
 									¿VALIDÓ CON BROKER?
 									SÍ <input type="checkbox" checked>
@@ -422,7 +422,7 @@
 
 						<div class="column-third">
 
-							<% if @cargo_info.files.empty? %>
+							<% if cargo_info(@operation).files.empty? %>
 								<p>
 									¿TIENE DOC HAZ?
 									SÍ <input type="checkbox"> 
@@ -436,14 +436,14 @@
 								</p>
 							<% end %>
 
-							<% if @cargo_info.self_propelled.nil? %>
+							<% if cargo_info(@operation).self_propelled.nil? %>
 								<p>
 									¿ES SELF PROPELLED?
 									SÍ <input type="checkbox"> 
 									NO <input type="checkbox">
 								</p>	
 							<% else %>
-								<% if @cargo_info.self_propelled? %>
+								<% if cargo_info(@operation).self_propelled? %>
 									<p>
 										¿ES SELF PROPELLED?
 										SÍ <input type="checkbox" checked> 
@@ -484,7 +484,7 @@
 			<br>
 			<div class="row">
 				<div class="column-third">
-					<% if @booking_info.doc_cut_off_date.nil? || @booking_info.doc_cut_off_time.nil? %>
+					<% if booking_info(@operation).doc_cut_off_date.nil? || booking_info(@operation).doc_cut_off_time.nil? %>
 						<p>
 							DOC CUT OFF: 
 							<span style="text-decoration: underline; white-space: pre;">                                             </span>
@@ -492,11 +492,11 @@
 					<% else %>
 						<p>
 							DOC CUT OFF: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.doc_cut_off_date %> <%= @booking_info.time(@booking_info.doc_cut_off_time) %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).doc_cut_off_date %> <%= booking_info(@operation).time(booking_info(@operation).doc_cut_off_time) %></span>
 						</p>
 					<% end %>
 
-					<% if @booking_info.sailing_date.nil? || @booking_info.sailing_time.nil? %>
+					<% if booking_info(@operation).sailing_date.nil? || booking_info(@operation).sailing_time.nil? %>
 						<p>
 							ETD: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -504,16 +504,16 @@
 					<% else %>
 						<p>
 							ETD: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.sailing_date %> <%= @booking_info.time(@booking_info.sailing_time) %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).sailing_date %> <%= booking_info(@operation).time(booking_info(@operation).sailing_time) %></span>
 						</p>
 					<% end %>
 
-					<% if @booking_info.ramp.nil? %>
+					<% if booking_info(@operation).ramp.nil? %>
 						<p>
 							MODE OF TRANSPORT: 
 							<span style="text-decoration: underline; white-space: pre;">                                 </span>
 						</p>
-					<% elsif @booking_info.ramp == false %>
+					<% elsif booking_info(@operation).ramp == false %>
 						<p>
 							MODE OF TRANSPORT: 
 							<span style="text-decoration: underline; white-space: pre;">OCEAN-NO RAMP</span>
@@ -526,7 +526,7 @@
 					<% end %>
 
 
-					<% if @steamship.nil? || @steamship == "" %>
+					<% if steamship(@operation).nil? || steamship(@operation) == "" %>
 						<p>
 							STEAMSHIP: 
 							<span style="text-decoration: underline; white-space: pre;">                                       </span>
@@ -534,11 +534,11 @@
 					<% else %>
 						<p>
 							STEAMSHIP: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @steamship %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= steamship(@operation) %></span>
 						</p>
 					<% end %>
 
-					<% if @cargo_info.pickup_reference.nil? || @cargo_info.pickup_reference == "" %>
+					<% if cargo_info(@operation).pickup_reference.nil? || cargo_info(@operation).pickup_reference == "" %>
 						<p>
 							PICKUP REFERENCE: 
 							<span style="text-decoration: underline; white-space: pre;">                             </span>
@@ -546,13 +546,13 @@
 					<% else %>
 						<p>
 							PICKUP REFERENCE: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @cargo_info.pickup_reference %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= cargo_info(@operation).pickup_reference %></span>
 						</p>
 					<% end %>
 				</div>
 
 				<div class="column-third">
-					<% if @booking_info.cargo_cut_off_date.nil? || @booking_info.cargo_cut_off_time.nil? %>
+					<% if booking_info(@operation).cargo_cut_off_date.nil? || booking_info(@operation).cargo_cut_off_time.nil? %>
 						<p>
 							CARGO CUT OFF: 
 							<span style="text-decoration: underline; white-space: pre;">                                     </span>
@@ -560,11 +560,11 @@
 					<% else %>
 						<p>
 							CARGO CUT OFF: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.cargo_cut_off_date %> <%= @booking_info.time(@booking_info.cargo_cut_off_time) %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).cargo_cut_off_date %> <%= booking_info(@operation).time(booking_info(@operation).cargo_cut_off_time) %></span>
 						</p>
 					<% end %>
 
-					<% if @booking_info.arrival_date.nil? %>
+					<% if booking_info(@operation).arrival_date.nil? %>
 						<p>
 							ETA: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -572,11 +572,11 @@
 					<% else %>
 						<p>
 							ETA: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.arrival_date %> <%= @booking_info.time(@booking_info.arrival_time) %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).arrival_date %> <%= booking_info(@operation).time(booking_info(@operation).arrival_time) %></span>
 						</p>
 					<% end %>
 
-					<% if @booking_info.booking_number.nil? %>
+					<% if booking_info(@operation).booking_number.nil? %>
 						<p>
 							BOOKING#: 
 							<span style="text-decoration: underline; white-space: pre;">                                                      </span>
@@ -584,11 +584,11 @@
 					<% else %>
 						<p>
 							BOOKING#: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.booking_number %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).booking_number %></span>
 						</p>
 					<% end %>
 
-					<% if @booking_info.vessel.nil? || @booking_info.vessel == "" %>
+					<% if booking_info(@operation).vessel.nil? || booking_info(@operation).vessel == "" %>
 						<p>
 							VESSEL/VOYAGE: 
 							<span style="text-decoration: underline; white-space: pre;">                                       </span>
@@ -596,12 +596,12 @@
 					<% else %>
 						<p>
 							VESSEL/VOYAGE: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.vessel %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).vessel %></span>
 						</p>
 					<% end %>
 
-					<% if @booking_info.ramp_cut_off_date.nil? || @booking_info.ramp_cut_off_date == "" %>
-						<% if @booking_info.ramp == "YES" %>
+					<% if booking_info(@operation).ramp_cut_off_date.nil? || booking_info(@operation).ramp_cut_off_date == "" %>
+						<% if booking_info(@operation).ramp == "YES" %>
 							<p>
 								RAMP CUT OFF DATE: 
 								<span style="text-decoration: underline; white-space: pre;">                                  </span>
@@ -613,10 +613,10 @@
 							</p>
 						<% end %>
 					<% else %>
-						<% if @booking_info.ramp %>
+						<% if booking_info(@operation).ramp %>
 							<p>
 								RAMP CUT OFF DATE: 
-								<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.ramp_cut_off_date %></span>
+								<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).ramp_cut_off_date %></span>
 							</p>
 						<% else %>
 							<p>
@@ -629,7 +629,7 @@
 				</div>
 
 				<div class="column-third">
-					<% if @booking_info.voyage.nil? %>
+					<% if booking_info(@operation).voyage.nil? %>
 						<p>
 							VGM CUT OFF: 
 							<span style="text-decoration: underline; white-space: pre;">                                                </span>
@@ -637,11 +637,11 @@
 					<% else %>
 						<p>
 							VGM CUT OFF: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.vgm_cut_off_date %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).vgm_cut_off_date %></span>
 						</p>
 					<% end %>
 
-					<% if @booking_info.voyage.nil? %>
+					<% if booking_info(@operation).voyage.nil? %>
 						<p>
 							VOYAGE: 
 							<span style="text-decoration: underline; white-space: pre;">                                                    </span>
@@ -649,11 +649,11 @@
 					<% else %>
 						<p>
 							VOYAGE: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @booking_info.voyage %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).voyage %></span>
 						</p>
 					<% end %>
 
-					<% if @cargo_info.loading_date.nil? || @cargo_info.loading_time.nil?  %>
+					<% if cargo_info(@operation).loading_date.nil? || cargo_info(@operation).loading_time.nil?  %>
 						<p>
 							SPOTTING DATE: 
 							<span style="text-decoration: underline; white-space: pre;">                                          </span>
@@ -661,16 +661,16 @@
 					<% else %>
 						<p>
 							SPOTTING DATE: 
-							<span style="text-decoration: underline; white-space: pre;"><%= @cargo_info.loading_date %> <%= @cargo_info.time(@cargo_info.loading_time) %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= cargo_info(@operation).loading_date %> <%= cargo_info(@operation).time(cargo_info(@operation).loading_time) %></span>
 						</p>
 					<% end %>
 
-					<% if @booking_info.ramp.nil? %>
+					<% if booking_info(@operation).ramp.nil? %>
 						<p>
 							INLAND MODE: 
 							<span style="text-decoration: underline; white-space: pre;">                                              </span>
 						</p>
-					<% elsif @booking_info.ramp == "YES" %>
+					<% elsif booking_info(@operation).ramp == "YES" %>
 						<p>
 							INLAND MODE: 
 							<span style="text-decoration: underline; white-space: pre;">RAIL TRUCK</span>

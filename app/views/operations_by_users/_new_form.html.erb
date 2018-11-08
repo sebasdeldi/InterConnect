@@ -14,10 +14,34 @@
     </div>
 
     <div class="field">
-      <label class="label">Reference Number (if customer provided):</label>
+      <label class="label">Agent Reference Number:</label>
       <div class="control has-icons-left">
         <div class=" full-select">
-          <%= text_field_tag :reference_number, nil, class: 'input' %>
+          <%= text_field_tag :agent_reference, nil, class: 'input' %>
+        </div>
+        <div class="icon is-small is-left">
+          <i class="fas fa-globe"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Shipper Reference Number:</label>
+      <div class="control has-icons-left">
+        <div class=" full-select">
+          <%= text_field_tag :shipper_reference, nil, class: 'input' %>
+        </div>
+        <div class="icon is-small is-left">
+          <i class="fas fa-globe"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Consignee Reference Number:</label>
+      <div class="control has-icons-left">
+        <div class=" full-select">
+          <%= text_field_tag :consignee_reference, nil, class: 'input' %>
         </div>
         <div class="icon is-small is-left">
           <i class="fas fa-globe"></i>
