@@ -10,7 +10,11 @@ class CreateInsurances < ActiveRecord::Migration[5.1]
       t.string :zip
       t.string :country
       t.string :modality
-      t.string :origin
+      t.string :origin_address
+      t.string :origin_city
+      t.string :origin_state
+      t.string :origin_country
+      t.string :origin_zip_code
       t.string :destination
       t.string :incoterm
       t.string :etd

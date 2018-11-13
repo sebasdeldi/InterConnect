@@ -18,7 +18,12 @@ class AddFieldsToOperations < ActiveRecord::Migration[5.1]
     add_column :operations, :difficulty, :string
     add_column :operations, :pol, :string
     add_column :operations, :pod, :string
-    add_column :operations, :origin, :string
+    add_column :operations, :origin_address, :string
+    add_column :operations, :origin_zip_code, :string
+    add_column :operations, :origin_city, :string
+    add_column :operations, :origin_state, :string
+    add_column :operations, :origin_country, :string
+
     add_column :operations, :destination, :string
   end
 end

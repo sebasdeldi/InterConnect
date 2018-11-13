@@ -73,19 +73,72 @@
         </div>
       </div>
     </div>
-
-
-    <div class="field">
-      <label class="label">Origin:</label>
-      <div class="control has-icons-left">
-        <div class=" full-select">
-          <%= text_field_tag :origin, nil, class: 'input' %>
+    <br>
+    <div>
+      <div class="box card-shadow margin-bottom">
+        <div class="field">
+          <label class="label">Origin Address:</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :origin_address, nil, class: 'input' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
         </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
+
+        <div class="field">
+          <label class="label">Origin City:</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :origin_city, nil, class: 'input' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Origin State:</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :origin_state, nil, class: 'input' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Origin Zip Code:</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :origin_zip_code, nil, class: 'input' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Origin Country:</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :origin_country, nil, class: 'input' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <br>
+
 
 
     <div class="field">
@@ -196,5 +249,3 @@
 <%= render 'new_user_modal', user_type: 'consignee' %>
 
 
-<br>
-<br>

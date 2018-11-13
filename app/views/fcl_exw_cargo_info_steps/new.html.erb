@@ -20,7 +20,7 @@
             <div class="field">
               <%= f.label 'Loading Address:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :loading_address, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.loading_address : '' %>
+                <%= f.text_field :loading_address, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).loading_address : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-map-signs"></i>
                 </span>
@@ -30,7 +30,7 @@
             <div class="field">
               <%= f.label 'Contact Email:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :contact_email, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.contact_email : '' %>
+                <%= f.text_field :contact_email, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).contact_email : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-map-signs"></i>
                 </span>
@@ -40,7 +40,7 @@
             <div class="field">
               <%= f.label 'Contant Phone:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :contact_number, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.contact_number : '' %>
+                <%= f.text_field :contact_number, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).contact_number : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-map-signs"></i>
                 </span>
@@ -50,7 +50,7 @@
             <div class="field">
               <%= f.label 'Loading Date:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :loading_date, autofocus: true, class: 'input loading_datetime', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.loading_date : '' %>
+                <%= f.text_field :loading_date, autofocus: true, class: 'input loading_datetime', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).loading_date : '' %>
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
                 </span>
@@ -67,15 +67,15 @@
               </div>
             </div> 
 
-            <% unless @existing_fcl_cargo_info.loading_time.nil? %>
-              <p class="hour hidden"><%= @existing_fcl_cargo_info.loading_time.hour %></p>
-              <p class="mins hidden"><%= @existing_fcl_cargo_info.loading_time.min %></p>
+            <% unless existing_fcl_cargo_info(@operation).loading_time.nil? %>
+              <p class="hour hidden"><%= hour(@operation) %></p>
+              <p class="mins hidden"><%= minute(@operation) %></p>
             <% end %>
 
             <div class="field">
               <%= f.label 'Pick Up Reference:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :pickup_reference, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.pickup_reference : '' %>
+                <%= f.text_field :pickup_reference, autofocus: true, class: 'input', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).pickup_reference : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-file-alt"></i>
                 </span>
@@ -86,7 +86,7 @@
             <div class="field">
               <%= f.label 'EIN:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :ein, autofocus: true, class: 'input', value: @ein.nil? ? '' : @ein %>
+                <%= f.text_field :ein, autofocus: true, class: 'input', value: ein(@operation).nil? ? '' : ein(@operation) %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-file-alt"></i>
                 </span>
@@ -97,7 +97,7 @@
               <%= f.label 'Bonded:', class: 'label' %>
               <div class="control has-icons-left">
                 <div class="select">
-                  <%= f.select :bonded, options_for_select([['NO', false], ['YES', true]], is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.bonded : '' ), {}, class: 'input'  %>
+                  <%= f.select :bonded, options_for_select([['NO', false], ['YES', true]], is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).bonded : '' ), {}, class: 'input'  %>
                 </div>
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
@@ -109,7 +109,7 @@
               <%= f.label 'Self Propelled:', class: 'label' %>
               <div class="control has-icons-left">
                 <div class="select">
-                  <%= f.select :self_propelled, options_for_select([['NO', false], ['YES', true]], is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.self_propelled : '' ), {}, class: 'input'  %>
+                  <%= f.select :self_propelled, options_for_select([['NO', false], ['YES', true]], is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).self_propelled : '' ), {}, class: 'input'  %>
                 </div>
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
@@ -120,20 +120,20 @@
             <div class="field pieces-number-diff">
               <%= f.label 'Number of containers', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.number_field :pieces_number, autofocus: true, class: 'input pieces-number-diff', min: 0, value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.pieces_number : '' %>
+                <%= f.number_field :pieces_number, autofocus: true, class: 'input pieces-number-diff', min: 0, value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).pieces_number : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope pieces-number-diff"></i>
                 </span>
               </div>
             </div>  
-            <%= f.hidden_field :fcl_exw_cargo_info_step_id, class: "fcl_exw_cargo_info_step_id", value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? @existing_fcl_cargo_info.id : '' %>
+            <%= f.hidden_field :fcl_exw_cargo_info_step_id, class: "fcl_exw_cargo_info_step_id", value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).id : '' %>
             <br>
             <div id="container"></div>
 
             <%= f.label 'Upload documents related to the cargo HAZMAT, SELF PROPELLED, BONDED, ETC...', class: 'label' %>
             <%= f.file_field :files, multiple: true %>
             <ul>
-              <% @existing_fcl_cargo_info.files.each do |file| %>
+              <% existing_fcl_cargo_info(@operation).files.each do |file| %>
                 <li> <%= link_to file.path.split("/").last, file.url, target: 'blank' %>  </li>
               <% end %>
             </ul>

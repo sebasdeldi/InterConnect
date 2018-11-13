@@ -175,15 +175,67 @@
 
 				<div class="column">
 
-		      <% if @insurance.origin.nil? %>
+		      <% if @insurance.origin_address.nil? %>
     		    <p>
-    		    	ORIGIN: 
+    		    	ORIGIN ADDRESS: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
     		    </p>
     	    <% else %>
             <p>
-            	ORIGIN: 
-        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.origin %></span>
+            	ORIGIN ADDRESS: 
+        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.origin_address %></span>
+            </p>
+    	    <% end %>
+
+
+		      <% if @insurance.origin_city.nil? %>
+    		    <p>
+    		    	ORIGIN CITY: 
+    					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+    		    </p>
+    	    <% else %>
+            <p>
+            	ORIGIN CITY: 
+        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.origin_city %></span>
+            </p>
+    	    <% end %>
+
+
+		      <% if @insurance.origin_state.nil? %>
+    		    <p>
+    		    	ORIGIN STATE: 
+    					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+    		    </p>
+    	    <% else %>
+            <p>
+            	ORIGIN STATE: 
+        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.origin_state %></span>
+            </p>
+    	    <% end %>
+
+
+		      <% if @insurance.origin_zip_code.nil? %>
+    		    <p>
+    		    	ORIGIN ZIP CODE: 
+    					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+    		    </p>
+    	    <% else %>
+            <p>
+            	ORIGIN ZIP CODE: 
+        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.origin_zip_code %></span>
+            </p>
+    	    <% end %>
+
+
+		      <% if @insurance.origin_country.nil? %>
+    		    <p>
+    		    	ORIGIN COUNTRY: 
+    					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
+    		    </p>
+    	    <% else %>
+            <p>
+            	ORIGIN COUNTRY: 
+        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.origin_country %></span>
             </p>
     	    <% end %>
 

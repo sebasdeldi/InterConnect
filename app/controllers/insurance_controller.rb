@@ -51,7 +51,7 @@ class InsuranceController < ApplicationController
   private
 		def insurance_params
 			params.require(:insurance).permit(:name, :email, :phone, :address, :city, :state, :zip, :country,
-				:modality, :origin, :destination, :incoterm, :etd, :carrier, :commodities, :marks, :commercial_value,
+				:modality, :origin_address, :origin_city, :origin_state, :origin_zip_code, :origin_country, :destination, :incoterm, :etd, :carrier, :commodities, :marks, :commercial_value,
 				:freight, :duties, :other_costs, :voluntary_coverage, :lost_profit, :operation_id)
 		end
 

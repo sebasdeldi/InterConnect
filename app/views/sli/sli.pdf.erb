@@ -122,7 +122,9 @@
 						<p class="padded">
 							<b>POINT (STATE) OF ORIGIN OR FTZ NO </b>
 							<br>
-							<%= @operation.origin %>
+							<%= @operation.origin_address %>, <%= @operation.origin_city %>, <%= @operation.origin_state %>, <%= @operation.origin_zip_code %>
+							<br>
+							<%= @operation.origin_country %>							
 						</p>	
 					</div>
 

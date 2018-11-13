@@ -164,18 +164,74 @@
 	          </div>
 
 	          <div class="field">
-	            <%= f.label 'Origin:', class: 'label' %>
-	            <% unless @insurance.origin.nil? %>
-	            	<%= f.text_field :origin, autofocus: true, value: @insurance.origin ,class: 'input' %>
+	            <%= f.label 'Origin Address:', class: 'label' %>
+	            <% unless @insurance.origin_address.nil? %>
+	            	<%= f.text_field :origin_address, autofocus: true, value: @insurance.origin_address ,class: 'input' %>
 	            <% else %>
 	            	<div class="control has-icons-left">
-	            	  <%= f.text_field :origin, autofocus: true, value: @operation.origin ,class: 'input' %>
+	            	  <%= f.text_field :origin_address, autofocus: true, value: @operation.origin_address ,class: 'input' %>
 	            	  <span class="icon is-small is-left">
 	            	    <i class="fas fa-map-signs"></i>
 	            	  </span>
 	            	</div>
 	            <% end %>
 	          </div>  
+
+	          <div class="field">
+	            <%= f.label 'Origin City:', class: 'label' %>
+	            <% unless @insurance.origin_city.nil? %>
+	            	<%= f.text_field :origin_city, autofocus: true, value: @insurance.origin_city ,class: 'input' %>
+	            <% else %>
+	            	<div class="control has-icons-left">
+	            	  <%= f.text_field :origin_city, autofocus: true, value: @operation.origin_city ,class: 'input' %>
+	            	  <span class="icon is-small is-left">
+	            	    <i class="fas fa-map-signs"></i>
+	            	  </span>
+	            	</div>
+	            <% end %>
+	          </div>
+
+	          <div class="field">
+	            <%= f.label 'Origin State:', class: 'label' %>
+	            <% unless @insurance.origin_state.nil? %>
+	            	<%= f.text_field :origin_state, autofocus: true, value: @insurance.origin_state ,class: 'input' %>
+	            <% else %>
+	            	<div class="control has-icons-left">
+	            	  <%= f.text_field :origin_state, autofocus: true, value: @operation.origin_state ,class: 'input' %>
+	            	  <span class="icon is-small is-left">
+	            	    <i class="fas fa-map-signs"></i>
+	            	  </span>
+	            	</div>
+	            <% end %>
+	          </div>  
+
+	          <div class="field">
+	            <%= f.label 'Origin Zip Code:', class: 'label' %>
+	            <% unless @insurance.origin_zip_code.nil? %>
+	            	<%= f.text_field :origin_zip_code, autofocus: true, value: @insurance.origin_zip_code ,class: 'input' %>
+	            <% else %>
+	            	<div class="control has-icons-left">
+	            	  <%= f.text_field :origin_zip_code, autofocus: true, value: @operation.origin_zip_code ,class: 'input' %>
+	            	  <span class="icon is-small is-left">
+	            	    <i class="fas fa-map-signs"></i>
+	            	  </span>
+	            	</div>
+	            <% end %>
+	          </div>  
+
+	          <div class="field">
+	            <%= f.label 'Origin Country:', class: 'label' %>
+	            <% unless @insurance.origin_country.nil? %>
+	            	<%= f.text_field :origin_country, autofocus: true, value: @insurance.origin_country ,class: 'input' %>
+	            <% else %>
+	            	<div class="control has-icons-left">
+	            	  <%= f.text_field :origin_country, autofocus: true, value: @operation.origin_country ,class: 'input' %>
+	            	  <span class="icon is-small is-left">
+	            	    <i class="fas fa-map-signs"></i>
+	            	  </span>
+	            	</div>
+	            <% end %>
+	          </div>    
 
 	          <div class="field">
 	            <%= f.label 'Destination:', class: 'label' %>

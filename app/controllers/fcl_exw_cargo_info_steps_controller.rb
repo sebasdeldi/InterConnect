@@ -2,66 +2,26 @@ class FclExwCargoInfoStepsController < ApplicationController
 	def new
 		@fcl_cargo_info = FclExwCargoInfoStep.new
 		@operation = Operation.find_by(secure_id: params[:operation_secure_id])
-		@existing_fcl_cargo_info = existing_fcl_cargo_info(@operation.id)
-		@ein = OperationsByUser.find_by(operation_id: @operation.id).shipper.ein
 	end
 
 	def create
 		@fcl_cargo_info = FclExwCargoInfoStep.new
-		existing_cargo_info = existing_fcl_cargo_info(Operation.find_by(secure_id: params[:operation_secure_id]).id)
-	  if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: Operation.find_by(secure_id: params[:operation_secure_id]).id))
-	  	op = Operation.find_by(secure_id: params[:operation_secure_id])
-			op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request Booking Order')
-			existing_bonded = Task.where(operation_id: op.id, subject: 'Bonded Docummentation').first
-			existing_self_propelled = Task.where(operation_id: op.id, subject: 'Self Propelled Docummentation').first
-
-			if params[:fcl_exw_cargo_info_step][:bonded] == 'true'
-				if existing_bonded.nil?
-					Task.create(operation_id: op.id, note: 'Verify bonded docummentation', due_date: Time.now + 1.weeks , subject:'Bonded Docummentation')				
-				else
-					existing_bonded.update(status: '0')
-				end
-			else
-				if !existing_bonded.nil?
-					existing_bonded.update(status: '1')
-				end
-			end
-
-			if params[:fcl_exw_cargo_info_step][:self_propelled] == 'true'
-				if existing_self_propelled.nil?
-					Task.create(operation_id: op.id, note: "Send self propelled docummentation (tittle/bill of sells original & notarized, power of attorney, copy of power of attorney signer's id) to broker", due_date: Time.now + 1.weeks , subject:'Self Propelled Docummentation')				
-				else
-					existing_self_propelled.update(status: '0')
-				end
-			else
-				if !existing_self_propelled.nil?
-					existing_self_propelled.update(status: '1')
-				end
-			end
-
-			Task.create(note: "Please verify that your POD, POL, container size, loading address and hazmat status match the operation's quotation. Also be aware of any overweight extra fee (20' bellow 35.000lbs, 40' and 45' bellow 42.000)", due_date: Time.now + 4.days, operation_id: op.id, subject: 'Quotation Review' )
-
-			shipper = OperationsByUser.find_by(operation_id: op.id).shipper
-			if shipper.ein != params[:fcl_exw_cargo_info_step][:ein]
-				shipper.update!(ein: params[:fcl_exw_cargo_info_step][:ein])
-			end
-			#Creating easy to loop params array
-			params_array = params.to_unsafe_h.to_a
-			create_pieces(params_array, existing_cargo_info)
-			flash[:notice] = 'Information correctly updated'
-			if current_user
-				redirect_to operation_path op.id
-			else
-				redirect_back(fallback_location: unauthenticated_root_path)
-			end
-		else
-			flash[:alert] = 'Information could not be saved, please fill in all the information listed bellow'
-			if current_user
-				redirect_to new_fcl_exw_cargo_info_step_path(operation_id: op.id)
-			else
-				redirect_back(fallback_location: unauthenticated_root_path)
-			end
-		end
+		op = Operation.find_by(secure_id: params[:operation_secure_id])
+	  if FclExwCargoInfoStep.create_cargo_info(params, fcl_cargo_info_params)
+	  	flash[:notice] = 'Information correctly updated'
+	  	if current_user
+	  		redirect_to operation_path op.id
+	  	else
+	  		redirect_back(fallback_location: unauthenticated_root_path)
+	  	end
+	  else
+	  	flash[:alert] = 'Information could not be saved, please fill in all the information listed bellow'
+	  	if current_user
+	  		redirect_to new_fcl_exw_cargo_info_step_path(operation_id: op.id)
+	  	else
+	  		redirect_back(fallback_location: unauthenticated_root_path)
+	  	end
+	  end
 	end
 
 	def request_info
@@ -144,22 +104,9 @@ class FclExwCargoInfoStepsController < ApplicationController
 	end
 
 	private
-		def existing_fcl_cargo_info (operation_id)
-		  FclExwCargoInfoStep.find_by(operation_id: operation_id)
-		end
-
 		def fcl_cargo_info_params
 			params.require(:fcl_exw_cargo_info_step).permit({files: []}, :operation_id, :loading_address, :loading_date, :loading_time, :gross_weight, :commercial_description, :cargo_hazardous, :hazardous_document, :pickup_reference, :contact_name, :contact_email, :contact_number, :contact_company, :pieces_number, :bonded, :self_propelled)
 		end
 
-	  def create_pieces (params_array, cargo_info)
-	  	Piece.where(fcl_exw_cargo_info_step_id: cargo_info.id).delete_all
-	  	params_array = params_array.drop(4)[0..-4]
-      (0..params_array.length).step(6) do |element|
-      	unless params_array[element].nil?
-        	piece = Piece.create(fcl_exw_cargo_info_step_id: cargo_info.id, gross_weight: params_array[element][1], commercial_description: params_array[element+1][1], container_size: params_array[element+2][1], cargo_hazardous: params_array[element+3][1], hazardous_class: params_array[element+4][1], un_code: params_array[element+5][1] )
-      	end
-      end
-    end
 end
 

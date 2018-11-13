@@ -9,7 +9,6 @@ class RepresentativeRecord
   def self.fetch_representative_operations(sort_param, query_params, representative_id)
     query_params[0] = query_params[0] == 'ALL' ? nil : query_params[0]
     query_params[1] = query_params[1] == 'ALL' ? nil : query_params[1]
-
     operations = query_representative_operations(set_general_operations, query_params, representative_id)
     sort_operations(sort_param, operations)
   end
