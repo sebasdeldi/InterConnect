@@ -7,10 +7,6 @@ class ApplicationController < ActionController::Base
     :is_pricing_representative?, :is_fcl_exw_quotation_confirmed?, :is_fcl_exw_booking_requested?, :is_fcl_exw_booking_info_completed?, :is_leader?,
     :is_fcl_exw_loading_confirmed?, :is_fcl_exw_delivery_confirmed?
 
-
-  def save_nil
-  end
-
   # Roles detection helpers
   def is_admin?
   	current_role == 'admin' ? true : false

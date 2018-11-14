@@ -16,7 +16,7 @@
 		</li>
 	</ul>
 	<h2><b> Una vez diligenciada la cotización, por favor subir los documentos de soporte de la cotización a través del siguiente link: </b>
-	<%= link_to "FORMULARIO DE COTIZACIÓN", "http://localhost:3000/quotation/new/"+@operation.secure_id.to_s, class: "button is-link" %></h2>
+	<%= link_to "FORMULARIO DE COTIZACIÓN", Figaro.env.host+"/quotation/new/"+@operation.secure_id.to_s, class: "button is-link" %></h2>
 
 	<p>Agradezco que me mantengan al tanto de la situación.</p>
 	<p>Muchas gracias.</p>

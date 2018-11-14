@@ -5,7 +5,7 @@
 should have cargo ready to load into a container, if so please confirm the following information in order to make the booking and schedule spotting on time:</font></span></font></div>
 <div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">&nbsp;</font></span></font></div>
 <h3><b>Please visit the following link and fill in the information requested in the form:</b>
-<%= link_to 'CARGO INFORMATION FORMULARY', "http://localhost:3000/fcl_exw_cargo_info_steps/new?operation_secure_id=" + @secure_id.to_s, class: "button is-link" %></h3>
+<%= link_to 'CARGO INFORMATION FORMULARY', Figaro.env.host+"/fcl_exw_cargo_info_steps/new?operation_secure_id=" + @secure_id.to_s, class: "button is-link" %></h3>
 <br>
 <br>
 <br>
