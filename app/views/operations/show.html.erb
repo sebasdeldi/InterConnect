@@ -5,14 +5,8 @@
 		<br>
 		<nav class="breadcrumb" aria-label="breadcrumbs">
 		  <ul>
-		  	<% if is_admin? %>
-		  		<li class='operations-redirection' ><%= link_to "Operation Records List", general_records_path %></li>
-		  	<% elsif is_leader? %>
-		  		<li class='operations-redirection' ><%= link_to "Main Page", authenticated_root_path %></li>
-		  	<% elsif is_representative? %>
-		  		<li class='operations-redirection' ><%= link_to "Operation Records List", representative_path %></li>
-		  	<% end %>
-		    <li class="is-active"><%= link_to "Operation " + @operation.reference, operation_path(@operation.id) %></li>
+		  	<li class='operations-redirection' ><%= link_to breadcrumb_selector[0], breadcrumb_selector[1] %></li>
+		    <li class="is-active"><%= link_to "Operation " + @operation.reference %></li>
 		  </ul>
 
 		  <div class="field">
@@ -48,6 +42,16 @@
     	        </option>
     	        <option value="<%= booking_sheet_path(@operation.id, format: 'pdf') %>">
     	        	See Booking Sheet
+    	        </option>
+    	        <% existing_fcl_cargo_info(@operation).files.each_with_index do |file, i| %>
+    	          <option value="<%= file.url %>"> <%= link_to doc_name(i), '', target: 'blank' %> </option>
+    	        <% end %>
+    	        </option>
+    	        <% quotation(@operation).files.each_with_index do |file, i| %>
+    	          <option value="<%= file.url %>"> <%= link_to doc_name(i, 'quotation'), '', target: 'blank' %> </option>
+    	        <% end %>
+    	        <option value="insurance/view_pdf/<%= @operation.secure_id %>.pdf">
+    	        	See Insurance
     	        </option>
 		        </select>
 		      </div>

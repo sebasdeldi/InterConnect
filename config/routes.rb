@@ -21,13 +21,13 @@ Rails.application.routes.draw do
 	resources :fcl_exw_cargo_info_steps, only: [:new, :create]
 	resources :fcl_exw_booking_info_steps, only: [:new, :create]
 	resources :operations, only: [:show]
-	post "/fcl_exw_confirm_loading", to: "fcl_exw_cargo_info_steps#confirm_loading"
-	post "/fcl_exw_confirm_delivery", to: "fcl_exw_cargo_info_steps#confirm_delivery"
+	post "/fcl_exw_confirm_loading", to: "fcl_exw_container_loadings#confirm_loading"
+	post "/fcl_exw_confirm_delivery", to: "fcl_exw_container_deliveries#confirm_delivery"
 
-	post "/fcl_exw_info", to: "fcl_exw_cargo_info_steps#request_info"
-	post "/fcl_exw_confirm_info", to: "fcl_exw_cargo_info_steps#confirm_info"
-	post "/fcl_exw_confirm_quotation", to: "fcl_exw_cargo_info_steps#confirm_quotation"
-	post "/fcl_exw_request_booking", to: "fcl_exw_cargo_info_steps#request_booking"
+	post "/fcl_exw_info", to: "fcl_exw_info_requested_steps#request_info"
+	post "/fcl_exw_confirm_info", to: "fcl_exw_info_confirmed_steps#confirm_info"
+	post "/fcl_exw_confirm_quotation", to: "fcl_exw_quotation_confirmed_steps#confirm_quotation"
+	post "/fcl_exw_request_booking", to: "fcl_exw_request_booking_steps#request_booking"
 	get '/admin', to: "admins#index", as: "admin"
 	post "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#update_pricing", as: "new_quotation"
 	post '/quotation_representative/:id', to: "fcl_exw_quotation_confirmed_steps#update_representative", as: "repre_quotation"

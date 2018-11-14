@@ -25,7 +25,7 @@ class OperationsController < ApplicationController
 
 		@sli = Sli.find_by(operation_id: @operation.id)
 		@invoice = Invoice.find_by(operation_id: @operation.id)
-
+		@booking_info = FclExwBookingInfoStep.find_by(operation_id: @operation.id)
 	end
 
 	def carrier_info
