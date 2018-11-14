@@ -1,32 +1,10 @@
 class InsuranceController < ApplicationController
   def new
   	@operation = Operation.find_by(secure_id: params[:secure_id])
-  	@consignee = OperationsByUser.find_by(operation_id: @operation).consignee
-  	@cargo_info = FclExwCargoInfoStep.find_by(operation_id: @operation)
-  	@booking_info = FclExwBookingInfoStep.find_by(operation_id: @operation)
-  	carrier_id = FclExwRequestBookingStep.find_by(operation_id: @operation).carrier_id
-  	unless carrier_id.nil?
-  		@carrier = User.find carrier_id
-  	else
-  		@carrier = nil
-  	end
-    cargo_descriptions_array = @cargo_info.pieces.select(:commercial_description).to_a
-    @cargo_descriptions = []
-    cargo_descriptions_array.each do |cargo|
-      @cargo_descriptions << cargo.commercial_description
-    end
-    @cargo_descriptions.join(', ')
-    @insurance = Insurance.find_by(operation_id: @operation)
   end
 
   def view_pdf
     @operation = Operation.find_by(secure_id: params[:secure_id])
-    @insurance = Insurance.find_by(operation_id: @operation)
-    
-    @subtotal = [@insurance.commercial_value, @insurance.freight, @insurance.duties, @insurance.other_costs].compact.sum
-    total = [@insurance.voluntary_coverage, @insurance.lost_profit].compact.sum
-
-    @total = @subtotal + total 
     respond_to do |format|
       format.html
       format.pdf do

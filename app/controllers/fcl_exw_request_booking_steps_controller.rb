@@ -1,5 +1,4 @@
 class FclExwRequestBookingStepsController < ApplicationController
-
 	def request_booking
 		if FclExwRequestBookingStep.request_booking(params, current_user)
 			shipper = User.find(params[:shipper_id])

@@ -15,7 +15,7 @@
 			<div class="row">
 				<h3>ASSURED</h3>
 				<div class="column">
-					<% if @insurance.name.nil? %>
+					<% if insurance(@operation).name.nil? %>
 				    <p>
 				    	NAME: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -23,11 +23,11 @@
 			    <% else %>
 		        <p>
 		        	NAME: 
-		    			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.name %></span>
+		    			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).name %></span>
 		        </p>
 			    <% end %>
 
-    			<% if @insurance.phone.nil? %>
+    			<% if insurance(@operation).phone.nil? %>
     		    <p>
     		    	PHONE: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -35,11 +35,11 @@
     	    <% else %>
             <p>
             	PHONE: 
-        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.phone %></span>
+        			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).phone %></span>
             </p>
     	    <% end %>
 
-    			<% if @insurance.city.nil? %>
+    			<% if insurance(@operation).city.nil? %>
     		    <p>
     		    	CITY: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -47,11 +47,11 @@
     	    <% else %>
             <p>
             	CITY: 
-        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.city %></span>
+        			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).city %></span>
             </p>
     	    <% end %>
 
-    	    <% if @insurance.zip.nil? %>
+    	    <% if insurance(@operation).zip.nil? %>
 				    <p>
 				    	ZIP: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -59,7 +59,7 @@
 			    <% else %>
 		        <p>
 		        	ZIP: 
-		    			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.zip %></span>
+		    			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).zip %></span>
 		        </p>
 			    <% end %>
 
@@ -68,7 +68,7 @@
 
 				<div class="column">
 
-		      <% if @insurance.email.nil? %>
+		      <% if insurance(@operation).email.nil? %>
 		  	    <p>
 		  	    	EMAIL: 
 		  	    	<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -76,11 +76,11 @@
 		  	  <% else %>
 		  	  	<p>
 		  	  		EMAIL: 
-		  	  		<span style="text-decoration: underline; white-space: pre;"><%= @insurance.email %></span>
+		  	  		<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).email %></span>
 		  	  	</p>
 		  	  <% end %>	
 
-	  			<% if @insurance.address.nil? %>
+	  			<% if insurance(@operation).address.nil? %>
 	  		    <p>
 	  		    	ADDRESS: 
 	  					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -88,11 +88,11 @@
 	  	    <% else %>
 	          <p>
 	          	ADDRESS: 
-	      			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.address %></span>
+	      			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).address %></span>
 	          </p>
 	  	    <% end %>
 
-	  	    <% if @insurance.state.nil? %>
+	  	    <% if insurance(@operation).state.nil? %>
 				    <p>
 				    	STATE: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -100,11 +100,11 @@
 			    <% else %>
 		        <p>
 		        	STATE: 
-		    			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.state %></span>
+		    			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).state %></span>
 		        </p>
 			    <% end %>
 
-			    <% if @insurance.country.nil? %>
+			    <% if insurance(@operation).country.nil? %>
 				    <p>
 				    	COUNTRY: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -112,7 +112,7 @@
 			    <% else %>
 		        <p>
 		        	COUNTRY: 
-		    			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.country %></span>
+		    			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).country %></span>
 		        </p>
 			    <% end %>
 				</div>
@@ -123,7 +123,7 @@
 			<div class="row">
 				<h3>CARGO DETAILS METHOD OF SHIPMENT</h3>
 				<div class="column">
-					<% if @insurance.modality.nil? %>
+					<% if insurance(@operation).modality.nil? %>
 				    <p>
 				    	MODALITY: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -135,7 +135,7 @@
 		        </p>
 			    <% end %>
 
-    			<% if @insurance.destination.nil? %>
+    			<% if insurance(@operation).destination.nil? %>
     		    <p>
     		    	DESTINATION: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -143,11 +143,11 @@
     	    <% else %>
             <p>
             	DESTINATION: 
-        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.destination %></span>
+        			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).destination %></span>
             </p>
     	    <% end %>
 
-    	    <% if @insurance.etd.nil? %>
+    	    <% if insurance(@operation).etd.nil? %>
 				    <p>
 				    	EXPECTED TIME OF DELIVERY: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -155,11 +155,11 @@
 			    <% else %>
 		        <p>
 				    	EXPECTED TIME OF DELIVERY: 
-		    			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.etd %></span>
+		    			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).etd %></span>
 		        </p>
 			    <% end %>
 
-    	    <% if @insurance.commodities.nil? %>
+    	    <% if insurance(@operation).commodities.nil? %>
     		    <p>
     		    	COMMODITIES: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -167,7 +167,7 @@
     	    <% else %>
             <p>
             	COMMODITIES: 
-        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.commodities %></span>
+        			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).commodities %></span>
             </p>
     	    <% end %>
 				</div>
@@ -175,7 +175,7 @@
 
 				<div class="column">
 
-		      <% if @insurance.origin_address.nil? %>
+		      <% if insurance(@operation).origin_address.nil? %>
     		    <p>
     		    	ORIGIN ADDRESS: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -183,12 +183,12 @@
     	    <% else %>
             <p>
             	ORIGIN ADDRESS: 
-        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.origin_address %></span>
+        			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).origin_address %></span>
             </p>
     	    <% end %>
 
 
-		      <% if @insurance.origin_city.nil? %>
+		      <% if insurance(@operation).origin_city.nil? %>
     		    <p>
     		    	ORIGIN CITY: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -196,12 +196,12 @@
     	    <% else %>
             <p>
             	ORIGIN CITY: 
-        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.origin_city %></span>
+        			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).origin_city %></span>
             </p>
     	    <% end %>
 
 
-		      <% if @insurance.origin_state.nil? %>
+		      <% if insurance(@operation).origin_state.nil? %>
     		    <p>
     		    	ORIGIN STATE: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -209,12 +209,12 @@
     	    <% else %>
             <p>
             	ORIGIN STATE: 
-        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.origin_state %></span>
+        			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).origin_state %></span>
             </p>
     	    <% end %>
 
 
-		      <% if @insurance.origin_zip_code.nil? %>
+		      <% if insurance(@operation).origin_zip_code.nil? %>
     		    <p>
     		    	ORIGIN ZIP CODE: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -222,12 +222,12 @@
     	    <% else %>
             <p>
             	ORIGIN ZIP CODE: 
-        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.origin_zip_code %></span>
+        			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).origin_zip_code %></span>
             </p>
     	    <% end %>
 
 
-		      <% if @insurance.origin_country.nil? %>
+		      <% if insurance(@operation).origin_country.nil? %>
     		    <p>
     		    	ORIGIN COUNTRY: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -235,11 +235,11 @@
     	    <% else %>
             <p>
             	ORIGIN COUNTRY: 
-        			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.origin_country %></span>
+        			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).origin_country %></span>
             </p>
     	    <% end %>
 
-	  			<% if @insurance.modality.nil? %>
+	  			<% if insurance(@operation).modality.nil? %>
 	  		    <p>
 	  		    	INCOTERM: 
 	  					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -247,11 +247,11 @@
 	  	    <% else %>
 	          <p>
 	          	INCOTERM: 
-	      			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.modality %></span>
+	      			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).modality %></span>
 	          </p>
 	  	    <% end %>
 
-	  	    <% if @insurance.carrier.nil? %>
+	  	    <% if insurance(@operation).carrier.nil? %>
 				    <p>
 				    	CARRIER: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -259,12 +259,12 @@
 			    <% else %>
 		        <p>
 		        	CARRIER: 
-		    			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.carrier %></span>
+		    			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).carrier %></span>
 		        </p>
 			    <% end %>
 				</div>
 
-		    <% if @insurance.marks.nil? %>
+		    <% if insurance(@operation).marks.nil? %>
 			    <p>
 			    	MARKS: 
 						<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -272,7 +272,7 @@
 		    <% else %>
 	        <p>
 	        	MARKS: 
-	    			<span style="text-decoration: underline; white-space: pre;"><%= @insurance.marks %></span>
+	    			<span style="text-decoration: underline; white-space: pre;"><%= insurance(@operation).marks %></span>
 	        </p>
 		    <% end %>
 
@@ -283,7 +283,7 @@
 			<div class="row">
 				<h3>SUM INSURED</h3>
 				<div class="column">
-					<% if @insurance.commercial_value.nil? %>
+					<% if insurance(@operation).commercial_value.nil? %>
 				    <p>
 				    	COMMERCIAL VALUE: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -291,11 +291,11 @@
 			    <% else %>
 		        <p>
 		        	COMMERCIAL VALUE: 
-		    			<span style="text-decoration: underline; white-space: pre;">USD <%= @insurance.commercial_value %></span>
+		    			<span style="text-decoration: underline; white-space: pre;">USD <%= insurance(@operation).commercial_value %></span>
 		        </p>
 			    <% end %>
 
-    			<% if @insurance.freight.nil? %>
+    			<% if insurance(@operation).freight.nil? %>
     		    <p>
     		    	FREIGHT: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -303,11 +303,11 @@
     	    <% else %>
             <p>
             	FREIGHT: 
-        			<span style="text-decoration: underline; white-space: pre;">USD <%= @insurance.freight %></span>
+        			<span style="text-decoration: underline; white-space: pre;">USD <%= insurance(@operation).freight %></span>
             </p>
     	    <% end %>
 
-    			<% if @insurance.duties.nil? %>
+    			<% if insurance(@operation).duties.nil? %>
     		    <p>
     		    	DUTIES: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -315,11 +315,11 @@
     	    <% else %>
             <p>
             	DUTIES: 
-        			<span style="text-decoration: underline; white-space: pre;">USD <%= @insurance.duties %></span>
+        			<span style="text-decoration: underline; white-space: pre;">USD <%= insurance(@operation).duties %></span>
             </p>
     	    <% end %>
 
-    			<% if @insurance.other_costs.nil? %>
+    			<% if insurance(@operation).other_costs.nil? %>
     		    <p>
     		    	OTHER COSTS: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -327,7 +327,7 @@
     	    <% else %>
             <p>
             	OTHER COSTS: 
-        			<span style="text-decoration: underline; white-space: pre;">USD <%= @insurance.other_costs %></span>
+        			<span style="text-decoration: underline; white-space: pre;">USD <%= insurance(@operation).other_costs %></span>
             </p>
     	    <% end %>
 			  </div>
@@ -335,7 +335,7 @@
 			 	<div class="column">
   		    <p>
   		    	<b>SUBTOTAL:</b> 
-  					<span style="text-decoration: underline; white-space: pre;">USD <%= @subtotal %></span>
+  					<span style="text-decoration: underline; white-space: pre;">USD <%= subtotal(@operation) %></span>
   		    </p>
 			 	</div>
 			</div>
@@ -343,7 +343,7 @@
 			<div class="row">
 				<div class="column">
 
-					<% if @insurance.voluntary_coverage.nil? %>
+					<% if insurance(@operation).voluntary_coverage.nil? %>
 				    <p>
 				    	VOLUNTARY COVERAGE: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -351,11 +351,11 @@
 			    <% else %>
 		        <p>
 		        	VOLUNTARY COVERAGE: 
-		    			<span style="text-decoration: underline; white-space: pre;">USD <%= @insurance.voluntary_coverage %></span>
+		    			<span style="text-decoration: underline; white-space: pre;">USD <%= insurance(@operation).voluntary_coverage %></span>
 		        </p>
 			    <% end %>
 
-    			<% if @insurance.lost_profit.nil? %>
+    			<% if insurance(@operation).lost_profit.nil? %>
     		    <p>
     		    	LOST PROFIT 20% ADDITIONAL: 
     					<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -363,14 +363,14 @@
     	    <% else %>
             <p>
             	LOST PROFIT 20% ADDITIONAL: 
-        			<span style="text-decoration: underline; white-space: pre;">USD <%= @insurance.lost_profit %></span>
+        			<span style="text-decoration: underline; white-space: pre;">USD <%= insurance(@operation).lost_profit %></span>
             </p>
     	    <% end %>
     	  </div>
 			 	<div class="column">
           <p>
           	<b>TOTAL:</b> 
-      			<span style="text-decoration: underline; white-space: pre;">USD <%= @total %></span>
+      			<span style="text-decoration: underline; white-space: pre;">USD <%= total(@operation) %></span>
           </p>
 			  </div>
 			</div>
