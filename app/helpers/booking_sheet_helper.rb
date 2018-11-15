@@ -1,19 +1,6 @@
 module BookingSheetHelper
-
 	def operation_by_user(operation)
 		OperationsByUser.find_by(operation_id: operation)
-	end
-
-	def agent(operation)
-		operation_by_user(operation).agent
-	end
-
-	def shipper(operation)
-		operation_by_user(operation).shipper
-	end
-
-	def consignee(operation)
-		operation_by_user(operation).shipper
 	end
 
 	def cargo_info(operation)
@@ -22,18 +9,6 @@ module BookingSheetHelper
 
 	def pieces(operation)
 		cargo_info(operation).pieces
-	end
-
-	def booking_info(operation)
-		FclExwBookingInfoStep.find_by(operation_id: operation)
-	end
-
-	def sli(operation)
-		Sli.find_by(operation_id: operation)
-	end
-
-	def invoice(operation)
-		Invoice.find_by(operation_id: operation)
 	end
 
 	def self_propelled_task(operation)

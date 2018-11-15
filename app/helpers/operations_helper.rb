@@ -34,7 +34,47 @@ module OperationsHelper
 		end
 	end
 
-	def quotation(operation_id)
-		FclExwQuotationConfirmedStep.find_by(operation_id: operation_id)
+	def operation_secure_id(operation)
+		operation.secure_id
+	end
+
+	def carriers
+		User.carriers
+	end
+
+	def fcl_exw_container_loading_tasks(operation)
+		Task.where(operation_id: operation, status: '0',fcl_exw_container_loading_id: FclExwContainerLoading.find_by(operation_id: operation))
+	end
+
+	def fcl_exw_container_delivery_tasks(operation)
+		Task.where(operation_id: operation, status: '0',fcl_exw_container_delivery_id: FclExwContainerDelivery.find_by(operation_id: operation))
+	end
+
+	def booking_info_tasks(operation)
+		Task.where(operation_id: operation, status: '0',fcl_exw_booking_info_steps_id: FclExwBookingInfoStep.find_by(operation_id: operation))
+	end
+
+	def request_booking_tasks(operation)
+		Task.where(operation_id: operation, status: '0',fcl_exw_request_booking_steps_id: FclExwRequestBookingStep.find_by(operation_id: operation))
+	end
+
+	def quotation_confirmed_tasks(operation)
+		Task.where(operation_id: operation, status: '0',fcl_exw_quotation_confirmed_steps_id: FclExwQuotationConfirmedStep.find_by(operation_id: operation))
+	end
+
+	def tasks(operation)
+		Task.where(operation_id: operation, status: '0')
+	end
+
+	def cargo_info_tasks(operation)
+		Task.where(operation_id: operation, status: '0', fcl_exw_cargo_info_steps_id: FclExwCargoInfoStep.find_by(operation_id: operation))
+	end
+
+	def info_confirmed_tasks(operation)
+		Task.where(operation_id: operation, status: '0', fcl_exw_info_confirmed_steps_id: FclExwInfoConfirmedStep.find_by(operation_id: operation))
+	end
+
+	def info_requested_tasks(operation)
+		Task.where(operation_id: operation, status: '0', fcl_exw_info_requested_steps_id: FclExwInfoRequestedStep.find_by(operation_id: operation))
 	end
 end

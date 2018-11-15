@@ -23,11 +23,9 @@ module TasksHelper
 		FclExwRequestBookingStep.find_by(operation_id: operation_id).id
 	end
 
-
 	def fcl_exw_container_loading_step_id(operation_id)
 		FclExwContainerLoading.find_by(operation_id: operation_id).id
 	end
-
 
 	def fcl_exw_container_delivery_step_id(operation_id)
 		FclExwContainerDelivery.find_by(operation_id: operation_id).id

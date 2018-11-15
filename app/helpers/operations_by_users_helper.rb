@@ -8,11 +8,11 @@ module OperationsByUsersHelper
 		current_user.relateds.where(role_id: 4)
 	end
 
-	def representatives
+	def all_representatives
 		User.representatives
 	end
 
-	def consignees
+	def all_consignees
 		User.consignees
 	end
 

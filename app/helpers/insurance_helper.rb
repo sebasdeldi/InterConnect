@@ -1,15 +1,4 @@
 module InsuranceHelper
-	def company_name(customer_id)
-		User.find(customer_id).company_name
-	end
-
-	def consignee(operation)
-		OperationsByUser.find_by(operation_id: operation).consignee
-	end
-
-	def booking_info(operation)
-		FclExwBookingInfoStep.find_by(operation_id: operation)
-	end
 
 	def carrier(operation)
 		carrier_id = FclExwRequestBookingStep.find_by(operation_id: operation).carrier_id

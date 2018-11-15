@@ -14,7 +14,7 @@
 	      <p class="panel-heading">
 	        Create new operation
 	      </p>
-	      <%= render 'new_form', operations_by_user: @operations_by_user, agents: agents(current_user), representatives: representatives, shippers: shippers(current_user), consignees: consignees %>
+	      <%= render 'new_form', operations_by_user: @operations_by_user, agents: agents(current_user), representatives: all_representatives, shippers: shippers(current_user), consignees: all_consignees %>
 	    </nav>
 	   
 	  </div>

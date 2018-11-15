@@ -14,12 +14,12 @@
 		      <div class="select sli margin-right">
 		        <select class="sli difficulty outline-select">
 		          <option disabled>DOCUMENTS</option>
-		          <% if @sli.nil? || @sli.files.empty? %>
+		          <% if sli(@operation).nil? || sli(@operation).files.empty? %>
 			          <option value="slis/<%= params[:id] %>.pdf">
 		          	  See SLI
 			          </option>
 			        <% else %>
-  		          <option value="<%= @sli.files.first.url %>">
+  		          <option value="<%= sli(@operation).files.first.url %>">
   	          		See SLI
   		          </option>
 			        <% end %>
@@ -29,8 +29,8 @@
 		          <option value="slis/request_sli/<%= @operation.secure_id %>">
 		          	Request SLI
 		          </option>
-              <% unless @invoice.nil? || @invoice.files.empty? %>
-    	          <option value="<%= @invoice.files.first.url %>">
+              <% unless invoice(@operation).nil? || invoice(@operation).files.empty? %>
+    	          <option value="<%= invoice(@operation).files.first.url %>">
               		See Invoice
     	          </option>
     	        <% end %>
@@ -61,7 +61,7 @@
 		    </div>
 		  </div>
 
-		  <%= link_to insurance_form_path(@operation_secure_id) , class: "button is-link is-outlined margin-right" do %>
+		  <%= link_to insurance_form_path(operation_secure_id(@operation)) , class: "button is-link is-outlined margin-right" do %>
 			  <i class="fas fa-file-pdf"></i>
 			  <span class="margin-left">INSURANCE</span>
 			<% end %>
@@ -76,8 +76,8 @@
 		</nav>
 	</div>
 	<br>
-	<%= render 'timeline', operation_secure_id: @operation_secure_id, operation_id: @operation.id, agent: @agent, shipper: @shipper, tasks: @tasks, cargo_info_tasks: @cargo_info_tasks, booking_info_tasks: @booking_info_tasks, info_confirmed_tasks: @info_confirmed_tasks, info_requested_tasks: @info_requested_tasks, quotation_confirmed_tasks: @quotation_confirmed_tasks, request_booking_tasks: @request_booking_tasks, carriers: @carriers, consignee: @consignee, fcl_exw_container_loading_tasks: @fcl_exw_container_loading_tasks,
-	 fcl_exw_container_delivery_tasks: @fcl_exw_container_delivery_tasks %>
+	<%= render 'timeline', operation_secure_id: operation_secure_id(@operation), operation_id: @operation.id, agent: agent(@operation), shipper: shipper(@operation), tasks: tasks(@operation), cargo_info_tasks: cargo_info_tasks(@operation), booking_info_tasks: booking_info_tasks(@operation), info_confirmed_tasks: info_confirmed_tasks(@operation), info_requested_tasks: info_requested_tasks(@operation), quotation_confirmed_tasks: quotation_confirmed_tasks(@operation), request_booking_tasks: request_booking_tasks(@operation), carriers: carriers, consignee: consignee(@operation), fcl_exw_container_loading_tasks: fcl_exw_container_loading_tasks(@operation),
+	 fcl_exw_container_delivery_tasks: fcl_exw_container_delivery_tasks(@operation) %>
 <% elsif is_agent? %>
 <% end %>
 
