@@ -9,8 +9,23 @@ I need all your collaboration to get a booking and spot container under below in
 <h2>Cargo info</h2>
 <ul>
 	<li>
-		<b>Pickup Reference: </b> <%= @operation[0].reference_number %>
+		<b>Freight Forwarder Reference: </b> <%= @operation[0].reference %>
 	</li>
+	<% unless @operation[0].agent_reference.nil? %>
+		<li>
+			<b>Cargo Agent Reference: </b> <%= @operation[0].agent_reference %>
+		</li>
+	<% end %>
+	<% unless @operation[0].shipper_reference.nil? %>
+		<li>
+			<b>Shipper Reference: </b> <%= @operation[0].shipper_reference %>
+		</li>
+	<% end %>
+	<% unless @operation[0].consignee_reference.nil? %>
+		<li>
+			<b>Consignee Reference: </b> <%= @operation[0].consignee_reference %>
+		</li>
+	<% end %>
 	<li>
 		<b>Pieces Number:</b> <%= @operation[0].pieces_number %>
 	</li>
