@@ -3,9 +3,7 @@ class TasksController < ApplicationController
   end
 
   def create
-  	task = new_task(params[:task])
-
-    #Task.new(note: params[:task][:note], due_date: params[:task][:due_date], operation_id: params[:task][:operation_id])
+  	task = Task.new_task(params[:task])
   	if task.save
   		flash[:notice] = 'Task saved'
   		redirect_to operation_path params[:task][:operation_id]
@@ -27,25 +25,4 @@ class TasksController < ApplicationController
     flash[:notice] = 'Record updated'
     redirect_to operation_path params[:task][:operation_id]
   end
-
-  private
-    def new_task(params)
-      if params[:fcl_exw_cargo_info_step]
-        Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_cargo_info_steps_id: params[:fcl_exw_cargo_info_step], operation_id: params[:operation_id] )
-      elsif params[:fcl_exw_info_confirmed_step]
-        Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_info_confirmed_steps_id: params[:fcl_exw_info_confirmed_step], operation_id: params[:operation_id] )
-      elsif params[:fcl_exw_info_requested_step]
-        Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_info_requested_steps_id: params[:fcl_exw_info_requested_step], operation_id: params[:operation_id] )
-      elsif params[:fcl_exw_quotation_confirmed_step]
-        Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_quotation_confirmed_steps_id: params[:fcl_exw_quotation_confirmed_step], operation_id: params[:operation_id] )
-      elsif params[:fcl_exw_request_booking_step]
-        Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_request_booking_steps_id: params[:fcl_exw_request_booking_step], operation_id: params[:operation_id] )
-      elsif params[:fcl_exw_booking_info_steps]
-        Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_booking_info_steps_id: params[:fcl_exw_booking_info_steps], operation_id: params[:operation_id] )
-      elsif params[:fcl_exw_container_delivery_step]
-        Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_container_delivery_id: params[:fcl_exw_container_delivery_step], operation_id: params[:operation_id] )
-      elsif params[:fcl_exw_container_loading_step]
-        Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_container_loading_id: params[:fcl_exw_container_loading_step], operation_id: params[:operation_id] )
-      end
-    end
 end

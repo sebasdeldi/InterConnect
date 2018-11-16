@@ -1,5 +1,4 @@
 <div class="section">
 	<%= render 'shared/tabs_buttons', role: 'representative', role_to_register: 'agent', tasks_count: @tasks.count, operations_count: @operations.count %>
-	<%= render 'shared/tabs_content', role: 'representative', role_to_register: 'agent', status_content: @status_content, modality_content: @modality_content, search_content: @search_content, operations: @operations, operations_by_repre: @operations_by_repre, task_subject: @task_subject %>
+	<%= render 'shared/tabs_content', role: 'representative', role_to_register: 'agent', status_content: status, modality_content: modality, search_content: search, operations: @operations, operations_by_repre: @operations_by_repre, task_subject: task_subject %>
 </div>
-

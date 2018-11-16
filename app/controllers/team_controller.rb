@@ -1,9 +1,8 @@
 class TeamController < ApplicationController
 	def index
-		@representatives = User.representatives
+		@operations = OperationsByUser.where(representative_id: User.where(team_id: Team.where(team_leader: current_user.id)))
+		@difficult_operations = @operations.where('operations.difficulty = ?', 'HARD').includes(:operation).references(:operation) 
 		@team = Team.find_by(team_leader: current_user.id)
-		@team_members = User.where(team_id: @team.id)
-
 		if request.post?
 			if params[:delete].present? 
 				User.find(params[:representative_id]).update(team_id: nil)
@@ -11,9 +10,6 @@ class TeamController < ApplicationController
 				User.find(params[:representative_id]).update(team_id: @team.id)
 			end
 		end
-
-		@operations = OperationsByUser.where(representative_id: User.where(team_id: Team.where(team_leader: current_user.id)))
-		@difficult_operations = @operations.where('operations.difficulty = ?', 'HARD').includes(:operation).references(:operation) 
 	end
 
 	def show

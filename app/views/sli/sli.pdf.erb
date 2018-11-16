@@ -16,18 +16,18 @@
 					<p class="padded">
 						<b>EXPORTER/SHIPPER (Name and address including ZIP code)</b>
 						<br>
-						<%= @shipper.company_name %> 
+						<%= shipper(@operation).company_name %> 
 						<br>
-						Phone: <%= @shipper.phone_number %>
+						Phone: <%= shipper(@operation).phone_number %>
 						<br>
-						Address: <%= @shipper.address %>
+						Address: <%= shipper(@operation).address %>
 					</p>
 					<div class="with-top-border">
 						<div class="column small">
 							<p class="padded">
 								<b>EXPORTER'S EIN (IRS) NO </b>
 								<br>
-								<%= @shipper.ein %>
+								<%= shipper(@operation).ein %>
 							</p>	
 						</div>
 
@@ -45,10 +45,10 @@
 						<p class="padded">
 							<b>CONSIGNEE</b>
 							<br>
-							<%= @consignee.company_name %> 
-							<% if !@consignee.address.nil? %>
+							<%= consignee(@operation).company_name %> 
+							<% if !consignee(@operation).address.nil? %>
 								<br>
-								<%= @consignee.address %>
+								<%= consignee(@operation).address %>
 							<% end %>
 						</p>
 					</div>
@@ -57,7 +57,7 @@
 						<p class="padded">
 							<b>FORWARDING AGENT</b>
 							<br>
-							<%= @agent.company_name %> 
+							<%= agent(@operation).company_name %> 
 						</p>
 					</div>
 
@@ -73,7 +73,7 @@
 						<p class="padded">
 							<b>MODE OF TRANSPORT </b>
 							<br>	
-							<% if @booking_info.ramp == "YES" %>
+							<% if booking_info(@operation).ramp == "YES" %>
 								FCL-EXW RAMP NEEDED
 							<% else %>
 								FCL-WXW NO RAMP NEEDED
@@ -85,7 +85,7 @@
 						<p class="padded">
 							<b>EXPORTING CARRIER </b>
 							<br>
-							<%= @steamship %>
+							<%= steamship(@operation) %>
 						</p>	
 					</div>
 
@@ -212,8 +212,8 @@
 					<th>ECCN</th>
 				</tr>
 
-				<% unless @tariff_groups.nil? %>
-					<% @tariff_groups.each do |tariff| %>
+				<% unless tariff_groups(@operation).nil? %>
+					<% tariff_groups(@operation).each do |tariff| %>
 						<tr>
 							<td><%= tariff.code %></td>
 							<td><%= tariff.schedule_b %></td>

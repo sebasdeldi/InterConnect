@@ -5,7 +5,7 @@ module FclExwCargoInfoStepsHelper
 	end
 
 	def ein(operation)
-		OperationsByUser.find_by(operation_id: operation).shipper.ein
+		operation_by_user(operation).shipper.ein
 	end
 
 	def hour(operation)

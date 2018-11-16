@@ -1,14 +1,14 @@
 module ApplicationHelper
 	def agent(operation)
-		OperationsByUser.find_by(operation_id: operation).agent
+		operation_by_user(operation).agent
 	end
 
 	def shipper(operation)
-		OperationsByUser.find_by(operation_id: operation).shipper
+		operation_by_user(operation).shipper
 	end
 
 	def consignee(operation)
-		OperationsByUser.find_by(operation_id: operation).consignee
+		operation_by_user(operation).consignee
 	end
 
 	def booking_info(operation)
@@ -49,5 +49,35 @@ module ApplicationHelper
 
 	def company_name(customer_id)
 		User.find(customer_id).company_name
+	end
+
+	def contact_names(representative_id)
+		user = User.find(representative_id)
+		user.contact_first_name + ' ' + user.contact_last_name 
+	end
+
+	def operation_by_user(operation)
+		OperationsByUser.find_by(operation_id: operation)
+	end
+
+	def cargo_info(operation)
+		FclExwCargoInfoStep.find_by(operation_id: operation)
+	end
+
+	def pieces(operation)
+		cargo_info(operation).pieces
+	end
+
+	def steamship(operation)
+		carrier_id = FclExwRequestBookingStep.find_by(operation_id: operation).carrier_id
+		unless carrier_id.nil?
+			User.find(carrier_id).company_name
+		else
+			nil
+		end
+	end
+
+	def contacted_customer(operation)
+		FclExwInfoRequestedStep.find_by(operation_id: operation).completed
 	end
 end

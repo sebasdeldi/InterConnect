@@ -16,8 +16,6 @@ class UsersRelationshipController < ApplicationController
 
   def new
   	@representative = User.find(params[:representative_id])
-  	@agents = User.agents
-  	@shippers = User.shippers
   	@relateds = @representative.relateds
   end
 
