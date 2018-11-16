@@ -1,9 +1,9 @@
 module UsersRelationshipHelper
-	def shippers
+	def shippers_relationships
   	User.shippers
 	end
 
-	def agents
+	def agents_relationships
 		User.agents
 	end
 end
