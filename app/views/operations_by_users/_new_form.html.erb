@@ -1,138 +1,209 @@
 <div class='panel-block'>
   <%= form_for operations_by_user, html: {class: "control"} do |f| %>
 
-    <div class="field">
-      <label class="label">PO Number:</label>
-      <div class="control has-icons-left">
-        <div class=" full-select">
-          <%= text_field_tag :po_number, nil ,  class: 'input' %>
+    <div class="columns">
+      <div class="column is-11">
+        <div class="field">
+          <label class="label">PO Number:</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :po_number, nil ,  class: 'input with-guide' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
         </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
-        </div>
+      </div>
+      <div class="column is-1">
+        <br>
+        <i class="fas fa-info-circle guide-btn"></i>
       </div>
     </div>
 
-    <div class="field">
-      <label class="label">Agent Reference Number:</label>
-      <div class="control has-icons-left">
-        <div class=" full-select">
-          <%= text_field_tag :agent_reference, nil, class: 'input' %>
+    <div class="columns">
+      <div class="column is-11">
+        <div class="field">
+          <label class="label">Agent Reference Number:</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :agent_reference, nil, class: 'input with-guide' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
         </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
-        </div>
+      </div>
+      <div class="column is-1">
+        <br>
+        <i class="fas fa-info-circle guide-btn"></i>
       </div>
     </div>
 
-    <div class="field">
-      <label class="label">Shipper Reference Number:</label>
-      <div class="control has-icons-left">
-        <div class=" full-select">
-          <%= text_field_tag :shipper_reference, nil, class: 'input' %>
-        </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
-        </div>
-      </div>
-    </div>
-
-    <div class="field">
-      <label class="label">Consignee Reference Number:</label>
-      <div class="control has-icons-left">
-        <div class=" full-select">
-          <%= text_field_tag :consignee_reference, nil, class: 'input' %>
-        </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
+    <div class="columns">
+      <div class="column is-11">
+        <div class="field">
+          <label class="label">Shipper Reference Number:</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :shipper_reference, nil, class: 'input with-guide' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="field">
-      <label class="label">Port Of Loading (POL):</label>
-      <div class="control has-icons-left">
-        <div class=" full-select">
-          <%= text_field_tag :pol, nil, class: 'input', id: 'port-loading' %>
-        </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
-        </div>
+      <div class="column is-1">
+        <br>
+        <i class="fas fa-info-circle guide-btn"></i>
       </div>
     </div>
 
 
-    <div class="field">
-      <label class="label">Port Of Discharge (POD):</label>
-      <div class="control has-icons-left">
-        <div class=" full-select">
-          <%= text_field_tag :pod, nil, class: 'input', id: 'port-discharge' %>
-        </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
+
+    <div class="columns">
+      <div class="column is-11">
+        <div class="field">
+          <label class="label">Consignee Reference Number:</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :consignee_reference, nil, class: 'input with-guide' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="column is-1">
+        <br>
+        <i class="fas fa-info-circle guide-btn"></i>
+      </div>  
     </div>
+
+    <div class="columns">
+      <div class="column is-11">
+        <div class="field">
+          <label class="label">Port Of Loading (POL):</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :pol, nil, class: 'input with-guide', id: 'port-loading' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-1">
+        <br>
+        <i class="fas fa-info-circle guide-btn"></i>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-11">
+        <div class="field">
+          <label class="label">Port Of Discharge (POD):</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :pod, nil, class: 'input with-guide', id: 'port-discharge' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-1">
+        <br>
+        <i class="fas fa-info-circle guide-btn"></i>
+      </div>
+    </div>
+    
     <br>
     <div>
       <div class="box card-shadow margin-bottom">
-        <div class="field">
-          <label class="label">Origin Address:</label>
-          <div class="control has-icons-left">
-            <div class=" full-select">
-              <%= text_field_tag :origin_address, nil, class: 'input' %>
+
+        <div class="columns">
+          <div class="column is-11">
+            <div class="field">
+              <label class="label">Origin Address:</label>
+              <div class="control has-icons-left">
+                <div class=" full-select">
+                  <%= text_field_tag :origin_address, nil, class: 'input with-guide' %>
+                </div>
+                <div class="icon is-small is-left">
+                  <i class="fas fa-globe"></i>
+                </div>
+              </div>
             </div>
-            <div class="icon is-small is-left">
-              <i class="fas fa-globe"></i>
-            </div>
+          </div>
+          <div class="column is-1">
+            <br>
+            <i class="fas fa-info-circle guide-btn"></i>
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Origin City:</label>
-          <div class="control has-icons-left">
-            <div class=" full-select">
-              <%= text_field_tag :origin_city, nil, class: 'input' %>
+        <div class="columns">
+          <div class="column is-11">
+            <div class="field">
+              <label class="label">Origin State:</label>
+              <div class="control has-icons-left">
+                <div class=" full-select">
+                  <%= text_field_tag :origin_state, nil, class: 'input with-guide' %>
+                </div>
+                <div class="icon is-small is-left">
+                  <i class="fas fa-globe"></i>
+                </div>
+              </div>
             </div>
-            <div class="icon is-small is-left">
-              <i class="fas fa-globe"></i>
-            </div>
+          </div>
+          <div class="column is-1">
+            <br>
+            <i class="fas fa-info-circle guide-btn"></i>
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Origin State:</label>
-          <div class="control has-icons-left">
-            <div class=" full-select">
-              <%= text_field_tag :origin_state, nil, class: 'input' %>
+        <div class="columns">
+          <div class="column is-11">
+            <div class="field">
+              <label class="label">Origin Zip Code:</label>
+              <div class="control has-icons-left">
+                <div class=" full-select">
+                  <%= text_field_tag :origin_zip_code, nil, class: 'input with-guide' %>
+                </div>
+                <div class="icon is-small is-left">
+                  <i class="fas fa-globe"></i>
+                </div>
+              </div>
             </div>
-            <div class="icon is-small is-left">
-              <i class="fas fa-globe"></i>
-            </div>
+          </div>
+          <div class="column is-1">
+            <br>
+            <i class="fas fa-info-circle guide-btn"></i>
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">Origin Zip Code:</label>
-          <div class="control has-icons-left">
-            <div class=" full-select">
-              <%= text_field_tag :origin_zip_code, nil, class: 'input' %>
-            </div>
-            <div class="icon is-small is-left">
-              <i class="fas fa-globe"></i>
+        <div class="columns">
+          <div class="column is-11">
+            <div class="field">
+              <label class="label">Origin Country:</label>
+              <div class="control has-icons-left">
+                <div class=" full-select">
+                  <%= text_field_tag :origin_country, nil, class: 'input with-guide' %>
+                </div>
+                <div class="icon is-small is-left">
+                  <i class="fas fa-globe"></i>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="field">
-          <label class="label">Origin Country:</label>
-          <div class="control has-icons-left">
-            <div class=" full-select">
-              <%= text_field_tag :origin_country, nil, class: 'input' %>
-            </div>
-            <div class="icon is-small is-left">
-              <i class="fas fa-globe"></i>
-            </div>
+          <div class="column is-1">
+            <br>
+            <i class="fas fa-info-circle guide-btn"></i>
           </div>
         </div>
       </div>
@@ -145,7 +216,7 @@
       <label class="label">Destination:</label>
       <div class="control has-icons-left">
         <div class=" full-select">
-          <%= text_field_tag :destination, nil, class: 'input' %>
+          <%= text_field_tag :destination, nil, class: 'input with-guide' %>
         </div>
         <div class="icon is-small is-left">
           <i class="fas fa-globe"></i>
@@ -157,7 +228,7 @@
     <label class="label">Destination Agent:</label>
     <div class="field is-grouped">
       <div class="control has-icons-left">
-        <div class="select">
+        <div class="select ">
           <%= f.select :agent_id, options_for_select(agents.map{|agent| ["#{agent.company_name} <#{agent.email}>", agent.id]}), {include_blank: 'SELECT A DESTINATION AGENT'} ,{class: ''} %>
         </div>
         <div class="icon is-small is-left">
@@ -211,8 +282,8 @@
     <div class="field">
       <label class="label">Operation Type:</label>
       <div class="control has-icons-left">
-        <div class="select full-select">
-          <%= select_tag :modality, options_for_select(["FCL - EXW", "LCL"], "FCL - EXW"), {include_blank: 'SELECT AN OPERATION TYPE', class: "full-select modality"}%>
+        <div class="select with-guide">
+          <%= select_tag :modality, options_for_select(["FCL - EXW", "LCL"], "FCL - EXW"), {include_blank: 'SELECT AN OPERATION TYPE', class: "modality with-guide"}%>
         </div>
         <div class="icon is-small is-left">
           <i class="fas fa-globe"></i>

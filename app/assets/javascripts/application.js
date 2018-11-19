@@ -42,7 +42,7 @@ document.addEventListener("turbolinks:load", function() {
 
   $("#port-discharge").easyAutocomplete(options);
   $("#port-loading").easyAutocomplete(options);
-
+  $('div.easy-autocomplete').removeAttr('style');
 
 
   $(".show-modal").click(function() {
