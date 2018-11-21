@@ -196,7 +196,6 @@ ActiveRecord::Schema.define(version: 20210927200622) do
     t.boolean "fcl_exw_quotation_confirmed", default: false
     t.string "status_message", default: " "
     t.string "reference"
-    t.string "po_number"
     t.string "shipper_reference"
     t.string "consignee_reference"
     t.string "agent_reference"

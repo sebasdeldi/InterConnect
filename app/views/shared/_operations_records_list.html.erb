@@ -25,8 +25,6 @@
           <p data-link="<%= operation_path(operation.operation_id) %>" class="tooltip">
             <%= Operation.find(operation.operation_id).reference %>
             <span data-link="<%= operation_path(operation.operation_id) %>" class="tooltiptext">
-              PO #: <%= Operation.find(operation.operation_id).po_number %>
-              <br>
               Agent's Reference #: <%= Operation.find(operation.operation_id).agent_reference %>
               <br>
               Shipper's Reference #: <%= Operation.find(operation.operation_id).shipper_reference %>

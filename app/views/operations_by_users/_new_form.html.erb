@@ -4,10 +4,10 @@
     <div class="columns">
       <div class="column is-11">
         <div class="field">
-          <label class="label">PO Number:</label>
+          <label class="label">Operation Type:</label>
           <div class="control has-icons-left">
-            <div class=" full-select">
-              <%= text_field_tag :po_number, nil ,  class: 'input with-guide' %>
+            <div class="select with-guide">
+              <%= select_tag :modality, options_for_select(["FCL - EXW", "LCL"], "FCL - EXW"), {include_blank: 'SELECT AN OPERATION TYPE', class: "modality full-select"}%>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -17,7 +17,93 @@
       </div>
       <div class="column is-1">
         <br>
-        <i class="fas fa-info-circle guide-btn"></i>
+        <a class="show-modal operation-type">
+          <i class="fas fa-info-circle guide-btn"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-11">
+        <label class="label">Destination Agent:</label>
+        <div class="field is-grouped">
+          <div class="control has-icons-left">
+            <div class="select ">
+              <%= f.select :agent_id, options_for_select(agents.map{|agent| ["#{agent.company_name} <#{agent.email}>", agent.id]}), {include_blank: 'SELECT A DESTINATION AGENT'} ,{class: ''} %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+          <p class="control text-joiner"> OR </p>
+          <p class="control">
+            <a class="button is-link show-modal agent">
+              ADD NEW AGENT
+            </a>
+          </p>
+        </div>
+      </div>
+      <div class="column is-1">
+        <br>
+        <a class="show-modal destination-agent">
+          <i class="fas fa-info-circle guide-btn show-modal"></i>
+        </a>
+      </div>
+    </div>
+    
+    <div class="columns">
+      <div class="column is-11">
+        <label class="label">Shipper:</label>
+        <div class="field is-grouped">
+          <div class="control has-icons-left">
+            <div class="select">
+              <%= f.select :shipper_id, options_for_select(shippers.map{|shipper| ["#{shipper.company_name} <#{shipper.email}>", shipper.id]}), {include_blank: 'SELECT A SHIPPER'} ,{class: ''} %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+          <p class="control text-joiner"> OR </p>
+          <p class="control">
+            <a class="button is-link show-modal shipper">
+              ADD NEW SHIPPER
+            </a>
+          </p>
+        </div>
+      </div>
+      <div class="column is-1">
+        <br>
+        <a class="show-modal shipper-guide">
+          <i class="fas fa-info-circle guide-btn"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column is-11">
+        <label class="label">Consignee:</label>
+        <div class="field is-grouped">
+          <div class="control has-icons-left">
+            <div class="select">
+              <%= f.select :consignee_id, options_for_select(consignees.map{|consignee| ["#{consignee.company_name} <#{consignee.email}>", consignee.id]}), {include_blank: 'SELECT A CONSIGNEE'} ,{class: ''} %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+          <p class="control text-joiner"> OR </p>
+          <p class="control">
+            <a class="button is-link show-modal consignee">
+              ADD NEW CONSIGNEE
+            </a>
+          </p>
+        </div>
+      </div>
+      <div class="column is-1">
+        <br>
+        <a class="show-modal consignee-guide">
+          <i class="fas fa-info-circle guide-btn"></i>
+        </a>
       </div>
     </div>
 
@@ -37,7 +123,9 @@
       </div>
       <div class="column is-1">
         <br>
-        <i class="fas fa-info-circle guide-btn"></i>
+        <a class="show-modal agent-reference">
+          <i class="fas fa-info-circle guide-btn"></i>
+        </a>
       </div>
     </div>
 
@@ -57,11 +145,11 @@
       </div>
       <div class="column is-1">
         <br>
-        <i class="fas fa-info-circle guide-btn"></i>
+        <a class="show-modal shipper-reference">
+          <i class="fas fa-info-circle guide-btn"></i>
+        </a>
       </div>
     </div>
-
-
 
     <div class="columns">
       <div class="column is-11">
@@ -79,7 +167,9 @@
       </div>
       <div class="column is-1">
         <br>
-        <i class="fas fa-info-circle guide-btn"></i>
+        <a class="show-modal consignee-reference">
+          <i class="fas fa-info-circle guide-btn"></i>
+        </a>
       </div>  
     </div>
 
@@ -99,7 +189,9 @@
       </div>
       <div class="column is-1">
         <br>
-        <i class="fas fa-info-circle guide-btn"></i>
+        <a class="show-modal pol">
+          <i class="fas fa-info-circle guide-btn"></i>
+        </a>
       </div>
     </div>
 
@@ -119,7 +211,9 @@
       </div>
       <div class="column is-1">
         <br>
-        <i class="fas fa-info-circle guide-btn"></i>
+        <a class="show-modal pod">
+          <i class="fas fa-info-circle guide-btn"></i>
+        </a>
       </div>
     </div>
     
@@ -143,7 +237,31 @@
           </div>
           <div class="column is-1">
             <br>
-            <i class="fas fa-info-circle guide-btn"></i>
+            <a class="show-modal origin-address">
+              <i class="fas fa-info-circle guide-btn"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column is-11">
+            <div class="field">
+              <label class="label">Origin City:</label>
+              <div class="control has-icons-left">
+                <div class=" full-select">
+                  <%= text_field_tag :origin_city, nil, class: 'input with-guide' %>
+                </div>
+                <div class="icon is-small is-left">
+                  <i class="fas fa-globe"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column is-1">
+            <br>
+            <a class="show-modal origin-city">
+              <i class="fas fa-info-circle guide-btn"></i>
+            </a>
           </div>
         </div>
 
@@ -163,7 +281,9 @@
           </div>
           <div class="column is-1">
             <br>
-            <i class="fas fa-info-circle guide-btn"></i>
+            <a class="show-modal origin-state">
+              <i class="fas fa-info-circle guide-btn"></i>
+            </a>
           </div>
         </div>
 
@@ -183,7 +303,9 @@
           </div>
           <div class="column is-1">
             <br>
-            <i class="fas fa-info-circle guide-btn"></i>
+            <a class="show-modal origin-zip">
+              <i class="fas fa-info-circle guide-btn"></i>
+            </a>
           </div>
         </div>
 
@@ -203,91 +325,34 @@
           </div>
           <div class="column is-1">
             <br>
-            <i class="fas fa-info-circle guide-btn"></i>
+            <a class="show-modal origin-country">
+              <i class="fas fa-info-circle guide-btn"></i>
+            </a>
           </div>
         </div>
       </div>
     </div>
     <br>
 
-
-
-    <div class="field">
-      <label class="label">Destination:</label>
-      <div class="control has-icons-left">
-        <div class=" full-select">
-          <%= text_field_tag :destination, nil, class: 'input with-guide' %>
-        </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
-        </div>
-      </div>
-    </div>
-
-
-    <label class="label">Destination Agent:</label>
-    <div class="field is-grouped">
-      <div class="control has-icons-left">
-        <div class="select ">
-          <%= f.select :agent_id, options_for_select(agents.map{|agent| ["#{agent.company_name} <#{agent.email}>", agent.id]}), {include_blank: 'SELECT A DESTINATION AGENT'} ,{class: ''} %>
-        </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
+    <div class="columns">
+      <div class="column is-11">
+        <div class="field">
+          <label class="label">Destination:</label>
+          <div class="control has-icons-left">
+            <div class=" full-select">
+              <%= text_field_tag :destination, nil, class: 'input with-guide' %>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
         </div>
       </div>
-      <p class="control text-joiner"> OR </p>
-      <p class="control">
-        <a class="button is-link show-modal agent">
-          ADD NEW AGENT
+      <div class="column is-1">
+        <br>
+        <a class="show-modal destination">
+          <i class="fas fa-info-circle guide-btn"></i>
         </a>
-      </p>
-    </div>
-
-    <label class="label">Shipper:</label>
-    <div class="field is-grouped">
-      <div class="control has-icons-left">
-        <div class="select">
-          <%= f.select :shipper_id, options_for_select(shippers.map{|shipper| ["#{shipper.company_name} <#{shipper.email}>", shipper.id]}), {include_blank: 'SELECT A SHIPPER'} ,{class: ''} %>
-        </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
-        </div>
-      </div>
-      <p class="control text-joiner"> OR </p>
-      <p class="control">
-        <a class="button is-link show-modal shipper">
-          ADD NEW SHIPPER
-        </a>
-      </p>
-    </div>
-
-    <label class="label">Consignee:</label>
-    <div class="field is-grouped">
-      <div class="control has-icons-left">
-        <div class="select">
-          <%= f.select :consignee_id, options_for_select(consignees.map{|consignee| ["#{consignee.company_name} <#{consignee.email}>", consignee.id]}), {include_blank: 'SELECT A CONSIGNEE'} ,{class: ''} %>
-        </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
-        </div>
-      </div>
-      <p class="control text-joiner"> OR </p>
-      <p class="control">
-        <a class="button is-link show-modal consignee">
-          ADD NEW CONSIGNEE
-        </a>
-      </p>
-    </div>
-
-    <div class="field">
-      <label class="label">Operation Type:</label>
-      <div class="control has-icons-left">
-        <div class="select with-guide">
-          <%= select_tag :modality, options_for_select(["FCL - EXW", "LCL"], "FCL - EXW"), {include_blank: 'SELECT AN OPERATION TYPE', class: "modality with-guide"}%>
-        </div>
-        <div class="icon is-small is-left">
-          <i class="fas fa-globe"></i>
-        </div>
       </div>
     </div>
 
@@ -319,4 +384,5 @@
 
 <%= render 'new_user_modal', user_type: 'consignee' %>
 
+<%= render 'guides/new_operation/main_guide' %>
 
