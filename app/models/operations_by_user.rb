@@ -4,13 +4,15 @@ class OperationsByUser < ApplicationRecord
   belongs_to :agent, class_name: 'User', foreign_key: "agent_id", optional: true
   belongs_to :shipper, class_name: 'User', foreign_key: "shipper_id", optional: true
   belongs_to :consignee, class_name: 'User', foreign_key: "consignee_id", optional: true
-  validates :agent_id, :operation_id, presence: true
+  validates :agent_id, :shipper_id, :consignee_id, :operation_id, presence: true
 
   # fields is an array conteining [ reference, modality, strong_params_for_representatives, current_user, pieces_number ]
 
   def self.create_for_representatives(fields)
 		operation = create_operation(fields[1], fields[0], fields[4], fields[6], fields[7], fields[8], fields[9], fields[10], fields[11], fields[12], fields[13], fields[14], fields[15], fields[16])
 		@operations_by_user = OperationsByUser.create(fields[2].merge(operation_id: operation.id, representative_id: fields[3].id))
+    errors = (@operations_by_user.errors.full_messages + operation.errors.full_messages).delete_if {|x| x == "Operation must exist" || x == "Operation can't be blank"}
+    [@operations_by_user, errors]
   end
 
 =begin
@@ -22,17 +24,13 @@ class OperationsByUser < ApplicationRecord
 =end
 
   def self.create_operation_by_representative(params, current_user, strong_params)
-    if params[:operations_by_user][:agent_id].present? && params[:operations_by_user][:shipper_id].present?
-      date_arr = Date.today.to_s.split('-') 
-      reference = (current_user.contact_first_name[0..0] + current_user.contact_last_name[0..0] + date_arr[2] + date_arr[1] + date_arr[0][2..4] + last_two_digits).upcase
-      fields = [ reference, params[:modality], strong_params, current_user, params[:pieces_number], '', params[:agent_reference], params[:shipper_reference],
-      params[:consignee_reference], params[:pol], params[:pod], params[:origin_address], params[:origin_city], params[:origin_state], params[:origin_zip_code], params[:origin_country], params[:destination] ]
-      new_operation = create_for_representatives(fields)
-    else
-      false
-    end
+    params[:operations_by_user][:agent_id].present? && params[:operations_by_user][:shipper_id].present?
+    date_arr = Date.today.to_s.split('-') 
+    reference = (current_user.contact_first_name[0..0] + current_user.contact_last_name[0..0] + date_arr[2] + date_arr[1] + date_arr[0][2..4] + last_two_digits).upcase
+    fields = [ reference, params[:modality], strong_params, current_user, params[:pieces_number], '', params[:agent_reference], params[:shipper_reference],
+    params[:consignee_reference], params[:pol], params[:pod], params[:origin_address], params[:origin_city], params[:origin_state], params[:origin_zip_code], params[:origin_country], params[:destination] ]
+    new_operation = create_for_representatives(fields)
   end
-
 
   private
   	def self.create_operation(modality, reference, pieces_number, agent_reference, shipper_reference, consignee_reference, pol, pod, origin_address, origin_city, origin_state, origin_zip_code, origin_country, destination)
@@ -42,7 +40,7 @@ class OperationsByUser < ApplicationRecord
   			#TODO add other modality cases
   		end
       last_two_digits
-  		operation = Operation.create!(reference: reference, status: 'IN PROGRESS', status_message:'Confirm quotation', 
+  		operation = Operation.create(reference: reference, status: 'IN PROGRESS', status_message:'Confirm quotation', 
         modality: modality, steps_number: steps_number, current_step: 0, pieces_number: pieces_number, agent_reference: agent_reference,
         pol: pol, pod: pod, origin_address: origin_address, origin_city: origin_city, origin_state: origin_state, origin_zip_code: origin_zip_code, origin_country: origin_country,
          destination: destination, shipper_reference: shipper_reference, consignee_reference: consignee_reference)
@@ -63,7 +61,6 @@ class OperationsByUser < ApplicationRecord
       booking_info = FclExwBookingInfoStep.new(operation: operation)
       booking_info.save!(validate: false)
     end
-
 
     def self.last_two_digits
       if ((Operation.last.nil?) || (Operation.last.created_at < Time.current.beginning_of_day))

@@ -10,11 +10,16 @@
 	        <li class="is-active"><%= link_to "New Operation", new_operations_by_user_path %></li>
 	      </ul>
 	    </nav>
+
+	    <div class="notification is-primary">
+	      Fields marked with an <strong>asterisk (*)</strong> are mandatory, please be sure to fill them in before proceeding.
+	    </div>
+
 	    <nav class= 'panel is-form-panel card-shadow'>
 	      <p class="panel-heading">
 	        Create new operation
 	      </p>
-	      <%= render 'new_form', operations_by_user: @operations_by_user, agents: agents(current_user), representatives: all_representatives, shippers: shippers(current_user), consignees: all_consignees %>
+	      <%= render 'new_form', operations_by_user: new_operation, agents: agents(current_user), representatives: all_representatives, shippers: shippers(current_user), consignees: all_consignees, errors: @errors %>
 	    </nav>
 	   
 	  </div>

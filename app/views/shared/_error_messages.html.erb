@@ -1,0 +1,9 @@
+<% unless format.nil? %>
+	<div class="notification is-danger">
+	  <ul>
+	    <% format.split('/').each do |msg| %>
+	      <li>- <%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+<% end %>

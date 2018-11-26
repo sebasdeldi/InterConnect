@@ -1,13 +1,13 @@
 <div class='panel-block'>
   <%= form_for operations_by_user, html: {class: "control"} do |f| %>
-
+    <%= render 'shared/error_messages', format: params[:format] %>
     <div class="columns">
       <div class="column is-11">
         <div class="field">
-          <label class="label">Operation Type:</label>
+          <label class="label">* Operation Modality:</label>
           <div class="control has-icons-left">
             <div class="select with-guide">
-              <%= select_tag :modality, options_for_select(["FCL - EXW", "LCL"], "FCL - EXW"), {include_blank: 'SELECT AN OPERATION TYPE', class: "modality full-select"}%>
+              <%= select_tag :modality, options_for_select(["FCL - EXW", "LCL"], "FCL - EXW"), {include_blank: 'SELECT AN OPERATION MODALITY', class: "modality full-select"}%>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -25,7 +25,7 @@
 
     <div class="columns">
       <div class="column is-11">
-        <label class="label">Destination Agent:</label>
+        <label class="label">* Destination Agent:</label>
         <div class="field is-grouped">
           <div class="control has-icons-left">
             <div class="select ">
@@ -53,7 +53,7 @@
     
     <div class="columns">
       <div class="column is-11">
-        <label class="label">Shipper:</label>
+        <label class="label">* Shipper:</label>
         <div class="field is-grouped">
           <div class="control has-icons-left">
             <div class="select">
@@ -81,7 +81,7 @@
 
     <div class="columns">
       <div class="column is-11">
-        <label class="label">Consignee:</label>
+        <label class="label">* Consignee:</label>
         <div class="field is-grouped">
           <div class="control has-icons-left">
             <div class="select">
@@ -176,7 +176,7 @@
     <div class="columns">
       <div class="column is-11">
         <div class="field">
-          <label class="label">Port Of Loading (POL):</label>
+          <label class="label">* Port Of Loading (POL):</label>
           <div class="control has-icons-left">
             <div class=" full-select">
               <%= text_field_tag :pol, nil, class: 'input with-guide', id: 'port-loading' %>
@@ -198,7 +198,7 @@
     <div class="columns">
       <div class="column is-11">
         <div class="field">
-          <label class="label">Port Of Discharge (POD):</label>
+          <label class="label">* Port Of Discharge (POD):</label>
           <div class="control has-icons-left">
             <div class=" full-select">
               <%= text_field_tag :pod, nil, class: 'input with-guide', id: 'port-discharge' %>
@@ -224,7 +224,7 @@
         <div class="columns">
           <div class="column is-11">
             <div class="field">
-              <label class="label">Origin Address:</label>
+              <label class="label">* Origin Address:</label>
               <div class="control has-icons-left">
                 <div class=" full-select">
                   <%= text_field_tag :origin_address, nil, class: 'input with-guide' %>
@@ -246,7 +246,7 @@
         <div class="columns">
           <div class="column is-11">
             <div class="field">
-              <label class="label">Origin City:</label>
+              <label class="label">* Origin City:</label>
               <div class="control has-icons-left">
                 <div class=" full-select">
                   <%= text_field_tag :origin_city, nil, class: 'input with-guide' %>
@@ -268,7 +268,7 @@
         <div class="columns">
           <div class="column is-11">
             <div class="field">
-              <label class="label">Origin State:</label>
+              <label class="label">* Origin State:</label>
               <div class="control has-icons-left">
                 <div class=" full-select">
                   <%= text_field_tag :origin_state, nil, class: 'input with-guide' %>
@@ -290,7 +290,7 @@
         <div class="columns">
           <div class="column is-11">
             <div class="field">
-              <label class="label">Origin Zip Code:</label>
+              <label class="label">* Origin Zip Code:</label>
               <div class="control has-icons-left">
                 <div class=" full-select">
                   <%= text_field_tag :origin_zip_code, nil, class: 'input with-guide' %>
@@ -312,7 +312,7 @@
         <div class="columns">
           <div class="column is-11">
             <div class="field">
-              <label class="label">Origin Country:</label>
+              <label class="label">* Origin Country:</label>
               <div class="control has-icons-left">
                 <div class=" full-select">
                   <%= text_field_tag :origin_country, nil, class: 'input with-guide' %>
@@ -337,7 +337,7 @@
     <div class="columns">
       <div class="column is-11">
         <div class="field">
-          <label class="label">Destination:</label>
+          <label class="label">* Destination:</label>
           <div class="control has-icons-left">
             <div class=" full-select">
               <%= text_field_tag :destination, nil, class: 'input with-guide' %>

@@ -80,4 +80,5 @@ module ApplicationHelper
 	def contacted_customer(operation)
 		FclExwInfoRequestedStep.find_by(operation_id: operation).completed
 	end
+
 end

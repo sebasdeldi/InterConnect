@@ -16,4 +16,8 @@ module OperationsByUsersHelper
 		User.consignees
 	end
 
+	def new_operation
+		OperationsByUser.new
+	end
+
 end

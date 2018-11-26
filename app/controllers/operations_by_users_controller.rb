@@ -3,16 +3,15 @@ class OperationsByUsersController < ApplicationController
 	before_action :authenticate_user!, :require_new_operation_permission
 
 	def new
-		@operations_by_user = OperationsByUser.new
 	end
 
 	def create
 		op = OperationsByUser.create_operation_by_representative(params, current_user, strong_params_for_representatives)
-		if op
+		if op[1].empty?
 			set_notice
-			redirect_to operation_path(op)
+			redirect_to operation_path(op[0].operation_id)
 		else
-			set_alert
+			set_alert(op[1])
 		end
 	end
 
@@ -23,9 +22,9 @@ class OperationsByUsersController < ApplicationController
 			cookies.permanent[:redirect_tab] = 'operations_tab'
 		end
 
-		def set_alert
-			flash[:alert] = "Please choose a valid option."
-			render :new
+		def set_alert(error)
+			flash[:alert] = "Please provide the infomartion marked with (*)"
+			redirect_to new_operations_by_user_path(error)
 		end
 
 		def strong_params_for_representatives
