@@ -22,10 +22,13 @@ class FclExwQuotationConfirmedStepsController < ApplicationController
 	end
 
 	def confirm_quotation
-		if FclExwQuotationConfirmedStep.confirm_quotation(params, current_user)
-			flash[:notice] = "Step confirmed, no more reminders will be sent"
-			redirect_to operation_path params[:operation_id]
+		confirmation = FclExwQuotationConfirmedStep.confirm_quotation(params, current_user)
+		if params[:files].present? || params[:commit] == 'ISSUE'
+			flash[:notice] = confirmation
+		else
+			flash[:alert] = confirmation
 		end
+		redirect_to operation_path params[:operation_id]
 	end
 
 end
