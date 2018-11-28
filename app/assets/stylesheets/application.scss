@@ -98,7 +98,7 @@ article a {
 
 $major-blue: #3273dc;
 
-.hidden { display: none; }
+.hidden { display: none !important; }
 
 .is-form-panel { margin-top: 35px; }
 
@@ -273,4 +273,9 @@ $major-blue: #3273dc;
   font-size: 24px;
   height: 2.2em !important;
   cursor: pointer;
+}
+
+
+.fas.fa-info-circle.guide-btn{
+  margin-top: 13px;
 }

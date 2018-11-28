@@ -22,14 +22,13 @@
   						<ul>
   							<b>
   								<li>-Loading Address</li>
-  								<li>-Container Size</li>
+  								<li>-Container Information</li>
+                  <li>-Contact Information</li>
   								<li>-Loading Date & Dock Hours</li>
-  								<li>-Gross Weight</li>
-  								<li>-Commercial Description</li>
-  								<li>-Is Cargo Hazardous</li>
-  								<li>-Hazard Document</li>
   								<li>-EIN</li>
   								<li>-PickUp Reference</li>
+                  <li>-Bonded</li>
+                  <li>-Self Propelled</li>
   							</b>
   						</ul>
   						<br>
@@ -59,7 +58,7 @@
   							<%= hidden_field_tag 'shipper_id', shipper.id %>
   							<%= hidden_field_tag 'operation_id', operation_id %>
   							<%= hidden_field_tag 'agent_id', agent.id %>
-  							<%= submit_tag 'SEND REQUEST', class: "button is-link #{is_fcl_exw_info_requested?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_info_requested?(operation_id) %>
+  							<%= submit_tag 'SEND REQUEST', class: "button is-link #{is_fcl_exw_info_requested?(operation_id) ? 'step-completed' : ''  } "  %>
   							<a class="button is-primary right-button circle-button show-modal info_requested">
   								<i class="fas fa-tasks"></i>
   							</a>

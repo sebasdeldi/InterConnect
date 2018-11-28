@@ -20,7 +20,7 @@
             <div class="field">
               <%= f.label 'Booking Number:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :booking_number, autofocus: true, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).booking_number : '' %>
+                <%= f.text_field :booking_number, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).booking_number : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-map-signs"></i>
                 </span>
@@ -30,7 +30,7 @@
             <div class="field">
               <%= f.label 'Vessel:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :vessel, autofocus: true, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).vessel : '' %>
+                <%= f.text_field :vessel, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).vessel : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-map-signs"></i>
                 </span>
@@ -40,7 +40,7 @@
             <div class="field">
               <%= f.label 'Voyage:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :voyage, autofocus: true, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).voyage : '' %>
+                <%= f.text_field :voyage, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).voyage : '' %>
                 <span class="icon is-small is-left">
                   <i class="fas fa-map-signs"></i>
                 </span>
@@ -50,7 +50,7 @@
             <div class="field">
               <%= f.label 'Document cut off date:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :doc_cut_off_date, autofocus: true, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).doc_cut_off_date : '' %>
+                <%= f.text_field :doc_cut_off_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).doc_cut_off_date : '' %>
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
                 </span>
@@ -73,7 +73,7 @@
             <div class="field">
               <%= f.label 'Cargo cut off date:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :cargo_cut_off_date, autofocus: true, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).cargo_cut_off_date : '' %>
+                <%= f.text_field :cargo_cut_off_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).cargo_cut_off_date : '' %>
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
                 </span>
@@ -93,7 +93,7 @@
             <div class="field">
               <%= f.label 'VGM cut off date:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :vgm_cut_off_date, autofocus: true, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).vgm_cut_off_date : '' %>
+                <%= f.text_field :vgm_cut_off_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).vgm_cut_off_date : '' %>
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
                 </span>
@@ -106,7 +106,7 @@
             <div class="field">
               <%= f.label 'Expected sailing date:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :sailing_date, autofocus: true, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).sailing_date : '' %>
+                <%= f.text_field :sailing_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).sailing_date : '' %>
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
                 </span>
@@ -129,7 +129,7 @@
             <div class="field">
               <%= f.label 'Expected arrival date:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :arrival_date, autofocus: true, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).arrival_date : '' %>
+                <%= f.text_field :arrival_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).arrival_date : '' %>
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
                 </span>
@@ -161,7 +161,7 @@
             <div class="field hidden ramp-cut-off-container">
               <%= f.label 'Ramp cut off date:', class: 'label' %>
               <div class="control has-icons-left">
-                <%= f.text_field :ramp_cut_off_date, autofocus: true, class: 'input loading_datetime ramp-cut-off', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).ramp_cut_off_date : '' %>
+                <%= f.text_field :ramp_cut_off_date, class: 'input loading_datetime ramp-cut-off', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).ramp_cut_off_date : '' %>
                 <span class="icon is-small is-left">
                   <i class="far fa-calendar-alt"></i>
                 </span>
@@ -178,7 +178,7 @@
               <div class="field pieces-number-booking">
                 <%= f.label 'Number of containers', class: 'label' %>
                 <div class="control has-icons-left">
-                  <%= f.number_field :pieces_number, autofocus: true, class: 'input pieces-number-booking', min: 0, value: pieces_number(@operation) %>
+                  <%= f.number_field :pieces_number, class: 'input pieces-number-booking', min: 0, value: pieces_number(@operation) %>
                   <span class="icon is-small is-left">
                     <i class="fas fa-envelope pieces-number-booking"></i>
                   </span>
