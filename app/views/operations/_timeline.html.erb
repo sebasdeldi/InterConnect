@@ -2,117 +2,7 @@
 <br>
 <div class="container is-widescreen"> 
 	<% if is_fcl_exw? operation_id %>
-		<section class="full-section">
-			<div class="tile is-ancestor">
-			  <div class="tile is-vertical is-8">
-			    <div class="tile">
-			      <div class="tile is-parent is-vertical">
-			        <article class="tile is-child notification step-completed show-modal fcl-initial">      
-		        		<p class="title"> 
-		        			<span class="numberCircle"><span>1</span></span>
-		        			FCL - EXW
-		        		</p>
-		        		<rp></rp>
-		          	<p class="subtitle">New process</p>
-			        </article>
-
-			        <article class="tile is-child notification step-not-completed <%= is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : '' %> show-modal quotation">
-			        		<p class="title">
-			        			<span class="numberCircle"><span>2</span></span>
-			        			Quotation
-			        		</p>
-			        		<rp></rp>
-			        		<p class="subtitle"> Check agent's quotation status  </p>
-			        </article>
-			      </div>
-			      <div class="tile is-parent">
-			        <article class="tile is-child notification step-not-completed <%= is_fcl_exw_info_confirmed?(operation_id) ? 'step-completed' : '' %> show-modal fcl-info-received">
-			          <p class="title">
-			          	<span class="numberCircle"><span>4</span></span>
-			          	Information response
-			          </p>
-			          <rp></rp>
-			          <p class="subtitle">Confirm shipper's information response</p>
-			        </article>
-			      </div>
-			    </div>
-			    <div class="tile is-parent">
-			      <article class="tile is-child notification <%= is_fcl_exw_info_requested?(operation_id) ? 'step-completed' : '' %> step-not-completed show-modal fcl-request-info ">
-			        <p class="title">
-			        	<span class="numberCircle"><span>3</span></span>
-			        	Cargo information request
-			        </p>
-			        <rp></rp>
-			        <p class="subtitle">Request cargo's info to shipper</p>
-			        <div class="content">
-			          <!-- Content -->
-			        </div>
-			      </article>
-			    </div>
-			  </div>
-			  <div class="tile is-parent is-vertical">
-			    <article class="tile is-child notification step-not-completed <%= is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'step-completed' : '' %>  <%= is_fcl_exw_info_stage_completed?(operation_secure_id) == 'orange' ? 'step-incompleted' : '' %> show-modal fcl-load-info">
-			      <p class="title">
-			      	<span class="numberCircle"><span>5</span></span>
-			      	Cargo info
-			      </p>
-			      <rp></rp>
-			      <p class="subtitle">Fill in info</p>
-			    </article>
-			    <article class="tile is-child notification step-not-completed <%= is_fcl_exw_booking_requested?(operation_id) ? 'step-completed' : '' %> show-modal fcl-booking">
-			      <p class="title">
-			      	<span class="numberCircle"><span>6</span></span>
-			      	Request booking
-			    	</p>
-			    	<rp></rp>
-			      <p class="subtitle">Request a cargo booking order</p>
-			    </article>
-
-			    <article class="tile is-child notification step-not-completed <%= is_fcl_exw_booking_info_completed?(operation_secure_id) ? 'step-completed' : '' %>  <%= is_fcl_exw_booking_info_completed?(operation_secure_id) == 'orange' ? 'step-incompleted' : '' %> show-modal fcl-booking-info">
-			      <p class="title">
-			      	<span class="numberCircle"><span>7</span></span>
-			      	Booking info
-			      </p>
-			      <rp></rp>
-			      <p class="subtitle">Fill in info</p>
-			    </article>
-			  </div>
-			</div>
-
-
-			<div class="tile is-ancestor">
-			  <div class="tile is-parent">
-			    <article class="tile is-child box notification step-not-completed <%= is_fcl_exw_loading_confirmed?(operation_id) ? 'step-completed' : '' %> show-modal fcl-container-loading">
-			      <p class="title">
-			      	<span class="numberCircle"><span>8</span></span>
-			      	Container Loading
-			      </p>
-			      <rp></rp>
-			      <p class="subtitle">Check container loading status</p>
-			    </article>
-			  </div>
-			  <div class="tile is-parent">
-			    <article class="tile is-child box notification step-not-completed <%= is_fcl_exw_delivery_confirmed?(operation_id) ? 'step-completed' : '' %> show-modal fcl-container-delivery">
-			      <p class="title">
-			      	<span class="numberCircle"><span>9</span></span>
-			      	Container Delivery
-			      </p>
-			      <rp></rp>
-			      <p class="subtitle">Check container delivery status</p>
-			    </article>
-			  </div>
-			</div>
-			<br>
-			<br>
-		</section>
-
-
-		<section id="timeline-section">
-			<%= render 'operations/fcl_exw/fcl_exw_timeline',operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper,
-			cargo_info_tasks: cargo_info_tasks, booking_info_tasks: booking_info_tasks ,info_confirmed_tasks: info_confirmed_tasks, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks, request_booking_tasks: request_booking_tasks, carriers: carriers, consignee: consignee, fcl_exw_container_loading_tasks: fcl_exw_container_loading_tasks,
-	 fcl_exw_container_delivery_tasks: fcl_exw_container_delivery_tasks %>
-		</section>
-
+		<%= render 'operations/fcl_exw/fcl_exw_timeline', operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, fcl_exw_container_loading_tasks: fcl_exw_container_loading_tasks , carriers: carriers, consignee: consignee, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks, info_confirmed_tasks: info_confirmed_tasks, cargo_info_tasks: cargo_info_tasks, request_booking_tasks: request_booking_tasks, carriers: carriers, booking_info_tasks: booking_info_tasks, 	 fcl_exw_container_delivery_tasks: fcl_exw_container_delivery_tasks, fcl_exw_container_loading_tasks: fcl_exw_container_loading_tasks %>
 	<% else %>
 		<%= render 'other_timeline', operation_id: operation_id, agent: agent, shipper: shipper %>
 	<% end %>
@@ -133,5 +23,13 @@
 
 	<!-- Hidding this on purpose -->
 	<% render 'send_follow_up_mail_modal', agent: agent, shipper: shipper, operation_id: operation_id %>
+
+	<%= link_to edit_operations_by_user_path(operation_id) do %>
+		<i class="fas fa-cog middle-icon settings-button show-modal"></i>
+	<% end %>
+
+	<a class="show-modal relevant-info">
+	  <i class="fas fa-info-circle middle-icon fixed-bottom-button show-modal" ></i>
+	</a>
 </div>
 

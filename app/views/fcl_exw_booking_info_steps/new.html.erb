@@ -1,6 +1,6 @@
 <div class="container is-widescreen"> 
   <div class="columns">
-    <div class="column <%= is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? 'is-6' : 'is-half is-8 is-offset-2' %>">
+    <div class="column is-10 is-offset-1">
       <br>
       <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
@@ -17,173 +17,278 @@
 
             <%= hidden_field_tag :operation_secure_id, params[:operation_secure_id] %>
 
-            <div class="field">
-              <%= f.label 'Booking Number:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.text_field :booking_number, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).booking_number : '' %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-map-signs"></i>
-                </span>
+            <div class="columns">
+              <div class="column is-11">
+                <div class="field">
+                  <%= f.label 'Booking Number:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <%= f.text_field :booking_number, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).booking_number : '' %>
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-map-signs"></i>
+                    </span>
+                  </div>
+                </div>  
               </div>
-            </div>  
+              <div class="column is-1">
+                <br>
+                <a class="show-modal booking-number">
+                  <i class="fas fa-info-circle guide-btn"></i>
+                </a>
+              </div>
+            </div>
 
-            <div class="field">
-              <%= f.label 'Vessel:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.text_field :vessel, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).vessel : '' %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-map-signs"></i>
-                </span>
+            <div class="columns">
+              <div class="column is-11">
+                <div class="field">
+                  <%= f.label 'Vessel:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <%= f.text_field :vessel, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).vessel : '' %>
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-map-signs"></i>
+                    </span>
+                  </div>
+                </div>  
               </div>
-            </div>  
+              <div class="column is-1">
+                <br>
+                <a class="show-modal vessel">
+                  <i class="fas fa-info-circle guide-btn"></i>
+                </a>
+              </div>
+            </div>
 
-            <div class="field">
-              <%= f.label 'Voyage:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.text_field :voyage, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).voyage : '' %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-map-signs"></i>
-                </span>
+            <div class="columns">
+              <div class="column is-11">
+                <div class="field">
+                  <%= f.label 'Voyage:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <%= f.text_field :voyage, class: 'input', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).voyage : '' %>
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-map-signs"></i>
+                    </span>
+                  </div>
+                </div>   
               </div>
-            </div>  
+              <div class="column is-1">
+                <br>
+                <a class="show-modal voyage">
+                  <i class="fas fa-info-circle guide-btn"></i>
+                </a>
+              </div>
+            </div>
 
-            <div class="field">
-              <%= f.label 'Document cut off date:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.text_field :doc_cut_off_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).doc_cut_off_date : '' %>
-                <span class="icon is-small is-left">
-                  <i class="far fa-calendar-alt"></i>
-                </span>
+            <div class="columns">
+              <div class="column is-11">
+                <div class="field">
+                  <%= f.label 'Document cut off date:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <%= f.text_field :doc_cut_off_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).doc_cut_off_date : '' %>
+                    <span class="icon is-small is-left">
+                      <i class="far fa-calendar-alt"></i>
+                    </span>
+                  </div>
+                </div>  
               </div>
-            </div> 
+              <div class="column is-1">
+                <br>
+                <a class="show-modal doc-cut-off-date">
+                  <i class="fas fa-info-circle guide-btn"></i>
+                </a>
+              </div>
+            </div>
 
-            <div class="field">
-              <%= f.label 'Document cut off time:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.time_select :doc_cut_off_time, {  }, { class: 'input time-input' } %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-clock"></i>
-                </span>
+            <div class="columns">
+              <div class="column is-11">
+                <div class="field">
+                  <%= f.label 'Document cut off time:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <%= f.time_select :doc_cut_off_time, {  }, { class: 'input time-input' } %>
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-clock"></i>
+                    </span>
+                  </div>
+                </div> 
               </div>
-            </div> 
+              <div class="column is-1">
+                <br>
+                <a class="show-modal doc-cut-off-time">
+                  <i class="fas fa-info-circle guide-btn"></i>
+                </a>
+              </div>
+            </div>
 
             <p class="doc_hour hidden"><%= existing_fcl_booking_info(@operation).doc_cut_off_time.nil? ? '00' : existing_fcl_booking_info(@operation).doc_cut_off_time.hour %></p>
             <p class="doc_mins hidden"><%= existing_fcl_booking_info(@operation).doc_cut_off_time.nil? ? '00' : existing_fcl_booking_info(@operation).doc_cut_off_time.min %></p>
 
-            <div class="field">
-              <%= f.label 'Cargo cut off date:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.text_field :cargo_cut_off_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).cargo_cut_off_date : '' %>
-                <span class="icon is-small is-left">
-                  <i class="far fa-calendar-alt"></i>
-                </span>
+            <div class="columns">
+              <div class="column is-11">
+                <div class="field">
+                  <%= f.label 'Cargo cut off date:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <%= f.text_field :cargo_cut_off_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).cargo_cut_off_date : '' %>
+                    <span class="icon is-small is-left">
+                      <i class="far fa-calendar-alt"></i>
+                    </span>
+                  </div>
+                </div> 
               </div>
-            </div> 
+              <div class="column is-1">
+                <br>
+                <a class="show-modal cargo-cut-off-date">
+                  <i class="fas fa-info-circle guide-btn"></i>
+                </a>
+              </div>
+            </div>
 
-            <div class="field">
-              <%= f.label 'Cargo cut off time:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.time_select :cargo_cut_off_time, {  }, { class: 'input time-input' } %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-clock"></i>
-                </span>
+            <div class="columns">
+              <div class="column is-11">
+                <div class="field">
+                  <%= f.label 'Cargo cut off time:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <%= f.time_select :cargo_cut_off_time, {  }, { class: 'input time-input' } %>
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-clock"></i>
+                    </span>
+                  </div>
+                </div> 
               </div>
-            </div> 
+              <div class="column is-1">
+                <br>
+                <a class="show-modal cargo-cut-off-time">
+                  <i class="fas fa-info-circle guide-btn"></i>
+                </a>
+              </div>
+            </div>
 
-            <div class="field">
-              <%= f.label 'VGM cut off date:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.text_field :vgm_cut_off_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).vgm_cut_off_date : '' %>
-                <span class="icon is-small is-left">
-                  <i class="far fa-calendar-alt"></i>
-                </span>
+            <div class="columns">
+              <div class="column is-11">
+                <div class="field">
+                  <%= f.label 'VGM cut off date:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <%= f.text_field :vgm_cut_off_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).vgm_cut_off_date : '' %>
+                    <span class="icon is-small is-left">
+                      <i class="far fa-calendar-alt"></i>
+                    </span>
+                  </div>
+                </div> 
               </div>
-            </div> 
+              <div class="column is-1">
+                <br>
+                <a class="show-modal vgm-cut-off-date">
+                  <i class="fas fa-info-circle guide-btn"></i>
+                </a>
+              </div>
+            </div>
 
             <p class="cargo_hour hidden"><%= existing_fcl_booking_info(@operation).cargo_cut_off_time.nil? ? '00' : existing_fcl_booking_info(@operation).cargo_cut_off_time.hour %></p>
             <p class="cargo_mins hidden"><%= existing_fcl_booking_info(@operation).cargo_cut_off_time.nil? ? '00' : existing_fcl_booking_info(@operation).cargo_cut_off_time.min %></p>
 
-            <div class="field">
-              <%= f.label 'Expected sailing date:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.text_field :sailing_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).sailing_date : '' %>
-                <span class="icon is-small is-left">
-                  <i class="far fa-calendar-alt"></i>
-                </span>
+            <div class="columns">
+              <div class="column is-11">
+                <div class="field">
+                  <%= f.label 'Expected sailing date:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <%= f.text_field :sailing_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).sailing_date : '' %>
+                    <span class="icon is-small is-left">
+                      <i class="far fa-calendar-alt"></i>
+                    </span>
+                  </div>
+                </div> 
               </div>
-            </div> 
-
-            <div class="field">
-              <%= f.label 'Expected sailing time:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.time_select :sailing_time, {  }, { class: 'input time-input' } %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-clock"></i>
-                </span>
+              <div class="column is-1">
+                <br>
+                <a class="show-modal expected-sailing-date">
+                  <i class="fas fa-info-circle guide-btn"></i>
+                </a>
               </div>
-            </div> 
+            </div>
 
-            <p class="sailing_hour hidden"><%= existing_fcl_booking_info(@operation).sailing_time.nil? ? '00' : existing_fcl_booking_info(@operation).sailing_time.hour %></p>
-            <p class="sailing_mins hidden"><%= existing_fcl_booking_info(@operation).sailing_time.nil? ? '00' : existing_fcl_booking_info(@operation).sailing_time.min %></p>
-
-            <div class="field">
-              <%= f.label 'Expected arrival date:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.text_field :arrival_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).arrival_date : '' %>
-                <span class="icon is-small is-left">
-                  <i class="far fa-calendar-alt"></i>
-                </span>
+            <div class="columns">
+              <div class="column is-11">
+                <div class="field">
+                  <%= f.label 'Expected arrival date:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <%= f.text_field :arrival_date, class: 'input loading_datetime', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).arrival_date : '' %>
+                    <span class="icon is-small is-left">
+                      <i class="far fa-calendar-alt"></i>
+                    </span>
+                  </div>
+                </div>  
               </div>
-            </div> 
-
-            <div class="field">
-              <%= f.label 'Expected arrival time:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.time_select :arrival_time, {  }, { class: 'input time-input' } %>
-                <span class="icon is-small is-left">
-                  <i class="fas fa-clock"></i>
-                </span>
+              <div class="column is-1">
+                <br>
+                <a class="show-modal expected-arrival-date">
+                  <i class="fas fa-info-circle guide-btn"></i>
+                </a>
               </div>
-            </div> 
+            </div>
 
-            <div class="field">
-              <%= f.label 'Ramp needed ?:', class: 'label' %>
-              <div class="control has-icons-left">
-                <div class="select">
-                  <%= f.select :ramp, options_for_select([['NO', 'NO'], ['YES', 'YES']], is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).ramp : '' ), {}, class: 'input loading_datetime ramp'  %>
-                </div>
-                <span class="icon is-small is-left">
-                  <i class="far fa-calendar-alt"></i>
-                </span>
+            <div class="columns">
+              <div class="column is-11">
+                <div class="field">
+                  <%= f.label 'Ramp needed ?:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <div class="select">
+                      <%= f.select :ramp, options_for_select([['NO', 'NO'], ['YES', 'YES']], is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).ramp : '' ), {}, class: 'input loading_datetime ramp'  %>
+                    </div>
+                    <span class="icon is-small is-left">
+                      <i class="far fa-calendar-alt"></i>
+                    </span>
+                  </div>
+                </div>  
               </div>
-            </div> 
-
-            <div class="field hidden ramp-cut-off-container">
-              <%= f.label 'Ramp cut off date:', class: 'label' %>
-              <div class="control has-icons-left">
-                <%= f.text_field :ramp_cut_off_date, class: 'input loading_datetime ramp-cut-off', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).ramp_cut_off_date : '' %>
-                <span class="icon is-small is-left">
-                  <i class="far fa-calendar-alt"></i>
-                </span>
+              <div class="column is-1">
+                <br>
+                <a class="show-modal ramp-needed">
+                  <i class="fas fa-info-circle guide-btn"></i>
+                </a>
               </div>
-            </div> 
+            </div>
 
-            <p class="arrival_hour hidden"><%= existing_fcl_booking_info(@operation).arrival_time.nil? ? '00' : existing_fcl_booking_info(@operation).arrival_time.hour %></p>
-            <p class="arrival_mins hidden"><%= existing_fcl_booking_info(@operation).arrival_time.nil? ? '00' : existing_fcl_booking_info(@operation).arrival_time.min %></p>
+            <div class="columns hidden ramp-cut-off-container">
+              <div class="column is-11">
+                <div class="field ">
+                  <%= f.label 'Ramp cut off date:', class: 'label' %>
+                  <div class="control has-icons-left">
+                    <%= f.text_field :ramp_cut_off_date, class: 'input loading_datetime ramp-cut-off', value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).ramp_cut_off_date : '' %>
+                    <span class="icon is-small is-left">
+                      <i class="far fa-calendar-alt"></i>
+                    </span>
+                  </div>
+                </div>  
+              </div>
+              <div class="column is-1">
+               <br>
+               <a class="show-modal ramp-cut-off-date">
+                 <i class="fas fa-info-circle guide-btn"></i>
+               </a>
+              </div>
+            </div>
  
             <%= f.hidden_field :fcl_exw_booking_info_step_id, class: "fcl_exw_booking_info_step_id", value: is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) ? existing_fcl_booking_info(@operation).id : '' %>
             <br>
 
             <% if !(existing_fcl_cargo_info(@operation).nil? || existing_fcl_cargo_info(@operation).pieces_number.nil?) %>
-              <div class="field pieces-number-booking">
-                <%= f.label 'Number of containers', class: 'label' %>
-                <div class="control has-icons-left">
-                  <%= f.number_field :pieces_number, class: 'input pieces-number-booking', min: 0, value: pieces_number(@operation) %>
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-envelope pieces-number-booking"></i>
-                  </span>
+
+              <div class="columns">
+                <div class="column is-11">
+                  <div class="field pieces-number-booking">
+                    <%= f.label 'Number of containers', class: 'label' %>
+                    <div class="control has-icons-left">
+                      <%= f.number_field :pieces_number, class: 'input pieces-number-booking', min: 0, value: pieces_number(@operation) %>
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-envelope pieces-number-booking"></i>
+                      </span>
+                    </div>
+                  </div>  
                 </div>
-              </div>  
+                <div class="column is-1">
+                  <br>
+                  <a class="show-modal number-of-containers">
+                    <i class="fas fa-info-circle guide-btn"></i>
+                  </a>
+                </div>
+              </div> 
               <%= f.hidden_field :fcl_exw_cargo_info_step_id, class: "fcl_exw_cargo_info_step_id", value: is_fcl_exw_info_stage_completed?(@operation.secure_id) ? existing_fcl_cargo_info(@operation).id : '' %>
               <div id="pieces-container"></div>
             <% end %>
@@ -197,30 +302,7 @@
       </nav>
     </div>
     <br>
-    <% if is_fcl_exw_booking_info_completed?(params[:operation_secure_id]) %>
-
-      <div class="column is-6">
-
-        <nav class= 'panel is-form-panel card-shadow' >
-          <p class="panel-heading">
-            Alerts for operation <%= @operation.reference %>
-          </p>
-
-          <div class='panel-block'>
-            <article class="message is-warning">
-              <div class="message-header">
-                <p><i class="fas fa-exclamation-triangle"> </i>   Warning</p>
-                <button class="delete" aria-label="delete"></button>
-              </div>
-              <div class="message-body">
-                <p>
-                  Please have in count that a record for this step of the <b>operation identified with the number <%= @operation.reference %></b> was previously saved in our system, and by submiting new information, the old data would be overriden.  
-                </p>
-              </div>
-            </article>
-          </div>
-        </nav>
-      </div>
-    <% end %>
   </div>
 </div>
+<%= render 'guides/booking_info/main_guide' %>
+<%= render 'guides/cargo_info/container_info' %>

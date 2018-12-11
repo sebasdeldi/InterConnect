@@ -1,4 +1,5 @@
 module ApplicationHelper
+
 	def agent(operation)
 		operation_by_user(operation).agent
 	end
@@ -79,6 +80,10 @@ module ApplicationHelper
 
 	def contacted_customer(operation)
 		FclExwInfoRequestedStep.find_by(operation_id: operation).completed
+	end
+
+	def quotation_sell(operation)
+		FclExwQuotationSellingStep.find_by(operation_id: operation)
 	end
 
 end

@@ -10,9 +10,7 @@ class CreateFclExwBookingInfoSteps < ActiveRecord::Migration[5.1]
     	t.date :cargo_cut_off_date
     	t.time :cargo_cut_off_time
     	t.date :sailing_date
-    	t.time :sailing_time
     	t.date :arrival_date
-    	t.time :arrival_time
         t.date :vgm_cut_off_date
         t.string :ramp
         t.date :ramp_cut_off_date

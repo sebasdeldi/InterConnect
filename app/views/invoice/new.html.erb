@@ -1,7 +1,9 @@
 <br>
+<br>
+<br>
 <div class="container">
-  <div class="">
-    <div class="column">
+  <div class="columns">
+    <div class="column is-4">
       <%= form_for(:invoice, url: create_invoice_path(params[:secure_id])) do |f| %>
         <div>
           <%= f.label 'Please upload your Invoice here:', class: 'label' %>
@@ -29,5 +31,13 @@
         </div>
       <% end %>
     </div>
+    <div class="column is-1">
+      <br>
+      <a class="show-modal invoice">
+        <i class="fas fa-info-circle guide-btn"></i>
+      </a>
+    </div>
   </div>
 </div>
+
+<%= render 'guides/invoice' %>

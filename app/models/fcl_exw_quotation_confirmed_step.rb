@@ -20,7 +20,7 @@ class FclExwQuotationConfirmedStep < ApplicationRecord
 			"Quotation requested to the pricing department"
 		else
 			if params[:files].present?
-				if operation.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', status_message:'Request Cargo Info To Shipper', current_step: 1)
+				if operation.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', status_message:'Confirm quotation selling prices', current_step: 1)
 					FclExwQuotationConfirmedStep.find_by(operation_id: params[:operation_id]).update(completed: true, files: params[:files])
 					"Step confirmed, no more reminders will be sent"
 				end

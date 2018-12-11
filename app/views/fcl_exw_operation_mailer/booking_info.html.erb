@@ -75,23 +75,10 @@
 		</li>
 		<br>
 		<li>
-			<b>Expected sailing time: </b> 
-			<%= @info.sailing_time.hour.to_s.length == 1 ? '0' + @info.sailing_time.hour.to_s : @info.sailing_time.hour.to_s %> 
-			:
-			<%= @info.sailing_time.min.to_s.length == 1 ? '0' + @info.sailing_time.min.to_s : @info.sailing_time.min.to_s %>
-		</li>
-		<br>
-		<li>
 			<b>Expected arrival date: </b> 
 			<%= @info.arrival_date %>
 		</li>
 		<br>
-		<li>
-			<b>Expected arrival time: </b> 
-			<%= @info.arrival_time.hour.to_s.length == 1 ? '0' + @info.arrival_time.hour.to_s : @info.arrival_time.hour.to_s %> 
-			:
-			<%= @info.arrival_time.min.to_s.length == 1 ? '0' + @info.arrival_time.min.to_s : @info.arrival_time.min.to_s %>
-		</li>
 		<% if !@info.ramp.nil? %>
 			<br>
 			<li>

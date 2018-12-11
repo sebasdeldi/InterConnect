@@ -1,0 +1,204 @@
+
+
+<div class="modal quotation-sell">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">QUOTATION SELL PRICES CONFIRMATION</p>
+      <button class="delete close-modal quotation-sell" aria-label="close"></button>
+    </header>
+
+    <section class="modal-card-body">
+      <div class=''>
+        <div id="">
+          <div class="timeline-item" id= "fcl_exw_confirm_quotation">
+            <div class="timeline-content right <%= is_fcl_exw_quotation_sell_confirmed?(operation_id) ? 'step-completed-no-bg-right' : '' %>">
+              <p>
+                <center>
+                  <i class="far fa-money-bill-alt timeline-card-icon <%= is_fcl_exw_quotation_sell_confirmed?(operation_id) ? 'step-completed-icon' : '' %>""></i>
+                </center>
+
+                Please confirm the prices that you negotiated with your shipper <b><%= shipper.company_name %></b>.
+                <br>
+                <br>
+
+                <%= form_tag ("/quotation_sell_prices"), class: "control full-select quotation", multipart: true do %>
+                  <br>
+                  <div class="columns">
+	            	    <div class="control modal-control">
+	            	    	<label class="label quotation-input"> Profit: </label>
+	            	    	<div class="columns">
+	            	    		<div class="column is-11">
+	            	    			<%= number_field_tag :profit, quotation_sell(operation_id).profit ,class: 'input quotation-input full-select' %>
+	            	    		</div>
+	            	    		<div class="column is-1">
+	            	    			<a class="show-modal quotation-document">
+	            	    			  <i class="fas fa-info-circle guide-btn modal-guide"></i>
+	            	    			</a>
+	            	    		</div>
+	            	    	</div>
+	            	    </div>
+            	    </div>
+
+            	    <div class="columns">
+	            	    <div class="control modal-control">
+	            	    	<label class="label quotation-input"> Documentation: </label>
+	            	    	<div class="columns">
+	            	    		<div class="column is-11">
+	            	    			<%= number_field_tag :documentation, quotation_sell(operation_id).documentation ,class: 'input quotation-input full-select' %>
+	            	    		</div>
+	            	    		<div class="column is-1">
+	            	    			<a class="show-modal quotation-document">
+	            	    			  <i class="fas fa-info-circle guide-btn modal-guide"></i>
+	            	    			</a>
+	            	    		</div>
+	            	    	</div>
+	            	    </div>
+            	    </div>
+
+            	    <div class="columns">
+	            	    <div class="control modal-control">
+	            	    	<label class="label quotation-input"> FF: </label>
+	            	    	<div class="columns">
+	            	    		<div class="column is-11">
+	            	    			<%= number_field_tag :ff, quotation_sell(operation_id).ff ,class: 'input quotation-input full-select' %>
+	            	    		</div>
+	            	    		<div class="column is-1">
+	            	    			<a class="show-modal quotation-document">
+	            	    			  <i class="fas fa-info-circle guide-btn modal-guide"></i>
+	            	    			</a>
+	            	    		</div>
+	            	    	</div>
+	            	    </div>
+            	    </div>
+
+            	    <div class="columns">
+	            	    <div class="control modal-control">
+	            	    	<label class="label quotation-input"> VGM: </label>
+	            	    	<div class="columns">
+	            	    		<div class="column is-11">
+	            	    			<%= number_field_tag :vgm, quotation_sell(operation_id).vgm ,class: 'input quotation-input full-select' %>
+	            	    		</div>
+	            	    		<div class="column is-1">
+	            	    			<a class="show-modal quotation-document">
+	            	    			  <i class="fas fa-info-circle guide-btn modal-guide"></i>
+	            	    			</a>
+	            	    		</div>
+	            	    	</div>
+	            	    </div>
+            	    </div>
+
+            	    <div class="columns">
+	            	    <div class="control modal-control">
+	            	    	<label class="label quotation-input"> Inland: </label>
+	            	    	<div class="columns">
+	            	    		<div class="column is-11">
+	            	    			<%= number_field_tag :inland, quotation_sell(operation_id).inland ,class: 'input quotation-input full-select' %>
+	            	    		</div>
+	            	    		<div class="column is-1">
+	            	    			<a class="show-modal quotation-document">
+	            	    			  <i class="fas fa-info-circle guide-btn modal-guide"></i>
+	            	    			</a>
+	            	    		</div>
+	            	    	</div>
+	            	    </div>
+            	    </div>
+
+            	    <div class="columns">
+	            	    <div class="control modal-control">
+	            	    	<label class="label quotation-input"> Others: </label>
+	            	    	<div class="columns">
+	            	    		<div class="column is-11">
+	            	    			<%= number_field_tag :others, quotation_sell(operation_id).others ,class: 'input quotation-input full-select' %>
+	            	    		</div>
+	            	    		<div class="column is-1">
+	            	    			<a class="show-modal quotation-document">
+	            	    			  <i class="fas fa-info-circle guide-btn modal-guide"></i>
+	            	    			</a>
+	            	    		</div>
+	            	    	</div>
+	            	    </div>
+            	    </div>
+
+            	    <div class="columns">
+	            	    <div class="control modal-control">
+	            	    	<label class="label quotation-input"> Explanation: </label>
+	            	    	<div class="columns">
+	            	    		<div class="column is-11">
+	            	    			<%= text_area_tag :explanation, quotation_sell(operation_id).explanation, class: "input note quotation-input" %>
+	            	    		</div>
+	            	    		<div class="column is-1">
+	            	    			<a class="show-modal quotation-document">
+	            	    			  <i class="fas fa-info-circle guide-btn modal-guide"></i>
+	            	    			</a>
+	            	    		</div>
+	            	    	</div>
+	            	    </div>
+            	    </div>
+           				<br>
+            	    <div class="columns">
+	            	    <div class="control modal-control">
+	            	    	<label class="label quotation-input"> Support Document: </label>
+	            	    	<div class="columns">
+	            	    		<div class="column is-11">
+                  				<%= file_field_tag 'files[]', multiple: true, class: 'quotation-input', id:'quotation-input' %>
+	            	    		</div>
+	            	    		<div class="column is-1">
+	            	    			<a class="show-modal quotation-document">
+	            	    			  <i class="fas fa-info-circle guide-btn modal-guide"></i>
+	            	    			</a>
+	            	    		</div>
+	            	    	</div>
+	            	    </div>
+            	    </div>
+
+                  <ul>
+                    <% quotation_sell(operation_id).files.each do |file| %>
+                      <li> <%= link_to file.path.split("/").last, file.url, target: 'blank' %>  </li>
+                    <% end %>
+                  </ul>
+                  <br>
+
+                  <% if !quotation_confirmed_tasks.empty? %>
+                    <article class="message is-primary">
+                      <div class="message-header">
+                        <p><b><%= quotation_confirmed_tasks.count %> Tasks for this step</b></p>
+                      </div>
+                      <div class="message-body">
+                        <% quotation_confirmed_tasks.each do |task|%>
+                          <%= link_to task_path(task.id), class: "panel-block is-active" do %>
+                            <span class="panel-icon">
+                              <i class="fas fa-book" aria-hidden="true"></i>
+                            </span>
+                            <p>
+                              <%= task.note.truncate 45 %> || due: 
+                              <b><%= task.due_date %></b>
+                            </p>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    </article>
+                  <% end %>
+
+                  <%= hidden_field_tag 'shipper_id', shipper.id %>
+                  <%= hidden_field_tag 'operation_id', operation_id %>
+                  <%= hidden_field_tag 'agent_id', agent.id %>
+
+                  <%= submit_tag 'CONFIRM', class: "button is-link confirm #{is_fcl_exw_quotation_sell_confirmed?(operation_id) ? 'step-completed' : ''  } "  %>
+
+                  <a class="button is-primary right-button circle-button show-modal fcl_exw_quotation_confirmed">
+                    <i class="fas fa-tasks"></i>
+                  </a>
+                <% end %>
+              </p>
+              <br>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <br>
+    </section>
+  </div>
+</div>
+<%= render 'guides/quotation/quotation_document' %>

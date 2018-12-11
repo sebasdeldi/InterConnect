@@ -545,7 +545,7 @@
 						</p>
 					<% end %>
 
-					<% if booking_info(@operation).sailing_date.nil? || booking_info(@operation).sailing_time.nil? %>
+					<% if booking_info(@operation).sailing_date.nil? %>
 						<p>
 							ETD: 
 							<span style="text-decoration: underline; white-space: pre;">                                                               </span>
@@ -553,7 +553,7 @@
 					<% else %>
 						<p>
 							ETD: 
-							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).sailing_date %> <%= booking_info(@operation).time(booking_info(@operation).sailing_time) %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).sailing_date %></span>
 						</p>
 					<% end %>
 
@@ -621,7 +621,7 @@
 					<% else %>
 						<p>
 							ETA: 
-							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).arrival_date %> <%= booking_info(@operation).time(booking_info(@operation).arrival_time) %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).arrival_date %></span>
 						</p>
 					<% end %>
 

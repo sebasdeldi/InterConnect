@@ -15,6 +15,15 @@ class OperationsByUser < ApplicationRecord
     [@operations_by_user, errors]
   end
 
+  def self.update_for_representatives(fields, operation_id, current_user)
+    op = Operation.find operation_id
+    update_operation(fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8], fields[9], fields[10], fields[11], fields[12], op)
+    OperationsByUser.find_by(operation_id: operation_id).update(fields[0].merge(operation_id: op.id, representative_id: current_user.id))
+    @operations_by_user = OperationsByUser.find_by(operation_id: operation_id)
+    errors = (@operations_by_user.errors.full_messages + op.errors.full_messages).delete_if {|x| x == "Operation must exist" || x == "Operation can't be blank"}
+    [@operations_by_user, errors]
+  end
+
 =begin
   def create_for_agents(modality, strong_params_for_agents, current_user)
 		operation = Operation.create(status: 'IN PROGRESS', status_message:'Confirm quotation', modality: modality)
@@ -32,11 +41,17 @@ class OperationsByUser < ApplicationRecord
     new_operation = create_for_representatives(fields)
   end
 
+  def self.update_operation_by_representative(params, current_user, strong_params, operation_id)
+    fields = [ strong_params, current_user, params[:agent_reference], params[:shipper_reference],
+    params[:consignee_reference], params[:pol], params[:pod], params[:origin_address], params[:origin_city], params[:origin_state], params[:origin_zip_code], params[:origin_country], params[:destination] ]
+    updated_operation = update_for_representatives(fields, operation_id, current_user)
+  end
+
   private
   	def self.create_operation(modality, reference, pieces_number, agent_reference, shipper_reference, consignee_reference, pol, pod, origin_address, origin_city, origin_state, origin_zip_code, origin_country, destination)
   		steps_number = 1
   		if modality == "FCL - EXW"
-  			steps_number = 8
+  			steps_number = 9
   			#TODO add other modality cases
   		end
       last_two_digits
@@ -48,6 +63,13 @@ class OperationsByUser < ApplicationRecord
       operation
     end
 
+
+    def self.update_operation(agent_reference, shipper_reference, consignee_reference, pol, pod, origin_address, origin_city, origin_state, origin_zip_code, origin_country, destination, operation)
+      operation.update(agent_reference: agent_reference,
+        pol: pol, pod: pod, origin_address: origin_address, origin_city: origin_city, origin_state: origin_state, origin_zip_code: origin_zip_code, origin_country: origin_country,
+         destination: destination, shipper_reference: shipper_reference, consignee_reference: consignee_reference)
+    end
+
     def self.create_steps(operation)
       FclExwContainerDelivery.create!(operation: operation)
       FclExwContainerLoading.create!(operation: operation)
@@ -55,6 +77,7 @@ class OperationsByUser < ApplicationRecord
       FclExwQuotationConfirmedStep.create!(operation: operation)
       FclExwInfoRequestedStep.create!(operation: operation)
       FclExwRequestBookingStep.create!(operation: operation)
+      FclExwQuotationSellingStep.create!(operation_id: operation.id)
       Insurance.create!(operation: operation)
       cargo_info = FclExwCargoInfoStep.new(operation: operation)
       cargo_info.save!(validate: false)

@@ -16,11 +16,11 @@
 		          <option disabled>DOCUMENTS</option>
 		          <% if sli(@operation).nil? || sli(@operation).files.empty? %>
 			          <option value="slis/<%= params[:id] %>.pdf">
-		          	  See SLI
+		          	  SLI
 			          </option>
 			        <% else %>
   		          <option value="<%= sli(@operation).files.first.url %>">
-  	          		See SLI
+  	          		SLI
   		          </option>
 			        <% end %>
 		          <option value="slis/new/<%= @operation.secure_id %>">
@@ -31,7 +31,7 @@
 		          </option>
               <% unless invoice(@operation).nil? || invoice(@operation).files.empty? %>
     	          <option value="<%= invoice(@operation).files.first.url %>">
-              		See Invoice
+              		Invoice
     	          </option>
     	        <% end %>
     	        <option value="invoices/new/<%= @operation.secure_id %>">
@@ -41,7 +41,7 @@
     	        	Request Invoice
     	        </option>
     	        <option value="<%= booking_sheet_path(@operation.id, format: 'pdf') %>">
-    	        	See Booking Sheet
+    	        	Booking Sheet
     	        </option>
     	        <% existing_fcl_cargo_info(@operation).files.each_with_index do |file, i| %>
     	          <option value="<%= file.url %>"> <%= link_to doc_name(i), '', target: 'blank' %> </option>
@@ -50,8 +50,19 @@
     	        <% quotation(@operation).files.each_with_index do |file, i| %>
     	          <option value="<%= file.url %>"> <%= link_to doc_name(i, 'quotation'), '', target: 'blank' %> </option>
     	        <% end %>
+    	        <% if quotation_sell(@operation).completed %>
+  		          <option value="quotation_sell/<%= params[:id] %>.pdf">
+  	          	  Sold Quotation
+  		          </option>
+    	        <% end %>
+    	        <% quotation_sell(@operation.id).files.each_with_index do |file, i| %>
+    	          <option value="<%= file.url %>"> <%= link_to doc_name(i, 'sell-quotation'), '', target: 'blank' %> </option>
+    	        <% end %>
     	        <option value="insurance/view_pdf/<%= @operation.secure_id %>.pdf">
-    	        	See Insurance
+    	        	Insurance
+    	        </option>
+    	        <option value="documents_transfer/<%= @operation.id %>">
+    	        	Send Documentation
     	        </option>
 		        </select>
 		      </div>

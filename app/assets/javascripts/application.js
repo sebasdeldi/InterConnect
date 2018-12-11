@@ -79,6 +79,11 @@ document.addEventListener("turbolinks:load", function() {
         "http://" + window.location.host + "/" + this.value,
         { secure_id: this.value, link: "http://" + window.location.host + "/invoices/new/" + this.value.split('/').pop() }
       );
+    }else if(this.value.includes("documents_transfer") === true){
+      $.post(
+        "http://" + window.location.host + "/" + this.value,
+        { secure_id: this.value, link: "http://" + window.location.host + "/invoices/new/" + this.value.split('/').pop() }
+      );
     }else{
       window.open("http://" + window.location.host + "/" + this.value, '_blank');
     }

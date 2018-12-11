@@ -48,17 +48,17 @@
   								<label class="label">Carrier:</label>
   						    <div class="control has-icons-left">
   						      <div class="select full-select">
-  						        <%= select_tag :carrier_id, options_for_select(carriers.map { |carrier| [carrier.company_name + " || " +carrier.email, carrier.id] } ), { include_blank: 'SELECT A CARRIER', class: 'full-select carrier-select', disabled: is_fcl_exw_booking_requested?(operation_id)  } %>
+  						        <%= select_tag :carrier_id, options_for_select(carriers.map { |carrier| [carrier.company_name + " || " +carrier.email, carrier.id] } ), { include_blank: 'SELECT A CARRIER', class: 'full-select carrier-select' } %>
   						      </div>
-  						      <br>
-  						      <br>
   						      <div class="icon is-small is-left">
   						        <i class="fas fa-ship"></i>
   						      </div>
   						    </div>
+                  <br>
+                  <br>
   					      <label class="label">Additional message:</label>
   				      	<div class="control">
-  				      	  <%= text_area_tag :additional_message, FclExwRequestBookingStep.find_by(operation_id: operation_id).additional_message, class: "input note", disabled: is_fcl_exw_booking_requested?(operation_id) %>
+  				      	  <%= text_area_tag :additional_message, FclExwRequestBookingStep.find_by(operation_id: operation_id).additional_message, class: "input note" %>
   				      	</div>
 
   						    <br>
@@ -87,7 +87,7 @@
   								<%= hidden_field_tag 'shipper_id', shipper.id %>
   								<%= hidden_field_tag 'operation_id', operation_id %>
   								<%= hidden_field_tag 'agent_id', agent.id %>
-  								<%= submit_tag 'REQUEST', class: "request button is-link #{is_fcl_exw_booking_requested?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_booking_requested?(operation_id)  %>
+  								<%= submit_tag 'REQUEST', class: "request button is-link #{is_fcl_exw_booking_requested?(operation_id) ? 'step-completed' : ''  } "  %>
   								<a class="button is-primary right-button circle-button show-modal request_booking">
   									<i class="fas fa-tasks"></i>
   								</a>

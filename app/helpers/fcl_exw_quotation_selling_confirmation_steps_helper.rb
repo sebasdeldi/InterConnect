@@ -1,0 +1,5 @@
+module FclExwQuotationSellingConfirmationStepsHelper
+	def quotation_confirmation_price(operation_id)
+		FclExwQuotationSellingConfirmationStep.find_by(operation_id: operation_id)
+	end
+end

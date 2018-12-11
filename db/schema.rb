@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210927200622) do
+ActiveRecord::Schema.define(version: 20210927200624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,9 +40,7 @@ ActiveRecord::Schema.define(version: 20210927200622) do
     t.date "cargo_cut_off_date"
     t.time "cargo_cut_off_time"
     t.date "sailing_date"
-    t.time "sailing_time"
     t.date "arrival_date"
-    t.time "arrival_time"
     t.date "vgm_cut_off_date"
     t.string "ramp"
     t.date "ramp_cut_off_date"
@@ -110,6 +108,20 @@ ActiveRecord::Schema.define(version: 20210927200622) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_fcl_exw_quotation_confirmed_steps_on_operation_id"
+  end
+
+  create_table "fcl_exw_quotation_selling_steps", force: :cascade do |t|
+    t.boolean "completed", default: false
+    t.bigint "operation_id"
+    t.json "files"
+    t.float "profit"
+    t.float "documentation"
+    t.float "ff"
+    t.float "vgm"
+    t.float "inland"
+    t.float "others"
+    t.text "explanation"
+    t.index ["operation_id"], name: "index_fcl_exw_quotation_selling_steps_on_operation_id"
   end
 
   create_table "fcl_exw_request_booking_steps", force: :cascade do |t|
@@ -353,6 +365,7 @@ ActiveRecord::Schema.define(version: 20210927200622) do
   add_foreign_key "fcl_exw_info_confirmed_steps", "operations"
   add_foreign_key "fcl_exw_info_requested_steps", "operations"
   add_foreign_key "fcl_exw_quotation_confirmed_steps", "operations"
+  add_foreign_key "fcl_exw_quotation_selling_steps", "operations"
   add_foreign_key "fcl_exw_request_booking_steps", "operations"
   add_foreign_key "functionalities", "roles"
   add_foreign_key "general_cargo_infos", "operations"

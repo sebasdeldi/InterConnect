@@ -1,0 +1,48 @@
+<h1>Quotation sell prices for Operation: <%= @operation.reference %></h1>
+<br>
+<br>
+<center>
+	<table style="width:100%">
+		<tr>
+		  <td><b>Profit:</b></td>
+		  <td>$ <%= @quotation.profit %></td>
+		</tr>
+		<tr>
+		  <td><b>Documentation:</b></td>
+		  <td>$ <%= @quotation.documentation %></td>
+		</tr>
+		<tr>
+		  <td><b>FF:</b></td>
+		  <td>$ <%= @quotation.ff %></td>
+		</tr>
+		<tr>
+		  <td><b>VGM:</b></td>
+		  <td>$ <%= @quotation.vgm %></td>
+		</tr>
+		<tr>
+		  <td><b>Inland:</b></td>
+		  <td>$ <%= @quotation.inland %></td>
+		</tr>
+		<tr>
+		  <td><b>Others:</b></td>
+		  <td>$ <%= @quotation.others %></td>
+		</tr>
+		<tr>
+		  <td><b>Explanation:</b></td>
+		  <td><%= @quotation.explanation %></td>
+		</tr>
+	</table>
+</center>
+<br>
+<br>
+<p><b>TOTAL:</b> $  <%= @quotation.profit + @quotation.documentation + @quotation.ff + @quotation.vgm + @quotation.inland + @quotation.others  %></p>
+
+
+<style type="text/css">
+	table, th, td {
+	  border: 1px solid black;
+	}
+	td{
+		width: 50%;
+	}
+</style>

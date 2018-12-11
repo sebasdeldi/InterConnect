@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :user_imports
 
-	resources :operations_by_users, only: [:new, :create]
+	resources :operations_by_users, only: [:new, :create, :edit, :update]
 	resources :general_cargo_infos, only: [:new, :create]
 	resources :fcl_exw_cargo_info_steps, only: [:new, :create]
 	resources :fcl_exw_booking_info_steps, only: [:new, :create]
@@ -68,6 +68,12 @@ Rails.application.routes.draw do
 	post "/invoices/request_invoice/:secure_id", to: "invoice#request_invoice", as: "request_invoice"
 
 	post "/change_difficulty", to: "operations#change_difficulty", as: "change_difficulty"
+	post "/documents_transfer/:operation_id", to: "documents_transfer#send_mail", as: 'send_documents'
+
+	post "/quotation_sell_prices", to: 'fcl_exw_quotation_selling_steps#confirm'
+
+	get "/quotation_sell/:id", to: "fcl_exw_quotation_selling_steps#show", as: "quotation_sell"
+
  	devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'

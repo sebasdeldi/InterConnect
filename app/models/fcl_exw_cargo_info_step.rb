@@ -15,7 +15,7 @@ class FclExwCargoInfoStep < ApplicationRecord
   	existing_cargo_info = FclExwCargoInfoStep.find_by(operation_id: op)
 
     if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: op.id))
-  		op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 4, status_message: 'Request Booking Order')
+  		op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 5, status_message: 'Request Booking Order')
 			create_bonded_task(params, op)
 			create_self_propelled_task(params, op)
 			create_quotation_verification_task(op)

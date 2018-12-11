@@ -1,13 +1,14 @@
 <div class='panel-block'>
-  <%= form_for operations_by_user, html: {class: "control"} do |f| %>
+  <%= form_for action_path, html: {class: "control"}, method: action_type do |f| %>
     <%= render 'shared/error_messages', format: params[:format] %>
+    <%= hidden_field_tag :operation_id, params[:id] %>
     <div class="columns">
       <div class="column is-11">
         <div class="field">
-          <label class="label">* Operation Modality:</label>
+          <label class="label">* Operation Type:</label>
           <div class="control has-icons-left">
             <div class="select with-guide">
-              <%= select_tag :modality, options_for_select(["FCL - EXW", "LCL"], "FCL - EXW"), {include_blank: 'SELECT AN OPERATION MODALITY', class: "modality full-select"}%>
+              <%= select_tag :modality, options_for_select(["FCL - EXW", "LCL"], operation(params[:id]).nil? ? '' : operation(params[:id]).modality), {include_blank: 'SELECT AN OPERATION TYPE', class: "full-select modality"}%>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -29,7 +30,7 @@
         <div class="field is-grouped">
           <div class="control has-icons-left">
             <div class="select ">
-              <%= f.select :agent_id, options_for_select(agents.map{|agent| ["#{agent.company_name} <#{agent.email}>", agent.id]}), {include_blank: 'SELECT A DESTINATION AGENT'} ,{class: ''} %>
+              <%= f.select :agent_id, options_for_select(agents.map{|agent| ["#{agent.company_name} <#{agent.email}>", agent.id]}, operation_by_user(params[:id]).nil? ? '' : operation_by_user(params[:id]).agent_id), {include_blank: 'SELECT A DESTINATION AGENT'} ,{class: ''} %>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -57,7 +58,7 @@
         <div class="field is-grouped">
           <div class="control has-icons-left">
             <div class="select">
-              <%= f.select :shipper_id, options_for_select(shippers.map{|shipper| ["#{shipper.company_name} <#{shipper.email}>", shipper.id]}), {include_blank: 'SELECT A SHIPPER'} ,{class: ''} %>
+              <%= f.select :shipper_id, options_for_select(shippers.map{|shipper| ["#{shipper.company_name} <#{shipper.email}>", shipper.id]}, operation_by_user(params[:id]).nil? ? '' : operation_by_user(params[:id]).shipper_id), {include_blank: 'SELECT A SHIPPER'} ,{class: ''} %>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -85,7 +86,7 @@
         <div class="field is-grouped">
           <div class="control has-icons-left">
             <div class="select">
-              <%= f.select :consignee_id, options_for_select(consignees.map{|consignee| ["#{consignee.company_name} <#{consignee.email}>", consignee.id]}), {include_blank: 'SELECT A CONSIGNEE'} ,{class: ''} %>
+              <%= f.select :consignee_id, options_for_select(consignees.map{|consignee| ["#{consignee.company_name} <#{consignee.email}>", consignee.id]}, operation_by_user(params[:id]).nil? ? '' : operation_by_user(params[:id]).consignee_id), {include_blank: 'SELECT A CONSIGNEE'} ,{class: ''} %>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -113,7 +114,7 @@
           <label class="label">Agent Reference Number:</label>
           <div class="control has-icons-left">
             <div class=" full-select">
-              <%= text_field_tag :agent_reference, nil, class: 'input with-guide' %>
+              <%= text_field_tag :agent_reference, operation(params[:id]).nil? ? '' : operation(params[:id]).agent_reference, class: 'input with-guide' %>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -135,7 +136,7 @@
           <label class="label">Shipper Reference Number:</label>
           <div class="control has-icons-left">
             <div class=" full-select">
-              <%= text_field_tag :shipper_reference, nil, class: 'input with-guide' %>
+              <%= text_field_tag :shipper_reference, operation(params[:id]).nil? ? '' : operation(params[:id]).shipper_reference, class: 'input with-guide' %>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -157,7 +158,7 @@
           <label class="label">Consignee Reference Number:</label>
           <div class="control has-icons-left">
             <div class=" full-select">
-              <%= text_field_tag :consignee_reference, nil, class: 'input with-guide' %>
+              <%= text_field_tag :consignee_reference, operation(params[:id]).nil? ? '' : operation(params[:id]).consignee_reference, class: 'input with-guide' %>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -179,7 +180,7 @@
           <label class="label">* Port Of Loading (POL):</label>
           <div class="control has-icons-left">
             <div class=" full-select">
-              <%= text_field_tag :pol, nil, class: 'input with-guide', id: 'port-loading' %>
+              <%= text_field_tag :pol, operation(params[:id]).nil? ? '' : operation(params[:id]).pol, class: 'input with-guide', id: 'port-loading' %>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -201,7 +202,7 @@
           <label class="label">* Port Of Discharge (POD):</label>
           <div class="control has-icons-left">
             <div class=" full-select">
-              <%= text_field_tag :pod, nil, class: 'input with-guide', id: 'port-discharge' %>
+              <%= text_field_tag :pod, operation(params[:id]).nil? ? '' : operation(params[:id]).pod, class: 'input with-guide', id: 'port-discharge' %>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -227,7 +228,7 @@
               <label class="label">* Origin Address:</label>
               <div class="control has-icons-left">
                 <div class=" full-select">
-                  <%= text_field_tag :origin_address, nil, class: 'input with-guide' %>
+                  <%= text_field_tag :origin_address, operation(params[:id]).nil? ? '' : operation(params[:id]).origin_address, class: 'input with-guide' %>
                 </div>
                 <div class="icon is-small is-left">
                   <i class="fas fa-globe"></i>
@@ -249,7 +250,7 @@
               <label class="label">* Origin City:</label>
               <div class="control has-icons-left">
                 <div class=" full-select">
-                  <%= text_field_tag :origin_city, nil, class: 'input with-guide' %>
+                  <%= text_field_tag :origin_city, operation(params[:id]).nil? ? '' : operation(params[:id]).origin_city, class: 'input with-guide' %>
                 </div>
                 <div class="icon is-small is-left">
                   <i class="fas fa-globe"></i>
@@ -271,7 +272,7 @@
               <label class="label">* Origin State:</label>
               <div class="control has-icons-left">
                 <div class=" full-select">
-                  <%= text_field_tag :origin_state, nil, class: 'input with-guide' %>
+                  <%= text_field_tag :origin_state, operation(params[:id]).nil? ? '' : operation(params[:id]).origin_state, class: 'input with-guide' %>
                 </div>
                 <div class="icon is-small is-left">
                   <i class="fas fa-globe"></i>
@@ -293,7 +294,7 @@
               <label class="label">* Origin Zip Code:</label>
               <div class="control has-icons-left">
                 <div class=" full-select">
-                  <%= text_field_tag :origin_zip_code, nil, class: 'input with-guide' %>
+                  <%= text_field_tag :origin_zip_code, operation(params[:id]).nil? ? '' : operation(params[:id]).origin_zip_code, class: 'input with-guide' %>
                 </div>
                 <div class="icon is-small is-left">
                   <i class="fas fa-globe"></i>
@@ -315,7 +316,7 @@
               <label class="label">* Origin Country:</label>
               <div class="control has-icons-left">
                 <div class=" full-select">
-                  <%= text_field_tag :origin_country, nil, class: 'input with-guide' %>
+                  <%= text_field_tag :origin_country, operation(params[:id]).nil? ? '' : operation(params[:id]).origin_country, class: 'input with-guide' %>
                 </div>
                 <div class="icon is-small is-left">
                   <i class="fas fa-globe"></i>
@@ -337,10 +338,10 @@
     <div class="columns">
       <div class="column is-11">
         <div class="field">
-          <label class="label">* Destination:</label>
+          <label class="label">Destination:</label>
           <div class="control has-icons-left">
             <div class=" full-select">
-              <%= text_field_tag :destination, nil, class: 'input with-guide' %>
+              <%= text_field_tag :destination, operation(params[:id]).nil? ? '' : operation(params[:id]).destination, class: 'input with-guide' %>
             </div>
             <div class="icon is-small is-left">
               <i class="fas fa-globe"></i>
@@ -360,19 +361,27 @@
 
     <div class="control">
     	<%= f.button type: 'submit', class: 'button is-success' do %>
-        <span>CREATE</span>
+        <span><%= action_type == "patch" ? "UPDATE" : "CREATE" %></span>
         <span class="icon is-small">
           <i class="fas fa-check"></i>
         </span>
       <% end %>
 
-    	<%= link_to authenticated_root_path, class: 'button is-danger' do %>
-      	<span>CANCEL</span>
-      	<span class="icon is-small">
-      	  <i class="fas fa-times"></i>
-      	</span>
-    	<% end %>
-      
+      <% if action_type == "patch" %>
+        <%= link_to operation_path(params[:id]), class: 'button is-danger' do %>
+          <span>CANCEL</span>
+          <span class="icon is-small">
+            <i class="fas fa-times"></i>
+          </span>
+        <% end %>
+      <% else %>
+        <%= link_to authenticated_root_path, class: 'button is-danger' do %>
+          <span>CANCEL</span>
+          <span class="icon is-small">
+            <i class="fas fa-times"></i>
+          </span>
+        <% end %>
+      <% end %> 
     </div>
   <% end %>
 </div>

@@ -22,6 +22,6 @@ class FclExwBookingInfoStepsController < ApplicationController
 	private	
 		def fcl_booking_info_params
 			params.require(:fcl_exw_booking_info_step).permit(:operation_id, :vgm_cut_off_date, :booking_number, :vessel, :voyage, :doc_cut_off_date, :doc_cut_off_time, 
-				:cargo_cut_off_date, :cargo_cut_off_time, :sailing_date, :sailing_time, :arrival_date, :arrival_time, :ramp, :ramp_cut_off_date)
+				:cargo_cut_off_date, :cargo_cut_off_time, :sailing_date, :arrival_date, :ramp, :ramp_cut_off_date)
 		end
 end

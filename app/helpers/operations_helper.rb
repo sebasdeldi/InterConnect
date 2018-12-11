@@ -18,6 +18,8 @@ module OperationsHelper
 	def doc_name(iteration, type=nil)
 		if type == 'quotation'
 			'Quotation Doc-'+ (iteration+1).to_s 
+		elsif type == 'sell-quotation'
+			'Sold Support-'+ (iteration+1).to_s 
 		else
 			'Haz/S Prop/Bonded-'+ (iteration+1).to_s
 		end
@@ -36,6 +38,14 @@ module OperationsHelper
 
 	def operation_secure_id(operation)
 		operation.secure_id
+	end
+
+	def operation(operation_id)
+		if operation_id.nil?
+			nil
+		else
+			Operation.find operation_id
+		end
 	end
 
 	def carriers

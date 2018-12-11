@@ -292,7 +292,7 @@
 	            	<%= f.text_field :marks, autofocus: true, value: insurance(@operation).marks ,class: 'input' %>
 	            <% else %>
 		            <div class="control has-icons-left">
-		              <%= f.text_field :marks, autofocus: true, value: "PO#:"+ +@operation.po_number ,class: 'input' %>
+		              <%= f.text_field :marks, autofocus: true, value: "Shipper reference#:"+ @operation.shipper_reference + ', Consignee reference#:' + @operation.consignee_reference + ', Consignee reference#:' + @operation.consignee_reference, class: 'input' %>
 		              <span class="icon is-small is-left">
 		                <i class="fas fa-map-signs"></i>
 		              </span>

@@ -1,4 +1,6 @@
 class FclExwOperationMailer < ApplicationMailer
+	add_template_helper(OperationsHelper)
+	add_template_helper(ApplicationHelper)
 
 	def booking_info (agent, representative, info)
 	  @agent = agent
@@ -13,7 +15,7 @@ class FclExwOperationMailer < ApplicationMailer
 	                       password: representative.outlook_password
 	                     }
 	  mail(to: agent.email,
-	       subject: "Booking information updated",
+	       subject: "Booking information updated for operation #{@operation.reference}",
 	       delivery_method_options: delivery_options, from: representative.email, cc: representative.email)
 	end
 
@@ -22,12 +24,13 @@ class FclExwOperationMailer < ApplicationMailer
 	  @shipper  = shipper
 	  @agent = agent
 	  @secure_id = secure_id
+	  @operation = Operation.find_by(secure_id: secure_id)
 	  attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
 	  delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password
 	                     }
 	  mail(to: shipper.email,
-	       subject: "Please see the Terms and Conditions attached",
+	       subject: "Please provide the following information for operation #{@operation.reference}",
 	       delivery_method_options: delivery_options, from: representative.email, cc: representative.email)
 	end
 
@@ -53,7 +56,7 @@ class FclExwOperationMailer < ApplicationMailer
 	                       password: representative.outlook_password
 	                     }
 	  mail(to: agent.email,
-	       subject: "Quotation request from shipper " + shipper.company_name,
+	       subject: "Quotation request from shipper " + shipper.company_name + "for operation #{operation.reference}",
 	       delivery_method_options: delivery_options, from: representative.email, cc: 'pricing333@interwf.com')
 	end
 
@@ -110,7 +113,7 @@ class FclExwOperationMailer < ApplicationMailer
 	                       password: representative.outlook_password
 	                     }
 		mail(to: agent.email,
-		     subject: "Cargo loading confirmation",
+		     subject: "Cargo loading confirmation for operation #{operation.reference}",
 		     delivery_method_options: delivery_options, from: representative.email, cc: shipper.email)
 	end
 
@@ -125,7 +128,7 @@ class FclExwOperationMailer < ApplicationMailer
 	                       password: representative.outlook_password
 	                     }
 		mail(to: agent.email,
-		     subject: "Cargo delivery confirmation",
+		     subject: "Cargo delivery confirmation for operation #{operation.reference}",
 		     delivery_method_options: delivery_options, from: representative.email, cc: shipper.email)
 	end
 
@@ -163,6 +166,19 @@ class FclExwOperationMailer < ApplicationMailer
 		mail(to: 'daniel@daniel.com',
 		     subject: "Insurance Information",
 		     delivery_method_options: delivery_options, from: representative.email, cc: 'sebas@sebas.com')
+	end
+
+	def transfer_documents(operation, representative)
+		@operation = operation
+		@shipper = OperationsByUser.find_by(operation: operation).shipper
+		@agent = OperationsByUser.find_by(operation: operation).agent
+		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
+		delivery_options = { user_name: representative.email,
+	                       password: representative.outlook_password
+	                     }
+		mail(to: 'documentation@documentation.com',
+		     subject: "Documentation for operation #{operation.reference}",
+		     delivery_method_options: delivery_options, from: representative.email)
 	end
 
 end

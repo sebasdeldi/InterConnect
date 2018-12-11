@@ -28,7 +28,7 @@
                 <%= form_tag ("/fcl_exw_confirm_quotation"), class: "control full-select quotation", multipart: true do %>
                   <br>
                   <div class="columns">
-                    <%= file_field_tag 'files[]', multiple: true, disabled:  is_fcl_exw_quotation_confirmed?(operation_id) ? true : false, class: 'quotation-input', id:'quotation-input' %>
+                    <%= file_field_tag 'files[]', multiple: true, class: 'quotation-input', id:'quotation-input' %>
                     <a class="show-modal quotation-document">
                       <i class="fas fa-info-circle guide-btn"></i>
                     </a>
@@ -78,8 +78,8 @@
                   <%= hidden_field_tag 'operation_id', operation_id %>
                   <%= hidden_field_tag 'agent_id', agent.id %>
 
-                  <%= submit_tag 'CONFIRM', class: "button is-link confirm #{is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : ''  } " , disabled: is_fcl_exw_quotation_confirmed?(operation_id)  %>
-                  <%= submit_tag 'ISSUE', class: "button is-link #{is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : ''  }", issue: true, disabled: is_fcl_exw_quotation_confirmed?(operation_id)  %>
+                  <%= submit_tag 'CONFIRM', class: "button is-link confirm #{is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : ''  } "  %>
+                  <%= submit_tag 'ISSUE', class: "button is-link #{is_fcl_exw_quotation_confirmed?(operation_id) ? 'step-completed' : ''  }", issue: true  %>
 
                   <a class="button is-primary right-button circle-button show-modal fcl_exw_quotation_confirmed">
                     <i class="fas fa-tasks"></i>

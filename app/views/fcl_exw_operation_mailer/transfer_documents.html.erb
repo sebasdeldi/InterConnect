@@ -1,0 +1,63 @@
+<div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060"></font></span></font></div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">&nbsp;</font></span></font></div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">
+
+	Good day, these are the documents related to the operation with reference: <%= @operation.reference %>, shipper: <b><%= @shipper.company_name %></b> and agent: <b><%= @agent.company_name %></b>
+	<br>
+	<br>
+	<ul>
+		<% quotation(@operation).files.each do |file| %>
+		  <li> <b>Quotation: </b><%= link_to file.path.split("/").last, Figaro.env.host + file.url, target: 'blank' %>  </li>
+		<% end %>
+
+		<% if quotation_sell(@operation).completed %>
+		  <li>
+			  <b>Quotation Sold: </b> <a href="<%= Figaro.env.host + '/quotation_sell/' + @operation.id.to_s + '.pdf' %>" target="blank"> Quotation Sold Document</a>
+		  </li>
+		<% end %>
+
+		<% quotation_sell(@operation).files.each_with_index do |file, i| %>
+			<li><b>Quotation Sold Support: </b><%= link_to doc_name(i, 'sell-quotation'), Figaro.env.host + file.url, target: 'blank' %></li>
+		<% end %>
+
+
+    <% if sli(@operation).nil? || sli(@operation).files.empty? %>
+      <li>
+    	  <b>SLI: </b> <a href="<%= Figaro.env.host + '/slis/' + @operation.id.to_s + '.pdf' %>" target="blank"> SLI Document</a>
+      </li>
+    <% else %>
+      <li>
+    		<b>SLI: </b> <a href="<%= Figaro.env.host + sli(@operation).files.first.url %>" target="blank"> SLI Document</a> 
+      </li>
+    <% end %>
+		<% unless invoice(@operation).nil? %>
+			<li>
+				<b>Invoice:</b> <a href="<%= Figaro.env.host + invoice(@operation).files.first.url %>" target="blank"> Invoice Document </a> 
+			</li>
+		<% end %>
+		<li>
+			<b>Booking Sheet:</b> <a href="<%= Figaro.env.host + '/booking_sheet/' + @operation.id.to_s + '.pdf' %>" target="blank"> Booking Sheet </a>
+		</li>
+		<% existing_fcl_cargo_info(@operation).files.each_with_index do |file, i| %>
+			<li><b>Hazmat / Self Propelled / Bonded: </b><%= link_to doc_name(i), Figaro.env.host + file.url, target: 'blank' %></li>
+		<% end %>
+		<li>
+			<b>Insurance: </b> <a href="<%= Figaro.env.host + '/insurance/view_pdf/' + @operation.secure_id.to_s + '.pdf' %>" target="blank">Insurance Document</a>
+		</li>
+
+	</ul>
+
+
+</font></span></font></div>
+
+
+<%= image_tag(attachments['signature.png'].url, width:"100%", height: "150") %>
+
+<br>
+<br>
+
+<br>
+<font size="2" face="Calibri,sans-serif"><span style="font-size:11pt;"><font size="1" face="Century Gothic,sans-serif" color="#002060"><span style="font-size:8pt;"><b>OUR VALUES : Dependence - Obedience - Gratitude - Integrity - Exc</b></span></font><font size="1" face="Century Gothic,sans-serif" color="#002060"><span style="font-size:8pt;" lang="en-US"><b>ellence
+- Perseverance - Honor - Generosity - Humility - Generational Mentality</b></span></font></span></font>
+</div>

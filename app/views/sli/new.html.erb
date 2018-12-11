@@ -1,57 +1,80 @@
 <br>
 <div class="container">
-  <div class="">
-    <div class="column">
-      <%= form_for(:sli, url: create_sli_path(params[:secure_id])) do |f| %>
-        <div>
-          <%= f.label 'If you already have a SLI upload it here:', class: 'label' %>
-          <%= f.file_field :files, multiple: true %>
-          <%= f.hidden_field :operation_id, value: Operation.find_by(secure_id: params[:secure_id]).id%>
-          <%= hidden_field_tag :secure_id,  value: params[:secure_id]%>
-        </div>
-        <br>
+  <div class="columns">
+    <div class="column is-4">
+     <%= form_for(:sli, url: create_sli_path(params[:secure_id])) do |f| %>
+       <div>
+         <%= f.label 'If you already have a SLI upload it here:', class: 'label' %>
+         <%= f.file_field :files, multiple: true %>
+         <%= f.hidden_field :operation_id, value: Operation.find_by(secure_id: params[:secure_id]).id%>
+         <%= hidden_field_tag :secure_id,  value: params[:secure_id]%>
+       </div>
+       <br>
 
-        <% unless @sli.files.empty? %>
-          <ul>
-            <label class="label">
-              Uploaded SLI docs:
-            </label>
-            <% @sli.files.each do |file| %>
-              <li> <%= link_to file.path.split("/").last, file.url, target: 'blank' %>  </li>
-            <% end %>
-          </ul>
-        <% end %>
+       <% unless @sli.files.empty? %>
+         <ul>
+           <label class="label">
+             Uploaded SLI docs:
+           </label>
+           <% @sli.files.each do |file| %>
+             <li> <%= link_to file.path.split("/").last, file.url, target: 'blank' %>  </li>
+           <% end %>
+         </ul>
+       <% end %>
 
-        <br>
-  
-        <div class="actions">
-          <%= f.submit "Upload" %>
-        </div>
-      <% end %>
+       <br>
+ 
+       <div class="actions">
+         <%= f.submit "Upload" %>
+       </div>
+     <% end %>
+    </div>
+    <div class="column is-1">
       <br>
-      <br>
-      <br>
-
-      <% if @sli.files.empty? %>
-        <p class="label">
-          If you don't have a SLI please provide the following information and we will create it for you:
-        </p>
-
-        <%= form_tag tariff_group_path do %> 
-          <br>
-          Number of schedule B commodities:
-          <%= number_field_tag :pieces_number, nil, class: 'schedule-b-amount', min: 0 %>
-          <%= hidden_field_tag :operation_id, Operation.find_by(secure_id: params[:secure_id]).id%>
-          <br>
-          <br>
-          <div id="schedule-b-container">
-            <!-- JS GENERATED CODE -->
-          </div>
-          <br>
-          <br>
-          <%= submit_tag "Submit" %>
-        <% end %>
-      <% end %>
+      <a class="show-modal file">
+        <i class="fas fa-info-circle guide-btn"></i>
+      </a>
     </div>
   </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="">
+    <div class="columns">
+      <div class="column is-8">
+        <% if @sli.files.empty? %>
+          <p class="label">
+            If you don't have a SLI please provide the following information and we will create it for you:
+          </p>
+        <% end %>
+      </div>
+      <div class="column is-1">
+        <a class="show-modal general">
+          <i class="fas fa-info-circle guide-btn"></i>
+        </a>
+      </div>
+    </div>
+    <% if @sli.files.empty? %>
+      <%= form_tag tariff_group_path do %> 
+        <br>
+        Number of schedule B commodities:
+        <%= number_field_tag :pieces_number, nil, class: 'schedule-b-amount', min: 0 %>
+        <%= hidden_field_tag :operation_id, Operation.find_by(secure_id: params[:secure_id]).id%>
+        <br>
+        <br>
+        <div id="schedule-b-container">
+          <!-- JS GENERATED CODE -->
+        </div>
+        <br>
+        <br>
+        <%= submit_tag "Submit" %>
+      <% end %>
+    <% end %>
+  </div>
+  <br>
+  <br>
 </div>
+<%= render 'guides/sli/file' %>
+<%= render 'guides/sli/general_info' %>

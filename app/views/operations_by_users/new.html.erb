@@ -19,7 +19,7 @@
 	      <p class="panel-heading">
 	        Create new operation
 	      </p>
-	      <%= render 'new_form', operations_by_user: new_operation, agents: agents(current_user), representatives: all_representatives, shippers: shippers(current_user), consignees: all_consignees, errors: @errors %>
+	      <%= render 'form', action_path: new_operation, agents: agents(current_user), representatives: all_representatives, shippers: shippers(current_user), consignees: all_consignees, errors: @errors, action_type: 'post' %>
 	    </nav>
 	   
 	  </div>

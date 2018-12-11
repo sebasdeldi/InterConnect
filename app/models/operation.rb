@@ -4,8 +4,7 @@ class Operation < ApplicationRecord
 	has_many :operations_by_users
 	has_one :invoice
 	has_one :insurance
-	validates :modality, :pol, :pod, :origin_address, :origin_zip_code, :origin_city, :origin_state, :origin_country,
-	:destination, presence: true
+	validates :modality, :pol, :pod, :origin_address, :origin_zip_code, :origin_city, :origin_state, :origin_country, presence: true
 
 	def self.send_fcl_exw_info_confirmation
 		operations = Operation.where(fcl_exw_info_requested: true, fcl_exw_info_confirmed: false)

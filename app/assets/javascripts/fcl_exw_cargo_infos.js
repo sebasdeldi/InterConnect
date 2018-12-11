@@ -78,6 +78,16 @@ document.addEventListener("turbolinks:load", function() {
 	  value = classList[classList.length-1];
 	  if(value.includes('weight')){
   	  $(".modal.gross-weight").addClass("is-active"); 
+	  }else if(value.includes('commercial-description')){
+	  	$(".modal.commercial-description").addClass("is-active"); 
+	  }else if(value.includes("container-type")){
+	  	$(".modal.container-type").addClass("is-active")
+	  }else if(value.includes('is-hazard')){
+	  	$(".modal.cargo-hazardous").addClass("is-active")
+	  }else if(value.includes('hazard-class')){
+	  	$(".modal.hazard-class").addClass("is-active")
+	  }else if(value.includes('un-code')){
+	  	$(".modal.un-code").addClass("is-active")
 	  }
 	}
 

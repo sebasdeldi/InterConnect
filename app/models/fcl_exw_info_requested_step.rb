@@ -7,7 +7,7 @@ class FclExwInfoRequestedStep < ApplicationRecord
 		agent = User.find(params[:agent_id])
 		op = Operation.find(params[:operation_id])
 		FclExwOperationMailer.info_request(shipper, current_user, agent, op.secure_id).deliver_later
-		if op.update(status: 'IN PROGRESS', status_message:'Confirm Cargo Info Received', current_step: 2)
+		if op.update(status: 'IN PROGRESS', status_message:'Confirm Cargo Info Received', current_step: 3)
 			FclExwInfoRequestedStep.find_by(operation_id: params[:operation_id]).update(completed: true)
 			true
 		end
