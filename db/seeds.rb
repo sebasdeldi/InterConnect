@@ -20,9 +20,9 @@ roles = Role.create!([
 ])
 
 users = User.create!([
-	{email: 'admin@admin.com', password: '12345678', role_id: 1, company_name: 'Interworld Freight', phone_number: '23423423', contact_first_name: 'Pepito', contact_last_name: 'Perez'},
-	{email: 'leader@leader.com', password: '12345678', role_id: 10, company_name: 'Interworld Freight', phone_number: '12313123', contact_first_name: 'Daniel', contact_last_name: 'Zapata'},
-	{email: 'sdelgado@interwf.com', password: '12345678', role_id: 2, company_name: 'Interworld Freight', phone_number: '53435453', outlook_password: 'Ron10373', contact_first_name: 'Sebastián', contact_last_name: 'Delgado',
+	{email: 'dzapata@interwf.com', password: '12345678', role_id: 1, company_name: 'Interworld Freight', phone_number: '0', contact_first_name: 'Daniel', contact_last_name: 'Zapata'},
+	{email: 'lfontalvo@interwf.com', password: '12345678', role_id: 10, company_name: 'Interworld Freight', phone_number: '0', contact_first_name: 'Laura', contact_last_name: 'Fontalvo'},
+	{email: 'lcuesta@interwf.com', password: 'Say09916', role_id: 2, company_name: 'Interworld Freight', phone_number: '53435453', outlook_password: 'Say09916', contact_first_name: 'Laura', contact_last_name: 'Cuesta',
 	address: '7741 nw 7th st', state: 'Florida', country: 'USA', city: 'Miami', zip_code: 33126 },
 	{email: 'maria@interwf.com', password: '12345678', role_id: 2, company_name: 'Interworld Freight', phone_number: '234234234', outlook_password: 'Sdiwf**321', contact_first_name: 'Maria', contact_last_name: 'Dolores' },
 	{email: 'juan@interwf.com', password: '12345678', role_id: 2, company_name: 'Interworld Freight', phone_number: '08954563', outlook_password: 'Sdiwf**321', contact_first_name: 'Juanito', contact_last_name: 'Pérez' },
