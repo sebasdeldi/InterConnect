@@ -163,9 +163,9 @@ class FclExwOperationMailer < ApplicationMailer
 		delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password
 	                     }
-		mail(to: 'daniel@daniel.com',
+		mail(to: 'dzapata@interwf.com',
 		     subject: "Insurance Information",
-		     delivery_method_options: delivery_options, from: representative.email, cc: 'sebas@sebas.com')
+		     delivery_method_options: delivery_options, from: representative.email, cc: 'sargaez@interwf.com')
 	end
 
 	def transfer_documents(operation, representative)
@@ -176,7 +176,7 @@ class FclExwOperationMailer < ApplicationMailer
 		delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password
 	                     }
-		mail(to: 'documentation@documentation.com',
+		mail(to: 'amesa@interwf.com',
 		     subject: "Documentation for operation #{operation.reference}",
 		     delivery_method_options: delivery_options, from: representative.email)
 	end
