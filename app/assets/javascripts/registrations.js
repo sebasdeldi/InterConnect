@@ -19,8 +19,8 @@ document.addEventListener("turbolinks:load", function() {
 		var data = detail[0], status = detail[1],  xhr = detail[2];
 		if (data.success){
 			swal({
-			  title: "Shipper registered!",
-			  text: "Shipper correctly registered!",
+			  title: "Contact registered!",
+			  text: "Contact correctly registered!",
 			  icon: "success",
 			  button: "Close",
 			});
@@ -29,7 +29,7 @@ document.addEventListener("turbolinks:load", function() {
 			}
 		}else{
 			swal({
-			  title: "Shipper registration failed!",
+			  title: "Registration failed!",
 			  text: "Please fill in the fields marked with '*'",
 			  icon: "error",
 			  button: "Close",

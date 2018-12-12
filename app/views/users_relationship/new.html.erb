@@ -14,14 +14,8 @@
   </nav>
   <nav class="panel">
     <p class="panel-heading">
-      <%= @representative.contact_first_name + ' ' + @representative.contact_last_name %>
+      Agents
     </p>
-
-
-    
-    <a class="panel-block is-active" >        
-     	<b>Agents</b>
-    </a>
     <%  agents_relationships.each_with_index do |rel, index| %>
       <a class="panel-block is-active" > 
           <span class="panel-icon">
@@ -49,9 +43,14 @@
     <% end %>
     <br>
     <br>
-    <a class="panel-block is-active" >        
-      <b>Shippers</b>
-    </a>
+  </nav>
+
+
+  <nav class="panel">
+    <p class="panel-heading">
+      Shippers
+    </p>
+    
     <%  shippers_relationships.each_with_index do |rel, index| %>
       <a class="panel-block is-active" >        
         <span class="panel-icon">
@@ -61,21 +60,27 @@
         <% unless @relateds.include? rel %>
           <% add_shipper = 'add_shipper_'+index.to_s %>
           <%= form_tag create_relation_path, class: add_shipper do %>
-          	<%= hidden_field_tag 'related_id', rel.id %>
-          	<%= hidden_field_tag 'representative_id', @representative.id %>
-          	<i class="fas fa-plus add button-icon" onclick='$(".add_shipper_<%= index %>").submit();'></i>
+            <%= hidden_field_tag 'related_id', rel.id %>
+            <%= hidden_field_tag 'representative_id', @representative.id %>
+            <i class="fas fa-plus add button-icon" onclick='$(".add_shipper_<%= index %>").submit();'></i>
           <% end %>
         <% else %>
           <% remove_shipper = 'remove_shipper_'+index.to_s %>
           <%= form_tag destroy_relation_path, class: remove_shipper, method: :delete do %>
-          	<%= hidden_field_tag 'related_id', rel.id %>
-          	<%= hidden_field_tag 'representative_id', @representative.id %>
-          	<i class="fas fa-minus remove button-icon" onclick='$(".remove_shipper_<%= index %>").submit();'></i>
+            <%= hidden_field_tag 'related_id', rel.id %>
+            <%= hidden_field_tag 'representative_id', @representative.id %>
+            <i class="fas fa-minus remove button-icon" onclick='$(".remove_shipper_<%= index %>").submit();'></i>
           <% end %>
         <% end %>
         <i class="fas fa-cog user-setting <%= rel.id %>"></i>
       </a>
     <% end %>
+    <br>
+    <br>
+  </nav>
+
+
+
     <br>
     <br>
   </nav>
