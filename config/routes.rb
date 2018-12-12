@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'users/edit'
+
   get 'insurance/new/:secure_id', to: 'insurance#new', as: 'insurance_form'
 
   get 'insurance/view_pdf/:secure_id', to: 'insurance#view_pdf', as: 'insurance_pdf'
@@ -74,10 +76,15 @@ Rails.application.routes.draw do
 
 	get "/quotation_sell/:id", to: "fcl_exw_quotation_selling_steps#show", as: "quotation_sell"
 
+
  	devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
+
+  get '/users/edit/:id', to: 'users#edit', as: 'user'
+  patch '/users/edit/:id', to: 'users#update'
+
 
   devise_scope :user do
 	  authenticated :user do

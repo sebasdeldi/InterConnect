@@ -19,13 +19,12 @@ document.addEventListener("turbolinks:load", function() {
 		  url: "/carrier_info",
 		  data: { carrier_id: $('.carrier-select').val() },
 		  success: function(data){
- 				if (data.vendor_operation_mode === 'web') {
- 					$('#additional_message').hide();
- 					$('.request').hide();
- 					$(".carrier-info").html("<article class='message is-primary'><div class='message-header'><p><i class='fas fa-exclamation-triangle'> </i>CARRIER INFORMATION</p></div><div class='message-body'><li>This carrier takes it's bookings trough their website, please visit: <a href='" + data.website + "'><b>" + data.website + "</b></li></div></article>")
- 				} else {
- 					$(".carrier-info").html("<article class='message is-primary'><div class='message-header'><p><i class='fas fa-exclamation-triangle'> </i>CARRIER INFORMATION</p></div><div class='message-body'><li><b>Carrier Name: </b>"+ data.company_name +"</li>" +"<li><b>Email Address: </b>"+ data.email +"</li>" + "<li><b>Phone Number: </b>"+ data.phone_number +"</li></div></article>")
- 				}
+		  	var options = '';
+		  	for (var i = 0; i < data.length; i++) {
+		  		console.log(i)
+		  		options = options + "<option value='" + data[i].id +"'>" + data[i].email + "</option>"  
+		  	}
+ 				$(".carrier-info").html('<label class="label">Contact:</label><div class="select full-select"><select name="carrier_contact_id" id="carrier_contact_id" class="full-select">' + options + '</select></div>')
  			},
  			error: function(data){
 		  	$(".carrier-info").html("")

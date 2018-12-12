@@ -4,11 +4,16 @@
 document.addEventListener("turbolinks:load", function() {
 
 	$(".shipper-registration").on("ajax:success", function(event) {
-		onShipperSubmit(event);
+		onShipperSubmit(event, true);
+	});
+
+	$(".main-registration").on("ajax:success", function(event) {
+		onShipperSubmit(event, false);
+		$("input[type=text]").val('');
 	});
 
 
-	var onShipperSubmit = (event) => {
+	var onShipperSubmit = (event, redirect) => {
 
 		var detail = event.detail;
 		var data = detail[0], status = detail[1],  xhr = detail[2];
@@ -19,7 +24,9 @@ document.addEventListener("turbolinks:load", function() {
 			  icon: "success",
 			  button: "Close",
 			});
-			redirectOnSuccess();
+			if(redirect){
+				redirectOnSuccess();
+			}
 		}else{
 			swal({
 			  title: "Shipper registration failed!",
@@ -28,8 +35,6 @@ document.addEventListener("turbolinks:load", function() {
 			  button: "Close",
 			});
 		}
-		
-
 	}
 
 	var redirectOnSuccess = () => {

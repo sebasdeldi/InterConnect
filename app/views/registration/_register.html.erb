@@ -1,54 +1,11 @@
 <div class="columns">
   <div class="column is-half  is-offset-one-quarter">
-    
     <nav class= 'panel is-form-panel card-shadow'>
-      <p class="panel-heading">
-        Register new <%= role_to_register %>
-      </p>
-
-      <div class='panel-block'>
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name) , remote: true, html: {class: "control #{role_to_register}" }) do |f| %>
-          <!--role hidden field-->  
-          <%= hidden_field_tag :role, role_to_register %>
-
-
-          <div class="field email <%= role_to_register %>">
-            <%= f.label :email, class: 'label' %>
-            <div class="control has-icons-left">
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "email input #{role_to_register}" %>
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope email <%= role_to_register %>"></i>
-              </span>
-            </div>
-          </div>
-
-          <div class="field password <%= role_to_register %>">
-            <%= f.label :password, class: 'label' %>
-            <p class="control has-icons-left">
-              <%= f.password_field :password, autocomplete: "off", class: "password input #{role_to_register} >" %>
-              <span class="icon is-small is-left">
-                <i class="fas fa-lock password <%= role_to_register %>"></i>
-              </span>
-            </p>
-          </div>
-
-          <div class="field password-confirmation <%= role_to_register %>">
-            <%= f.label :password_confirmation, class: 'label' %>
-            <p class="control has-icons-left">
-              <%= f.password_field :password_confirmation, autocomplete: "off", class: "password-confirmation input #{role_to_register}" %>
-              <span class="icon is-small is-left">
-                <i class="fas fa-lock password-confirmation <%= role_to_register %>"></i>
-              </span>
-            </p>
-          </div>
-
-          <div class="control">
-            <%= f.submit "Register", class: 'button is-link' %>
-          </div>
-
-        <% end %>
-      </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name) , remote: true, html: {class: "control main-registration" }) do |f| %>
+        <!--role hidden field-->  
+        <%= hidden_field_tag :role, role_to_register %>
+        <%= render 'registration/fields', f: f %>
+      <% end %>
     </nav>
-   
   </div>
 </div>

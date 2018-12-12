@@ -16,7 +16,7 @@ class UsersRelationshipController < ApplicationController
 
   def new
   	@representative = User.find(params[:representative_id])
-  	@relateds = @representative.relateds
+  	@relateds = @representative.relateds.order('company_name ASC')
   end
 
   def index_representatives

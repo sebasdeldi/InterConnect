@@ -5,7 +5,8 @@ class OperationsController < ApplicationController
 	end
 
 	def carrier_info
-		@info = User.find(params[:carrier_id])
+		company_name = User.find(params[:carrier_id]).company_name
+		@info = User.where(company_name: company_name)
 		render json: @info
 	end
 

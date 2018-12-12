@@ -1,0 +1,144 @@
+<div class="columns">
+  <div class="column is-half  is-offset-one-quarter">
+  	<br>
+  	<br>
+  	<nav class="breadcrumb" aria-label="breadcrumbs">
+  	  <ul>
+  	    <li><%= link_to "Edit Relationships", new_relationship_path(current_user)  %></li>
+  	    <li class="is-active"><a href="">Edit User <%= @user.company_name %></a></li>
+  	  </ul>
+  	</nav>
+    <nav class= 'panel is-form-panel card-shadow'>
+      <%= form_for(@user, html: {class: "control " }) do |f| %>
+
+      	<section class="modal-card-body">
+  	       <br>
+  	       <article class="message is-warning">
+  	         <div class="message-header">
+  	           <p><i class="fas fa-exclamation-triangle"> </i>   Warning</p>
+  	         </div>
+  	         <div class="message-body">
+  	           - The fields marked with an asterisk ('*') must be filled in.
+  	           <br>
+  	           <br>
+  	           - You may complete or update the other fields later.
+  	         </div>
+  	       </article>
+  	       <br>
+
+  	       <div class="field shipper">
+  	         <label class= 'label'> * Email: </label>
+  	         <div class="control has-icons-left">
+  	           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "email input shipper" %>
+  	           <span class="icon is-small is-left">
+  	             <i class="fas fa-envelope email shipper"></i>
+  	           </span>
+  	         </div>
+  	       </div>
+
+  	       <div class="field shipper">
+  	         <label class= 'label'> * Company Name: </label>
+  	         <div class="control has-icons-left">
+  	           <%= f.text_field :company_name, autofocus: true, autocomplete: "email", class: "email input shipper" %>
+  	           <span class="icon is-small is-left">
+  	             <i class="far fa-building"></i>
+  	           </span>
+  	         </div>
+  	       </div>
+
+
+  	       <div class="field shipper">
+  	         <label class= 'label'> * Company Contact Phone Number: </label>
+  	         <div class="control has-icons-left">
+  	           <%= f.text_field :phone_number, autofocus: true, autocomplete: "email", class: "email input shipper" %>
+  	           <span class="icon is-small is-left">
+  	             <i class="fas fa-phone"></i>
+  	           </span>
+  	         </div>
+  	       </div>
+
+  	       <label class= 'label'> Company Contact Names: </label>
+  	       <div class="field is-grouped shipper">
+  	         <div class="control has-icons-left">
+  	           <%= f.text_field :contact_first_name, autofocus: true, autocomplete: "email", class: "email input shipper", placeholder: "FIRST NAME" %>
+  	           <span class="icon is-small is-left">
+  	             <i class="fas fa-user-circle"></i>
+  	           </span>
+  	         </div>
+  	         <div class="control has-icons-left">
+  	           <%= f.text_field :contact_first_name, autofocus: true, autocomplete: "email", class: "email input shipper", placeholder: "SECOND NAME" %>
+  	           <span class="icon is-small is-left">
+  	             <i class="fas fa-user-circle"></i>
+  	           </span>
+  	         </div>
+  	       </div>
+
+
+
+  	       <div class="field shipper">
+  	         <label class= 'label'> Address: </label>
+  	         <div class="control has-icons-left">
+  	           <%= f.text_field :address, autofocus: true, autocomplete: "email", class: "email input shipper" %>
+  	           <span class="icon is-small is-left">
+  	             <i class="fas fa-map-signs"></i>
+  	           </span>
+  	         </div>
+  	       </div>
+
+  	       <div class="field shipper">
+  	         <label class= 'label'> Country: </label>
+  	         <div class="control has-icons-left">
+  	           <%= f.text_field :country, autofocus: true, autocomplete: "email", class: "email input shipper" %>
+  	           <span class="icon is-small is-left">
+  	             <i class="fas fa-globe"></i>
+  	           </span>
+  	         </div>
+  	       </div>
+
+
+  	       <div class="field shipper">
+  	         <label class= 'label'> State: </label>
+  	         <div class="control has-icons-left">
+  	           <%= f.text_field :state, autofocus: true, autocomplete: "email", class: "email input shipper" %>
+  	           <span class="icon is-small is-left">
+  	             <i class="fas fa-globe"></i>
+  	           </span>
+  	         </div>
+  	       </div>
+
+
+  	       <div class="field shipper">
+  	         <label class= 'label'> City: </label>
+  	         <div class="control has-icons-left">
+  	           <%= f.text_field :city, autofocus: true, autocomplete: "email", class: "email input shipper" %>
+  	           <span class="icon is-small is-left">
+  	             <i class="fas fa-globe"></i>
+  	           </span>
+  	         </div>
+  	       </div>
+
+  	       <div class="field shipper">
+  	         <label class= 'label'>  Zip Code: </label>
+  	         <div class="control has-icons-left">
+  	           <%= f.text_field :zip_code, autofocus: true, autocomplete: "email", class: "email input shipper" %>
+  	           <span class="icon is-small is-left">
+  	             <i class="fas fa-globe"></i>
+  	           </span>
+  	         </div>
+  	       </div>
+
+  	     </section>
+
+  	     <footer class="modal-card-foot">
+  	       <%= f.button type: 'submit', class: 'button is-success' do %>
+  	         <span>UPDATE</span>
+  	         <span class="icon is-small">
+  	           <i class="fas fa-check"></i>
+  	         </span>
+  	       <% end %>
+  	     </footer>
+    
+      <% end %>
+    </nav>
+  </div>
+</div>

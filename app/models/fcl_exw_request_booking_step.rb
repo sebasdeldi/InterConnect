@@ -8,7 +8,7 @@ class FclExwRequestBookingStep < ApplicationRecord
 		step = FclExwCargoInfoStep.find_by(operation_id: params[:operation_id])
 		agent = User.find(params[:agent_id])
 		operation = [op, step]
-		carrier = User.find(params[:carrier_id])
+		carrier = User.find(params[:carrier_contact_id])
 		additional_message = params[:additional_message]
 		FclExwOperationMailer.request_booking(shipper, operation, carrier, additional_message, current_user).deliver_later
 		FclExwOperationMailer.request_booking_notification(agent, step, carrier, current_user).deliver_later

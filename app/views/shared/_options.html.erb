@@ -25,6 +25,13 @@
         </span>
         Manage Representatives 
       <% end %>
+    <% else %>
+      <%= link_to(new_relationship_path(current_user), class: "panel-block is-active" ) do %>        
+        <span class="panel-icon">
+          <i class="fas fa-users"></i>
+        </span>
+        Manage Relationships 
+      <% end %>
   	<% end %>
   </nav>
 </div>
