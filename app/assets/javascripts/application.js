@@ -89,5 +89,10 @@ document.addEventListener("turbolinks:load", function() {
     }
     $('select.sli').val("DOCUMENTS");
   });  
+
+  $('.user-setting').on('click', function(){
+    var id = this.classList[3]
+    window.location.href = 'http://'+window.location.host+'/users/edit/'+id;
+  });
 });
 
