@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210927200624) do
+ActiveRecord::Schema.define(version: 20210927200625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20210927200624) do
     t.integer "carrier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "carrier_contact_id"
     t.index ["operation_id"], name: "index_fcl_exw_request_booking_steps_on_operation_id"
   end
 

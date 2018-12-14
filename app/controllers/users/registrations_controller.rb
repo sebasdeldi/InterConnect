@@ -1,18 +1,21 @@
-
 class Users::RegistrationsController < Devise::RegistrationsController
-
   def create
+    puts '==================================================================='
+    puts '==================================================================='
+    puts params
+    puts '==================================================================='
+    puts '==================================================================='
     role = Role.where(name: params[:role]).first
     if params[:password].present?
       user = User.new(user_strong_params.merge(role_id: role.id))
     else
       user = User.new(user_strong_params.merge(role_id: role.id, password: '12345678'))
     end
-
     user.save
-
     yield resource if block_given?
     if user.persisted?
+      user_id = user.id
+
       if user.active_for_authentication?
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
@@ -23,6 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         #respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
       render json: {'success': true}
+      UsersRelationship.create!(user_id: params[:current_user_id], related_id: user_id )
     else
       clean_up_passwords resource
       set_minimum_password_length

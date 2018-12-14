@@ -9,39 +9,6 @@ I need all your collaboration to get a booking and spot container under below in
 <h2>Cargo info</h2>
 <ul>
 	<li>
-		<b>Freight Forwarder Reference: </b> <%= @operation[0].reference %>
-	</li>
-	<% unless @operation[0].agent_reference.nil? %>
-		<li>
-			<b>Cargo Agent Reference: </b> <%= @operation[0].agent_reference %>
-		</li>
-	<% end %>
-	<% unless @operation[0].shipper_reference.nil? %>
-		<li>
-			<b>Shipper Reference: </b> <%= @operation[0].shipper_reference %>
-		</li>
-	<% end %>
-	<% unless @operation[0].consignee_reference.nil? %>
-		<li>
-			<b>Consignee Reference: </b> <%= @operation[0].consignee_reference %>
-		</li>
-	<% end %>
-	<li>
-		<b>Contact Email:</b> <%= @operation[1].contact_email %>
-	</li>
-	<li>
-		<b>Contact Number:</b> <%= @operation[1].contact_number %>
-	</li>
-	<li>
-		<b>Loading Date:</b> <%= @operation[1].loading_date %>
-	</li>
-	<li>
-		<b>Loading Time:</b> <%= @operation[1].loading_time %>
-	</li>
-	<li>
-		<b>Loading Address:</b> <%= @operation[1].loading_address %>
-	</li>
-	<li>
 		<b>Shipper company name:</b> <%= @shipper.company_name %>
 	</li>
 	<li>
@@ -50,6 +17,45 @@ I need all your collaboration to get a booking and spot container under below in
 	<li>
 		<b>Shipper company email:</b> <%= @shipper.email %>
 	</li>
+	<li>
+		<b>Contact Email:</b> <%= @operation[1].contact_email %>
+	</li>
+	<li>
+		<b>Contact Number:</b> <%= @operation[1].contact_number %>
+	</li>
+	<br>
+	<br>
+	<b>***PLEASE CONTACT SUPPLIER BEFORE SPOTTING CONTAINER TO SCHEDULE LOADING.</b>
+	<br>
+	<br>
+	<li>
+		<b>Port of Loading:</b> <%= @operation[0].pol %>
+	</li>	
+	<li>
+		<b>Port of Unloading:</b> <%= @operation[0].pod %>
+	</li>
+	<% unless @operation[0].destination.nil? || @operation[0].destination == ""  %>
+		<li>
+			<b>Place of Delivery:</b> <%= @operation[0].destination %>
+		</li>
+	<% end %>
+	<li>
+		<b>Freight Forwarder Reference: </b> <%= @operation[0].reference %>
+	</li>
+	<li>
+		<b>PickUp Reference: </b> <%= @operation[1].pickup_reference %>
+	</li>
+	<li>
+		<b>Loading Address:</b> <%= @operation[1].loading_address %>
+	</li>
+	<li>
+		<b>Loading Date:</b> <%= @operation[1].loading_date %>
+	</li>
+	<li>
+		<b>Loading Time:</b> <%= time(@operation[1].loading_time) %> 
+	</li>
+
+
 </ul>
 <br>
 <h2>

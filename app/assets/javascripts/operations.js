@@ -11,7 +11,7 @@ document.addEventListener("turbolinks:load", function() {
 		document.cookie = "redirect_tab=operations_tab";
 	});
 
-	$('.carrier-select').prop('selectedIndex', 0); 
+	//$('.carrier-select').prop('selectedIndex', 0); 
 	
 	$('.carrier-select').on('change', function() {
 		$.ajax({

@@ -1,0 +1,28 @@
+<div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060"></font></span></font></div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">&nbsp;</font></span></font></div>
+<div style="margin:0;"><font size="3" face="Calibri,sans-serif"><span style="font-size:12pt;"><font color="#002060">
+
+	Buenos días,
+	<br>
+	Por favor compartirme el valor en dolares del profit generado por la operación <%= @operation.reference %>.
+	Con la siguiente documentación de cotización: 
+	<% quotation(@operation).files.each do |file| %>
+	  <b>Cotización: </b><%= link_to file.path.split("/").last, Figaro.env.host + file.url, target: 'blank' %> 
+	  <br>
+	<% end %>
+
+	<p>Agradezco que me mantengan al tanto de la situación.</p>
+	<p>Muchas gracias.</p>
+</font></span></font></div>
+
+
+<%= image_tag(attachments['signature.png'].url, width:"100%", height: "150") %>
+
+<br>
+<br>
+
+<br>
+<font size="2" face="Calibri,sans-serif"><span style="font-size:11pt;"><font size="1" face="Century Gothic,sans-serif" color="#002060"><span style="font-size:8pt;"><b>OUR VALUES : Dependence - Obedience - Gratitude - Integrity - Exc</b></span></font><font size="1" face="Century Gothic,sans-serif" color="#002060"><span style="font-size:8pt;" lang="en-US"><b>ellence
+- Perseverance - Honor - Generosity - Humility - Generational Mentality</b></span></font></span></font>
+</div>

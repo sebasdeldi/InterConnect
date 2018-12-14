@@ -25,6 +25,8 @@ class FclExwOperationMailer < ApplicationMailer
 	  @agent = agent
 	  @secure_id = secure_id
 	  @operation = Operation.find_by(secure_id: secure_id)
+	  op_by_user = OperationsByUser.find_by(operation_id: @operation)
+	  @consignee = User.find(op_by_user.consignee_id)
 	  attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
 	  delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password
@@ -178,6 +180,18 @@ class FclExwOperationMailer < ApplicationMailer
 	                     }
 		mail(to: 'amesa@interwf.com',
 		     subject: "Documentation for operation #{operation.reference}",
+		     delivery_method_options: delivery_options, from: representative.email)
+	end
+
+	def issue_profit(operation, representative)
+		@operation = operation
+		@agent = OperationsByUser.find_by(operation: operation).agent
+		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
+		delivery_options = { user_name: representative.email,
+	                       password: representative.outlook_password
+	                     }
+		mail(to: @agent.email,
+		     subject: "Profit Request #{operation.reference}",
 		     delivery_method_options: delivery_options, from: representative.email)
 	end
 
