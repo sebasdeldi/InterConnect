@@ -79,6 +79,24 @@
     <br>
   </nav>
 
+  <nav class="panel">
+    <p class="panel-heading">
+      Consignees
+    </p>
+    
+    <%  consignees.each_with_index do |rel, index| %>
+      <a class="panel-block is-active" >        
+        <span class="panel-icon">
+          <i class="fas fa-users"></i>
+        </span>
+        <%= rel.company_name + ' - ' + rel.email %>
+        <i class="fas fa-cog user-setting <%= rel.id %>"></i>
+      </a>
+    <% end %>
+    <br>
+    <br>
+  </nav>
+
 
 
     <br>

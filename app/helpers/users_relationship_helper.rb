@@ -7,7 +7,7 @@ module UsersRelationshipHelper
 		User.agents.order('company_name ASC')
 	end
 
-	def consignees_relationships
-		
+	def consignees
+		User.consignees.order('company_name ASC')
 	end
 end

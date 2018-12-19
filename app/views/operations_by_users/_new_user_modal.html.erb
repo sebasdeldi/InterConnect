@@ -11,7 +11,7 @@
       <!--role hidden field-->  
       <%= hidden_field_tag :role, user_type %>
 
-      <%= render 'registration/fields', f: f %>
+      <%= render 'registration/fields', f: f, user_type: user_type %>
 
 
     <% end %>

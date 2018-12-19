@@ -1,17 +1,20 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
-    puts '==================================================================='
-    puts '==================================================================='
-    puts params
-    puts '==================================================================='
-    puts '==================================================================='
     role = Role.where(name: params[:role]).first
     if params[:password].present?
       user = User.new(user_strong_params.merge(role_id: role.id))
     else
       user = User.new(user_strong_params.merge(role_id: role.id, password: '12345678'))
     end
-    user.save
+
+    if params[:role] == 'consignee'
+      if !params[:company_name].nil? && !params[:phone_number].nil?
+        user.save(validate: false)
+      end
+    else
+      user.save
+    end
+
     yield resource if block_given?
     if user.persisted?
       user_id = user.id
