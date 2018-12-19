@@ -57,9 +57,9 @@ class FclExwOperationMailer < ApplicationMailer
 	  delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password
 	                     }
-	  mail(to: agent.email,
-	       subject: "Quotation request from shipper " + shipper.company_name + "for operation #{operation.reference}",
-	       delivery_method_options: delivery_options, from: representative.email, cc: 'pricing333@interwf.com')
+	  mail(to: 'pricing333@interwf.com',
+	       subject: "Quotation request from agent " + agent.company_name + "for operation #{operation.reference}",
+	       delivery_method_options: delivery_options, from: representative.email, cc: agent.email)
 	end
 
 	def quotation_confirmation (shipper, representative, agent)
@@ -116,7 +116,7 @@ class FclExwOperationMailer < ApplicationMailer
 	                     }
 		mail(to: agent.email,
 		     subject: "Cargo loading confirmation for operation #{operation.reference}",
-		     delivery_method_options: delivery_options, from: representative.email, cc: shipper.email)
+		     delivery_method_options: delivery_options, from: representative.email)
 	end
 
 	def container_delivery (agent, operation, shipper, representative)

@@ -101,4 +101,12 @@ module ApplicationHelper
 		end 
 		hour + ':' + min
 	end
+
+	def default_time(time)
+		if time.nil?
+			Time.current.change(hour: 0, min: 0)
+		else
+			Time.current.change(hour: time.hour, min: time.min)
+		end
+	end
 end

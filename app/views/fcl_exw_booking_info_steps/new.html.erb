@@ -102,7 +102,7 @@
                 <div class="field">
                   <%= f.label 'Document cut off time:', class: 'label' %>
                   <div class="control has-icons-left">
-                    <%= f.time_select :doc_cut_off_time, {  }, { class: 'input time-input' } %>
+                    <%= f.time_select :doc_cut_off_time, { default: default_time(existing_fcl_booking_info(@operation).doc_cut_off_time) }, { class: 'input time-input' } %>
                     <span class="icon is-small is-left">
                       <i class="fas fa-clock"></i>
                     </span>
@@ -145,7 +145,7 @@
                 <div class="field">
                   <%= f.label 'Cargo cut off time:', class: 'label' %>
                   <div class="control has-icons-left">
-                    <%= f.time_select :cargo_cut_off_time, {  }, { class: 'input time-input' } %>
+                    <%= f.time_select :cargo_cut_off_time, { default: default_time(existing_fcl_booking_info(@operation).cargo_cut_off_time) }, { class: 'input time-input' } %>
                     <span class="icon is-small is-left">
                       <i class="fas fa-clock"></i>
                     </span>

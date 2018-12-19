@@ -33,16 +33,18 @@ document.addEventListener("turbolinks:load", function() {
 	}
 
 	function hideHazFieldsWhenSaved(){
-	  for (i=0; i < $('#container')[0].childNodes.length; i++) {
-	  	haz = $('#container')[0].children[i].children[0].children[4].children[0].children[0].children[1].children[0].children[0];
-	  	if(haz.value === "YES"){
-	  		hazClass = haz.parentNode.parentNode.parentNode.parentNode.parentNode.nextSibling.classList;
-	  		unCode = haz.parentNode.parentNode.parentNode.parentNode.parentNode.nextSibling.nextSibling.classList;
+		if($('#container')[0] !== undefined){
+		  for (i=0; i < $('#container')[0].childNodes.length; i++) {
+		  	haz = $('#container')[0].children[i].children[0].children[4].children[0].children[0].children[1].children[0].children[0];
+		  	if(haz.value === "YES"){
+		  		hazClass = haz.parentNode.parentNode.parentNode.parentNode.parentNode.nextSibling.classList;
+		  		unCode = haz.parentNode.parentNode.parentNode.parentNode.parentNode.nextSibling.nextSibling.classList;
 
-		  	hazClass.remove("hidden");
-				unCode.remove("hidden");
-	  	}
-	  }
+			  	hazClass.remove("hidden");
+					unCode.remove("hidden");
+		  	}
+		  }
+		}  
 	} 
 
 	// Multiple containers generator

@@ -107,7 +107,7 @@
                 <div class="field">
                   <label class="label">* Loading Time:</label>
                   <div class="control has-icons-left">
-                    <%= f.time_select :loading_time, { }, { class: 'input time-input'} %>
+                    <%= f.time_select :loading_time, { default: default_time(existing_fcl_cargo_info(@operation).loading_time) }, { class: 'input time-input' } %>
                     <span class="icon is-small is-left">
                       <i class="fas fa-clock"></i>
                     </span>
