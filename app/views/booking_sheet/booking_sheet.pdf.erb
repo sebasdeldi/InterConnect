@@ -541,7 +541,7 @@
 					<% else %>
 						<p>
 							DOC CUT OFF: 
-							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).doc_cut_off_date %> <%= booking_info(@operation).time(booking_info(@operation).doc_cut_off_time) %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).doc_cut_off_date %> <%= time(booking_info(@operation).doc_cut_off_time) %></span>
 						</p>
 					<% end %>
 
@@ -609,7 +609,7 @@
 					<% else %>
 						<p>
 							CARGO CUT OFF: 
-							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).cargo_cut_off_date %> <%= booking_info(@operation).time(booking_info(@operation).cargo_cut_off_time) %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= booking_info(@operation).cargo_cut_off_date %> <%= time(booking_info(@operation).cargo_cut_off_time) %></span>
 						</p>
 					<% end %>
 
@@ -710,7 +710,7 @@
 					<% else %>
 						<p>
 							SPOTTING DATE: 
-							<span style="text-decoration: underline; white-space: pre;"><%= cargo_info(@operation).loading_date %> <%= cargo_info(@operation).time(cargo_info(@operation).loading_time) %></span>
+							<span style="text-decoration: underline; white-space: pre;"><%= cargo_info(@operation).loading_date %> <%= time(cargo_info(@operation).loading_time) %></span>
 						</p>
 					<% end %>
 

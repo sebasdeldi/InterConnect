@@ -35,7 +35,7 @@
 </center>
 <br>
 <br>
-<p><b>TOTAL:</b> $  <%= @quotation.profit + @quotation.documentation + @quotation.ff + @quotation.vgm + @quotation.inland + @quotation.others  %></p>
+<p><b>TOTAL:</b> $  <%= quotation_total(@quotation) %></p>
 
 
 <style type="text/css">
