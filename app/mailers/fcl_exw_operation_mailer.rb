@@ -178,7 +178,7 @@ class FclExwOperationMailer < ApplicationMailer
 		delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password
 	                     }
-		mail(to: 'amesa@interwf.com',
+		mail(to: 'amesa33@interwf.com',
 		     subject: "Documentation for operation #{operation.reference}",
 		     delivery_method_options: delivery_options, from: representative.email)
 	end
