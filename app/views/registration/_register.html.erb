@@ -4,7 +4,7 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name) , remote: true, html: {class: "control main-registration" }) do |f| %>
         <!--role hidden field-->  
         <%= hidden_field_tag :role, role_to_register %>
-        <%= render 'registration/fields', f: f, user_type: '' %>
+        <%= render 'registration/fields', f: f, user_type: role_to_register %>
       <% end %>
     </nav>
   </div>

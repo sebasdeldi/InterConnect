@@ -1,19 +1,9 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
     role = Role.where(name: params[:role]).first
-    if params[:password].present?
-      user = User.new(user_strong_params.merge(role_id: role.id))
-    else
-      user = User.new(user_strong_params.merge(role_id: role.id, password: '12345678'))
-    end
-
-    if params[:role] == 'consignee'
-      if !params[:company_name].nil? && !params[:phone_number].nil?
-        user.save(validate: false)
-      end
-    else
-      user.save
-    end
+    user = init(params, role)
+    consignee_validations(params, user)
+    agent_validations(params, user)
 
     yield resource if block_given?
     if user.persisted?
@@ -40,15 +30,42 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-
   before_action :authenticate_user!, :redirect_unless_admin,  only: [:new, :create]
   skip_before_action :require_no_authentication
 
   private
+  def init(params, role)
+    if params[:password].present?
+      user = User.new(user_strong_params.merge(role_id: role.id))
+    else
+      user = User.new(user_strong_params.merge(role_id: role.id, password: '12345678'))
+    end
+    user
+  end
 
+  def consignee_validations(params, user)
+    if params[:role] == 'consignee'
+      if params[:user][:company_name] != '' && params[:user][:phone_number] != ''
+        user.save(validate: false)
+      end
+    else
+      user.save
+    end
+  end
+
+  def agent_validations(params, user)
+    if params[:role] == 'agent'
+      if params[:user][:company_name] != '' && params[:user][:phone_number] != '' && params[:user][:email] != '' && params[:user][:documental_email] != ''
+        user.save(validate: false)
+      end
+    else
+      user.save
+    end
+  end
+    
   def user_strong_params
     params.require(:user).permit(:company_name, :contact_first_name, :contact_last_name, :phone_number, :address, :state, :country, :city, :account_type, :zip_code,
-    :email, :password, :outlook_password )
+    :email, :password, :outlook_password, :documental_email )
   end
 
   def redirect_unless_admin

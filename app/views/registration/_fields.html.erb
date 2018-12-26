@@ -44,6 +44,18 @@
          </div>
        </div>
 
+        <% if user_type == 'agent' %>
+         <div class="field shipper">
+           <label class= 'label'> * Documental Email: </label>
+           <div class="control has-icons-left">
+             <%= f.email_field :documental_email, autofocus: true, autocomplete: "email", class: "email input shipper" %>
+             <span class="icon is-small is-left">
+               <i class="fas fa-phone"></i>
+             </span>
+           </div>
+         </div>
+        <% end %>
+
        <label class= 'label'> Company Contact Names: </label>
        <div class="field is-grouped shipper">
          <div class="control has-icons-left">

@@ -49,7 +49,7 @@ users = User.create!([
 	{email: 'yolanda.bunn@hamburgsud.com', password: '12345678', role_id: 6, company_name: 'HamburgSud', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'},
 	{email: 'falvarenga@greatwhitefleet.com', password: '12345678', role_id: 6, company_name: 'GWF', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'},
 	{email: 'hilarykaganas@evergreen-shipping.us', password: '12345678', role_id: 6, company_name: 'Evergreen', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'},
-	{email: 'cssca@kingocean.com', password: '12345678', role_id: 6, company_name: 'king Ocean', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'},
+	{email: 'cssca@kingocean.com', password: '12345678', role_id: 6, company_name: 'King Ocean', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'},
 	{email: 'jesus.intriago@seaboardmarine.com', password: '12345678', role_id: 6, company_name: 'Seaboard', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'},
 	{email: 'carmen.alvarez@seaboardmarine.com', password: '12345678', role_id: 6, company_name: 'Seaboard', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'},
 	{email: 'bookingrequests@crowley.com', password: '12345678', role_id: 6, company_name: 'Crowley', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'}
