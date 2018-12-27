@@ -170,8 +170,9 @@ class FclExwOperationMailer < ApplicationMailer
 		     delivery_method_options: delivery_options, from: representative.email, cc: 'sargaez@interwf.com')
 	end
 
-	def transfer_documents(operation, representative)
+	def transfer_documents(additional_comment, operation, representative)
 		@operation = operation
+		@additional_comment = additional_comment
 		@shipper = OperationsByUser.find_by(operation: operation).shipper
 		@agent = OperationsByUser.find_by(operation: operation).agent
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")

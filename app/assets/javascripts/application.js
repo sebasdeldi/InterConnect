@@ -84,7 +84,10 @@ document.addEventListener("turbolinks:load", function() {
         "http://" + window.location.host + "/" + this.value,
         { secure_id: this.value, link: "http://" + window.location.host + "/invoices/new/" + this.value.split('/').pop() }
       );
-    }else{
+    }else if(this.value === "send_documentation_modal"){
+      //show modal
+    }
+    else{
       window.open("http://" + window.location.host + "/" + this.value, '_blank');
     }
     $('select.sli').val("DOCUMENTS");

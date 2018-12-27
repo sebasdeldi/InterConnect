@@ -1,0 +1,75 @@
+
+
+<div class="modal send-documents">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">SEND DOCUMENTATION </p>
+      <button class="delete close-modal send-documents" aria-label="close"></button>
+    </header>
+
+    <section class="modal-card-body">
+      <p>
+        The following documents will be sent to your documentation operator (<b><%= agent(operation).documental_email %></b>)
+      </p>
+      <hr>
+      <ul>
+        <% quotation(operation).files.each do |file| %>
+          <li> <b>Quotation: </b><%= link_to file.path.split("/").last, Figaro.env.host + file.url, target: 'blank' %>  </li>
+        <% end %>
+
+        <% if quotation_sell(operation).completed %>
+          <li>
+            <b>Quotation Sold: </b> <a href="<%= Figaro.env.host + '/quotation_sell/' + operation.id.to_s + '.pdf' %>" target="blank"> Quotation Sold Document</a>
+          </li>
+        <% end %>
+
+        <% quotation_sell(operation).files.each_with_index do |file, i| %>
+          <li><b>Quotation Sold Support: </b><%= link_to doc_name(i, 'sell-quotation'), Figaro.env.host + file.url, target: 'blank' %></li>
+        <% end %>
+
+
+        <% if sli(operation).nil? || sli(operation).files.empty? %>
+          <li>
+            <b>SLI: </b> <a href="<%= Figaro.env.host + '/slis/' + operation.id.to_s + '.pdf' %>" target="blank"> SLI Document</a>
+          </li>
+        <% else %>
+          <li>
+            <b>SLI: </b> <a href="<%= Figaro.env.host + sli(operation).files.first.url %>" target="blank"> SLI Document</a> 
+          </li>
+        <% end %>
+        <% unless invoice(operation).nil? %>
+          <li>
+            <b>Invoice:</b> <a href="<%= Figaro.env.host + invoice(operation).files.first.url %>" target="blank"> Invoice Document </a> 
+          </li>
+        <% end %>
+        <li>
+          <b>Booking Sheet:</b> <a href="<%= Figaro.env.host + '/booking_sheet/' + operation.id.to_s + '.pdf' %>" target="blank"> Booking Sheet </a>
+        </li>
+        <% existing_fcl_cargo_info(operation).files.each_with_index do |file, i| %>
+          <li><b>Hazmat / Self Propelled / Bonded: </b><%= link_to doc_name(i), Figaro.env.host + file.url, target: 'blank' %></li>
+        <% end %>
+        <li>
+          <b>Insurance: </b> <a href="<%= Figaro.env.host + '/insurance/view_pdf/' + operation.secure_id.to_s + '.pdf' %>" target="blank">Insurance Document</a>
+        </li>
+
+      </ul>
+      <hr>
+      <%= form_tag send_documents_path(operation), class: "control full-select quotation" do |f| %>
+        <label class="label">Additional Comment:</label>
+        <div class="field is-grouped">
+          <div class="control has-icons-left full-select">
+            <div class="control full-select">
+              <%= text_area_tag :additional_comment, '' , class: 'input note full-select'%>
+            </div>
+            <div class="icon is-small is-left">
+              <i class="fas fa-globe"></i>
+            </div>
+          </div>
+        </div>
+        <%= submit_tag 'SEND DOCUMENTATION', class: "button is-link" %>
+      <% end %>
+    </section>
+
+  </div>
+</div>

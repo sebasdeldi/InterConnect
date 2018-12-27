@@ -61,7 +61,7 @@
     	        <option value="insurance/view_pdf/<%= @operation.secure_id %>.pdf">
     	        	Insurance
     	        </option>
-    	        <option value="documents_transfer/<%= @operation.id %>">
+    	        <option value="send_documentation_modal" class="show-modal send-documents">
     	        	Send Documentation
     	        </option>
 		        </select>
@@ -89,6 +89,8 @@
 	<br>
 	<%= render 'timeline', operation_secure_id: operation_secure_id(@operation), operation_id: @operation.id, agent: agent(@operation), shipper: shipper(@operation), tasks: tasks(@operation), cargo_info_tasks: cargo_info_tasks(@operation), booking_info_tasks: booking_info_tasks(@operation), info_confirmed_tasks: info_confirmed_tasks(@operation), info_requested_tasks: info_requested_tasks(@operation), quotation_confirmed_tasks: quotation_confirmed_tasks(@operation), request_booking_tasks: request_booking_tasks(@operation), carriers: carriers, consignee: consignee(@operation), fcl_exw_container_loading_tasks: fcl_exw_container_loading_tasks(@operation),
 	 fcl_exw_container_delivery_tasks: fcl_exw_container_delivery_tasks(@operation) %>
+
+	 <%= render 'send_documentation_modal', operation: @operation %>
 <% elsif is_agent? %>
 <% end %>
 
