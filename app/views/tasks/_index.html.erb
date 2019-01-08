@@ -1,22 +1,15 @@
 <%= render 'tasks/tasks_control_bar', operations_by_repre: operations_by_repre, task_subject: task_subject %>
 
 
-<div class="container">
-  <div class="columns">
-    <ul class='sticky-list'>
-      <% @tasks.each do |task| %>
-        <li class="sticky-element">
-          <%= link_to task_path(task.id), class: 'sticky-anchor' do  %>
-            <h2 class="sticky-header">Task for: Operation <%= Operation.find(task.operation_id).reference %></h2>
-            <p class="sticky-paragraph">
-              <%= task.note.truncate(180) %>
-            </p>
-            <br>
-            <p class="sticky-paragraph"><b><i class="fas fa-calendar-alt"></i> <%= task.due_date %></b></p>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
-
+<nav class="panel">
+  <% @tasks.each do |task| %>
+    <%= link_to task_path(task.id), class: 'panel-block is-active' do  %>
+      <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true"></i>
+      </span>
+      <p>
+        Task for: <b><%= operation(task.operation_id).reference %></b> ---- <span class="blue"> <%= task.note.truncate(180) %> </span> ---- <i class="fas fa-calendar-alt"></i> <%= task.due_date %></b></p>
+      </p>
+    <% end %>
+  <% end %>
+</nav>
