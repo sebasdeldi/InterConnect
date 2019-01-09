@@ -52,7 +52,11 @@ users = User.create!([
 	{email: 'cssca@kingocean.com', password: '12345678', role_id: 6, company_name: 'King Ocean', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'},
 	{email: 'jesus.intriago@seaboardmarine.com', password: '12345678', role_id: 6, company_name: 'Seaboard', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'},
 	{email: 'carmen.alvarez@seaboardmarine.com', password: '12345678', role_id: 6, company_name: 'Seaboard', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'},
-	{email: 'bookingrequests@crowley.com', password: '12345678', role_id: 6, company_name: 'Crowley', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'}
+	{email: 'bookingrequests@crowley.com', password: '12345678', role_id: 6, company_name: 'Crowley', phone_number: 'N/A', vendor_operation_mode: 'email', website: 'N/A'},
+	{email: 'sealand@sealand.com', password: '12345678', role_id: 6, company_name: 'Sealand', phone_number: 'N/A', vendor_operation_mode: 'web', website: 'https://my.sealand.com/booking/new'},
+	{email: 'hapag@hapag.com', password: '12345678', role_id: 6, company_name: 'Hapag', phone_number: 'N/A', vendor_operation_mode: 'web', website: 'https://www.hapag-lloyd.com/es/online-business/booking/list-of-requests.html'},
+	{email: 'cma@cma.com', password: '12345678', role_id: 6, company_name: 'CMA', phone_number: 'N/A', vendor_operation_mode: 'web', website: 'https://www.cma-cgm.com/ebusiness/booking/request'}
+
 ])
 
 Team.create(team_leader: 2)

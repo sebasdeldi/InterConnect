@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210927200627) do
+ActiveRecord::Schema.define(version: 20210927200628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,8 @@ ActiveRecord::Schema.define(version: 20210927200627) do
     t.float "inland"
     t.float "others"
     t.text "explanation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["operation_id"], name: "index_fcl_exw_quotation_selling_steps_on_operation_id"
   end
 

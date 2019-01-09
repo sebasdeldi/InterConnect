@@ -6,9 +6,15 @@ class FclExwRequestBookingStepsController < ApplicationController
 				redirect_to operation_path params[:operation_id]
 			end 
 		else
-			if FclExwRequestBookingStep.request_booking(params, current_user)
-				shipper = User.find(params[:shipper_id])
-				flash[:notice] = "An email has been sent to the shipping company:" + shipper.email + " from " + shipper.company_name
+			if params[:website] == "N/A"
+				if FclExwRequestBookingStep.request_booking(params, current_user)
+					shipper = User.find(params[:shipper_id])
+					flash[:notice] = "An email has been sent to the shipping company:" + shipper.email + " from " + shipper.company_name
+					redirect_to operation_path params[:operation_id]
+				end
+			else
+				FclExwRequestBookingStep.request_booking_website(params[:operation_id], params[:carrier_id])
+				flash[:notice] = "Redirecting to the carrier website"
 				redirect_to operation_path params[:operation_id]
 			end
 		end

@@ -13,10 +13,11 @@ class FclExwCargoInfoStep < ApplicationRecord
   def self.create_cargo_info(params, fcl_cargo_info_params)
   	op = Operation.find_by(secure_id: params[:operation_secure_id])
   	existing_cargo_info = FclExwCargoInfoStep.find_by(operation_id: op)
-
+    if existing_cargo_info.created_at == existing_cargo_info.updated_at
+      op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: op.current_step + 1, status_message: 'Request Booking Order')
+    end
     if existing_cargo_info.update(fcl_cargo_info_params.merge(operation_id: op.id))
-  		op.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', current_step: 5, status_message: 'Request Booking Order')
-			create_bonded_task(params, op)
+      create_bonded_task(params, op)
 			create_self_propelled_task(params, op)
 			create_quotation_verification_task(op)
 			update_shipper_ein(params, op)			
@@ -78,7 +79,7 @@ class FclExwCargoInfoStep < ApplicationRecord
   	def self.update_shipper_ein(params, op)
   		shipper = OperationsByUser.find_by(operation_id: op.id).shipper
   		if shipper.ein != params[:fcl_exw_cargo_info_step][:ein]
-  			shipper.update!(ein: params[:fcl_exw_cargo_info_step][:ein])
+        shipper.update_attribute('ein', params[:fcl_exw_cargo_info_step][:ein])
   		end
   	end
 

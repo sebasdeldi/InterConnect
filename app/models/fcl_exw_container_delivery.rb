@@ -7,10 +7,13 @@ class FclExwContainerDelivery < ApplicationRecord
 		shipper = User.find(params[:shipper_id])
 		agent = User.find(params[:agent_id])
 		op = Operation.find(params[:operation_id])
-		if Operation.find(params[:operation_id]).update(status: 'COMPLETED' ,status_message: 'Completed', current_step: 9)
-			FclExwContainerDelivery.find_by(operation_id: params[:operation_id]).update(completed: true)
-			FclExwOperationMailer.container_delivery(agent, op, shipper, current_user).deliver_later
-			true
+		step = FclExwContainerDelivery.find_by(operation_id: params[:operation_id])
+		if step.created_at == step.updated_at
+			op.update(status: 'COMPLETED' ,status_message: 'Completed', current_step: op.current_step + 1)
 		end
+
+		step.update(completed: true)
+		FclExwOperationMailer.container_delivery(agent, op, shipper, current_user).deliver_later
+		true
 	end
 end

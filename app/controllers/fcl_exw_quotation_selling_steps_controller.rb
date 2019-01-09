@@ -6,8 +6,12 @@ class FclExwQuotationSellingStepsController < ApplicationController
       flash[:notice] = 'Information requested to agent'
     else
       quotation = FclExwQuotationSellingStep.find_by(operation_id: params[:operation_id])
+      operation = Operation.find(params[:operation_id])
+
+      if quotation.created_at == quotation.updated_at
+        operation.update(status: 'IN PROGRESS', status_message:'Request Cargo Info To Shipper', current_step: operation.current_step + 1)
+      end
       quotation.update(completed: true, files: params[:files], profit: params[:profit], documentation: params[:documentation], ff: params[:ff], vgm: params[:vgm], inland: params[:inland], others: params[:others], explanation: params[:explanation] )
-      Operation.find(params[:operation_id]).update(status: 'IN PROGRESS', status_message:'Request Cargo Info To Shipper', current_step: 2)
       flash[:notice] = 'Information correctly updated'
     end
     redirect_to operation_path params[:operation_id]

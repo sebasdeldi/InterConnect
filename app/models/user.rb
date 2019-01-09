@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :email, uniqueness: true
-  validates :email, :company_name, :phone_number, :documental_email, presence: true
+  validates :email, :company_name, :phone_number, presence: true
 
 
   has_many :agent, class_name: 'OperationsByUser'

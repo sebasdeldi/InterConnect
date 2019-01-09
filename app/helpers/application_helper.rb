@@ -91,15 +91,19 @@ module ApplicationHelper
 	end
 
 	def time(time)
-		hour = time.hour.to_s 
-		min = time.min.to_s
-		if hour.length < 2
-			hour = '0' + time.hour.to_s
+		unless time.nil?
+			hour = time.hour.to_s 
+			min = time.min.to_s
+			if hour.length < 2
+				hour = '0' + time.hour.to_s
+			end
+			if min.to_s.length < 2
+				min = '0' + time.min.to_s
+			end 
+			hour + ':' + min
+		else
+			''
 		end
-		if min.to_s.length < 2
-			min = '0' + time.min.to_s
-		end 
-		hour + ':' + min
 	end
 
 	def default_time(time)
