@@ -13,7 +13,7 @@ document.addEventListener("turbolinks:load", function() {
 
 	//$('.carrier-select').prop('selectedIndex', 0); 
 
-	if($('.carrier-select').val() !== ""){
+	if($('.carrier-select').val() != null){
 		dataRequest();
 	}
 	
