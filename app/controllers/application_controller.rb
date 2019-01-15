@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
   # FCL-EXW helpers
   def is_fcl_exw_info_stage_completed?(operation_secure_id)
     operation_id = Operation.find_by(secure_id: operation_secure_id).id
-    record = FclExwCargoInfoStep.find_by(operation_id: operation_id)
+    record = FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: operation_id)
     if record.created_at == record.updated_at
       false
     else
@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
 
   def is_fcl_exw_booking_info_completed?(operation_secure_id)
     operation_id = Operation.find_by(secure_id: operation_secure_id).id
-    record = FclExwBookingInfoStep.find_by(operation_id: operation_id)
+    record = FclExwSteps::FclExwBookingInfoStep.find_by(operation_id: operation_id)
     if record.created_at == record.updated_at
       false
     else
@@ -91,31 +91,31 @@ class ApplicationController < ActionController::Base
   end
 
   def is_fcl_exw_info_requested?(operation_id)
-    FclExwInfoRequestedStep.find_by(operation_id: operation_id).completed
+    FclExwSteps::FclExwInfoRequestedStep.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_loading_confirmed?(operation_id)
-    FclExwContainerLoading.find_by(operation_id: operation_id).completed
+    FclExwSteps::FclExwContainerLoading.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_delivery_confirmed?(operation_id)
-    FclExwContainerDelivery.find_by(operation_id: operation_id).completed
+    FclExwSteps::FclExwContainerDelivery.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_info_confirmed?(operation_id)
-    FclExwInfoConfirmedStep.find_by(operation_id: operation_id).completed
+    FclExwSteps::FclExwInfoConfirmedStep.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_quotation_confirmed?(operation_id)
-    FclExwQuotationConfirmedStep.find_by(operation_id: operation_id).completed
+    FclExwSteps::FclExwQuotationConfirmedStep.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_booking_requested?(operation_id)
-    FclExwRequestBookingStep.find_by(operation_id: operation_id).completed
+    FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_quotation_sell_confirmed?(operation_id)
-    FclExwQuotationSellingStep.find_by(operation_id: operation_id).completed
+    FclExwSteps::FclExwQuotationSellingStep.find_by(operation_id: operation_id).completed
   end
 
   # Admin Charts helpers

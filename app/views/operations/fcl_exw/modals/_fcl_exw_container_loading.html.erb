@@ -42,7 +42,7 @@
   				    	</article>
   				  	<% end %>
 
-  						<%= form_tag ("/fcl_exw_confirm_loading") do %>
+  						<%= form_tag fcl_exw_steps_confirm_loading_path do %>
   							<%= hidden_field_tag 'shipper_id', shipper.id %>
   							<%= hidden_field_tag 'operation_id', operation_id %>
   							<%= hidden_field_tag 'agent_id', agent.id %>

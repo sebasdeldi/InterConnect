@@ -13,19 +13,19 @@ module ApplicationHelper
 	end
 
 	def booking_info(operation)
-		FclExwBookingInfoStep.find_by(operation_id: operation)
+		FclExwSteps::FclExwBookingInfoStep.find_by(operation_id: operation)
 	end
 
 	def sli(operation)
-		Sli.find_by(operation_id: operation)
+		Documents::Sli.find_by(operation_id: operation)
 	end
 
 	def invoice(operation)
-		Invoice.find_by(operation_id: operation)
+		Documents::Invoice.find_by(operation_id: operation)
 	end
 
 	def quotation(operation)
-		FclExwQuotationConfirmedStep.find_by(operation_id: operation)
+		FclExwSteps::FclExwQuotationConfirmedStep.find_by(operation_id: operation)
 	end
 
 	def modality
@@ -45,7 +45,7 @@ module ApplicationHelper
 	end
 
 	def existing_fcl_cargo_info(operation)
-		FclExwCargoInfoStep.find_by(operation_id: operation)
+		FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: operation)
 	end
 
 	def company_name(customer_id)
@@ -62,7 +62,7 @@ module ApplicationHelper
 	end
 
 	def cargo_info(operation)
-		FclExwCargoInfoStep.find_by(operation_id: operation)
+		FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: operation)
 	end
 
 	def pieces(operation)
@@ -70,7 +70,7 @@ module ApplicationHelper
 	end
 
 	def steamship(operation)
-		carrier_id = FclExwRequestBookingStep.find_by(operation_id: operation).carrier_id
+		carrier_id = FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: operation).carrier_id
 		unless carrier_id.nil?
 			User.find(carrier_id).company_name
 		else
@@ -79,15 +79,15 @@ module ApplicationHelper
 	end
 
 	def contacted_customer(operation)
-		FclExwInfoRequestedStep.find_by(operation_id: operation).completed
+		FclExwSteps::FclExwInfoRequestedStep.find_by(operation_id: operation).completed
 	end
 
 	def quotation_sell(operation)
-		FclExwQuotationSellingStep.find_by(operation_id: operation)
+		FclExwSteps::FclExwQuotationSellingStep.find_by(operation_id: operation)
 	end
 
 	def booking_order(operation)
-		FclExwRequestBookingStep.find_by(operation_id: operation)
+		FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: operation)
 	end
 
 	def time(time)

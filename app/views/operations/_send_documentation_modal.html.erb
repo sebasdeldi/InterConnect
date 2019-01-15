@@ -20,7 +20,7 @@
 
         <% if quotation_sell(operation).completed %>
           <li>
-            <b>Quotation Sold: </b> <a href="<%= Figaro.env.host + '/quotation_sell/' + operation.id.to_s + '.pdf' %>" target="blank"> Quotation Sold Document</a>
+            <b>Quotation Sold: </b> <a href="<%= Figaro.env.host + '/fcl_exw_steps/quotation_sell/' + operation.id.to_s + '.pdf' %>" target="blank"> Quotation Sold Document</a>
           </li>
         <% end %>
 
@@ -44,18 +44,18 @@
           </li>
         <% end %>
         <li>
-          <b>Booking Sheet:</b> <a href="<%= Figaro.env.host + '/booking_sheet/' + operation.id.to_s + '.pdf' %>" target="blank"> Booking Sheet </a>
+          <b>Booking Sheet:</b> <a href="<%= Figaro.env.host + '/documents/booking_sheet/' + operation.id.to_s + '.pdf' %>" target="blank"> Booking Sheet </a>
         </li>
         <% existing_fcl_cargo_info(operation).files.each_with_index do |file, i| %>
           <li><b>Hazmat / Self Propelled / Bonded: </b><%= link_to doc_name(i), Figaro.env.host + file.url, target: 'blank' %></li>
         <% end %>
         <li>
-          <b>Insurance: </b> <a href="<%= Figaro.env.host + '/insurance/view_pdf/' + operation.secure_id.to_s + '.pdf' %>" target="blank">Insurance Document</a>
+          <b>Insurance: </b> <a href="<%= Figaro.env.host + '/documents/insurance/view_pdf/' + operation.secure_id.to_s + '.pdf' %>" target="blank">Insurance Document</a>
         </li>
 
       </ul>
       <hr>
-      <%= form_tag send_documents_path(operation), class: "control full-select quotation" do |f| %>
+      <%= form_tag documents_send_documents_path(operation), class: "control full-select quotation" do |f| %>
         <label class="label">Additional Comment:</label>
         <div class="field is-grouped">
           <div class="control has-icons-left full-select">

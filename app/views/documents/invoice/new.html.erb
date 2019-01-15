@@ -1,0 +1,43 @@
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="columns">
+    <div class="column is-4">
+      <%= form_for(:invoice, url: documents_create_invoice_path(params[:secure_id])) do |f| %>
+        <div>
+          <%= f.label 'Please upload your Invoice here:', class: 'label' %>
+          <%= f.file_field :files, multiple: true %>
+          <%= f.hidden_field :operation_id, value: @operation.id%>
+          <%= hidden_field_tag :secure_id,  value: params[:secure_id]%>
+        </div>
+        <br>
+
+        <% unless @invoice.files.empty? %>
+          <ul>
+            <label class="label">
+              Uploaded Invoice docs:
+            </label>
+            <% @invoice.files.each do |file| %>
+              <li> <%= link_to file.path.split("/").last, file.url, target: 'blank' %> </li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <br>
+  
+        <div class="actions">
+          <%= f.submit "Upload" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="column is-1">
+      <br>
+      <a class="show-modal invoice">
+        <i class="fas fa-info-circle guide-btn"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<%= render 'guides/invoice' %>

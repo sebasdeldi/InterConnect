@@ -1,7 +1,7 @@
 module InsuranceHelper
 
 	def carrier(operation)
-		carrier_id = FclExwRequestBookingStep.find_by(operation_id: operation).carrier_id
+		carrier_id = FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: operation).carrier_id
 		unless carrier_id.nil?
 			User.find carrier_id
 		else
@@ -10,7 +10,7 @@ module InsuranceHelper
 	end
 
 	def cargo_descriptions(operation)
-		cargo_info = FclExwCargoInfoStep.find_by(operation_id: operation)
+		cargo_info = FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: operation)
 		cargo_descriptions_array = cargo_info.pieces.select(:commercial_description).to_a
 		cargo_descriptions = []
 		cargo_descriptions_array.each do |cargo|
@@ -20,7 +20,7 @@ module InsuranceHelper
 	end
 
 	def insurance(operation)
-		Insurance.find_by(operation_id: operation)
+		Documents::Insurance.find_by(operation_id: operation)
 	end
 
 	def subtotal(operation)

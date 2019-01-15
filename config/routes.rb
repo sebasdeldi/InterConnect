@@ -2,12 +2,7 @@ Rails.application.routes.draw do
 
   get 'users/edit'
 
-  get 'insurance/new/:secure_id', to: 'insurance#new', as: 'insurance_form'
 
-  get 'insurance/view_pdf/:secure_id', to: 'insurance#view_pdf', as: 'insurance_pdf'
-
-  post 'insurance/create', to: 'insurance#create', as: 'insurance_create'
-  post 'insurance/send_info/:operation_id', to: 'insurance#send_info', as: 'insurance_send_info'
 
   get 'users_relationship/new/:representative_id', to: 'users_relationship#new', as: 'new_relationship'
   post 'users_relationship/create', as: 'create_relation'
@@ -16,24 +11,15 @@ Rails.application.routes.draw do
   get 'users_relationship/index_representatives', to: 'users_relationship#index_representatives', as: 'representatives_list'
 
 
+
   resources :user_imports
 
 	resources :operations_by_users, only: [:new, :create, :edit, :update]
 	resources :general_cargo_infos, only: [:new, :create]
-	resources :fcl_exw_cargo_info_steps, only: [:new, :create]
-	resources :fcl_exw_booking_info_steps, only: [:new, :create]
 	resources :operations, only: [:show]
-	post "/fcl_exw_confirm_loading", to: "fcl_exw_container_loadings#confirm_loading"
-	post "/fcl_exw_confirm_delivery", to: "fcl_exw_container_deliveries#confirm_delivery"
-
-	post "/fcl_exw_info", to: "fcl_exw_info_requested_steps#request_info"
-	post "/fcl_exw_confirm_info", to: "fcl_exw_info_confirmed_steps#confirm_info"
-	post "/fcl_exw_confirm_quotation", to: "fcl_exw_quotation_confirmed_steps#confirm_quotation"
-	post "/fcl_exw_request_booking", to: "fcl_exw_request_booking_steps#request_booking"
+	
 	get '/admin', to: "admins#index", as: "admin"
-	post "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#update_pricing", as: "new_quotation"
-	post '/quotation_representative/:id', to: "fcl_exw_quotation_confirmed_steps#update_representative", as: "repre_quotation"
-	get  "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#new", as: "new_quotation_view"
+
 
 	
 	match "/admin/general_charts", to: "general_charts#index", as: "general_charts", via: [:get, :post]
@@ -58,23 +44,46 @@ Rails.application.routes.draw do
 	post "/update_tasks", to: "tasks#update", as: "update_tasks"
 	post "/carrier_info", to: "operations#carrier_info"
 
-	get "/booking_sheet/:operation_id", to: "booking_sheet#show", as: "booking_sheet"
-	get "/slis/:operation_id", to: "sli#show", as: "sli"
-	get "/slis/new/:secure_id", to: "sli#new", as: "new_sli"
-	post "/slis/create/:secure_id", to: "sli#create", as: "create_sli"
-	post "/slis/request_sli/:secure_id", to: "sli#request_sli", as: "request_sli"
-	post "/slis/tariff_group", to: "sli#tariff_group", as: "tariff_group"
+	namespace :documents do
+		get "/booking_sheet/:operation_id", to: "booking_sheet#show", as: "booking_sheet"
+		get "/slis/:operation_id", to: "sli#show", as: "sli"
+		get "/slis/new/:secure_id", to: "sli#new", as: "new_sli"
+		post "/slis/create/:secure_id", to: "sli#create", as: "create_sli"
+		post "/slis/request_sli/:secure_id", to: "sli#request_sli", as: "request_sli"
+		post "/slis/tariff_group", to: "sli#tariff_group", as: "tariff_group"
+		get "/invoices/new/:secure_id", to: "invoice#new", as: "new_invoice"
+		post "/invoices/create/:secure_id", to: "invoice#create", as: "create_invoice"
+		post "/invoices/request_invoice/:secure_id", to: "invoice#request_invoice", as: "request_invoice"
+		post "/documents_transfer/:operation_id", to: "documents_transfer#send_mail", as: 'send_documents'
+		get 'insurance/new/:secure_id', to: 'insurance#new', as: 'insurance_form'
+		get 'insurance/view_pdf/:secure_id', to: 'insurance#view_pdf', as: 'insurance_pdf'
+		post 'insurance/create', to: 'insurance#create', as: 'insurance_create'
+		post 'insurance/send_info/:operation_id', to: 'insurance#send_info', as: 'insurance_send_info'
+	end
 
-	get "/invoices/new/:secure_id", to: "invoice#new", as: "new_invoice"
-	post "/invoices/create/:secure_id", to: "invoice#create", as: "create_invoice"
-	post "/invoices/request_invoice/:secure_id", to: "invoice#request_invoice", as: "request_invoice"
+	namespace :fcl_exw_steps do 
+		post "/confirm_loading", to: "fcl_exw_container_loadings#confirm_loading", as: "confirm_loading"
+		post "/confirm_delivery", to: "fcl_exw_container_deliveries#confirm_delivery", as: "confirm_delivery"
+		post "/info", to: "fcl_exw_info_requested_steps#request_info"
+		post "/confirm_info", to: "fcl_exw_info_confirmed_steps#confirm_info"
+		post "/confirm_quotation", to: "fcl_exw_quotation_confirmed_steps#confirm_quotation"
+		post "/request_booking", to: "fcl_exw_request_booking_steps#request_booking"
+		post "/test123", to: "fcl_exw_cargo_info_steps#request_booking#create"
+
+		resources :fcl_exw_cargo_info_steps, only: [:new, :create]
+		resources :fcl_exw_booking_info_steps, only: [:new, :create]
+		post "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#update_pricing", as: "new_quotation"
+		post '/quotation_representative/:id', to: "fcl_exw_quotation_confirmed_steps#update_representative", as: "repre_quotation"
+		get  "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#new", as: "new_quotation_view"
+		post "/quotation_sell_prices", to: 'fcl_exw_quotation_selling_steps#confirm'
+		get "/quotation_sell/:id", to: "fcl_exw_quotation_selling_steps#show", as: "quotation_sell"
+	end
+
+
+
 
 	post "/change_difficulty", to: "operations#change_difficulty", as: "change_difficulty"
-	post "/documents_transfer/:operation_id", to: "documents_transfer#send_mail", as: 'send_documents'
 
-	post "/quotation_sell_prices", to: 'fcl_exw_quotation_selling_steps#confirm'
-
-	get "/quotation_sell/:id", to: "fcl_exw_quotation_selling_steps#show", as: "quotation_sell"
 
 
  	devise_for :users, controllers: {

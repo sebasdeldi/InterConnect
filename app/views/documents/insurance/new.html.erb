@@ -1,0 +1,390 @@
+<div class="container is-widescreen">
+	<%= form_for(:insurance, url: documents_insurance_create_path(params[:secure_id])) do |f| %>
+		<%= f.hidden_field :operation_id, value: @operation.id %>
+	  <div class="columns">
+	    <div class="column is-6">
+	      <br>
+	      <nav class="breadcrumb" aria-label="breadcrumbs">
+	        <ul>
+	          <li><%= link_to "Operation Timeline", operation_path(@operation.id) %></li>
+	          <li class="is-active">
+	          	<a href="">
+	          		Insurance for operation: <%= @operation.reference %>
+							</a>
+						</li>
+	        </ul>
+	      </nav>
+	      <nav class= 'panel is-form-panel card-shadow' >
+	        <p class="panel-heading">
+	          Consignee Information
+	        </p>
+	        <div class='padding-box'>
+
+	          <div class="field">
+	            <%= f.label 'Name:', class: 'label' %>
+	            <div class="control has-icons-left">
+	            	<% unless insurance(@operation).name.nil? %>
+	            		<%= f.text_field :name, autofocus: true, value: insurance(@operation).name, class: 'input' %>
+	            	<% else %>
+    		        	<% if consignee(@operation).contact_first_name.nil? || consignee(@operation).contact_last_name.nil? %>
+    								<%= f.text_field :name, autofocus: true, value: consignee(@operation).company_name, class: 'input' %>
+    		          <% else %>
+    		          	<%= f.text_field :name, autofocus: true, value: consignee(@operation).contact_first_name + " " + consignee(@operation).contact_last_name, class: 'input' %>
+    		          <% end %>
+	            	<% end %>
+	              <span class="icon is-small is-left">
+	                <i class="fas fa-map-signs"></i>
+	              </span>
+	            </div>
+	          </div>  
+
+	          <div class="field">
+	          	<%= f.label 'Email:', class: 'label' %>
+	          	<% unless insurance(@operation).email.nil? %>
+	          		<%= f.text_field :email, autofocus: true, value: insurance(@operation).email, class: 'input' %>
+	          	<% else %>
+		          	<div class="control has-icons-left">
+		          	  <%= f.text_field :email, autofocus: true, value: consignee(@operation).email ,class: 'input' %>
+		          	  <span class="icon is-small is-left">
+		          	    <i class="fas fa-map-signs"></i>
+		          	  </span>
+		          	</div>
+	          	<% end %>	     
+	          </div>  
+
+	          <div class="field">
+	          	<%= f.label 'Phone:', class: 'label' %>
+	          	<% unless insurance(@operation).phone.nil? %>
+	          		<%= f.text_field :email, autofocus: true, value: insurance(@operation).phone, class: 'input' %>
+	          	<% else %>
+		          	<div class="control has-icons-left">
+		          	  <%= f.text_field :phone, autofocus: true, value: consignee(@operation).phone_number ,class: 'input' %>
+		          	  <span class="icon is-small is-left">
+		          	    <i class="fas fa-map-signs"></i>
+		          	  </span>
+		          	</div>
+	          	<% end %>
+	          </div>  
+
+	          <div class="field">
+	          	<%= f.label 'Address:', class: 'label' %>
+	          	<% unless insurance(@operation).address.nil? %>
+	          		<%= f.text_field :address, autofocus: true, value: insurance(@operation).address, class: 'input' %>
+	          	<% else %>
+		          	<div class="control has-icons-left">
+		          	  <%= f.text_field :address, autofocus: true, value: consignee(@operation).address ,class: 'input' %>
+		          	  <span class="icon is-small is-left">
+		          	    <i class="fas fa-map-signs"></i>
+		          	  </span>
+		          	</div>
+	          	<% end %>
+	          </div>  
+
+	          <div class="field">
+	            <%= f.label 'City:', class: 'label' %>
+	            <% unless insurance(@operation).city.nil? %>
+	            	<%= f.text_field :city, autofocus: true, value: insurance(@operation).city, class: 'input' %>
+	            <% else %>
+	            	<div class="control has-icons-left">
+	            	  <%= f.text_field :city, autofocus: true, value: consignee(@operation).city, class: 'input' %>
+	            	  <span class="icon is-small is-left">
+	            	    <i class="fas fa-map-signs"></i>
+	            	  </span>
+	            	</div>
+	            <% end %>
+	          </div>  
+
+	          <div class="field">
+	            <%= f.label 'State:', class: 'label' %>
+	            <% unless insurance(@operation).state.nil? %>
+	            	<%= f.text_field :state, autofocus: true, value: insurance(@operation).state ,class: 'input' %>
+	            <% else %>
+	            	<div class="control has-icons-left">
+	            	  <%= f.text_field :state, autofocus: true, value: consignee(@operation).state ,class: 'input' %>
+	            	  <span class="icon is-small is-left">
+	            	    <i class="fas fa-map-signs"></i>
+	            	  </span>
+	            	</div>
+	            <% end %>
+	          </div>  
+
+	          <div class="field">
+	            <%= f.label 'Zip:', class: 'label' %>
+	            <% unless insurance(@operation).zip.nil? %>
+	            	<%= f.text_field :zip, autofocus: true, value: insurance(@operation).zip ,class: 'input' %>
+	            <% else %>
+		            <div class="control has-icons-left">
+		              <%= f.text_field :zip, autofocus: true, value: consignee(@operation).zip_code ,class: 'input' %>
+		              <span class="icon is-small is-left">
+		                <i class="fas fa-map-signs"></i>
+		              </span>
+		            </div>
+	            <% end %>
+	          </div>  
+
+	          <div class="field">
+	            <%= f.label 'Country:', class: 'label' %>
+	            <% unless insurance(@operation).country.nil? %>
+	            	<%= f.text_field :country, autofocus: true, value: insurance(@operation).country ,class: 'input' %>
+	            <% else %>
+		            <div class="control has-icons-left">
+		              <%= f.text_field :country, autofocus: true, value: consignee(@operation).country ,class: 'input' %>
+		              <span class="icon is-small is-left">
+		                <i class="fas fa-map-signs"></i>
+		              </span>
+		            </div>
+	            <% end %>
+	          </div>  
+	        </div>
+	      </nav>
+	    </div>
+
+	    <div class="column is-6 ">
+	      <nav class= 'panel is-form-panel card-shadow insurance-cargo-info' >
+	        <p class="panel-heading">
+	          Cargo Information
+	        </p>
+	        <div class='padding-box'> 
+
+	          <div class="field">
+	            <%= f.label 'Modality:', class: 'label' %>
+		          <% unless insurance(@operation).modality.nil? %>
+		          	<%= f.text_field :modality, autofocus: true, value: @operation.modality, class: 'input' %>
+	            <% else %>
+		            <div class="control has-icons-left">
+		              <%= f.text_field :modality, autofocus: true, value: @operation.modality, class: 'input' %>
+		              <span class="icon is-small is-left">
+		                <i class="fas fa-map-signs"></i>
+		              </span>
+		            </div>
+		          <% end %>
+	          </div>
+
+	          <div class="field">
+	            <%= f.label 'Origin Address:', class: 'label' %>
+	            <% unless insurance(@operation).origin_address.nil? %>
+	            	<%= f.text_field :origin_address, autofocus: true, value: insurance(@operation).origin_address ,class: 'input' %>
+	            <% else %>
+	            	<div class="control has-icons-left">
+	            	  <%= f.text_field :origin_address, autofocus: true, value: @operation.origin_address ,class: 'input' %>
+	            	  <span class="icon is-small is-left">
+	            	    <i class="fas fa-map-signs"></i>
+	            	  </span>
+	            	</div>
+	            <% end %>
+	          </div>  
+
+	          <div class="field">
+	            <%= f.label 'Origin City:', class: 'label' %>
+	            <% unless insurance(@operation).origin_city.nil? %>
+	            	<%= f.text_field :origin_city, autofocus: true, value: insurance(@operation).origin_city ,class: 'input' %>
+	            <% else %>
+	            	<div class="control has-icons-left">
+	            	  <%= f.text_field :origin_city, autofocus: true, value: @operation.origin_city ,class: 'input' %>
+	            	  <span class="icon is-small is-left">
+	            	    <i class="fas fa-map-signs"></i>
+	            	  </span>
+	            	</div>
+	            <% end %>
+	          </div>
+
+	          <div class="field">
+	            <%= f.label 'Origin State:', class: 'label' %>
+	            <% unless insurance(@operation).origin_state.nil? %>
+	            	<%= f.text_field :origin_state, autofocus: true, value: insurance(@operation).origin_state ,class: 'input' %>
+	            <% else %>
+	            	<div class="control has-icons-left">
+	            	  <%= f.text_field :origin_state, autofocus: true, value: @operation.origin_state ,class: 'input' %>
+	            	  <span class="icon is-small is-left">
+	            	    <i class="fas fa-map-signs"></i>
+	            	  </span>
+	            	</div>
+	            <% end %>
+	          </div>  
+
+	          <div class="field">
+	            <%= f.label 'Origin Zip Code:', class: 'label' %>
+	            <% unless insurance(@operation).origin_zip_code.nil? %>
+	            	<%= f.text_field :origin_zip_code, autofocus: true, value: insurance(@operation).origin_zip_code ,class: 'input' %>
+	            <% else %>
+	            	<div class="control has-icons-left">
+	            	  <%= f.text_field :origin_zip_code, autofocus: true, value: @operation.origin_zip_code ,class: 'input' %>
+	            	  <span class="icon is-small is-left">
+	            	    <i class="fas fa-map-signs"></i>
+	            	  </span>
+	            	</div>
+	            <% end %>
+	          </div>  
+
+	          <div class="field">
+	            <%= f.label 'Origin Country:', class: 'label' %>
+	            <% unless insurance(@operation).origin_country.nil? %>
+	            	<%= f.text_field :origin_country, autofocus: true, value: insurance(@operation).origin_country ,class: 'input' %>
+	            <% else %>
+	            	<div class="control has-icons-left">
+	            	  <%= f.text_field :origin_country, autofocus: true, value: @operation.origin_country ,class: 'input' %>
+	            	  <span class="icon is-small is-left">
+	            	    <i class="fas fa-map-signs"></i>
+	            	  </span>
+	            	</div>
+	            <% end %>
+	          </div>    
+
+	          <div class="field">
+	            <%= f.label 'Destination:', class: 'label' %>
+	            <% unless insurance(@operation).destination.nil? %>
+	            	<%= f.text_field :destination, autofocus: true, value: insurance(@operation).destination, class: 'input' %>
+	            <% else %>
+		            <div class="control has-icons-left">
+		              <%= f.text_field :destination, autofocus: true, value: @operation.destination, class: 'input' %>
+		              <span class="icon is-small is-left">
+		                <i class="fas fa-map-signs"></i>
+		              </span>
+		            </div>
+		          <% end %>
+	          </div>    
+
+	          <div class="field">
+	            <%= f.label 'Expected date of departure:', class: 'label' %>
+	            <% unless insurance(@operation).etd.nil? %>
+	            	<%= f.text_field :etd, autofocus: true, value: insurance(@operation).etd ,class: 'input loading_datetime' %>
+	            <% else %>
+		            <div class="control has-icons-left">
+		              <%= f.text_field :etd, autofocus: true, value: booking_info(@operation).sailing_date ,class: 'input loading_datetime' %>
+		              <span class="icon is-small is-left">
+		                <i class="fas fa-map-signs"></i>
+		              </span>
+		            </div>
+		          <% end %>
+	          </div>  
+
+	          <div class="field">
+	            <%= f.label 'Carrier:', class: 'label' %>
+	            <% unless insurance(@operation).carrier.nil? %>
+		            <%= f.text_field :carrier, autofocus: true, value: insurance(@operation).carrier, class: 'input' %>
+		          <% else %>
+			          <div class="control has-icons-left">
+			            <%= f.text_field :carrier, autofocus: true, value: carrier(@operation).nil? ? '' : carrier(@operation).company_name, class: 'input' %>
+			            <span class="icon is-small is-left">
+			              <i class="fas fa-map-signs"></i>
+			            </span>
+			          </div>
+		          <% end %>
+	          </div> 
+
+	          <div class="field">
+	            <%= f.label 'Commodities:', class: 'label' %>
+	            <% unless insurance(@operation).commodities.nil? %>
+	            	<%= f.text_field :commodities, autofocus: true, value: insurance(@operation).commodities ,class: 'input' %>
+	            <% else %>
+		            <div class="control has-icons-left">
+		              <%= f.text_field :commodities, autofocus: true, value: cargo_descriptions(@operation) , class: 'input' %>
+		              <span class="icon is-small is-left">
+		                <i class="fas fa-map-signs"></i>
+		              </span>
+		            </div>
+		          <% end %>
+	          </div>   
+
+	          <div class="field">
+	            <%= f.label 'Marks:', class: 'label' %>
+	            <% unless insurance(@operation).marks.nil? %>
+	            	<%= f.text_field :marks, autofocus: true, value: insurance(@operation).marks ,class: 'input' %>
+	            <% else %>
+		            <div class="control has-icons-left">
+		              <%= f.text_field :marks, autofocus: true, value: "Shipper reference#:"+ @operation.shipper_reference + ', Consignee reference#:' + @operation.consignee_reference + ', Consignee reference#:' + @operation.consignee_reference, class: 'input' %>
+		              <span class="icon is-small is-left">
+		                <i class="fas fa-map-signs"></i>
+		              </span>
+		            </div>
+		          <% end %>
+	          </div>  
+	        </div>
+	      </nav>
+	    </div>
+	  </div>
+	  <div class="columns">
+	  	<div class="column is-12">
+	  	  <nav class= 'panel is-form-panel card-shadow' >
+	  	    <p class="panel-heading">
+	  	      Insurance Values
+	  	    </p>
+	  	    <div class='padding-box'>
+
+		        <div class="field">
+		          <%= f.label 'Commercial Value:', class: 'label' %>
+		          <div class="control has-icons-left">
+		            <%= f.number_field :commercial_value, autofocus: true, class: 'input', value: insurance(@operation).commercial_value %>
+		            <span class="icon is-small is-left">
+		              <i class="fas fa-map-signs"></i>
+		            </span>
+		          </div>
+		        </div>  
+
+		        <div class="field">
+		          <%= f.label 'Freight:', class: 'label' %>
+		          <div class="control has-icons-left">
+		            <%= f.number_field :freight, autofocus: true, class: 'input', value: insurance(@operation).freight %>
+		            <span class="icon is-small is-left">
+		              <i class="fas fa-map-signs"></i>
+		            </span>
+		          </div>
+		        </div>  
+
+		        <div class="field">
+		          <%= f.label 'Duties:', class: 'label' %>
+		          <div class="control has-icons-left">
+		            <%= f.number_field :duties, autofocus: true, class: 'input', value: insurance(@operation).duties %>
+		            <span class="icon is-small is-left">
+		              <i class="fas fa-map-signs"></i>
+		            </span>
+		          </div>
+		        </div>  
+
+		        <div class="field">
+		          <%= f.label 'Other costs:', class: 'label' %>
+		          <div class="control has-icons-left">
+		            <%= f.number_field :other_costs, autofocus: true, class: 'input', value: insurance(@operation).other_costs %>
+		            <span class="icon is-small is-left">
+		              <i class="fas fa-map-signs"></i>
+		            </span>
+		          </div>
+		        </div>  
+
+		        <div class="field">
+		          <%= f.label 'Voluntary coverage:', class: 'label' %>
+		          <div class="control has-icons-left">
+		            <%= f.number_field :voluntary_coverage, autofocus: true, class: 'input', value: insurance(@operation).voluntary_coverage %>
+		            <span class="icon is-small is-left">
+		              <i class="fas fa-map-signs"></i>
+		            </span>
+		          </div>
+		        </div>  
+
+		        <div class="field">
+		          <%= f.label 'Lost profit:', class: 'label' %>
+		          <div class="control has-icons-left">
+		            <%= f.number_field :lost_profit, autofocus: true, class: 'input', value: insurance(@operation).lost_profit %>
+		            <span class="icon is-small is-left">
+		              <i class="fas fa-map-signs"></i>
+		            </span>
+		          </div>
+		        </div>  
+	  	    </div>
+	  	  </nav>
+	  	</div>
+	  </div>
+	  <div class="control">
+	    <br>
+	    <% if current_user && is_representative? %>
+		    <%= f.submit "SAVE" , class: 'button is-link' %>
+		    <%= link_to "SEND INFO TO PERSON IN CHARGE", documents_insurance_send_info_path(@operation.id), method: :post , class: 'button is-link'%>
+		  <% end %>
+	    <%= link_to "SEE PDF", documents_insurance_pdf_path(@operation.secure_id, format: 'pdf'), target: :_blank  ,class: 'button is-link' %>
+	    <br>
+	    <br>
+	    <br>
+	    <br>
+	  </div>
+  <% end %>
+</div>

@@ -72,17 +72,17 @@ document.addEventListener("turbolinks:load", function() {
     if(this.value.includes("request_sli") === true){
       $.post(
         "http://" + window.location.host + "/" + this.value,
-        { secure_id: this.value, link: "http://" + window.location.host + "/slis/new/" + this.value.split('/').pop() }
+        { secure_id: this.value, link: "http://" + window.location.host + "/documents/slis/new/" + this.value.split('/').pop() }
       );
     }else if(this.value.includes("request_invoice") === true){
       $.post(
         "http://" + window.location.host + "/" + this.value,
-        { secure_id: this.value, link: "http://" + window.location.host + "/invoices/new/" + this.value.split('/').pop() }
+        { secure_id: this.value, link: "http://" + window.location.host + "documents/invoices/new/" + this.value.split('/').pop() }
       );
     }else if(this.value.includes("documents_transfer") === true){
       $.post(
         "http://" + window.location.host + "/" + this.value,
-        { secure_id: this.value, link: "http://" + window.location.host + "/invoices/new/" + this.value.split('/').pop() }
+        { secure_id: this.value, link: "http://" + window.location.host + "documents/invoices/new/" + this.value.split('/').pop() }
       );
     }else if(this.value === "send_documentation_modal"){
       //show modal

@@ -15,7 +15,7 @@
 		        <select class="sli difficulty outline-select">
 		          <option disabled>DOCUMENTS</option>
 		          <% if sli(@operation).nil? || sli(@operation).files.empty? %>
-			          <option value="slis/<%= params[:id] %>.pdf">
+			          <option value="documents/slis/<%= params[:id] %>.pdf">
 		          	  SLI
 			          </option>
 			        <% else %>
@@ -23,10 +23,10 @@
   	          		SLI
   		          </option>
 			        <% end %>
-		          <option value="slis/new/<%= @operation.secure_id %>">
+		          <option value="documents/slis/new/<%= @operation.secure_id %>">
 		          	SLI Form
 		          </option>
-		          <option value="slis/request_sli/<%= @operation.secure_id %>">
+		          <option value="documents/slis/request_sli/<%= @operation.secure_id %>">
 		          	Request SLI
 		          </option>
               <% unless invoice(@operation).nil? || invoice(@operation).files.empty? %>
@@ -34,13 +34,13 @@
               		Invoice
     	          </option>
     	        <% end %>
-    	        <option value="invoices/new/<%= @operation.secure_id %>">
+    	        <option value="documents/invoices/new/<%= @operation.secure_id %>">
     	        	Invoice Form
     	        </option>
-    	        <option value="invoices/request_invoice/<%= @operation.secure_id %>">
+    	        <option value="documents/invoices/request_invoice/<%= @operation.secure_id %>">
     	        	Request Invoice
     	        </option>
-    	        <option value="<%= booking_sheet_path(@operation.id, format: 'pdf') %>">
+    	        <option value="<%= documents_booking_sheet_path(@operation.id, format: 'pdf') %>">
     	        	Booking Sheet
     	        </option>
     	        <% existing_fcl_cargo_info(@operation).files.each_with_index do |file, i| %>
@@ -58,7 +58,7 @@
     	        <% quotation_sell(@operation.id).files.each_with_index do |file, i| %>
     	          <option value="<%= file.url %>"> <%= link_to doc_name(i, 'sell-quotation'), '', target: 'blank' %> </option>
     	        <% end %>
-    	        <option value="insurance/view_pdf/<%= @operation.secure_id %>.pdf">
+    	        <option value="documents/insurance/view_pdf/<%= @operation.secure_id %>.pdf">
     	        	Insurance
     	        </option>
     	        <option value="send_documentation_modal" class="show-modal send-documents">
@@ -72,7 +72,7 @@
 		    </div>
 		  </div>
 
-		  <%= link_to insurance_form_path(operation_secure_id(@operation)) , class: "button is-link is-outlined margin-right" do %>
+		  <%= link_to documents_insurance_form_path(operation_secure_id(@operation)) , class: "button is-link is-outlined margin-right" do %>
 			  <i class="fas fa-file-pdf"></i>
 			  <span class="margin-left">INSURANCE</span>
 			<% end %>

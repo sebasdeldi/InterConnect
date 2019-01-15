@@ -71,17 +71,17 @@ class OperationsByUser < ApplicationRecord
     end
 
     def self.create_steps(operation)
-      FclExwContainerDelivery.create!(operation: operation)
-      FclExwContainerLoading.create!(operation: operation)
-      FclExwInfoConfirmedStep.create!(operation: operation)
-      FclExwQuotationConfirmedStep.create!(operation: operation)
-      FclExwInfoRequestedStep.create!(operation: operation)
-      FclExwRequestBookingStep.create!(operation: operation)
-      FclExwQuotationSellingStep.create!(operation_id: operation.id)
-      Insurance.create!(operation: operation)
-      cargo_info = FclExwCargoInfoStep.new(operation: operation)
+      FclExwSteps::FclExwContainerDelivery.create!(operation: operation)
+      FclExwSteps::FclExwContainerLoading.create!(operation: operation)
+      FclExwSteps::FclExwInfoConfirmedStep.create!(operation: operation)
+      FclExwSteps::FclExwQuotationConfirmedStep.create!(operation: operation)
+      FclExwSteps::FclExwInfoRequestedStep.create!(operation: operation)
+      FclExwSteps::FclExwRequestBookingStep.create!(operation: operation)
+      FclExwSteps::FclExwQuotationSellingStep.create!(operation_id: operation.id)
+      Documents::Insurance.create!(operation: operation)
+      cargo_info = FclExwSteps::FclExwCargoInfoStep.new(operation: operation)
       cargo_info.save!(validate: false)
-      booking_info = FclExwBookingInfoStep.new(operation: operation)
+      booking_info = FclExwSteps::FclExwBookingInfoStep.new(operation: operation)
       booking_info.save!(validate: false)
     end
 
