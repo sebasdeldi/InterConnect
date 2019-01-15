@@ -70,7 +70,7 @@ Rails.application.routes.draw do
 		post "/request_booking", to: "fcl_exw_request_booking_steps#request_booking"
 		post "/test123", to: "fcl_exw_cargo_info_steps#request_booking#create"
 
-		resources :fcl_exw_cargo_info_steps, only: [:new, :create]
+		resources :cargo_info, only: [:new, :create]
 		resources :booking_info, only: [:new, :create]
 		post "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#update_pricing", as: "new_quotation"
 		post '/quotation_representative/:id', to: "fcl_exw_quotation_confirmed_steps#update_representative", as: "repre_quotation"

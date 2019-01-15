@@ -18,7 +18,7 @@
           FCL - EXW Cargo information for operation: <%= @operation.reference %>
         </p>
         <div class='panel-block'>
-          <%= form_for @fcl_cargo_info, url: fcl_exw_steps_fcl_exw_cargo_info_steps_path, id: '', html: {class: "control"}, multipart: true, remote: true do |f| %>
+          <%= form_for @fcl_cargo_info, url: fcl_exw_steps_cargo_info_index_path, id: '', html: {class: "control"}, multipart: true, remote: true do |f| %>
             <%= render 'shared/error_messages', format: params[:format] %>
             <%= hidden_field_tag :operation_secure_id, params[:operation_secure_id] %>
 
@@ -231,7 +231,7 @@
               </div>
             </div>
 
-            <%= f.hidden_field :fcl_exw_cargo_info_step_id, class: "fcl_exw_cargo_info_step_id", value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).id : '' %>
+            <%= f.hidden_field :fcl_exw_steps_cargo_info_id, class: "fcl_exw_steps_cargo_info_id", value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).id : '' %>
             <br>
             <div id="container"></div>
 

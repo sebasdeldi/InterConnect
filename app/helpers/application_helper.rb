@@ -45,7 +45,7 @@ module ApplicationHelper
 	end
 
 	def existing_fcl_cargo_info(operation)
-		FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: operation)
+		FclExwSteps::CargoInfo.find_by(operation_id: operation)
 	end
 
 	def company_name(customer_id)
@@ -62,7 +62,7 @@ module ApplicationHelper
 	end
 
 	def cargo_info(operation)
-		FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: operation)
+		FclExwSteps::CargoInfo.find_by(operation_id: operation)
 	end
 
 	def pieces(operation)

@@ -59,9 +59,9 @@
     	    	<% end %>
     			</p>
     		  <% if is_fcl_exw_info_stage_completed?(operation_secure_id) == 'orange' %>
-    		  	<%= link_to is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_steps_fcl_exw_cargo_info_step_path(operation_secure_id: operation_secure_id), class: 'button step-incompleted'  %>
+    		  	<%= link_to is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_steps_cargo_info_path(operation_secure_id: operation_secure_id), class: 'button step-incompleted'  %>
     		  <% else %>
-    		  	<%= link_to is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_steps_fcl_exw_cargo_info_step_path(operation_secure_id: operation_secure_id), class: is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'button step-completed' : 'button is-link'  %>
+    		  	<%= link_to is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_steps_cargo_info_path(operation_secure_id: operation_secure_id), class: is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'button step-completed' : 'button is-link'  %>
     		  <% end %>
     			
     			<a class="button is-primary right-button circle-button show-modal fcl_exw_cargo_info">

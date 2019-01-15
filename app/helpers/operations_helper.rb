@@ -77,7 +77,7 @@ module OperationsHelper
 	end
 
 	def cargo_info_tasks(operation)
-		Task.where(operation_id: operation, status: '0', fcl_exw_cargo_info_steps_id: FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: operation))
+		Task.where(operation_id: operation, status: '0', fcl_exw_steps_cargo_info_id: FclExwSteps::CargoInfo.find_by(operation_id: operation))
 	end
 
 	def info_confirmed_tasks(operation)

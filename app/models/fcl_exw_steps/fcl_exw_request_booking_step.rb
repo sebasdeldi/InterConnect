@@ -6,7 +6,7 @@ module FclExwSteps
 		def self.request_booking(params, current_user)
 			shipper = User.find(params[:shipper_id])
 			op = Operation.find(params[:operation_id])
-			step = FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: params[:operation_id])
+			step = FclExwSteps::CargoInfo.find_by(operation_id: params[:operation_id])
 			booking_step = FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: params[:operation_id])
 			agent = User.find(params[:agent_id])
 			operation = [op, step]
@@ -34,7 +34,7 @@ module FclExwSteps
 
 		def self.notify(params, current_user)
 			shipper = User.find(params[:shipper_id])
-			step = FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: params[:operation_id])
+			step = FclExwSteps::CargoInfo.find_by(operation_id: params[:operation_id])
 			agent = User.find(params[:agent_id])
 			carrier = User.find(params[:carrier_contact_id])
 			FclExwOperationMailer.request_booking_notification(agent, step, carrier, current_user).deliver_later

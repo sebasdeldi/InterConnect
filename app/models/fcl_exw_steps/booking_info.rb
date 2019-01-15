@@ -7,11 +7,11 @@ module FclExwSteps
   	has_many :tasks, dependent: :destroy
 
   	def self.create_pieces (params, cargo_info)
-    	Piece.where(fcl_exw_cargo_info_step_id: cargo_info.id).delete_all
+    	Piece.where(fcl_exw_steps_cargo_info_id: cargo_info.id).delete_all
     	params_array = params.to_unsafe_h.to_a.drop(3)[0..-4]
       (0..params_array.length).step(9) do |element|
       	unless params_array[element].nil?
-        	piece = Piece.create!(fcl_exw_cargo_info_step_id: cargo_info.id, gross_weight: params_array[element][1], commercial_description: params_array[element+1][1], container_size: params_array[element+2][1], cargo_hazardous: params_array[element+3][1], hazardous_class: params_array[element+4][1], un_code: params_array[element+5][1], container_number: params_array[element+6][1], seal_number: params_array[element+7][1], tare_weight: params_array[element+8][1] )
+        	piece = Piece.create!(fcl_exw_steps_cargo_info_id: cargo_info.id, gross_weight: params_array[element][1], commercial_description: params_array[element+1][1], container_size: params_array[element+2][1], cargo_hazardous: params_array[element+3][1], hazardous_class: params_array[element+4][1], un_code: params_array[element+5][1], container_number: params_array[element+6][1], seal_number: params_array[element+7][1], tare_weight: params_array[element+8][1] )
       	end
       end
     end

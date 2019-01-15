@@ -10,7 +10,7 @@ module InsuranceHelper
 	end
 
 	def cargo_descriptions(operation)
-		cargo_info = FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: operation)
+		cargo_info = FclExwSteps::CargoInfo.find_by(operation_id: operation)
 		cargo_descriptions_array = cargo_info.pieces.select(:commercial_description).to_a
 		cargo_descriptions = []
 		cargo_descriptions_array.each do |cargo|

@@ -3,7 +3,7 @@ class CreatePieces < ActiveRecord::Migration[5.1]
   def change
     create_table :pieces do |t|
       #t.references :general_cargo_info, foreign_key: true
-      t.references :fcl_exw_cargo_info_step, foreign_key: true
+      t.references :fcl_exw_steps_cargo_info, foreign_key: true
       t.string :sort
       t.float :gross_weight
       t.text :commercial_description

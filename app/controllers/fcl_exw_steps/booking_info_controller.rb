@@ -7,7 +7,7 @@ module FclExwSteps
 
 	  def create
 			operation = Operation.find_by(secure_id: params[:operation_secure_id])
-			cargo_info = FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: operation.id)
+			cargo_info = FclExwSteps::CargoInfo.find_by(operation_id: operation.id)
 			FclExwSteps::BookingInfo.create_pieces(params, cargo_info)
 			FclExwSteps::BookingInfo.create_tasks(params)
 
@@ -16,7 +16,7 @@ module FclExwSteps
 				redirect_to operation_path operation.id
 			else
 				flash[:alert] = 'Information could not be saved, please fill in all the information listed bellow'
-				redirect_to new_fcl_exw_steps_fcl_exw_cargo_info_step_path(operation_id: operation.id)
+				redirect_to new_fcl_exw_steps_cargo_info_path(operation_id: operation.id)
 			end
 	  end
 

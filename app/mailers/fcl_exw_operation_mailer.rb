@@ -6,7 +6,7 @@ class FclExwOperationMailer < ApplicationMailer
 	  @agent = agent
 	  @info = info
 	  @operation = Operation.find(info.operation_id)
-	  @pieces = FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: @operation.id).pieces
+	  @pieces = FclExwSteps::CargoInfo.find_by(operation_id: @operation.id).pieces
 	  @agent_reference = @operation.agent_reference
 	  @shipper_reference = @operation.shipper_reference
 	  @consignee_reference = @operation.consignee_reference
@@ -107,9 +107,9 @@ class FclExwOperationMailer < ApplicationMailer
 	def container_loading (agent, operation,shipper, representative)
 		@agent  = agent
 		@operation = operation
-		@pieces = FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: @operation.id).pieces
+		@pieces = FclExwSteps::CargoInfo.find_by(operation_id: @operation.id).pieces
 		@shipper = shipper
-		@pickup = FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: @operation).pickup_reference
+		@pickup = FclExwSteps::CargoInfo.find_by(operation_id: @operation).pickup_reference
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
 		delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password
@@ -123,7 +123,7 @@ class FclExwOperationMailer < ApplicationMailer
 		@agent  = agent
 		@operation = operation
 		@shipper = shipper
-		@pickup = FclExwSteps::FclExwCargoInfoStep.find_by(operation_id: @operation).pickup_reference
+		@pickup = FclExwSteps::CargoInfo.find_by(operation_id: @operation).pickup_reference
 
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
 		delivery_options = { user_name: representative.email,

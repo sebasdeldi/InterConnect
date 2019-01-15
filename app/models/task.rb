@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  belongs_to :fcl_exw_cargo_info_step, optional: true
+  belongs_to :fcl_exw_steps_cargo_info, optional: true
   belongs_to :fcl_exw_steps_booking_info, optional: true
   belongs_to :fcl_exw_info_confirmed_step, optional: true
   belongs_to :fcl_exw_info_requested_step, optional: true
@@ -35,7 +35,7 @@ class Task < ApplicationRecord
 
   def self.new_task(params)
     if params[:fcl_exw_cargo_info_step]
-      Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_cargo_info_steps_id: params[:fcl_exw_cargo_info_step], operation_id: params[:operation_id] )
+      Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_steps_cargo_info_id: params[:fcl_exw_cargo_info_step], operation_id: params[:operation_id] )
     elsif params[:fcl_exw_info_confirmed_step]
       Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_info_confirmed_steps_id: params[:fcl_exw_info_confirmed_step], operation_id: params[:operation_id] )
     elsif params[:fcl_exw_info_requested_step]

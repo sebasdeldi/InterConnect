@@ -56,7 +56,7 @@ document.addEventListener("turbolinks:load", function() {
 		$.ajax({
 		  type: "POST",
 		  url: "/pieces_for_cargo_info",
-		  data: { fcl_exw_cargo_info_step_id: $('.fcl_exw_cargo_info_step_id').val() },
+		  data: { fcl_exw_steps_cargo_info_id: $('.fcl_exw_steps_cargo_info_id').val() },
 		  success: function(data){
 
 		  	if(data[data.length-1] === 'update'){

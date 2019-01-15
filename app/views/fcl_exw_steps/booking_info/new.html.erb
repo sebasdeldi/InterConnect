@@ -289,7 +289,7 @@
                   </a>
                 </div>
               </div> 
-              <%= f.hidden_field :fcl_exw_cargo_info_step_id, class: "fcl_exw_cargo_info_step_id", value: is_fcl_exw_info_stage_completed?(@operation.secure_id) ? existing_fcl_cargo_info(@operation).id : '' %>
+              <%= f.hidden_field :fcl_exw_steps_cargo_info_id, class: "fcl_exw_steps_cargo_info_id", value: is_fcl_exw_info_stage_completed?(@operation.secure_id) ? existing_fcl_cargo_info(@operation).id : '' %>
               <div id="pieces-container"></div>
             <% end %>
             <div class="control">
