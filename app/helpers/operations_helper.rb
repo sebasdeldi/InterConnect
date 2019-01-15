@@ -85,6 +85,6 @@ module OperationsHelper
 	end
 
 	def info_requested_tasks(operation)
-		Task.where(operation_id: operation, status: '0', fcl_exw_info_requested_steps_id: FclExwSteps::FclExwInfoRequestedStep.find_by(operation_id: operation))
+		Task.where(operation_id: operation, status: '0', fcl_exw_steps_info_requested_id: FclExwSteps::InfoRequested.find_by(operation_id: operation))
 	end
 end

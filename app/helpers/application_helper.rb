@@ -79,7 +79,7 @@ module ApplicationHelper
 	end
 
 	def contacted_customer(operation)
-		FclExwSteps::FclExwInfoRequestedStep.find_by(operation_id: operation).completed
+		FclExwSteps::InfoRequested.find_by(operation_id: operation).completed
 	end
 
 	def quotation_sell(operation)

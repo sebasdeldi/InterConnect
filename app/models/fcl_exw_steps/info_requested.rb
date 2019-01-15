@@ -1,5 +1,6 @@
 module FclExwSteps  	
-	class FclExwInfoRequestedStep < ApplicationRecord
+	class InfoRequested < ApplicationRecord
+		self.table_name = 'fcl_exw_steps_info_requesteds'
 		has_many :tasks
 		belongs_to :operation
 
@@ -7,7 +8,7 @@ module FclExwSteps
 			shipper = User.find(params[:shipper_id])
 			agent = User.find(params[:agent_id])
 			op = Operation.find(params[:operation_id])
-			step = FclExwSteps::FclExwInfoRequestedStep.find_by(operation_id: params[:operation_id])
+			step = FclExwSteps::InfoRequested.find_by(operation_id: params[:operation_id])
 			FclExwOperationMailer.info_request(shipper, current_user, agent, op.secure_id).deliver_later
 			if step.created_at == step.updated_at
 				op.update(status: 'IN PROGRESS', status_message:'Confirm Cargo Info Received', current_step: op.current_step + 1)

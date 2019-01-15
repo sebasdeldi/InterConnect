@@ -12,7 +12,7 @@ module TasksHelper
 	end
 
 	def fcl_exw_info_requested_step_id(operation_id)
-		FclExwSteps::FclExwInfoRequestedStep.find_by(operation_id: operation_id).id
+		FclExwSteps::InfoRequested.find_by(operation_id: operation_id).id
 	end
 
 	def fcl_exw_quotation_confirmed_step_id(operation_id)
