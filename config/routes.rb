@@ -62,14 +62,12 @@ Rails.application.routes.draw do
 	end
 
 	namespace :fcl_exw_steps do 
-		post "/confirm_loading", to: "fcl_exw_container_loadings#confirm_loading", as: "confirm_loading"
+		post "/confirm_loading", to: "container_loadings#confirm_loading", as: "confirm_loading"
 		post "/confirm_delivery", to: "container_deliveries#confirm_delivery", as: "confirm_delivery"
 		post "/info", to: "fcl_exw_info_requested_steps#request_info"
-		post "/confirm_info", to: "fcl_exw_info_confirmed_steps#confirm_info"
+		post "/confirm_info", to: "info_confirmed#confirm_info"
 		post "/confirm_quotation", to: "fcl_exw_quotation_confirmed_steps#confirm_quotation"
 		post "/request_booking", to: "fcl_exw_request_booking_steps#request_booking"
-		post "/test123", to: "fcl_exw_cargo_info_steps#request_booking#create"
-
 		resources :cargo_info, only: [:new, :create]
 		resources :booking_info, only: [:new, :create]
 		post "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#update_pricing", as: "new_quotation"

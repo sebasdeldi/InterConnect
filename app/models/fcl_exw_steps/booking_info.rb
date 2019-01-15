@@ -36,7 +36,7 @@ module FclExwSteps
       if existing_booking_info.update!(fcl_booking_info_params.merge(operation_id: operation.id))
         agent = OperationsByUser.find_by(operation_id: operation.id).agent
   			FclExwOperationMailer.booking_info(agent, current_user, existing_booking_info).deliver_later
-        FclExwOperationMailer.transfer_documents(operation, current_user).deliver_later
+        #FclExwOperationMailer.transfer_documents("", operation, current_user).deliver_later
   			true
   		else
   			false
@@ -110,7 +110,7 @@ module FclExwSteps
           end
         elsif (params[:fcl_exw_steps_booking_info][:ramp] == "NO")
           unless existing_task.nil?
-            existing_task.delete!
+            existing_task.delete
           end
         end
       end

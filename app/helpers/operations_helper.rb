@@ -53,7 +53,7 @@ module OperationsHelper
 	end
 
 	def fcl_exw_container_loading_tasks(operation)
-		Task.where(operation_id: operation, status: '0',fcl_exw_container_loading_id: FclExwSteps::FclExwContainerLoading.find_by(operation_id: operation))
+		Task.where(operation_id: operation, status: '0',fcl_exw_steps_container_loading_id: FclExwSteps::ContainerLoading.find_by(operation_id: operation))
 	end
 
 	def fcl_exw_container_delivery_tasks(operation)
@@ -81,7 +81,7 @@ module OperationsHelper
 	end
 
 	def info_confirmed_tasks(operation)
-		Task.where(operation_id: operation, status: '0', fcl_exw_info_confirmed_steps_id: FclExwSteps::FclExwInfoConfirmedStep.find_by(operation_id: operation))
+		Task.where(operation_id: operation, status: '0', fcl_exw_steps_info_confirmed_id: FclExwSteps::InfoConfirmed.find_by(operation_id: operation))
 	end
 
 	def info_requested_tasks(operation)

@@ -72,8 +72,8 @@ class OperationsByUser < ApplicationRecord
 
     def self.create_steps(operation)
       FclExwSteps::ContainerDelivery.create!(operation: operation)
-      FclExwSteps::FclExwContainerLoading.create!(operation: operation)
-      FclExwSteps::FclExwInfoConfirmedStep.create!(operation: operation)
+      FclExwSteps::ContainerLoading.create!(operation: operation)
+      FclExwSteps::InfoConfirmed.create!(operation: operation)
       FclExwSteps::FclExwQuotationConfirmedStep.create!(operation: operation)
       FclExwSteps::FclExwInfoRequestedStep.create!(operation: operation)
       FclExwSteps::FclExwRequestBookingStep.create!(operation: operation)

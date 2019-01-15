@@ -79,7 +79,7 @@
 			<%= @info.arrival_date %>
 		</li>
 		<br>
-		<% if !@info.ramp.nil? %>
+		<% if @info.ramp != "NO" %>
 			<br>
 			<li>
 				<b>Ramp needed: </b> 

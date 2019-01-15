@@ -95,7 +95,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_fcl_exw_loading_confirmed?(operation_id)
-    FclExwSteps::FclExwContainerLoading.find_by(operation_id: operation_id).completed
+    FclExwSteps::ContainerLoading.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_delivery_confirmed?(operation_id)
@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_fcl_exw_info_confirmed?(operation_id)
-    FclExwSteps::FclExwInfoConfirmedStep.find_by(operation_id: operation_id).completed
+    FclExwSteps::InfoConfirmed.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_quotation_confirmed?(operation_id)

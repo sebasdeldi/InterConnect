@@ -1,7 +1,7 @@
 module FclExwSteps	
-	class FclExwInfoConfirmedStepsController < ApplicationController
+	class InfoConfirmedController < ApplicationController
 		def confirm_info
-			if FclExwSteps::FclExwInfoConfirmedStep.confirm_info(params)
+			if FclExwSteps::InfoConfirmed.confirm_info(params)
 				flash[:notice] = "Step confirmed, no more reminders will be sent"
 				redirect_to operation_path params[:operation_id]
 			end
