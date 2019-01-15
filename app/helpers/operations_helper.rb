@@ -69,7 +69,7 @@ module OperationsHelper
 	end
 
 	def quotation_confirmed_tasks(operation)
-		Task.where(operation_id: operation, status: '0',fcl_exw_quotation_confirmed_steps_id: FclExwSteps::FclExwQuotationConfirmedStep.find_by(operation_id: operation))
+		Task.where(operation_id: operation, status: '0',fcl_exw_steps_quotation_confirmed_id: FclExwSteps::QuotationConfirmed.find_by(operation_id: operation))
 	end
 
 	def tasks(operation)

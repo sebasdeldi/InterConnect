@@ -1,12 +1,12 @@
 module FclExwSteps	
-	class FclExwQuotationConfirmedStepsController < ApplicationController
+	class QuotationConfirmedController < ApplicationController
 		def new
 			@operation = Operation.find_by(secure_id: params[:secure_id])
 		end
 
 		def update_pricing
 			operation = Operation.find_by(secure_id: params[:secure_id])
-			quotation = FclExwSteps::FclExwQuotationConfirmedStep.find_by(operation_id: operation)
+			quotation = FclExwSteps::QuotationConfirmed.find_by(operation_id: operation)
 			if quotation.update(files: params[:files])
 				flash[:notice] = "Quotation correctly sent"
 				redirect_to fcl_exw_steps_new_quotation_view_path(params[:secure_id])
@@ -15,7 +15,7 @@ module FclExwSteps
 
 		def update_representative
 			operation = Operation.find(params[:id])
-			quotation = FclExwSteps::FclExwQuotationConfirmedStep.find_by(operation_id: operation)
+			quotation = FclExwSteps::QuotationConfirmed.find_by(operation_id: operation)
 			if quotation.update(files: params[:files])
 				flash[:notice] = "Quotation correctly sent"
 				redirect_to operation_path(params[:id])
@@ -23,7 +23,7 @@ module FclExwSteps
 		end
 
 		def confirm_quotation
-			confirmation = FclExwSteps::FclExwQuotationConfirmedStep.confirm_quotation(params, current_user)
+			confirmation = FclExwSteps::QuotationConfirmed.confirm_quotation(params, current_user)
 			if params[:files].present? || params[:commit] == 'ISSUE'
 				flash[:notice] = confirmation
 			else

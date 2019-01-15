@@ -74,7 +74,7 @@ class OperationsByUser < ApplicationRecord
       FclExwSteps::ContainerDelivery.create!(operation: operation)
       FclExwSteps::ContainerLoading.create!(operation: operation)
       FclExwSteps::InfoConfirmed.create!(operation: operation)
-      FclExwSteps::FclExwQuotationConfirmedStep.create!(operation: operation)
+      FclExwSteps::QuotationConfirmed.create!(operation: operation)
       FclExwSteps::InfoRequested.create!(operation: operation)
       FclExwSteps::FclExwRequestBookingStep.create!(operation: operation)
       FclExwSteps::FclExwQuotationSellingStep.create!(operation_id: operation.id)

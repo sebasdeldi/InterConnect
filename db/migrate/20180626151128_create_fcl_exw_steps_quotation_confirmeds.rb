@@ -1,6 +1,6 @@
-class CreateFclExwQuotationConfirmedSteps < ActiveRecord::Migration[5.1]
+class CreateFclExwStepsQuotationConfirmeds < ActiveRecord::Migration[5.1]
   def change
-    create_table :fcl_exw_quotation_confirmed_steps do |t|
+    create_table :fcl_exw_steps_quotation_confirmeds do |t|
       t.boolean :completed, default: false
       t.references :operation, foreign_key: true
       t.text :additional_comment
