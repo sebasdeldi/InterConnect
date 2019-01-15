@@ -1,7 +1,7 @@
 module InsuranceHelper
 
 	def carrier(operation)
-		carrier_id = FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: operation).carrier_id
+		carrier_id = FclExwSteps::RequestBooking.find_by(operation_id: operation).carrier_id
 		unless carrier_id.nil?
 			User.find carrier_id
 		else

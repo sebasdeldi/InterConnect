@@ -20,7 +20,7 @@ module TasksHelper
 	end
 
 	def fcl_exw_request_booking_step_id(operation_id)
-		FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: operation_id).id
+		FclExwSteps::RequestBooking.find_by(operation_id: operation_id).id
 	end
 
 	def fcl_exw_container_loading_step_id(operation_id)

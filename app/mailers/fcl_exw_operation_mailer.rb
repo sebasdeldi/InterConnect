@@ -78,7 +78,7 @@ class FclExwOperationMailer < ApplicationMailer
 		@shipper  = shipper
 		@operation = operation	
 
-		@pieces = operation[1].pieces
+		@pieces = Piece.where(fcl_exw_steps_cargo_info_id: FclExwSteps::CargoInfo.find_by(operation_id: operation[1])) 
 		@carrier = carrier
 		@additional_message = additional_message
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")

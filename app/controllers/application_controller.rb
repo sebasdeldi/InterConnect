@@ -111,7 +111,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_fcl_exw_booking_requested?(operation_id)
-    FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: operation_id).completed
+    FclExwSteps::RequestBooking.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_quotation_sell_confirmed?(operation_id)

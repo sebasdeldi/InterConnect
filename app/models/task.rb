@@ -2,7 +2,7 @@ class Task < ApplicationRecord
   belongs_to :fcl_exw_steps_cargo_info, optional: true
   belongs_to :fcl_exw_steps_booking_info, optional: true
   belongs_to :fcl_exw_steps_info_confirmed, optional: true
-  belongs_to :fcl_exw_info_requested_step, optional: true
+  belongs_to :fcl_exw_steps_info_requested, optional: true
   belongs_to :fcl_exw_steps_quotation_confirmed, optional: true
 
   belongs_to :fcl_exw_steps_container_delivery, optional: true

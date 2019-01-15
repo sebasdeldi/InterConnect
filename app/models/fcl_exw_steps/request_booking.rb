@@ -1,5 +1,6 @@
 module FclExwSteps  	
-	class FclExwRequestBookingStep < ApplicationRecord
+	class RequestBooking < ApplicationRecord
+		self.table_name = 'fcl_exw_steps_request_bookings'
 		has_many :tasks
 		belongs_to :operation
 
@@ -7,7 +8,7 @@ module FclExwSteps
 			shipper = User.find(params[:shipper_id])
 			op = Operation.find(params[:operation_id])
 			step = FclExwSteps::CargoInfo.find_by(operation_id: params[:operation_id])
-			booking_step = FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: params[:operation_id])
+			booking_step = FclExwSteps::RequestBooking.find_by(operation_id: params[:operation_id])
 			agent = User.find(params[:agent_id])
 			operation = [op, step]
 			carrier = User.find(params[:carrier_contact_id])
@@ -17,18 +18,18 @@ module FclExwSteps
 				op.update(status: 'IN PROGRESS', status_message:'Booking order requested ', current_step: op.current_step + 1, status_message:'Fill In Booking Info')
 				booking_step.update(updated_at: Time.now )
 			end
-			FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: params[:operation_id]).update(completed: true, additional_message: params[:additional_message], carrier_id: params[:carrier_id], carrier_contact_id: params[:carrier_contact_id])
+			FclExwSteps::RequestBooking.find_by(operation_id: params[:operation_id]).update(completed: true, additional_message: params[:additional_message], carrier_id: params[:carrier_id], carrier_contact_id: params[:carrier_contact_id])
 			true
 		end
 
 		def self.request_booking_website(operation_id, carrier_id)
 			op = Operation.find(operation_id)
-			booking_step = FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: operation_id)
+			booking_step = FclExwSteps::RequestBooking.find_by(operation_id: operation_id)
 			if booking_step.created_at == booking_step.updated_at 
 				op.update(status: 'IN PROGRESS', status_message:'Booking order requested ', current_step: op.current_step + 1, status_message:'Fill In Booking Info')
 				booking_step.update(updated_at: Time.now )
 			end
-			FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: operation_id).update(completed: true, additional_message: '', carrier_id: carrier_id, carrier_contact_id: 0)
+			FclExwSteps::RequestBooking.find_by(operation_id: operation_id).update(completed: true, additional_message: '', carrier_id: carrier_id, carrier_contact_id: 0)
 			true
 		end
 

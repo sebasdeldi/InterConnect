@@ -67,14 +67,14 @@ Rails.application.routes.draw do
 		post "/info", to: "info_requested#request_info"
 		post "/confirm_info", to: "info_confirmed#confirm_info"
 		post "/confirm_quotation", to: "quotation_confirmed#confirm_quotation"
-		post "/request_booking", to: "fcl_exw_request_booking_steps#request_booking"
+		post "/request_booking", to: "request_bookings#request_booking"
 		resources :cargo_info, only: [:new, :create]
 		resources :booking_info, only: [:new, :create]
-		post "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#update_pricing", as: "new_quotation"
-		post '/quotation_representative/:id', to: "fcl_exw_quotation_confirmed_steps#update_representative", as: "repre_quotation"
-		get  "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#new", as: "new_quotation_view"
+		post "/quotation/new/:secure_id", to: "quotation_confirmed#update_pricing", as: "new_quotation"
+		post '/quotation_representative/:id', to: "quotation_confirmed#update_representative", as: "repre_quotation"
+		get  "/quotation/new/:secure_id", to: "quotation_confirmed#new", as: "new_quotation_view"
 		post "/quotation_sell_prices", to: 'quotation_selling#confirm'
-		get "/quotation_sell/:id", to: "fcl_exw_quotation_selling_steps#show", as: "quotation_sell"
+		get "/quotation_sell/:id", to: "quotation_selling#show", as: "quotation_sell"
 	end
 
 

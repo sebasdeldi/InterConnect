@@ -1,6 +1,6 @@
-class CreateFclExwRequestBookingSteps < ActiveRecord::Migration[5.1]
+class CreateFclExwStepsRequestBookings < ActiveRecord::Migration[5.1]
   def change
-    create_table :fcl_exw_request_booking_steps do |t|
+    create_table :fcl_exw_steps_request_bookings do |t|
       t.boolean :completed, default: false
       t.references :operation, foreign_key: true
       t.string :additional_message

@@ -70,7 +70,7 @@ module ApplicationHelper
 	end
 
 	def steamship(operation)
-		carrier_id = FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: operation).carrier_id
+		carrier_id = FclExwSteps::RequestBooking.find_by(operation_id: operation).carrier_id
 		unless carrier_id.nil?
 			User.find(carrier_id).company_name
 		else
@@ -87,7 +87,7 @@ module ApplicationHelper
 	end
 
 	def booking_order(operation)
-		FclExwSteps::FclExwRequestBookingStep.find_by(operation_id: operation)
+		FclExwSteps::RequestBooking.find_by(operation_id: operation)
 	end
 
 	def time(time)
