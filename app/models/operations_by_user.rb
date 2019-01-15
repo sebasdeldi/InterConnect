@@ -77,7 +77,7 @@ class OperationsByUser < ApplicationRecord
       FclExwSteps::QuotationConfirmed.create!(operation: operation)
       FclExwSteps::InfoRequested.create!(operation: operation)
       FclExwSteps::FclExwRequestBookingStep.create!(operation: operation)
-      FclExwSteps::FclExwQuotationSellingStep.create!(operation_id: operation.id)
+      FclExwSteps::QuotationSelling.create!(operation_id: operation.id)
       Documents::Insurance.create!(operation: operation)
       cargo_info = FclExwSteps::CargoInfo.new(operation: operation)
       cargo_info.save!(validate: false)

@@ -73,7 +73,7 @@ Rails.application.routes.draw do
 		post "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#update_pricing", as: "new_quotation"
 		post '/quotation_representative/:id', to: "fcl_exw_quotation_confirmed_steps#update_representative", as: "repre_quotation"
 		get  "/quotation/new/:secure_id", to: "fcl_exw_quotation_confirmed_steps#new", as: "new_quotation_view"
-		post "/quotation_sell_prices", to: 'fcl_exw_quotation_selling_steps#confirm'
+		post "/quotation_sell_prices", to: 'quotation_selling#confirm'
 		get "/quotation_sell/:id", to: "fcl_exw_quotation_selling_steps#show", as: "quotation_sell"
 	end
 

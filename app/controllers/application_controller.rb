@@ -115,7 +115,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_fcl_exw_quotation_sell_confirmed?(operation_id)
-    FclExwSteps::FclExwQuotationSellingStep.find_by(operation_id: operation_id).completed
+    FclExwSteps::QuotationSelling.find_by(operation_id: operation_id).completed
   end
 
   # Admin Charts helpers
