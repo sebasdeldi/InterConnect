@@ -4,7 +4,7 @@ module FclExwBookingInfoStepsHelper
 	end
 
 	def existing_fcl_booking_info(operation)
-		FclExwSteps::FclExwBookingInfoStep.existing_fcl_booking_info(operation)
+		FclExwSteps::BookingInfo.existing_fcl_booking_info(operation)
 	end
 
 end

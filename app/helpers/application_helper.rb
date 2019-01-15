@@ -13,7 +13,7 @@ module ApplicationHelper
 	end
 
 	def booking_info(operation)
-		FclExwSteps::FclExwBookingInfoStep.find_by(operation_id: operation)
+		FclExwSteps::BookingInfo.find_by(operation_id: operation)
 	end
 
 	def sli(operation)

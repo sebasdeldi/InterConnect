@@ -81,7 +81,7 @@ class OperationsByUser < ApplicationRecord
       Documents::Insurance.create!(operation: operation)
       cargo_info = FclExwSteps::FclExwCargoInfoStep.new(operation: operation)
       cargo_info.save!(validate: false)
-      booking_info = FclExwSteps::FclExwBookingInfoStep.new(operation: operation)
+      booking_info = FclExwSteps::BookingInfo.new(operation: operation)
       booking_info.save!(validate: false)
     end
 

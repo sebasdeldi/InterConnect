@@ -1,6 +1,6 @@
-class CreateFclExwBookingInfoSteps < ActiveRecord::Migration[5.1]
+class CreateFclExwStepsBookingInfos < ActiveRecord::Migration[5.1]
   def change
-    create_table :fcl_exw_booking_info_steps do |t|
+    create_table :fcl_exw_steps_booking_infos do |t|
     	t.references :operation, foreign_key: true
     	t.string :booking_number
     	t.string :vessel

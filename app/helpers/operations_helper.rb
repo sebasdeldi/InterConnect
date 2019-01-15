@@ -61,7 +61,7 @@ module OperationsHelper
 	end
 
 	def booking_info_tasks(operation)
-		Task.where(operation_id: operation, status: '0',fcl_exw_booking_info_steps_id: FclExwSteps::FclExwBookingInfoStep.find_by(operation_id: operation))
+		Task.where(operation_id: operation, status: '0',fcl_exw_steps_booking_info_id: FclExwSteps::BookingInfo.find_by(operation_id: operation))
 	end
 
 	def request_booking_tasks(operation)

@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
 
   def is_fcl_exw_booking_info_completed?(operation_secure_id)
     operation_id = Operation.find_by(secure_id: operation_secure_id).id
-    record = FclExwSteps::FclExwBookingInfoStep.find_by(operation_id: operation_id)
+    record = FclExwSteps::BookingInfo.find_by(operation_id: operation_id)
     if record.created_at == record.updated_at
       false
     else

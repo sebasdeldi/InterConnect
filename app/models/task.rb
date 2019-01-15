@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :fcl_exw_cargo_info_step, optional: true
-  belongs_to :fcl_exw_booking_info_step, optional: true
+  belongs_to :fcl_exw_steps_booking_info, optional: true
   belongs_to :fcl_exw_info_confirmed_step, optional: true
   belongs_to :fcl_exw_info_requested_step, optional: true
   belongs_to :fcl_exw_quotation_confirmed_step, optional: true
@@ -45,7 +45,7 @@ class Task < ApplicationRecord
     elsif params[:fcl_exw_request_booking_step]
       Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_request_booking_steps_id: params[:fcl_exw_request_booking_step], operation_id: params[:operation_id] )
     elsif params[:fcl_exw_booking_info_steps]
-      Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_booking_info_steps_id: params[:fcl_exw_booking_info_steps], operation_id: params[:operation_id] )
+      Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_steps_booking_info_id: params[:fcl_exw_booking_info_steps], operation_id: params[:operation_id] )
     elsif params[:fcl_exw_container_delivery_step]
       Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_container_delivery_id: params[:fcl_exw_container_delivery_step], operation_id: params[:operation_id] )
     elsif params[:fcl_exw_container_loading_step]
