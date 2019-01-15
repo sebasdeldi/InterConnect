@@ -30,14 +30,6 @@ ActiveRecord::Schema.define(version: 20210927200628) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "fcl_exw_container_deliveries", force: :cascade do |t|
-    t.boolean "completed", default: false
-    t.bigint "operation_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["operation_id"], name: "index_fcl_exw_container_deliveries_on_operation_id"
-  end
-
   create_table "fcl_exw_container_loadings", force: :cascade do |t|
     t.boolean "completed", default: false
     t.bigint "operation_id"
@@ -135,6 +127,14 @@ ActiveRecord::Schema.define(version: 20210927200628) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_fcl_exw_steps_cargo_infos_on_operation_id"
+  end
+
+  create_table "fcl_exw_steps_container_deliveries", force: :cascade do |t|
+    t.boolean "completed", default: false
+    t.bigint "operation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["operation_id"], name: "index_fcl_exw_steps_container_deliveries_on_operation_id"
   end
 
   create_table "functionalities", force: :cascade do |t|
@@ -297,12 +297,11 @@ ActiveRecord::Schema.define(version: 20210927200628) do
     t.bigint "fcl_exw_steps_cargo_info_id"
     t.bigint "fcl_exw_request_booking_steps_id"
     t.bigint "fcl_exw_steps_booking_info_id"
-    t.bigint "fcl_exw_container_delivery_id"
+    t.bigint "fcl_exw_steps_container_delivery_id"
     t.bigint "fcl_exw_container_loading_id"
     t.bigint "operation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["fcl_exw_container_delivery_id"], name: "index_tasks_on_fcl_exw_container_delivery_id"
     t.index ["fcl_exw_container_loading_id"], name: "index_tasks_on_fcl_exw_container_loading_id"
     t.index ["fcl_exw_info_confirmed_steps_id"], name: "index_tasks_on_fcl_exw_info_confirmed_steps_id"
     t.index ["fcl_exw_info_requested_steps_id"], name: "index_tasks_on_fcl_exw_info_requested_steps_id"
@@ -310,6 +309,7 @@ ActiveRecord::Schema.define(version: 20210927200628) do
     t.index ["fcl_exw_request_booking_steps_id"], name: "index_tasks_on_fcl_exw_request_booking_steps_id"
     t.index ["fcl_exw_steps_booking_info_id"], name: "index_tasks_on_fcl_exw_steps_booking_info_id"
     t.index ["fcl_exw_steps_cargo_info_id"], name: "index_tasks_on_fcl_exw_steps_cargo_info_id"
+    t.index ["fcl_exw_steps_container_delivery_id"], name: "index_tasks_on_fcl_exw_steps_container_delivery_id"
     t.index ["operation_id"], name: "index_tasks_on_operation_id"
   end
 
@@ -361,7 +361,6 @@ ActiveRecord::Schema.define(version: 20210927200628) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "fcl_exw_container_deliveries", "operations"
   add_foreign_key "fcl_exw_container_loadings", "operations"
   add_foreign_key "fcl_exw_info_confirmed_steps", "operations"
   add_foreign_key "fcl_exw_info_requested_steps", "operations"
@@ -370,6 +369,7 @@ ActiveRecord::Schema.define(version: 20210927200628) do
   add_foreign_key "fcl_exw_request_booking_steps", "operations"
   add_foreign_key "fcl_exw_steps_booking_infos", "operations"
   add_foreign_key "fcl_exw_steps_cargo_infos", "operations"
+  add_foreign_key "fcl_exw_steps_container_deliveries", "operations"
   add_foreign_key "functionalities", "roles"
   add_foreign_key "general_cargo_infos", "operations"
   add_foreign_key "insurances", "operations"
@@ -378,7 +378,6 @@ ActiveRecord::Schema.define(version: 20210927200628) do
   add_foreign_key "pieces", "fcl_exw_steps_cargo_infos"
   add_foreign_key "slis", "operations"
   add_foreign_key "tariff_groups", "slis"
-  add_foreign_key "tasks", "fcl_exw_container_deliveries"
   add_foreign_key "tasks", "fcl_exw_container_loadings"
   add_foreign_key "tasks", "fcl_exw_info_confirmed_steps", column: "fcl_exw_info_confirmed_steps_id"
   add_foreign_key "tasks", "fcl_exw_info_requested_steps", column: "fcl_exw_info_requested_steps_id"
@@ -386,6 +385,7 @@ ActiveRecord::Schema.define(version: 20210927200628) do
   add_foreign_key "tasks", "fcl_exw_request_booking_steps", column: "fcl_exw_request_booking_steps_id"
   add_foreign_key "tasks", "fcl_exw_steps_booking_infos"
   add_foreign_key "tasks", "fcl_exw_steps_cargo_infos"
+  add_foreign_key "tasks", "fcl_exw_steps_container_deliveries"
   add_foreign_key "tasks", "operations"
   add_foreign_key "users", "roles"
   add_foreign_key "users", "teams"

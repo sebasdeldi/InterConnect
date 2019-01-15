@@ -63,7 +63,7 @@ Rails.application.routes.draw do
 
 	namespace :fcl_exw_steps do 
 		post "/confirm_loading", to: "fcl_exw_container_loadings#confirm_loading", as: "confirm_loading"
-		post "/confirm_delivery", to: "fcl_exw_container_deliveries#confirm_delivery", as: "confirm_delivery"
+		post "/confirm_delivery", to: "container_deliveries#confirm_delivery", as: "confirm_delivery"
 		post "/info", to: "fcl_exw_info_requested_steps#request_info"
 		post "/confirm_info", to: "fcl_exw_info_confirmed_steps#confirm_info"
 		post "/confirm_quotation", to: "fcl_exw_quotation_confirmed_steps#confirm_quotation"

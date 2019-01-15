@@ -12,7 +12,7 @@ class CreateTasks < ActiveRecord::Migration[5.1]
       t.references :fcl_exw_request_booking_steps, foreign_key: true
       t.references :fcl_exw_steps_booking_info, foreign_key: true
 
-      t.references :fcl_exw_container_delivery, foreign_key: true
+      t.references :fcl_exw_steps_container_delivery, foreign_key: true
       t.references :fcl_exw_container_loading, foreign_key: true
 
       t.references :operation, foreign_key: true

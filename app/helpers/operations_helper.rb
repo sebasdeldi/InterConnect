@@ -57,7 +57,7 @@ module OperationsHelper
 	end
 
 	def fcl_exw_container_delivery_tasks(operation)
-		Task.where(operation_id: operation, status: '0',fcl_exw_container_delivery_id: FclExwSteps::FclExwContainerDelivery.find_by(operation_id: operation))
+		Task.where(operation_id: operation, status: '0',fcl_exw_steps_container_delivery_id: FclExwSteps::ContainerDelivery.find_by(operation_id: operation))
 	end
 
 	def booking_info_tasks(operation)
