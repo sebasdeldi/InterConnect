@@ -1,6 +1,5 @@
 class Operation < ApplicationRecord
 	before_create :randomize_id
-	has_one :general_cargo_info
 	has_many :operations_by_users
 	has_one :invoice
 	has_one :insurance
@@ -25,7 +24,6 @@ class Operation < ApplicationRecord
 	end
 
 	private
-
 		def randomize_id
 		  begin
 		    self.secure_id = SecureRandom.random_number(1_000_000)

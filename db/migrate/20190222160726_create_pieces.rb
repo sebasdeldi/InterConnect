@@ -2,7 +2,6 @@ class CreatePieces < ActiveRecord::Migration[5.1]
   # A piece acts also as a container for FCL
   def change
     create_table :pieces do |t|
-      #t.references :general_cargo_info, foreign_key: true
       t.references :fcl_exw_steps_cargo_info, foreign_key: true
       t.string :sort
       t.float :gross_weight

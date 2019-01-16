@@ -1,13 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'users/edit'
-
-
-
-
-
 	resources :operations_by_users, only: [:new, :create, :edit, :update]
-	resources :general_cargo_infos, only: [:new, :create]
 	resources :operations, only: [:show]
 	
 	get '/admin', to: "admins#index", as: "admin"
