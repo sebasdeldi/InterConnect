@@ -3,15 +3,6 @@ Rails.application.routes.draw do
 	resources :operations_by_users, only: [:new, :create, :edit, :update]
 	resources :operations, only: [:show]
 	
-
-
-	
-
-	
-
-
-	post "/pieces_for_cargo_info", to: "pieces#pieces_for_cargo_info", as: "pieces_for_cargo_info"
-
 	post "/carrier_info", to: "operations#carrier_info"
 
 	namespace :documents do
@@ -45,6 +36,7 @@ Rails.application.routes.draw do
 		get  "/quotation/new/:secure_id", to: "quotation_confirmed#new", as: "new_quotation_view"
 		post "/quotation_sell_prices", to: 'quotation_selling#confirm'
 		get "/quotation_sell/:id", to: "quotation_selling#show", as: "quotation_sell"
+		post "/pieces", to: "pieces#pieces_for_cargo_info", as: "pieces"
 	end
 
 	namespace :charts do
