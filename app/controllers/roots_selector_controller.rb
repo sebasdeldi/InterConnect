@@ -2,7 +2,7 @@ class RootsSelectorController < ApplicationController
   def index
     path = ''
     if current_user.role_id == Users::Role.find_by(name: 'admin').id
-      path = admin_path
+      path = users_admin_path
     elsif current_user.role_id == Users::Role.find_by(name: 'representative').id
       path = representative_path
     elsif current_user.role_id == Users::Role.find_by(name: 'team_leader').id

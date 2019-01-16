@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 	resources :operations_by_users, only: [:new, :create, :edit, :update]
 	resources :operations, only: [:show]
 	
-	get '/admin', to: "admins#index", as: "admin"
 
 
 	
@@ -73,6 +72,7 @@ Rails.application.routes.draw do
 		registrations: 'users/registrations'
 	}
 	namespace :users do	
+		get '/admin', to: "admins#index", as: "admin"
 		get 'relationship/new/:representative_id', to: 'relationships#new', as: 'new_relationship'
 		post 'relationship/create', to: 'relationships#create' ,as: 'create_relationship'
 		delete 'relationship/destroy', to: 'relationships#destroy' , as: 'destroy_relationship'
