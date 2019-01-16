@@ -14,13 +14,10 @@ Rails.application.routes.draw do
 
 
 	
-	match "/admin/general_charts", to: "general_charts#index", as: "general_charts", via: [:get, :post]
 	match "/admin/general_records", to: "general_records#index", as: "general_records", via: [:get, :post]
 
-	match "/admin/customers_charts", to: "customers_charts#index", as: "customers_charts", via: [:get, :post]
 	match "/admin/customers_records", to: "customers_records#index", as: "customers_records", via: [:get, :post]
 
-	match "/admin/representatives_charts", to: "representatives_charts#index", as: "representatives_charts", via: [:get, :post]
 	match "/admin/representatives_records", to: "representatives_records#index", as: "representatives_records", via: [:get, :post]
 
 	match "/representative", to: "representatives#index", as: "representative", via: [:get, :post]
@@ -65,6 +62,12 @@ Rails.application.routes.draw do
 		get  "/quotation/new/:secure_id", to: "quotation_confirmed#new", as: "new_quotation_view"
 		post "/quotation_sell_prices", to: 'quotation_selling#confirm'
 		get "/quotation_sell/:id", to: "quotation_selling#show", as: "quotation_sell"
+	end
+
+	namespace :charts do
+		match "/admin/general_charts", to: "generals#index", as: "general", via: [:get, :post]
+		match "/admin/customers_charts", to: "customers#index", as: "customers", via: [:get, :post]
+		match "/admin/representatives_charts", to: "representatives#index", as: "representatives", via: [:get, :post]
 	end
 
 

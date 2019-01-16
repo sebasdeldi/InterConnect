@@ -3,7 +3,7 @@ class GeneralChartsController < ApplicationController
 		set_date_range_cookies(params[:day], params[:week], params[:month], params[:year])	
 		set_query_params_cookies(params[:modality])
 		@modality_content = cookies[:modality]
-		@operations = GeneralChart.fetch_general_charts(cookies[:date_range_param], @modality_content)
+		@operations = Charts::General.fetch_general_charts(cookies[:date_range_param], @modality_content)
 	end
 
 	private

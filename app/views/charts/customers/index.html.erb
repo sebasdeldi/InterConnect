@@ -1,0 +1,14 @@
+
+<br>
+<br>
+<div class="container is-widescreen">
+	<nav class="breadcrumb" aria-label="breadcrumbs">
+	  <ul>
+	    <li><%= link_to "Insights", admin_path %></li>
+	    <li class="is-active"><%= link_to "Customers Charts", charts_general_path %></li>
+	  </ul>
+	</nav>
+	<%= render 'shared/operations_charts', modality_content: modality, search_content: @search_content, path: charts_customers_path, operations: @operations, representative_id: nil, customer_id: customer_id %>
+
+	<%= link_to "List Records", customers_records_path, class: "button is-link list-records" %>
+</div>
