@@ -6,7 +6,7 @@ class RootsSelectorController < ApplicationController
     elsif current_user.role_id == Role.find_by(name: 'representative').id
       path = representative_path
     elsif current_user.role_id == Role.find_by(name: 'team_leader').id
-    	path = team_path
+    	path = users_team_path
     end    
     redirect_to path     
   end

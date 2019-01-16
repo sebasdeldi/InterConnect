@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
 
 
-  resources :user_imports
 
 	resources :operations_by_users, only: [:new, :create, :edit, :update]
 	resources :general_cargo_infos, only: [:new, :create]
@@ -25,9 +24,7 @@ Rails.application.routes.draw do
 	match "/admin/representatives_records", to: "representatives_records#index", as: "representatives_records", via: [:get, :post]
 
 	match "/representative", to: "representatives#index", as: "representative", via: [:get, :post]
-	match "/team_leader", to: "team#index", as: "team", via: [:get, :post]
-	get "/team_leader/:id", to: "team#show", as: "team_member"
-	post "/team_leader/change_representative", to: "team#change_representative", as: "change_representative"
+	
 
 
 	get "/tasks_panel", to: "tasks#index"
@@ -85,6 +82,9 @@ Rails.application.routes.draw do
 		post 'relationship/create', to: 'relationships#create' ,as: 'create_relationship'
 		delete 'relationship/destroy', to: 'relationships#destroy' , as: 'destroy_relationship'
 		get 'relationship/index_representatives', to: 'relationships#index_representatives', as: 'representatives_list'
+		match "/team_leader", to: "teams#index", as: "team", via: [:get, :post]
+		get "/team_leader/:id", to: "teams#show", as: "team_member"
+		post "/team_leader/change_representative", to: "teams#change_representative", as: "change_representative"
 	end
 
 
