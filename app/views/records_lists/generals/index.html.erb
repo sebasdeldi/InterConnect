@@ -1,0 +1,17 @@
+<div class="breadcrumb-container">
+	<br>
+	<br>
+	<nav class="breadcrumb" aria-label="breadcrumbs">
+	  <ul>
+	    <li><%= link_to "Insights", admin_path %></li>
+	    <li><%= link_to "General Charts", charts_general_path %></li>
+	    <li class="is-active"><%= link_to "General Operations Records List", records_lists_general_path %></li>
+	  </ul>
+	</nav>
+</div>
+
+
+<div class="">
+	<%= render 'shared/operations_records_list', status_content: status, modality_content: modality, search_content: search, path: records_lists_general_path, operations: @operations %>
+</div>
+

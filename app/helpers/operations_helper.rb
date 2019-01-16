@@ -28,7 +28,7 @@ module OperationsHelper
 	def breadcrumb_selector
 		redirect = []
 		if is_admin?
-			redirect = ['Operation Records List', general_records_path]
+			redirect = ['Operation Records List', records_lists_general_path]
 		elsif is_leader?
 			redirect = ['Main Page', authenticated_root_path]
 		elsif is_representative?

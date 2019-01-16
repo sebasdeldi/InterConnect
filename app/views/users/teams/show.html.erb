@@ -19,7 +19,7 @@
         <th>Progress</th>
         <th>Status</th>
 
-        <% if is_admin? && path != representatives_records_path %>
+        <% if is_admin? && path != records_lists_representatives_path %>
           <th>Traffic</th>
         <% end %>
 
@@ -59,7 +59,7 @@
           <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
             <%= operation.operation.status_message %>
           </td>
-          <% if is_admin? && path != representatives_records_path %>
+          <% if is_admin? && path != records_lists_representatives_path %>
             <td data-link="<%= operation_path(operation.operation_id) %>" class="table-text">
               <%= operation.representative.company_name %>
             </td>

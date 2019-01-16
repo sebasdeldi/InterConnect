@@ -14,11 +14,6 @@ Rails.application.routes.draw do
 
 
 	
-	match "/admin/general_records", to: "general_records#index", as: "general_records", via: [:get, :post]
-
-	match "/admin/customers_records", to: "customers_records#index", as: "customers_records", via: [:get, :post]
-
-	match "/admin/representatives_records", to: "representatives_records#index", as: "representatives_records", via: [:get, :post]
 
 	match "/representative", to: "representatives#index", as: "representative", via: [:get, :post]
 	
@@ -70,7 +65,11 @@ Rails.application.routes.draw do
 		match "/admin/representatives_charts", to: "representatives#index", as: "representatives", via: [:get, :post]
 	end
 
-
+	namespace :records_lists do
+		match "/admin/general_records", to: "generals#index", as: "general", via: [:get, :post]
+		match "/admin/customers_records", to: "customers#index", as: "customers", via: [:get, :post]
+		match "/admin/representatives_records", to: "representatives#index", as: "representatives", via: [:get, :post]
+	end
 
 
 	post "/change_difficulty", to: "operations#change_difficulty", as: "change_difficulty"
