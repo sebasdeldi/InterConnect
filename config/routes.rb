@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 		get 'insurance/view_pdf/:secure_id', to: 'insurance#view_pdf', as: 'insurance_pdf'
 		post 'insurance/create', to: 'insurance#create', as: 'insurance_create'
 		post 'insurance/send_info/:operation_id', to: 'insurance#send_info', as: 'insurance_send_info'
+		post "/quotation_sell_prices", to: 'quotation_selling#confirm'
+		get "/quotation_sell/:id", to: "quotation_selling#show", as: "quotation_sell"
 	end
 
 	namespace :fcl_exw_steps do 
@@ -34,8 +36,6 @@ Rails.application.routes.draw do
 		post "/quotation/new/:secure_id", to: "quotation_confirmed#update_pricing", as: "new_quotation"
 		post '/quotation_representative/:id', to: "quotation_confirmed#update_representative", as: "repre_quotation"
 		get  "/quotation/new/:secure_id", to: "quotation_confirmed#new", as: "new_quotation_view"
-		post "/quotation_sell_prices", to: 'quotation_selling#confirm'
-		get "/quotation_sell/:id", to: "quotation_selling#show", as: "quotation_sell"
 		post "/pieces", to: "pieces#pieces_for_cargo_info", as: "pieces"
 	end
 

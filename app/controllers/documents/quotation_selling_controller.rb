@@ -1,4 +1,4 @@
-module FclExwSteps
+module Documents
   class QuotationSellingController < ApplicationController
     def confirm
       if params[:commit] == "REQUEST"
@@ -6,7 +6,7 @@ module FclExwSteps
         FclExwOperationMailer.issue_profit(operation, current_user).deliver_later
         flash[:notice] = 'Information requested to agent'
       else
-        quotation = FclExwSteps::QuotationSelling.find_by(operation_id: params[:operation_id])
+        quotation = Documents::QuotationSelling.find_by(operation_id: params[:operation_id])
         operation = Operation.find(params[:operation_id])
 
         if quotation.created_at == quotation.updated_at
@@ -20,11 +20,11 @@ module FclExwSteps
 
     def show
     	@operation = Operation.find params[:id]
-    	@quotation = FclExwSteps::QuotationSelling.find_by(operation_id: params[:id])
+    	@quotation = Documents::QuotationSelling.find_by(operation_id: params[:id])
     	respond_to do |format|
     		format.html
     	  format.pdf do
-    	    render template: "fcl_exw_steps/quotation_sell/pdf", pdf: "quotation_sell_operation_#{@operation.reference}"   # Excluding ".pdf" extension.
+    	    render template: "documents/quotation_sell/pdf", pdf: "quotation_sell_operation_#{@operation.reference}"   # Excluding ".pdf" extension.
     	  end
     	end
     end

@@ -20,7 +20,7 @@
 
         <% if quotation_sell(operation).completed %>
           <li>
-            <b>Quotation Sold: </b> <a href="<%= Figaro.env.host + '/fcl_exw_steps/quotation_sell/' + operation.id.to_s + '.pdf' %>" target="blank"> Quotation Sold Document</a>
+            <b>Quotation Sold: </b> <a href="<%= Figaro.env.host + '/documents/quotation_sell/' + operation.id.to_s + '.pdf' %>" target="blank"> Quotation Sold Document</a>
           </li>
         <% end %>
 

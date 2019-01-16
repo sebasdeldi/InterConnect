@@ -83,7 +83,7 @@ module ApplicationHelper
 	end
 
 	def quotation_sell(operation)
-		FclExwSteps::QuotationSelling.find_by(operation_id: operation)
+		Documents::QuotationSelling.find_by(operation_id: operation)
 	end
 
 	def booking_order(operation)

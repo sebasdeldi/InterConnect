@@ -51,7 +51,7 @@
     	          <option value="<%= file.url %>"> <%= link_to doc_name(i, 'quotation'), '', target: 'blank' %> </option>
     	        <% end %>
     	        <% if quotation_sell(@operation).completed %>
-  		          <option value="quotation_sell/<%= params[:id] %>.pdf">
+  		          <option value="documents/quotation_sell/<%= params[:id] %>.pdf">
   	          	  Sold Quotation
   		          </option>
     	        <% end %>
