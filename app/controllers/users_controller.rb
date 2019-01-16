@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def edit
     @user = User.find params[:id]
-    @role = Role.find(@user.role_id).name
+    @role = Users::Role.find(@user.role_id).name
   end
 
   def update

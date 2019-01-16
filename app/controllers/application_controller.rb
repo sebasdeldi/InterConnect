@@ -174,7 +174,7 @@ class ApplicationController < ActionController::Base
 
   private
   	def current_role
-  		current_role = current_user.nil? ? 'Not logged in' : Role.find(current_user.role_id).name 
+  		current_role = current_user.nil? ? 'Not logged in' : Users::Role.find(current_user.role_id).name 
   	end
 
     def require_new_operation_permission

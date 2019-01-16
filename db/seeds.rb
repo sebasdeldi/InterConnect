@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-roles = Role.create!([
+roles = Users::Role.create!([
 	{name: 'admin'},
 	{name: 'representative'},
 	{name: 'agent'},

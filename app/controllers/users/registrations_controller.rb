@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
-    role = Role.where(name: params[:role]).first
+    role = Users::Role.where(name: params[:role]).first
     user = init(params, role)
     consignee_validations(params, user)
     agent_validations(params, user)
