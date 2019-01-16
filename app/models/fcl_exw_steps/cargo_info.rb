@@ -46,10 +46,10 @@ module FclExwSteps
       end
 
     	def self.create_bonded_task(params, op)
-    		existing_bonded = Task.find_by(operation_id: op.id, subject: 'Bonded Docummentation')
+    		existing_bonded = Generals::Task.find_by(operation_id: op.id, subject: 'Bonded Docummentation')
     		if params[:fcl_exw_steps_cargo_info][:bonded] == 'true'
     			if existing_bonded.nil?
-    				Task.create(operation_id: op.id, note: 'Verify bonded docummentation', due_date: Time.now + 1.weeks , subject:'Bonded Docummentation')				
+    				Generals::Task.create(operation_id: op.id, note: 'Verify bonded docummentation', due_date: Time.now + 1.weeks , subject:'Bonded Docummentation')				
     			else
     				existing_bonded.update(status: '0')
     			end
@@ -61,10 +61,10 @@ module FclExwSteps
     	end
 
     	def self.create_self_propelled_task(params, op)
-    		existing_self_propelled = Task.find_by(operation_id: op.id, subject: 'Self Propelled Docummentation')
+    		existing_self_propelled = Generals::Task.find_by(operation_id: op.id, subject: 'Self Propelled Docummentation')
     		if params[:fcl_exw_steps_cargo_info][:self_propelled] == 'true'
     			if existing_self_propelled.nil?
-    				Task.create(operation_id: op.id, note: "Send self propelled docummentation (tittle/bill of sells original & notarized, power of attorney, copy of power of attorney signer's id) to broker", due_date: Time.now + 1.weeks , subject:'Self Propelled Docummentation')				
+    				Generals::Task.create(operation_id: op.id, note: "Send self propelled docummentation (tittle/bill of sells original & notarized, power of attorney, copy of power of attorney signer's id) to broker", due_date: Time.now + 1.weeks , subject:'Self Propelled Docummentation')				
     			else
     				existing_self_propelled.update(status: '0')
     			end
@@ -76,8 +76,8 @@ module FclExwSteps
     	end
 
     	def self.create_quotation_verification_task(op)
-    		unless Task.find_by(operation_id: op.id, subject: 'Quotation Review')
-    			Task.create(note: "Please verify that your POD, POL, container size, loading address and hazmat status match the operation's quotation. Also be aware of any overweight extra fee (20' bellow 35.000lbs, 40' and 45' bellow 42.000)", due_date: Time.now + 4.days, operation_id: op.id, subject: 'Quotation Review' )
+    		unless Generals::Task.find_by(operation_id: op.id, subject: 'Quotation Review')
+    			Generals::Task.create(note: "Please verify that your POD, POL, container size, loading address and hazmat status match the operation's quotation. Also be aware of any overweight extra fee (20' bellow 35.000lbs, 40' and 45' bellow 42.000)", due_date: Time.now + 4.days, operation_id: op.id, subject: 'Quotation Review' )
     		end
     	end
 

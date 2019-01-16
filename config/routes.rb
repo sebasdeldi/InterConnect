@@ -10,11 +10,8 @@ Rails.application.routes.draw do
 	
 
 
-	get "/tasks_panel", to: "tasks#index"
-	get "/tasks/:id", to: "tasks#show", as: "task"
 	post "/pieces_for_cargo_info", to: "pieces#pieces_for_cargo_info", as: "pieces_for_cargo_info"
-	post "/tasks", to: "tasks#create", as: "tasks"
-	post "/update_tasks", to: "tasks#update", as: "update_tasks"
+
 	post "/carrier_info", to: "operations#carrier_info"
 
 	namespace :documents do
@@ -62,8 +59,15 @@ Rails.application.routes.draw do
 		match "/admin/representatives_records", to: "representatives#index", as: "representatives", via: [:get, :post]
 	end
 
-
 	post "/change_difficulty", to: "operations#change_difficulty", as: "change_difficulty"
+
+
+	namespace :generals do	
+		get "/tasks/:id", to: "tasks#show", as: "task"
+		post "/tasks", to: "tasks#create", as: "tasks"
+		post "/update_tasks", to: "tasks#update", as: "update_tasks"
+	end
+
 
 
 	devise_for :users, controllers: {
@@ -81,9 +85,6 @@ Rails.application.routes.draw do
 		get "/team_leader/:id", to: "teams#show", as: "team_member"
 		post "/team_leader/change_representative", to: "teams#change_representative", as: "change_representative"
 	end
-
-
-
   get '/users/edit/:id', to: 'users#edit', as: 'user'
   patch '/users/edit/:id', to: 'users#update'
 

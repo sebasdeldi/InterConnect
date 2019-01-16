@@ -53,38 +53,38 @@ module OperationsHelper
 	end
 
 	def fcl_exw_container_loading_tasks(operation)
-		Task.where(operation_id: operation, status: '0',fcl_exw_steps_container_loading_id: FclExwSteps::ContainerLoading.find_by(operation_id: operation))
+		Generals::Task.where(operation_id: operation, status: '0',fcl_exw_steps_container_loading_id: FclExwSteps::ContainerLoading.find_by(operation_id: operation))
 	end
 
 	def fcl_exw_container_delivery_tasks(operation)
-		Task.where(operation_id: operation, status: '0',fcl_exw_steps_container_delivery_id: FclExwSteps::ContainerDelivery.find_by(operation_id: operation))
+		Generals::Task.where(operation_id: operation, status: '0',fcl_exw_steps_container_delivery_id: FclExwSteps::ContainerDelivery.find_by(operation_id: operation))
 	end
 
 	def booking_info_tasks(operation)
-		Task.where(operation_id: operation, status: '0',fcl_exw_steps_booking_info_id: FclExwSteps::BookingInfo.find_by(operation_id: operation))
+		Generals::Task.where(operation_id: operation, status: '0',fcl_exw_steps_booking_info_id: FclExwSteps::BookingInfo.find_by(operation_id: operation))
 	end
 
 	def request_booking_tasks(operation)
-		Task.where(operation_id: operation, status: '0',fcl_exw_steps_request_bookings_id: FclExwSteps::RequestBooking.find_by(operation_id: operation))
+		Generals::Task.where(operation_id: operation, status: '0',fcl_exw_steps_request_bookings_id: FclExwSteps::RequestBooking.find_by(operation_id: operation))
 	end
 
 	def quotation_confirmed_tasks(operation)
-		Task.where(operation_id: operation, status: '0',fcl_exw_steps_quotation_confirmed_id: FclExwSteps::QuotationConfirmed.find_by(operation_id: operation))
+		Generals::Task.where(operation_id: operation, status: '0',fcl_exw_steps_quotation_confirmed_id: FclExwSteps::QuotationConfirmed.find_by(operation_id: operation))
 	end
 
 	def tasks(operation)
-		Task.where(operation_id: operation, status: '0')
+		Generals::Task.where(operation_id: operation, status: '0')
 	end
 
 	def cargo_info_tasks(operation)
-		Task.where(operation_id: operation, status: '0', fcl_exw_steps_cargo_info_id: FclExwSteps::CargoInfo.find_by(operation_id: operation))
+		Generals::Task.where(operation_id: operation, status: '0', fcl_exw_steps_cargo_info_id: FclExwSteps::CargoInfo.find_by(operation_id: operation))
 	end
 
 	def info_confirmed_tasks(operation)
-		Task.where(operation_id: operation, status: '0', fcl_exw_steps_info_confirmed_id: FclExwSteps::InfoConfirmed.find_by(operation_id: operation))
+		Generals::Task.where(operation_id: operation, status: '0', fcl_exw_steps_info_confirmed_id: FclExwSteps::InfoConfirmed.find_by(operation_id: operation))
 	end
 
 	def info_requested_tasks(operation)
-		Task.where(operation_id: operation, status: '0', fcl_exw_steps_info_requested_id: FclExwSteps::InfoRequested.find_by(operation_id: operation))
+		Generals::Task.where(operation_id: operation, status: '0', fcl_exw_steps_info_requested_id: FclExwSteps::InfoRequested.find_by(operation_id: operation))
 	end
 end
