@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
 	
 
-	match "/representative", to: "representatives#index", as: "representative", via: [:get, :post]
 	
 
 
@@ -72,6 +71,7 @@ Rails.application.routes.draw do
 		registrations: 'users/registrations'
 	}
 	namespace :users do	
+		match "/representative", to: "representatives#index", as: "representative", via: [:get, :post]
 		get '/admin', to: "admins#index", as: "admin"
 		get 'relationship/new/:representative_id', to: 'relationships#new', as: 'new_relationship'
 		post 'relationship/create', to: 'relationships#create' ,as: 'create_relationship'

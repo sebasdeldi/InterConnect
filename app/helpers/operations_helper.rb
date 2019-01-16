@@ -32,7 +32,7 @@ module OperationsHelper
 		elsif is_leader?
 			redirect = ['Main Page', authenticated_root_path]
 		elsif is_representative?
-			redirect = ['Operation Records List', representative_path]
+			redirect = ['Operation Records List', users_representative_path]
 		end
 	end
 
