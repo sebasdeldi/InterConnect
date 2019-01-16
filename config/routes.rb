@@ -4,13 +4,6 @@ Rails.application.routes.draw do
 
 
 
-  get 'users_relationship/new/:representative_id', to: 'users_relationship#new', as: 'new_relationship'
-  post 'users_relationship/create', as: 'create_relation'
-
-  delete 'users_relationship/destroy', as: 'destroy_relation'
-  get 'users_relationship/index_representatives', to: 'users_relationship#index_representatives', as: 'representatives_list'
-
-
 
   resources :user_imports
 
@@ -83,11 +76,18 @@ Rails.application.routes.draw do
 	post "/change_difficulty", to: "operations#change_difficulty", as: "change_difficulty"
 
 
+	devise_for :users, controllers: {
+		sessions: 'users/sessions',
+		registrations: 'users/registrations'
+	}
+	namespace :users do	
+		get 'relationship/new/:representative_id', to: 'relationships#new', as: 'new_relationship'
+		post 'relationship/create', to: 'relationships#create' ,as: 'create_relationship'
+		delete 'relationship/destroy', to: 'relationships#destroy' , as: 'destroy_relationship'
+		get 'relationship/index_representatives', to: 'relationships#index_representatives', as: 'representatives_list'
+	end
 
- 	devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
-  }
+
 
   get '/users/edit/:id', to: 'users#edit', as: 'user'
   patch '/users/edit/:id', to: 'users#update'

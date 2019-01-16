@@ -19,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         #respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
       render json: {'success': true}
-      UsersRelationship.create!(user_id: params[:current_user_id], related_id: user_id )
+      Users::Relationship.create!(user_id: params[:current_user_id], related_id: user_id )
     else
       clean_up_passwords resource
       set_minimum_password_length

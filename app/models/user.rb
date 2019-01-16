@@ -13,7 +13,6 @@ class User < ApplicationRecord
   has_many :representative, class_name: 'OperationsByUser'
   has_many :pricing_representatives, class_name: 'OperationsByUser'
   has_many :users_relationships
-  has_many :relateds, through: 'users_relationships'
 
   belongs_to :roles , optional: true
   belongs_to :teams, optional: true
@@ -27,5 +26,10 @@ class User < ApplicationRecord
 
   def name_with_last_name
     "#{contact_first_name} #{contact_last_name}"
+  end
+
+  def self.relateds(user_id)
+    relateds = Users::Relationship.where(user_id: user_id).select(:related_id)
+    User.where(id: relateds)
   end
 end

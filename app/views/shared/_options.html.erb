@@ -19,14 +19,14 @@
   	    </span>
   	    Import Users 
   	  <% end %>
-      <%= link_to(representatives_list_path, class: "panel-block is-active" ) do %>        
+      <%= link_to(users_representatives_list_path, class: "panel-block is-active" ) do %>        
         <span class="panel-icon">
           <i class="fas fa-users"></i>
         </span>
         Manage Representatives 
       <% end %>
     <% else %>
-      <%= link_to(new_relationship_path(current_user), class: "panel-block is-active" ) do %>        
+      <%= link_to(users_new_relationship_path(current_user), class: "panel-block is-active" ) do %>        
         <span class="panel-icon">
           <i class="fas fa-users"></i>
         </span>

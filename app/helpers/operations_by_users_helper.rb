@@ -1,11 +1,11 @@
 module OperationsByUsersHelper
 
 	def agents(current_user)
-		current_user.relateds.where(role_id: 3)
+		User.relateds(current_user.id).where(role_id: 3)
 	end
 
 	def shippers(current_user)
-		current_user.relateds.where(role_id: 4)
+		User.relateds(current_user.id).where(role_id: 4)
 	end
 
 	def all_representatives

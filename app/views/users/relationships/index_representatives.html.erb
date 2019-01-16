@@ -18,7 +18,7 @@
 
     <% if is_admin? %>
       <%  @representatives.each do |rep| %>
-        <%= link_to(new_relationship_path(rep), class: "panel-block is-active" ) do %>        
+        <%= link_to(users_new_relationship_path(rep), class: "panel-block is-active" ) do %>        
           <span class="panel-icon">
             <i class="fas fa-users"></i>
           </span>

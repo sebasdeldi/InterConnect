@@ -24,14 +24,14 @@
           <%= rel.company_name + ' - ' + rel.email %>
           <% unless @relateds.include? rel %>
             <% add_agent = 'add_agent_'+index.to_s %>
-            <%= form_tag create_relation_path, class: add_agent do %>
+            <%= form_tag users_create_relationship_path, class: add_agent do %>
               <%= hidden_field_tag 'related_id', rel.id %>
               <%= hidden_field_tag 'representative_id', @representative.id %>
               <i class="fas fa-plus add button-icon" onclick='$(".add_agent_<%= index %>").submit();'></i>
             <% end %>
           <% else %>
             <% remove_agent = 'remove_agent_'+index.to_s %>
-            <%= form_tag destroy_relation_path, class: remove_agent, method: :delete do %>
+            <%= form_tag users_destroy_relationship_path, class: remove_agent, method: :delete do %>
               <%= hidden_field_tag 'related_id', rel.id %>
               <%= hidden_field_tag 'representative_id', @representative.id %>
               <i class="fas fa-minus remove button-icon" onclick='$(".remove_agent_<%= index %>").submit();'></i>
@@ -59,14 +59,14 @@
         <%= rel.company_name + ' - ' + rel.email %>
         <% unless @relateds.include? rel %>
           <% add_shipper = 'add_shipper_'+index.to_s %>
-          <%= form_tag create_relation_path, class: add_shipper do %>
+          <%= form_tag users_create_relationship_path, class: add_shipper do %>
             <%= hidden_field_tag 'related_id', rel.id %>
             <%= hidden_field_tag 'representative_id', @representative.id %>
             <i class="fas fa-plus add button-icon" onclick='$(".add_shipper_<%= index %>").submit();'></i>
           <% end %>
         <% else %>
           <% remove_shipper = 'remove_shipper_'+index.to_s %>
-          <%= form_tag destroy_relation_path, class: remove_shipper, method: :delete do %>
+          <%= form_tag users_destroy_relationship_path, class: remove_shipper, method: :delete do %>
             <%= hidden_field_tag 'related_id', rel.id %>
             <%= hidden_field_tag 'representative_id', @representative.id %>
             <i class="fas fa-minus remove button-icon" onclick='$(".remove_shipper_<%= index %>").submit();'></i>
