@@ -4,7 +4,7 @@ module OperationQueriable
   module ClassMethods
 
     def set_general_operations
-      operations = OperationsByUser
+      operations = Operations::OperationsByUser
         .includes(:operation)
         .includes(:agent)
         .includes(:shipper)
@@ -34,7 +34,7 @@ module OperationQueriable
     	user_ids = User.where('company_name ilike ?', "%"+search_param+"%")
     	OperationsByUser
     		.where(agent_id: user_ids)
-    		.or(OperationsByUser.where(shipper_id: user_ids))
+    		.or(Operations::OperationsByUser.where(shipper_id: user_ids))
     		.includes(:operation)
     		.references(:operations)
     end

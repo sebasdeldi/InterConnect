@@ -40,7 +40,7 @@ document.addEventListener("turbolinks:load", function() {
 	var redirectOnSuccess = () => {
 		$('.input').val('');
 		setTimeout(function() {
-		  window.location.href = "/operations_by_users/new"
+		  window.location.href = "/operations/operations_by_users/new"
 		}, 2500);
 	}
 

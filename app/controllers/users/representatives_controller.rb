@@ -8,7 +8,7 @@ module Users
   		query_params = [cookies[:modality], cookies[:status], cookies[:search]]
 
       @operations = RecordsLists::Representative.fetch_representative_operations(cookies[:sort_param], query_params, current_user)
-      @operations_by_repre =  Operation.where(id: OperationsByUser.where(representative_id: current_user))
+      @operations_by_repre =  Operation.where(id: Operations::OperationsByUser.where(representative_id: current_user))
       @tasks = Users::Representative.fetch_tasks(params, current_user, cookies[:date_range_param])
       
       set_cookies(params)

@@ -25,7 +25,7 @@ class FclExwOperationMailer < ApplicationMailer
 	  @agent = agent
 	  @secure_id = secure_id
 	  @operation = Operation.find_by(secure_id: secure_id)
-	  op_by_user = OperationsByUser.find_by(operation_id: @operation)
+	  op_by_user = Operations::OperationsByUser.find_by(operation_id: @operation)
 	  @consignee = User.find(op_by_user.consignee_id)
 	  attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
 	  delivery_options = { user_name: representative.email,
@@ -173,8 +173,8 @@ class FclExwOperationMailer < ApplicationMailer
 	def transfer_documents(additional_comment, operation, representative)
 		@operation = operation
 		@additional_comment = additional_comment
-		@shipper = OperationsByUser.find_by(operation: operation).shipper
-		@agent = OperationsByUser.find_by(operation: operation).agent
+		@shipper = Operations::OperationsByUser.find_by(operation: operation).shipper
+		@agent = Operations::OperationsByUser.find_by(operation: operation).agent
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
 		delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password
@@ -186,7 +186,7 @@ class FclExwOperationMailer < ApplicationMailer
 
 	def issue_profit(operation, representative)
 		@operation = operation
-		@agent = OperationsByUser.find_by(operation: operation).agent
+		@agent = Operations::OperationsByUser.find_by(operation: operation).agent
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
 		delivery_options = { user_name: representative.email,
 	                       password: representative.outlook_password

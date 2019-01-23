@@ -17,7 +17,7 @@ module OperationsByUsersHelper
 	end
 
 	def new_operation
-		OperationsByUser.new
+		Operations::OperationsByUser.new
 	end
 
 end

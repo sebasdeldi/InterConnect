@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-	resources :operations_by_users, only: [:new, :create, :edit, :update]
 	resources :operations, only: [:show]
 	
 	post "/carrier_info", to: "operations#carrier_info"
@@ -79,6 +78,10 @@ Rails.application.routes.draw do
 	end
   get '/users/edit/:id', to: 'users#edit', as: 'user'
   patch '/users/edit/:id', to: 'users#update'
+
+  namespace :operations do
+  	resources :operations_by_users, only: [:new, :create, :edit, :update]
+  end
 
 
   devise_scope :user do

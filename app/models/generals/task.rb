@@ -17,19 +17,19 @@ module Generals
 
     def self.get_data(current_user, due_date)
     	if due_date == 'today'
-    		Generals::Task.where(operation_id: OperationsByUser.where(representative_id: current_user))
+    		Generals::Task.where(operation_id: Operations::OperationsByUser.where(representative_id: current_user))
     			.where(status: 0)
     			.where(due_date: Date.today)
     	elsif due_date == 'this_week'
-    		Generals::Task.where(operation_id: OperationsByUser.where(representative_id: current_user))
+    		Generals::Task.where(operation_id: Operations::OperationsByUser.where(representative_id: current_user))
     			.where(status: 0)
     			.where('due_date < ?', Date.today + 7.days)
     	elsif due_date == 'this_month'
-    		Generals::Task.where(operation_id: OperationsByUser.where(representative_id: current_user))
+    		Generals::Task.where(operation_id: Operations::OperationsByUser.where(representative_id: current_user))
     			.where(status: 0)
     			.where('due_date < ?', Date.today + 30.days)
       elsif due_date == 'all'
-        Generals::Task.where(operation_id: OperationsByUser.where(representative_id: current_user))
+        Generals::Task.where(operation_id: Operations::OperationsByUser.where(representative_id: current_user))
           .where(status: 0)
     	end
    	end

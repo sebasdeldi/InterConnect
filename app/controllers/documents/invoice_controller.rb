@@ -25,7 +25,7 @@ module Documents
 
 		def request_invoice
 		  op = Operation.find_by(secure_id: params[:secure_id])
-		  @shipper = OperationsByUser.find_by(operation_id: op.id).shipper
+		  @shipper = Operations::OperationsByUser.find_by(operation_id: op.id).shipper
 		  FclExwOperationMailer.request_invoice(@shipper, current_user, params[:link]).deliver_later
 		  redirect(op.id, true)
 		end

@@ -1,7 +1,7 @@
 module Users	
 	class TeamsController < ApplicationController
 		def index
-			@operations = OperationsByUser.where(representative_id: User.where(team_id: Users::Team.where(team_leader: current_user.id)))
+			@operations = Operations::OperationsByUser.where(representative_id: User.where(team_id: Users::Team.where(team_leader: current_user.id)))
 			@difficult_operations = @operations.where('operations.difficulty = ?', 'HARD').includes(:operation).references(:operation) 
 			@team = Users::Team.find_by(team_leader: current_user.id)
 			if request.post?
@@ -15,11 +15,11 @@ module Users
 
 		def show
 			@representative = User.find(params[:id])
-			@operations = OperationsByUser.where(representative_id: params[:id])
+			@operations = Operations::OperationsByUser.where(representative_id: params[:id])
 		end
 
 		def change_representative
-			OperationsByUser.find(params[:operation_id]).update(representative_id: params[:representative])
+			Operations::OperationsByUser.find(params[:operation_id]).update(representative_id: params[:representative])
 			redirect_back(fallback_location: authenticated_root_path)
 		end
 	end

@@ -82,7 +82,7 @@ module FclExwSteps
     	end
 
     	def self.update_shipper_ein(params, op)
-    		shipper = OperationsByUser.find_by(operation_id: op.id).shipper
+    		shipper = Operations::OperationsByUser.find_by(operation_id: op.id).shipper
     		if shipper.ein != params[:fcl_exw_steps_cargo_info][:ein]
           shipper.update_attribute('ein', params[:fcl_exw_steps_cargo_info][:ein])
     		end

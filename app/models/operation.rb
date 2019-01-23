@@ -8,7 +8,7 @@ class Operation < ApplicationRecord
 	def self.send_fcl_exw_info_confirmation
 		operations = Operation.where(fcl_exw_info_requested: true, fcl_exw_info_confirmed: false)
 		operations.each do |operation|
-			OperationsByUser.where(operation_id: operation.id).each do |pair|
+			Operations::OperationsByUser.where(operation_id: operation.id).each do |pair|
 				FclExwOperationMailer.info_confirmation(pair.shipper, pair.representative, pair.agent).deliver_now
 			end
 		end
@@ -17,7 +17,7 @@ class Operation < ApplicationRecord
 	def self.send_fcl_exw_quotation_confirmation
 		operations = Operation.where(fcl_exw_quotation_confirmed: false)
 		operations.each do |operation|
-			OperationsByUser.where(operation_id: operation.id).each do |pair|
+			Operations::OperationsByUser.where(operation_id: operation.id).each do |pair|
 				FclExwOperationMailer.info_confirmation(pair.shipper, pair.representative, pair.agent).deliver_now
 			end
 		end

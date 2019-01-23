@@ -34,7 +34,7 @@ module FclExwSteps
       end
         
       if existing_booking_info.update!(fcl_booking_info_params.merge(operation_id: operation.id))
-        agent = OperationsByUser.find_by(operation_id: operation.id).agent
+        agent = Operations::OperationsByUser.find_by(operation_id: operation.id).agent
   			FclExwOperationMailer.booking_info(agent, current_user, existing_booking_info).deliver_later
         #FclExwOperationMailer.transfer_documents("", operation, current_user).deliver_later
   			true

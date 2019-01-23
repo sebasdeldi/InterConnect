@@ -58,7 +58,7 @@ module ApplicationHelper
 	end
 
 	def operation_by_user(operation)
-		OperationsByUser.find_by(operation_id: operation)
+		Operations::OperationsByUser.find_by(operation_id: operation)
 	end
 
 	def cargo_info(operation)
