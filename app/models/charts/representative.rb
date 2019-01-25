@@ -13,7 +13,7 @@ module Charts
       charts_info = [
         set_charts_date_range(all_operations, date_range), 
         set_charts_date_range(comleted_operations, date_range), 
-        set_charts_date_range(in_progress_operations, date_range) 
+        set_charts_date_range(in_progress_operations, date_range)
       ]
     end
 

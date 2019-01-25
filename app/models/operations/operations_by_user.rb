@@ -8,7 +8,6 @@ module Operations
     validates :agent_id, :shipper_id, :consignee_id, :operation_id, presence: true
 
     # fields is an array conteining [ reference, modality, strong_params_for_representatives, current_user, pieces_number ]
-
     def self.create_for_representatives(fields)
   		operation = create_operation(fields[1], fields[0], fields[4], fields[6], fields[7], fields[8], fields[9], fields[10], fields[11], fields[12], fields[13], fields[14], fields[15], fields[16])
   		@operations_by_user = Operations::OperationsByUser.create(fields[2].merge(operation_id: operation.id, representative_id: fields[3].id))
@@ -51,11 +50,10 @@ module Operations
     		operation = Operation.create(reference: reference, status: 'IN PROGRESS', status_message:'Confirm quotation', 
           modality: modality, steps_number: steps_number, current_step: 0, pieces_number: pieces_number, agent_reference: agent_reference,
           pol: pol, pod: pod, origin_address: origin_address, origin_city: origin_city, origin_state: origin_state, origin_zip_code: origin_zip_code, origin_country: origin_country,
-           destination: destination, shipper_reference: shipper_reference, consignee_reference: consignee_reference)
+          destination: destination, shipper_reference: shipper_reference, consignee_reference: consignee_reference)
         create_steps(operation)
         operation
       end
-
 
       def self.update_operation(agent_reference, shipper_reference, consignee_reference, pol, pod, origin_address, origin_city, origin_state, origin_zip_code, origin_country, destination, operation)
         operation.update(agent_reference: agent_reference,

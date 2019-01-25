@@ -144,18 +144,6 @@ ActiveRecord::Schema.define(version: 20210927200628) do
     t.index ["role_id"], name: "index_functionalities_on_role_id"
   end
 
-  create_table "general_cargo_infos", force: :cascade do |t|
-    t.bigint "operation_id"
-    t.integer "pieces_number"
-    t.string "invoice"
-    t.string "packing_list"
-    t.string "tax_id"
-    t.string "pv_address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["operation_id"], name: "index_general_cargo_infos_on_operation_id"
-  end
-
   create_table "insurances", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -371,7 +359,6 @@ ActiveRecord::Schema.define(version: 20210927200628) do
   add_foreign_key "fcl_exw_steps_quotation_sellings", "operations"
   add_foreign_key "fcl_exw_steps_request_bookings", "operations"
   add_foreign_key "functionalities", "roles"
-  add_foreign_key "general_cargo_infos", "operations"
   add_foreign_key "insurances", "operations"
   add_foreign_key "invoices", "operations"
   add_foreign_key "operations_by_users", "operations"

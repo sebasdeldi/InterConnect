@@ -16,7 +16,6 @@ module Operations
 			end
 		end
 
-
 		def edit
 			@operation = Operation.find(params[:id])
 			@op_by_user = Operations::OperationsByUser.find_by(operation_id: @operation.id)

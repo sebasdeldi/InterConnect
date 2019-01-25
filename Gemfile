@@ -37,17 +37,16 @@ gem 'devise'
 
 # Environment variables handler
 gem "figaro"
-
 gem 'whenever', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13'
+  gem 'capybara'
   gem 'selenium-webdriver'
-  # Use mysql as the database for Active Record
-  #gem 'mysql2', '>= 0.3.18', '< 0.5'
+  # Testing suite
+  gem 'rspec-rails', '~> 3.8'
 end
 
 group :development do
@@ -60,6 +59,14 @@ group :development do
   gem "letter_opener"
 end
 
+group :test do
+  # Fixtures replacement
+  gem 'factory_bot_rails'
+  # Automatically run specs
+  gem 'guard-rspec'
+  # Adds controller testing functionality
+  gem 'rails-controller-testing'
+end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -59,4 +59,4 @@ users = User.create!([
 
 ])
 
-Team.create(team_leader: 2)
+Users::Team.create(team_leader: 2)
