@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe FclExwSteps::InfoConfirmed, type: :model do
+	let(:operation) { create(:operation) }
+
   it "is valid with valid attributes" do
-  	operation = create(:operation)
   	obj = described_class.new(operation_id: operation.id)
   	expect(obj).to be_valid
   end

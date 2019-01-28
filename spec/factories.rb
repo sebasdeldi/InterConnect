@@ -117,6 +117,8 @@ FactoryBot.define do
     origin_state "FL" 
     origin_country "USA"
   end
+
+
 end
 
 

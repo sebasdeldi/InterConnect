@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Documents::Insurance, type: :model do
+	let(:operation) { create(:operation) }
+
   it "is valid with valid attributes" do
-  	operation = create(:operation)
   	obj = described_class.new(operation_id: Operation.last.id)
   	expect(obj).to be_valid
   end
