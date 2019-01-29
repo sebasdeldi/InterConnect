@@ -12,8 +12,9 @@ module Documents
 		end
 
 		def create
-		  if Documents::Invoice.find_by(operation_id: Operation.find_by(secure_id: params[:secure_id]).id)
-		    if Documents::Invoice.update(invoice_params.merge(requested: true))
+			invoice = Documents::Invoice.find_by(operation_id: Operation.find_by(secure_id: params[:secure_id]).id)
+		  unless invoice.nil?
+		    if invoice.update(invoice_params.merge(requested: true))
 		      redirect(Operation.find_by(secure_id: params[:secure_id]).id)
 		    end
 		  else

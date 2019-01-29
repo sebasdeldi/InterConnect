@@ -116,9 +116,15 @@ FactoryBot.define do
     origin_city "Miami" 
     origin_state "FL" 
     origin_country "USA"
+    secure_id "123123"
   end
 
+  # Create Insurance
+  factory :insurance, class: Documents::Insurance do
+  end
 
+  # Create Invoice
+  factory :invoice, class: Documents::Invoice do
+  end
 end
-
 

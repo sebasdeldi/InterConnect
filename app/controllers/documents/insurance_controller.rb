@@ -21,8 +21,7 @@ module Documents
     end
 
     def create
-      operation = Operation.find(params[:insurance][:operation_id])
-      @insurance = Documents::Insurance.find_by(operation_id: operation)
+      @insurance = Documents::Insurance.find_by(operation_id: params[:insurance][:operation_id])
       @insurance.update(insurance_params)
       redirect(params[:insurance][:operation_id], 'saved')
     end
