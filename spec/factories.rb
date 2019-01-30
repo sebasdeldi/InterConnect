@@ -44,7 +44,7 @@ FactoryBot.define do
   factory :admin, class: User do
     sequence(:email) { |n| "admin#{n}@interwf.com" }
   	password {'12345678'}
-  	role_id :admin_role 
+  	role_id 1 
     company_name {'Interworld Freight'}
     phone_number {'3123213412'}
     contact_first_name {'Daniel'} 
@@ -55,7 +55,7 @@ FactoryBot.define do
   factory :representative, class: User do
     sequence(:email) { |n| "repre#{n}@interwf.com" }
   	password {'12345678'}
-  	role_id :representative_role 
+  	role_id 2 
     company_name {'Interworld Freight'}
     phone_number {'3123213412'}
     contact_first_name {'Juan'} 
@@ -66,7 +66,7 @@ FactoryBot.define do
   factory :agent, class: User do
     sequence(:email) { |n| "agent#{n}@agent.com" }
   	password {'12345678'}
-  	role_id :agent_role 
+  	role_id 3 
     company_name {'Agent Company'}
     phone_number {'3123213412'}
     contact_first_name {'Camilo'} 
@@ -99,7 +99,7 @@ FactoryBot.define do
   factory :team_leader, class: User do
     sequence(:email) { |n| "tleader#{n}@interwf.com" }
   	password {'12345678'}
-  	role_id :team_leader_role 
+  	role_id 10 
     company_name {'Interworld Freight'}
     phone_number {'3123213412'}
     contact_first_name {'Laura'} 
