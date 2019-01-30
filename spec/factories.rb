@@ -106,9 +106,21 @@ FactoryBot.define do
     contact_last_name {'Fontalvo'}
   end
 
+  # Create carrier
+  factory :carrier, class: User do
+    sequence(:email) { |n| "carrier#{n}@interwf.com" }
+    password {'12345678'}
+    role_id :representative_role 
+    company_name {'Carrier Company'}
+    phone_number {'3123213412'}
+    contact_first_name {'Lucas'} 
+    contact_last_name {'Gomez'}
+  end
+
   # Create Operations
   factory :operation, class: Operation do
     modality 'FCL-EXW'
+    current_step 0
     pol "Albania, Durres (Durazzo), AL DRZ"
     pod "Algeria, Ghazaouet, DZ GHA" 
     origin_address "calle 15"
@@ -126,5 +138,19 @@ FactoryBot.define do
   # Create Invoice
   factory :invoice, class: Documents::Invoice do
   end
+
+  # Create Task
+  factory :task, class: Generals::Task do
+    note "some note"
+    association :operation, factory: :operation
+    due_date Date.today
+  end
+
+  # Create incomplete Task
+  factory :fail_task, class: Generals::Task do
+    association :operation, factory: :operation
+    due_date Date.today
+  end
+
 end
 

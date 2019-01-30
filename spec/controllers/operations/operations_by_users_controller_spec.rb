@@ -55,7 +55,7 @@ RSpec.describe Operations::OperationsByUsersController, type: :controller do
       allow(Operations::OperationsByUser).to receive(:update_operation_by_representative).and_return([operation_by_user, []])
       put :update, params: {"id"=>operation_by_user.operation_id, "operations_operations_by_user"=>{"agent_id"=>"158", "shipper_id"=>"159", "consignee_id"=>"160"}}
       expect(flash[:notice]).to eq("Operation successfuly created.")   
-      expect(response).to redirect_to redirect_to operation_path(operation_by_user.operation_id)
+      expect(response).to redirect_to operation_path(operation_by_user.operation_id)
     end
   end
 

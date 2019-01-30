@@ -78,7 +78,7 @@
 			<% end %>
 
 		  <b class="diff-label">Difficulty:</b>
-		  <%= form_tag change_difficulty_path, class: 'button-icon' do %>
+		  <%= form_tag change_difficulty_path, class: 'button-icon', method: 'put' do %>
 			  <div class="select">
 			    <%= select_tag "difficulty", options_for_select([['EASY', 'EASY'], ['MEDIUM','MEDIUM'], ['HARD','HARD']], @operation.difficulty), { onchange: 'this.form.submit();', class: "difficulty" } %>
 			  </div>

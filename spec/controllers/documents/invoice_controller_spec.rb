@@ -45,7 +45,9 @@ RSpec.describe Documents::InvoiceController, type: :controller do
 
 	  it 'redirects to operation with success flash and creates' do
 	  	sign_in(user)
-	    post :create, params: {"secure_id"=> operation.secure_id, "invoice"=>{ "operation_id"=>operation.id} }
+	  	expect {
+	  		post :create, params: {"secure_id"=> operation.secure_id, "invoice"=>{ "operation_id"=>operation.id} }
+	  	}.to change {Documents::Invoice.count}
 	    expect(flash[:notice]).to eq("Information correctly saved")   
 	    expect(response).to redirect_to operation_path(operation)
 	  end

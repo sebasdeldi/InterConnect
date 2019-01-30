@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 	resources :operations, only: [:show]
 	
 	post "/carrier_info", to: "operations#carrier_info"
+	put "/change_difficulty", to: "operations#change_difficulty", as: "change_difficulty"
 
 	namespace :documents do
 		get "/booking_sheet/:operation_id", to: "booking_sheet#show", as: "booking_sheet"
@@ -50,16 +51,11 @@ Rails.application.routes.draw do
 		match "/admin/representatives_records", to: "representatives#index", as: "representatives", via: [:get, :post]
 	end
 
-	post "/change_difficulty", to: "operations#change_difficulty", as: "change_difficulty"
-
-
 	namespace :generals do	
 		get "/tasks/:id", to: "tasks#show", as: "task"
 		post "/tasks", to: "tasks#create", as: "tasks"
-		post "/update_tasks", to: "tasks#update", as: "update_tasks"
+		put "/update_tasks", to: "tasks#update", as: "update_tasks"
 	end
-
-
 
 	devise_for :users, controllers: {
 		sessions: 'users/sessions',

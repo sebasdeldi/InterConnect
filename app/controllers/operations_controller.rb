@@ -14,5 +14,4 @@ class OperationsController < ApplicationController
 		Operation.find(params[:operation_id]).update(difficulty: params[:difficulty])
 		redirect_back(fallback_location: authenticated_root_path)
 	end
-
 end
