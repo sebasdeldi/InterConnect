@@ -152,5 +152,24 @@ FactoryBot.define do
     due_date Date.today
   end
 
+  # Create cargo info
+  factory :cargo_info, class: FclExwSteps::CargoInfo do
+    association :operation, factory: :operation
+  end
+
+  # Create booking info
+  factory :booking_info, class: FclExwSteps::CargoInfo do
+    association :operation, factory: :operation
+  end
+
+  # Create pieces
+  factory :piece, class: FclExwSteps::Piece do
+    association :fcl_exw_steps_cargo_info_id, factory: :cargo_info
+  end
+
+  # Create quotation
+  factory :quotation, class: FclExwSteps::QuotationConfirmed do
+    association :operation, factory: :operation
+  end
 end
 

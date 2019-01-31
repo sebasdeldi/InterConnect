@@ -13,15 +13,6 @@ module FclExwSteps
 			end
 		end
 
-		def update_representative
-			operation = Operation.find(params[:id])
-			quotation = FclExwSteps::QuotationConfirmed.find_by(operation_id: operation)
-			if quotation.update(files: params[:files])
-				flash[:notice] = "Quotation correctly sent"
-				redirect_to operation_path(params[:id])
-			end
-		end
-
 		def confirm_quotation
 			confirmation = FclExwSteps::QuotationConfirmed.confirm_quotation(params, current_user)
 			if params[:files].present? || params[:commit] == 'ISSUE'

@@ -5,7 +5,7 @@ module FclExwSteps
 			unless pieces.empty?
 				pieces << 'update'
 			end
-			render json: pieces 
+			render json: pieces
 		end
 	end
 end

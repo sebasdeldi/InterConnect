@@ -23,9 +23,9 @@ module FclExwSteps
 				"Quotation requested to the pricing department"
 			else
 				if params[:files].present?
+					step.update(completed: true, files: params[:files])
 					if step.created_at == step.updated_at
 						operation.update(fcl_exw_quotation_confirmed: true, status: 'IN PROGRESS', status_message:'Confirm quotation selling prices', current_step: operation.current_step + 1)
-						step.update(completed: true, files: params[:files])
 						"Step confirmed, no more reminders will be sent"
 					end
 				else
