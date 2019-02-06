@@ -69,7 +69,7 @@ module OperationsHelper
 	end
 
 	def quotation_confirmed_tasks(operation)
-		Generals::Task.where(operation_id: operation, status: '0',fcl_exw_steps_quotation_confirmed_id: FclExwSteps::QuotationConfirmed.find_by(operation_id: operation))
+		Generals::Task.where(operation_id: operation, status: '0',common_steps_quotation_confirmed_id: CommonSteps::QuotationConfirmed.find_by(operation_id: operation))
 	end
 
 	def tasks(operation)
@@ -85,6 +85,6 @@ module OperationsHelper
 	end
 
 	def info_requested_tasks(operation)
-		Generals::Task.where(operation_id: operation, status: '0', fcl_exw_steps_info_requested_id: FclExwSteps::InfoRequested.find_by(operation_id: operation))
+		Generals::Task.where(operation_id: operation, status: '0', common_steps_info_requested_id: CommonSteps::InfoRequested.find_by(operation_id: operation))
 	end
 end

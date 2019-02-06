@@ -3,7 +3,7 @@ module Generals
     belongs_to :fcl_exw_steps_cargo_info, optional: true
     belongs_to :fcl_exw_steps_booking_info, optional: true
     belongs_to :fcl_exw_steps_info_confirmed, optional: true
-    belongs_to :fcl_exw_steps_info_requested, optional: true
+    belongs_to :common_steps_info_requested, optional: true
     belongs_to :fcl_exw_steps_quotation_confirmed, optional: true
 
     belongs_to :fcl_exw_steps_container_delivery, optional: true
@@ -40,9 +40,9 @@ module Generals
       elsif params[:fcl_exw_info_confirmed_step]
         Generals::Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_steps_info_confirmed_id: params[:fcl_exw_info_confirmed_step], operation_id: params[:operation_id] )
       elsif params[:fcl_exw_info_requested_step]
-        Generals::Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_steps_info_requested_id: params[:fcl_exw_info_requested_step], operation_id: params[:operation_id] )
+        Generals::Task.new(note: params[:note], due_date: params[:due_date], common_steps_info_requested_id: params[:fcl_exw_info_requested_step], operation_id: params[:operation_id] )
       elsif params[:fcl_exw_quotation_confirmed_step]
-        Generals::Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_steps_quotation_confirmed_id: params[:fcl_exw_quotation_confirmed_step], operation_id: params[:operation_id] )
+        Generals::Task.new(note: params[:note], due_date: params[:due_date], common_steps_quotation_confirmed_id: params[:fcl_exw_quotation_confirmed_step], operation_id: params[:operation_id] )
       elsif params[:fcl_exw_request_booking_step]
         Generals::Task.new(note: params[:note], due_date: params[:due_date], fcl_exw_steps_request_bookings_id: params[:fcl_exw_request_booking_step], operation_id: params[:operation_id] )
       elsif params[:fcl_exw_booking_info_steps]

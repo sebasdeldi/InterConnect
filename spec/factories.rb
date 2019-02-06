@@ -168,7 +168,7 @@ FactoryBot.define do
   end
 
   # Create quotation
-  factory :quotation, class: FclExwSteps::QuotationConfirmed do
+  factory :quotation, class: CommonSteps::QuotationConfirmed do
     association :operation, factory: :operation
   end
 end

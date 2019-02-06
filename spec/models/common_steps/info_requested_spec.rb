@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe FclExwSteps::InfoRequested, type: :model do
+RSpec.describe CommonSteps::InfoRequested, type: :model do
 	let(:operation) { create(:operation) }
 
   it "is valid with valid attributes" do

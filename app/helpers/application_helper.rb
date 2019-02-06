@@ -25,7 +25,7 @@ module ApplicationHelper
 	end
 
 	def quotation(operation)
-		FclExwSteps::QuotationConfirmed.find_by(operation_id: operation)
+		CommonSteps::QuotationConfirmed.find_by(operation_id: operation)
 	end
 
 	def modality

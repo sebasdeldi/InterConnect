@@ -95,7 +95,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_fcl_exw_info_requested?(operation_id)
-    FclExwSteps::InfoRequested.find_by(operation_id: operation_id).completed
+    CommonSteps::InfoRequested.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_loading_confirmed?(operation_id)
@@ -111,7 +111,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_fcl_exw_quotation_confirmed?(operation_id)
-    FclExwSteps::QuotationConfirmed.find_by(operation_id: operation_id).completed
+    CommonSteps::QuotationConfirmed.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_booking_requested?(operation_id)

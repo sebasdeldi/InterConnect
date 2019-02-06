@@ -1,4 +1,4 @@
-module FclExwSteps	
+module CommonSteps	
 	class QuotationConfirmedController < ApplicationController
 		def new
 			@operation = Operation.find_by(secure_id: params[:secure_id])
@@ -6,15 +6,15 @@ module FclExwSteps
 
 		def update_pricing
 			operation = Operation.find_by(secure_id: params[:secure_id])
-			quotation = FclExwSteps::QuotationConfirmed.find_by(operation_id: operation)
+			quotation = CommonSteps::QuotationConfirmed.find_by(operation_id: operation)
 			if quotation.update(files: params[:files])
 				flash[:notice] = "Quotation correctly sent"
-				redirect_to fcl_exw_steps_new_quotation_view_path(params[:secure_id])
+				redirect_to common_steps_new_quotation_view_path(params[:secure_id])
 			end
 		end
 
 		def confirm_quotation
-			confirmation = FclExwSteps::QuotationConfirmed.confirm_quotation(params, current_user)
+			confirmation = CommonSteps::QuotationConfirmed.confirm_quotation(params, current_user)
 			if params[:files].present? || params[:commit] == 'ISSUE'
 				flash[:notice] = confirmation
 			else

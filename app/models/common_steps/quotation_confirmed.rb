@@ -1,6 +1,6 @@
-module FclExwSteps  	
+module CommonSteps  	
 	class QuotationConfirmed < ApplicationRecord
-		self.table_name = 'fcl_exw_steps_quotation_confirmeds'
+		self.table_name = 'common_steps_quotation_confirmeds'
 		has_many :tasks
 		belongs_to :operation
 
@@ -15,7 +15,7 @@ module FclExwSteps
 			agent = User.find(params[:agent_id])
 			op = Operation.find(params[:operation_id])
 			operation =  Operation.find(params[:operation_id])
-			step = FclExwSteps::QuotationConfirmed.find_by(operation_id: params[:operation_id])
+			step = CommonSteps::QuotationConfirmed.find_by(operation_id: params[:operation_id])
 			if params[:commit] == 'ISSUE'
 				shipper = User.find(params[:shipper_id])
 				agent = User.find(params[:agent_id])

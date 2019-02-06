@@ -15,6 +15,26 @@ ActiveRecord::Schema.define(version: 20210927200628) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "common_steps_info_requesteds", force: :cascade do |t|
+    t.boolean "completed", default: false
+    t.bigint "operation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["operation_id"], name: "index_common_steps_info_requesteds_on_operation_id"
+  end
+
+  create_table "common_steps_quotation_confirmeds", force: :cascade do |t|
+    t.boolean "completed", default: false
+    t.bigint "operation_id"
+    t.text "additional_comment"
+    t.float "neta"
+    t.float "venta"
+    t.json "files"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["operation_id"], name: "index_common_steps_quotation_confirmeds_on_operation_id"
+  end
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
@@ -88,26 +108,6 @@ ActiveRecord::Schema.define(version: 20210927200628) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["operation_id"], name: "index_fcl_exw_steps_info_confirmeds_on_operation_id"
-  end
-
-  create_table "fcl_exw_steps_info_requesteds", force: :cascade do |t|
-    t.boolean "completed", default: false
-    t.bigint "operation_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["operation_id"], name: "index_fcl_exw_steps_info_requesteds_on_operation_id"
-  end
-
-  create_table "fcl_exw_steps_quotation_confirmeds", force: :cascade do |t|
-    t.boolean "completed", default: false
-    t.bigint "operation_id"
-    t.text "additional_comment"
-    t.float "neta"
-    t.float "venta"
-    t.json "files"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["operation_id"], name: "index_fcl_exw_steps_quotation_confirmeds_on_operation_id"
   end
 
   create_table "fcl_exw_steps_quotation_sellings", force: :cascade do |t|
@@ -279,9 +279,9 @@ ActiveRecord::Schema.define(version: 20210927200628) do
     t.string "status", default: "0"
     t.string "subject"
     t.date "due_date"
-    t.bigint "fcl_exw_steps_info_requested_id"
+    t.bigint "common_steps_info_requested_id"
     t.bigint "fcl_exw_steps_info_confirmed_id"
-    t.bigint "fcl_exw_steps_quotation_confirmed_id"
+    t.bigint "common_steps_quotation_confirmed_id"
     t.bigint "fcl_exw_steps_cargo_info_id"
     t.bigint "fcl_exw_steps_request_bookings_id"
     t.bigint "fcl_exw_steps_booking_info_id"
@@ -290,13 +290,13 @@ ActiveRecord::Schema.define(version: 20210927200628) do
     t.bigint "operation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["common_steps_info_requested_id"], name: "index_tasks_on_common_steps_info_requested_id"
+    t.index ["common_steps_quotation_confirmed_id"], name: "index_tasks_on_common_steps_quotation_confirmed_id"
     t.index ["fcl_exw_steps_booking_info_id"], name: "index_tasks_on_fcl_exw_steps_booking_info_id"
     t.index ["fcl_exw_steps_cargo_info_id"], name: "index_tasks_on_fcl_exw_steps_cargo_info_id"
     t.index ["fcl_exw_steps_container_delivery_id"], name: "index_tasks_on_fcl_exw_steps_container_delivery_id"
     t.index ["fcl_exw_steps_container_loading_id"], name: "index_tasks_on_fcl_exw_steps_container_loading_id"
     t.index ["fcl_exw_steps_info_confirmed_id"], name: "index_tasks_on_fcl_exw_steps_info_confirmed_id"
-    t.index ["fcl_exw_steps_info_requested_id"], name: "index_tasks_on_fcl_exw_steps_info_requested_id"
-    t.index ["fcl_exw_steps_quotation_confirmed_id"], name: "index_tasks_on_fcl_exw_steps_quotation_confirmed_id"
     t.index ["fcl_exw_steps_request_bookings_id"], name: "index_tasks_on_fcl_exw_steps_request_bookings_id"
     t.index ["operation_id"], name: "index_tasks_on_operation_id"
   end
@@ -349,13 +349,13 @@ ActiveRecord::Schema.define(version: 20210927200628) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "common_steps_info_requesteds", "operations"
+  add_foreign_key "common_steps_quotation_confirmeds", "operations"
   add_foreign_key "fcl_exw_steps_booking_infos", "operations"
   add_foreign_key "fcl_exw_steps_cargo_infos", "operations"
   add_foreign_key "fcl_exw_steps_container_deliveries", "operations"
   add_foreign_key "fcl_exw_steps_container_loadings", "operations"
   add_foreign_key "fcl_exw_steps_info_confirmeds", "operations"
-  add_foreign_key "fcl_exw_steps_info_requesteds", "operations"
-  add_foreign_key "fcl_exw_steps_quotation_confirmeds", "operations"
   add_foreign_key "fcl_exw_steps_quotation_sellings", "operations"
   add_foreign_key "fcl_exw_steps_request_bookings", "operations"
   add_foreign_key "functionalities", "roles"
@@ -365,13 +365,13 @@ ActiveRecord::Schema.define(version: 20210927200628) do
   add_foreign_key "pieces", "fcl_exw_steps_cargo_infos"
   add_foreign_key "slis", "operations"
   add_foreign_key "tariff_groups", "slis"
+  add_foreign_key "tasks", "common_steps_info_requesteds"
+  add_foreign_key "tasks", "common_steps_quotation_confirmeds"
   add_foreign_key "tasks", "fcl_exw_steps_booking_infos"
   add_foreign_key "tasks", "fcl_exw_steps_cargo_infos"
   add_foreign_key "tasks", "fcl_exw_steps_container_deliveries"
   add_foreign_key "tasks", "fcl_exw_steps_container_loadings"
   add_foreign_key "tasks", "fcl_exw_steps_info_confirmeds"
-  add_foreign_key "tasks", "fcl_exw_steps_info_requesteds"
-  add_foreign_key "tasks", "fcl_exw_steps_quotation_confirmeds"
   add_foreign_key "tasks", "fcl_exw_steps_request_bookings", column: "fcl_exw_steps_request_bookings_id"
   add_foreign_key "tasks", "operations"
   add_foreign_key "users", "roles"

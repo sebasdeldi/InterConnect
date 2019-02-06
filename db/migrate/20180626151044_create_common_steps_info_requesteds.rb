@@ -1,6 +1,6 @@
-class CreateFclExwStepsInfoRequesteds < ActiveRecord::Migration[5.1]
+class CreateCommonStepsInfoRequesteds < ActiveRecord::Migration[5.1]
   def change
-    create_table :fcl_exw_steps_info_requesteds do |t|
+    create_table :common_steps_info_requesteds do |t|
       t.boolean :completed, default: false
       t.references :operation, foreign_key: true
 
