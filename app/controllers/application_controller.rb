@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :resource_name, :resource, :devise_mapping, :resource_class, :is_admin?, :is_representative?, :is_shipper?,
     :is_agent?, :is_operation_completed?, :is_fcl_exw?, :is_fcl_exw_info_stage_completed?, :is_fcl_exw_info_requested?, :is_fcl_exw_info_confirmed?,
     :is_pricing_representative?, :is_fcl_exw_quotation_confirmed?, :is_fcl_exw_booking_requested?, :is_fcl_exw_booking_info_completed?, :is_leader?,
-    :is_fcl_exw_loading_confirmed?, :is_fcl_exw_delivery_confirmed?, :is_fcl_exw_quotation_sell_confirmed?
+    :is_fcl_exw_loading_confirmed?, :is_fcl_exw_delivery_confirmed?, :is_fcl_exw_quotation_sell_confirmed?, :is_lcl?
 
   # Roles detection helpers
   def is_admin?
@@ -88,6 +88,10 @@ class ApplicationController < ActionController::Base
 
   def is_fcl_exw?(operation_id)
     Operation.find(operation_id).modality == 'FCL - EXW' ? true : false
+  end
+
+  def is_lcl?(operation_id)
+    Operation.find(operation_id).modality == 'LCL' ? true : false
   end
 
   def is_fcl_exw_info_requested?(operation_id)

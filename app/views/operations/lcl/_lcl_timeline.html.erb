@@ -1,0 +1,40 @@
+<section class="full-section">
+	<div class="tile is-ancestor">
+	  <div class="tile is-vertical is-8">
+	    <div class="tile">
+	      <div class="tile is-parent is-vertical">
+	        <%= render 'operations/lcl/cards/new_process', number: '1'%>
+	        <%= render 'operations/fcl_exw/cards/cargo_information_request', operation_id: operation_id, number: '4' %> 
+	      </div>
+	      <div class="tile">
+		      <div class="tile is-parent is-vertical">
+		      	<%= render 'operations/fcl_exw/cards/quotation', operation_id: operation_id, number: '2' %>
+		        <%= render 'operations/fcl_exw/cards/information_response', operation_id: operation_id, number: '5' %> 
+		      </div>
+	      </div>
+	    </div>
+	    <div class="tile is-parent">
+	    	<%= render 'operations/fcl_exw/cards/request_booking', operation_id: operation_id, number: '7' %> 
+	    </div>	
+	  </div>
+	  <div class="tile is-parent is-vertical">
+	  	<%= render 'operations/fcl_exw/cards/quotation_sell_confirmation', operation_id: operation_id, number: '3' %>
+	    <%= render 'operations/fcl_exw/cards/cargo_info', operation_id: operation_id, number: '6' %> 
+	    <%= render 'operations/fcl_exw/cards/booking_info', operation_id: operation_id, number: '8' %> 
+	  </div>
+	</div>
+
+	<div class="tile is-ancestor">
+	  <div class="tile is-parent">
+	    <%= render 'operations/fcl_exw/cards/container_loading', operation_id: operation_id, number: '9' %> 
+	  </div>
+	  <div class="tile is-parent">
+	    <%= render 'operations/fcl_exw/cards/container_delivery', operation_id: operation_id, number: '10' %> 
+	  </div>
+	</div>
+	<br>
+	<br>
+</section>
+
+
+<%= render 'operations/lcl/modals/main',  operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, fcl_exw_container_loading_tasks: fcl_exw_container_loading_tasks , carriers: carriers, consignee: consignee, info_requested_tasks: info_requested_tasks, quotation_confirmed_tasks: quotation_confirmed_tasks, info_confirmed_tasks: info_confirmed_tasks, cargo_info_tasks: cargo_info_tasks, request_booking_tasks: request_booking_tasks, carriers: carriers, booking_info_tasks: booking_info_tasks, 	 fcl_exw_container_delivery_tasks: fcl_exw_container_delivery_tasks, fcl_exw_container_loading_tasks: fcl_exw_container_loading_tasks %>
