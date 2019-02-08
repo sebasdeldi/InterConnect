@@ -1,0 +1,129 @@
+<div class="modal fcl-booking">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        REQUEST BOOKING ORDER
+      </p>
+      <button class="delete close-modal fcl-booking" aria-label="close"></button>
+    </header>
+
+    <section class="modal-card-body">
+    	<div class=''>
+  			<div id="">
+  				<div class="timeline-item" id="fcl_exw_request_booking_timeline_item">
+  					<div class="timeline-content right <%= is_fcl_exw_booking_requested?(operation_id) ? 'step-completed-no-bg-right' : '' %>">
+  						
+  						<p>
+  							<center>
+  								<i class="fas fa-ship timeline-card-icon <%= is_fcl_exw_booking_requested?(operation_id) ? 'step-completed-icon' : '' %>""></i>
+  							</center>
+
+  						  <% if !request_booking_tasks.empty? %>
+  					    	<article class="message is-primary">
+  					    	  <div class="message-header">
+  					    	    <p><b><%= request_booking_tasks.count %> Tasks for this step</b></p>
+  					    	  </div>
+  					    	  <div class="message-body">
+  					    	  	<% request_booking_tasks.each do |task|%>
+  							  	    <%= link_to generals_task_path(task.id), class: "panel-block is-active" do %>
+  						  	  	    <span class="panel-icon">
+  						  	  	      <i class="fas fa-book" aria-hidden="true"></i>
+  						  	  	    </span>
+  						  	  	    <p>
+  						  	  	    	<%= task.note.truncate 45 %> || due: 
+  						  	  	    	<b><%= task.due_date %></b>
+  						  	  	    </p>
+  						  	  	  <% end %>
+  						  	  	<% end %>
+  					    	  </div>
+  					    	</article>
+  				    	<% end %>
+  							 
+  							<p>
+  								A booking order generated with the previous information will be sent to your <b>selected carrier</b>, please be aware of their confirmation.
+  							</p>
+  							<br>
+  							<%= form_tag ("/fcl_exw_steps/request_booking") do %>
+  								<label class="label">Carrier:</label>
+  						    <div class="control has-icons-left">
+  						      <div class="select full-select">
+  						        <%= select_tag :carrier_id, options_for_select(carriers.select("DISTINCT ON (company_name) *").map { |carrier| [carrier.company_name, carrier.id] }, booking_order(operation_id).carrier_id ), { include_blank: 'SELECT A CARRIER', class: 'full-select carrier-select' } %>
+  						      </div>
+  						      <div class="icon is-small is-left">
+  						        <i class="fas fa-ship"></i>
+  						      </div>
+  						    </div>
+                  <br>
+                  <br>
+                  <div class="carrier-info control">
+                    <% unless booking_order(operation_id).created_at ==  booking_order(operation_id).updated_at%>
+                      <label class="label">Contact:</label>
+                      <div class="control">
+                        <div class="select full-select">
+                          <%= select_tag :carrier_contact_id, options_for_select(carriers.where(company_name: User.find(booking_order(operation_id).carrier_id).company_name).map { |carrier| [carrier.email, carrier.id] }, booking_order(operation_id).carrier_contact_id ), { class: 'full-select carrier-select' } %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                  <br>
+                  <br>
+                  <div class="additional-message">
+                    <label class="label">Additional message:</label>
+                    <div class="control">
+                      <%= text_area_tag :additional_message, booking_order(operation_id).additional_message, class: "input note" %>
+                    </div>
+                  </div>
+
+  						    <br>
+  								<%= hidden_field_tag 'shipper_id', shipper.id %>
+  								<%= hidden_field_tag 'operation_id', operation_id %>
+  								<%= hidden_field_tag 'agent_id', agent.id %>
+                  <%= hidden_field_tag 'website', 'N/A', class: 'hidden-website' %>
+
+  								<%= submit_tag 'REQUEST', class: "request button is-link #{is_fcl_exw_booking_requested?(operation_id) ? 'step-completed' : ''  } "  %>
+                  <%= submit_tag 'REQUEST', class: "request website-redirect button is-link #{is_fcl_exw_booking_requested?(operation_id) ? 'step-completed' : ''  } "  %>
+                  <%= submit_tag 'NOTIFY AGENT', class: "button is-link #{is_fcl_exw_booking_requested?(operation_id) ? 'step-completed' : ''  } "  %>
+  								<a class="button is-primary right-button circle-button show-modal request_booking">
+  									<i class="fas fa-tasks"></i>
+  								</a>
+  							<% end %>
+  						</p>
+  					</div>
+  				</div>
+  			</div>
+    	</div>
+     	<br>
+    </section>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

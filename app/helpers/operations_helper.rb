@@ -81,7 +81,7 @@ module OperationsHelper
 	end
 
 	def info_confirmed_tasks(operation)
-		Generals::Task.where(operation_id: operation, status: '0', fcl_exw_steps_info_confirmed_id: FclExwSteps::InfoConfirmed.find_by(operation_id: operation))
+		Generals::Task.where(operation_id: operation, status: '0', common_steps_info_confirmed_id: CommonSteps::InfoConfirmed.find_by(operation_id: operation))
 	end
 
 	def info_requested_tasks(operation)

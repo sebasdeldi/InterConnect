@@ -4,18 +4,18 @@
 
 <%= render 'operations/common/modals/confirm_quotation' , operation_id: operation_id, agent: agent, shipper: shipper, quotation_confirmed_tasks: quotation_confirmed_tasks %>
 
-<%= render 'operations/fcl_exw/modals/info_received', operation_id: operation_id, agent: agent, shipper: shipper, info_confirmed_tasks: info_confirmed_tasks %>
+<%= render 'operations/common/modals/info_received', operation_id: operation_id, agent: agent, shipper: shipper, info_confirmed_tasks: info_confirmed_tasks %>
 
-<%= render 'operations/fcl_exw/modals/info_timeline_item', operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, cargo_info_tasks: cargo_info_tasks %>
+<%= render 'operations/common/modals/info_timeline_item', operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, cargo_info_tasks: cargo_info_tasks %>
 
-<%= render 'operations/fcl_exw/modals/request_booking_timeline_item', operation_id: operation_id, agent: agent, shipper: shipper, request_booking_tasks: request_booking_tasks, carriers: carriers %>
+<%= render 'operations/lcl/modals/request_booking_timeline_item', operation_id: operation_id, agent: agent, shipper: shipper, request_booking_tasks: request_booking_tasks, carriers: carriers %>
 
-<%= render 'operations/fcl_exw/modals/booking_info_item',  operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, booking_info_tasks: booking_info_tasks, carriers: carriers %>
+<%= render 'operations/lcl/modals/booking_info_item',  operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, booking_info_tasks: booking_info_tasks, carriers: carriers %>
 
-<%= render 'operations/fcl_exw/modals/container_delivery',  operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, 	 fcl_exw_container_delivery_tasks: fcl_exw_container_delivery_tasks , carriers: carriers %>
+<%= render 'operations/lcl/modals/container_delivery',  operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, 	 fcl_exw_container_delivery_tasks: fcl_exw_container_delivery_tasks , carriers: carriers %>
 
-<%= render 'operations/fcl_exw/modals/container_loading',  operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, fcl_exw_container_loading_tasks: fcl_exw_container_loading_tasks , carriers: carriers %>
+<%= render 'operations/lcl/modals/container_loading',  operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, fcl_exw_container_loading_tasks: fcl_exw_container_loading_tasks , carriers: carriers %>
 
-<%= render 'operations/fcl_exw/modals/container_loading',  operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, fcl_exw_container_loading_tasks: fcl_exw_container_loading_tasks , carriers: carriers %>
+<%= render 'operations/lcl/modals/container_loading',  operation_secure_id: operation_secure_id, operation_id: operation_id, agent: agent, shipper: shipper, fcl_exw_container_loading_tasks: fcl_exw_container_loading_tasks , carriers: carriers %>
 
 <%= render 'operations/common/modals/quotation_sell_confirmation' , operation_id: operation_id, agent: agent, shipper: shipper, quotation_confirmed_tasks: quotation_confirmed_tasks, carriers: carriers %>

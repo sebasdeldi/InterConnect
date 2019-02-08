@@ -64,7 +64,7 @@ module Operations
       def self.create_steps(operation)
         FclExwSteps::ContainerDelivery.create!(operation: operation)
         FclExwSteps::ContainerLoading.create!(operation: operation)
-        FclExwSteps::InfoConfirmed.create!(operation: operation)
+        CommonSteps::InfoConfirmed.create!(operation: operation)
         CommonSteps::QuotationConfirmed.create!(operation: operation)
         CommonSteps::InfoRequested.create!(operation: operation)
         FclExwSteps::RequestBooking.create!(operation: operation)

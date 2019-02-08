@@ -107,7 +107,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_fcl_exw_info_confirmed?(operation_id)
-    FclExwSteps::InfoConfirmed.find_by(operation_id: operation_id).completed
+    CommonSteps::InfoConfirmed.find_by(operation_id: operation_id).completed
   end
 
   def is_fcl_exw_quotation_confirmed?(operation_id)

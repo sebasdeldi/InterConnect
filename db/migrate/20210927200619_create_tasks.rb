@@ -6,7 +6,7 @@ class CreateTasks < ActiveRecord::Migration[5.1]
       t.string :subject
       t.date :due_date
       t.references :common_steps_info_requested, foreign_key: true
-      t.references :fcl_exw_steps_info_confirmed, foreign_key: true
+      t.references :common_steps_info_confirmed, foreign_key: true
       t.references :common_steps_quotation_confirmed, foreign_key: true
       t.references :fcl_exw_steps_cargo_info, foreign_key: true
       t.references :fcl_exw_steps_request_bookings, foreign_key: true

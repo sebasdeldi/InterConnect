@@ -1,0 +1,8 @@
+<article class="tile is-child notification step-not-completed <%= is_fcl_exw_booking_info_completed?(operation_secure_id(operation operation_id)) ? 'step-completed' : '' %>  <%= is_fcl_exw_booking_info_completed?(operation_secure_id(operation operation_id)) == 'orange' ? 'step-incompleted' : '' %> show-modal fcl-booking-info">
+  <p class="title">
+  	<span class="numberCircle"><span><%= number %></span></span>
+  	Booking info
+  </p>
+  <rp></rp>
+  <p class="subtitle">Fill in info</p>
+</article>
