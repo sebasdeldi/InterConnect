@@ -163,7 +163,7 @@ FactoryBot.define do
   end
 
   # Create pieces
-  factory :piece, class: FclExwSteps::Piece do
+  factory :piece, class: CommonSteps::Piece do
     association :fcl_exw_steps_cargo_info_id, factory: :cargo_info
   end
 

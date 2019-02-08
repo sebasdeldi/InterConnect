@@ -30,7 +30,6 @@ Rails.application.routes.draw do
 		post "/request_booking", to: "request_bookings#request_booking"
 		resources :cargo_info, only: [:new, :create]
 		resources :booking_info, only: [:new, :create]
-		post "/pieces", to: "pieces#pieces_for_cargo_info", as: "pieces"
 	end
 
 	namespace :common_steps do
@@ -39,6 +38,7 @@ Rails.application.routes.draw do
 		post "/quotation/new/:secure_id", to: "quotation_confirmed#update_pricing", as: "new_quotation"
 		get  "/quotation/new/:secure_id", to: "quotation_confirmed#new", as: "new_quotation_view"
 		post "/confirm_quotation", to: "quotation_confirmed#confirm_quotation"
+		post "/pieces", to: "pieces#pieces_for_cargo_info", as: "pieces"
 	end
 
 	namespace :charts do

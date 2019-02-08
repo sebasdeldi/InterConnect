@@ -49,7 +49,7 @@ document.addEventListener("turbolinks:load", function() {
 
 	$.ajax({
 	  type: "POST",
-	  url: "/fcl_exw_steps/pieces",
+	  url: "/common_steps/pieces",
 	  data: { fcl_exw_steps_cargo_info_id: $('.fcl_exw_steps_cargo_info_id').val() },
 	  success: function(data){
 	  	if(data[data.length-1] === 'update'){

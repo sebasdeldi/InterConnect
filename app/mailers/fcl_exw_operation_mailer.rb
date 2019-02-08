@@ -6,7 +6,7 @@ class FclExwOperationMailer < ApplicationMailer
 	  @agent = agent
 	  @info = info
 	  @operation = Operation.find(info.operation_id)
-	  @pieces = FclExwSteps::Piece.where(fcl_exw_steps_cargo_info_id: FclExwSteps::CargoInfo.find_by(operation_id: @operation.id))
+	  @pieces = CommonSteps::Piece.where(fcl_exw_steps_cargo_info_id: FclExwSteps::CargoInfo.find_by(operation_id: @operation.id))
 	  @agent_reference = @operation.agent_reference
 	  @shipper_reference = @operation.shipper_reference
 	  @consignee_reference = @operation.consignee_reference
@@ -78,7 +78,7 @@ class FclExwOperationMailer < ApplicationMailer
 		@shipper  = shipper
 		@operation = operation	
 
-		@pieces = FclExwSteps::Piece.where(fcl_exw_steps_cargo_info_id: FclExwSteps::CargoInfo.find_by(operation_id: operation[1])) 
+		@pieces = CommonSteps::Piece.where(fcl_exw_steps_cargo_info_id: FclExwSteps::CargoInfo.find_by(operation_id: operation[1])) 
 		@carrier = carrier
 		@additional_message = additional_message
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")
@@ -107,7 +107,7 @@ class FclExwOperationMailer < ApplicationMailer
 	def container_loading (agent, operation,shipper, representative)
 		@agent  = agent
 		@operation = operation
-		@pieces = FclExwSteps::Piece.where(fcl_exw_steps_cargo_info_id: FclExwSteps::CargoInfo.find_by(operation_id: @operation.id))
+		@pieces = CommonSteps::Piece.where(fcl_exw_steps_cargo_info_id: FclExwSteps::CargoInfo.find_by(operation_id: @operation.id))
 		@shipper = shipper
 		@pickup = FclExwSteps::CargoInfo.find_by(operation_id: @operation).pickup_reference
 		attachments.inline["signature.png"] = File.read("#{Rails.root}/app/assets/images/signature.png")

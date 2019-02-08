@@ -66,7 +66,7 @@ module ApplicationHelper
 	end
 
 	def pieces(operation)
-		FclExwSteps::Piece.where(fcl_exw_steps_cargo_info_id: cargo_info(operation))
+		CommonSteps::Piece.where(fcl_exw_steps_cargo_info_id: cargo_info(operation))
 	end
 
 	def steamship(operation)
