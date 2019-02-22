@@ -5,15 +5,14 @@
       <p class="modal-card-title">CARGO GENERAL INFORMATION</p>
       <button class="delete close-modal fcl-load-info" aria-label="close"></button>
     </header>
-
     <section class="modal-card-body">
     	<div class="timeline-item" id="fcl_exw_info_timeline_item">
-    		<div class="timeline-content <%= is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'step-completed-no-bg' : '' %> <%= is_fcl_exw_info_stage_completed?(operation_secure_id) == 'orange' ? 'step-incompleted-no-bg' : '' %>">
+    		<div class="timeline-content <%= stage_completed ? 'step-completed-no-bg' : '' %> <%= stage_completed == 'orange' ? 'step-incompleted-no-bg' : '' %>">
     			
     			<br>
     			<p>
     				<center>
-    					<i class="fas fa-truck-loading timeline-card-icon <%= is_fcl_exw_info_stage_completed?(operation_secure_id) == 'orange' ? 'step-incompleted-icon' : '' %> <%= is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'step-completed-icon' : '' %>""></i>
+    					<i class="fas fa-truck-loading timeline-card-icon <%= stage_completed == 'orange' ? 'step-incompleted-icon' : '' %> <%= stage_completed ? 'step-completed-icon' : '' %>""></i>
     				</center>
     				<br>
     				Please load to the system the information that your shipper (<b><%= shipper.company_name %></b>) confirmed regarding the cargo issued by the agent <b><%= agent.company_name %></b>. 
@@ -58,11 +57,22 @@
     		    	</article>
     	    	<% end %>
     			</p>
-    		  <% if is_fcl_exw_info_stage_completed?(operation_secure_id) == 'orange' %>
-    		  	<%= link_to is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_steps_cargo_info_path(operation_secure_id: operation_secure_id), class: 'button step-incompleted'  %>
-    		  <% else %>
-    		  	<%= link_to is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_steps_cargo_info_path(operation_secure_id: operation_secure_id), class: is_fcl_exw_info_stage_completed?(operation_secure_id) ? 'button step-completed' : 'button is-link'  %>
-    		  <% end %>
+
+          <% if modality == "LCL" %>
+            <% if stage_completed == 'orange' %>
+              <%= link_to stage_completed ? 'UPDATE INFO' : 'FILL IN INFO', new_lcl_steps_cargo_info_path(operation_secure_id: operation_secure_id), class: 'button step-incompleted'  %>
+            <% else %>
+              <%= link_to stage_completed ? 'UPDATE INFO' : 'FILL IN INFO', new_lcl_steps_cargo_info_path(operation_secure_id: operation_secure_id), class: stage_completed ? 'button step-completed' : 'button is-link'  %>
+            <% end %>
+          <% elsif modality == "FCL - EXW" %>
+            <% if stage_completed == 'orange' %>
+              <%= link_to stage_completed ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_steps_cargo_info_path(operation_secure_id: operation_secure_id), class: 'button step-incompleted'  %>
+            <% else %>
+              <%= link_to stage_completed ? 'UPDATE INFO' : 'FILL IN INFO', new_fcl_exw_steps_cargo_info_path(operation_secure_id: operation_secure_id), class: stage_completed ? 'button step-completed' : 'button is-link'  %>
+            <% end %>
+          <% end %>
+
+
     			
     			<a class="button is-primary right-button circle-button show-modal fcl_exw_cargo_info">
     				<i class="fas fa-tasks"></i>

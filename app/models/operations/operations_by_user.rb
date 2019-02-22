@@ -44,14 +44,23 @@ module Operations
     		steps_number = 1
     		if modality == "FCL - EXW"
     			steps_number = 9
+          operation = Operation.create(reference: reference, status: 'IN PROGRESS', status_message:'Confirm quotation', 
+            modality: modality, steps_number: steps_number, current_step: 0, pieces_number: pieces_number, agent_reference: agent_reference,
+            pol: pol, pod: pod, origin_address: origin_address, origin_city: origin_city, origin_state: origin_state, origin_zip_code: origin_zip_code, origin_country: origin_country,
+            destination: destination, shipper_reference: shipper_reference, consignee_reference: consignee_reference)
+          create_fcl_exw_steps(operation)           
+        elsif modality == "LCL"
+          steps_number = 9
+          #TODO HACER ALGO CON POL Y POD
+          operation = Operation.create(reference: reference, status: 'IN PROGRESS', status_message:'Confirm quotation', 
+            modality: modality, steps_number: steps_number, current_step: 0, pieces_number: pieces_number, agent_reference: agent_reference,
+            pol: pol, pod: pod, origin_address: origin_address, origin_city: origin_city, origin_state: origin_state, origin_zip_code: origin_zip_code, origin_country: origin_country,
+            destination: destination, shipper_reference: shipper_reference, consignee_reference: consignee_reference)
+          create_lcl_steps(operation)
     			#TODO add other modality cases
     		end
         last_two_digits
-    		operation = Operation.create(reference: reference, status: 'IN PROGRESS', status_message:'Confirm quotation', 
-          modality: modality, steps_number: steps_number, current_step: 0, pieces_number: pieces_number, agent_reference: agent_reference,
-          pol: pol, pod: pod, origin_address: origin_address, origin_city: origin_city, origin_state: origin_state, origin_zip_code: origin_zip_code, origin_country: origin_country,
-          destination: destination, shipper_reference: shipper_reference, consignee_reference: consignee_reference)
-        create_steps(operation)
+
         operation
       end
 
@@ -61,7 +70,7 @@ module Operations
            destination: destination, shipper_reference: shipper_reference, consignee_reference: consignee_reference)
       end
 
-      def self.create_steps(operation)
+      def self.create_fcl_exw_steps(operation)
         FclExwSteps::ContainerDelivery.create!(operation: operation)
         FclExwSteps::ContainerLoading.create!(operation: operation)
         CommonSteps::InfoConfirmed.create!(operation: operation)
@@ -71,6 +80,22 @@ module Operations
         Documents::QuotationSelling.create!(operation_id: operation.id)
         Documents::Insurance.create!(operation: operation)
         cargo_info = FclExwSteps::CargoInfo.new(operation: operation)
+        cargo_info.save!(validate: false)
+        booking_info = FclExwSteps::BookingInfo.new(operation: operation)
+        booking_info.save!(validate: false)
+      end
+
+      def self.create_lcl_steps(operation)
+        #cambiar los fcls
+        FclExwSteps::ContainerDelivery.create!(operation: operation)
+        FclExwSteps::ContainerLoading.create!(operation: operation)
+        CommonSteps::InfoConfirmed.create!(operation: operation)
+        CommonSteps::QuotationConfirmed.create!(operation: operation)
+        CommonSteps::InfoRequested.create!(operation: operation)
+        LclSteps::RequestBooking.create!(operation: operation)
+        Documents::QuotationSelling.create!(operation_id: operation.id)
+        Documents::Insurance.create!(operation: operation)
+        cargo_info = LclSteps::CargoInfo.new(operation: operation)
         cargo_info.save!(validate: false)
         booking_info = FclExwSteps::BookingInfo.new(operation: operation)
         booking_info.save!(validate: false)

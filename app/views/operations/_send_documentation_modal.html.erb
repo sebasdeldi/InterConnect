@@ -46,8 +46,15 @@
         <li>
           <b>Booking Sheet:</b> <a href="<%= Figaro.env.host + '/documents/booking_sheet/' + operation.id.to_s + '.pdf' %>" target="blank"> Booking Sheet </a>
         </li>
-        <% existing_fcl_cargo_info(operation).files.each_with_index do |file, i| %>
-          <li><b>Hazmat / Self Propelled / Bonded: </b><%= link_to doc_name(i), Figaro.env.host + file.url, target: 'blank' %></li>
+
+        <% if @operation.modality == "FCL - EXW" %>
+          <% existing_fcl_cargo_info(operation).files.each_with_index do |file, i| %>
+            <li><b>Hazmat / Self Propelled / Bonded: </b><%= link_to doc_name(i), Figaro.env.host + file.url, target: 'blank' %></li>
+          <% end %>
+        <% elsif @operation.modality == "LCL" %>
+          <% existing_lcl_cargo_info(operation).files.each_with_index do |file, i| %>
+            <li><b>Hazmat / Self Propelled / Bonded: </b><%= link_to doc_name(i), Figaro.env.host + file.url, target: 'blank' %></li>
+          <% end %>
         <% end %>
         <li>
           <b>Insurance: </b> <a href="<%= Figaro.env.host + '/documents/insurance/view_pdf/' + operation.secure_id.to_s + '.pdf' %>" target="blank">Insurance Document</a>

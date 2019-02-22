@@ -3,7 +3,7 @@
 	<br>
 	<nav class="breadcrumb" aria-label="breadcrumbs">
 	  <ul>
-	    <li><%= link_to "Operation " + Operation.find(@operation_id).reference, operation_path(@operation_id)%></li>
+	    <li><%= link_to "Operation " + @operation.reference, operation_path(@operation_id)%></li>
 	    <li class="is-active"><%= link_to "Task", operation_path(@operation_id) %></li>
 	  </ul>
 	</nav>
@@ -11,7 +11,7 @@
 	<nav class="panel is-form-panel card-shadow">
 	  <div class="panel-block">
 	    <p>
-	    	<%= render 'generals/tasks/form', operation_id: @operation_id, action: 'update', method_var: 'put', id: @id, step: 'a' %>
+	    	<%= render 'generals/tasks/form', operation_id: @operation_id, action: 'update', method_var: 'put', id: @id, step: 'a', modality: @operation.modality %>
 	    </p>
 	  </div>
 	</nav>

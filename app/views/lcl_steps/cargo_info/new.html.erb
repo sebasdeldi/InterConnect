@@ -18,16 +18,16 @@
           FCL - EXW Cargo information for operation: <%= @operation.reference %>
         </p>
         <div class='panel-block'>
-          <%= form_for @fcl_cargo_info, url: fcl_exw_steps_cargo_info_index_path, id: '', html: {class: "control"}, multipart: true, remote: true do |f| %>
+          <%= form_for @lcl_cargo_info, url: lcl_steps_cargo_info_index_path, id: '', html: {class: "control"}, multipart: true, remote: true do |f| %>
             <%= render 'shared/error_messages', format: params[:format] %>
             <%= hidden_field_tag :operation_secure_id, params[:operation_secure_id] %>
 
             <div class="columns">
               <div class="column is-11">
                 <div class="field">
-                  <label class="label">* Loading Address:</label>
+                  <label class="label">* Pickup Address:</label>
                   <div class="control has-icons-left">
-                    <%= f.text_field :loading_address, class: 'input with-guide', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).loading_address : '' %>
+                    <%= f.text_field :pickup_address, class: 'input with-guide', value: is_lcl_info_stage_completed?(params[:operation_secure_id]) ? existing_lcl_cargo_info(@operation).pickup_address : '' %>
                     <div class="icon is-small is-left">
                       <i class="fas fa-globe"></i>
                     </div>
@@ -47,7 +47,7 @@
                 <div class="field">
                   <label class="label">* Contact Email:</label>
                   <div class="control has-icons-left">
-                    <%= f.text_field :contact_email, class: 'input with-guide', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).contact_email : '' %>
+                    <%= f.text_field :contact_email, class: 'input with-guide', value: is_lcl_info_stage_completed?(params[:operation_secure_id]) ? existing_lcl_cargo_info(@operation).contact_email : '' %>
                     <div class="icon is-small is-left">
                       <i class="fas fa-user"></i>
                     </div>
@@ -67,7 +67,7 @@
                 <div class="field">
                   <label class="label">* Contact Phone:</label>
                   <div class="control has-icons-left">
-                    <%= f.text_field :contact_number, class: 'input with-guide', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).contact_number : '' %>
+                    <%= f.text_field :contact_number, class: 'input with-guide', value: is_lcl_info_stage_completed?(params[:operation_secure_id]) ? existing_lcl_cargo_info(@operation).contact_number : '' %>
                     <div class="icon is-small is-left">
                       <i class="fas fa-user"></i>
                     </div>
@@ -85,9 +85,9 @@
             <div class="columns">
               <div class="column is-11">
                 <div class="field">
-                  <label class="label">* Loading Date:</label>
+                  <label class="label">* Pickup Date:</label>
                   <div class="control has-icons-left">
-                    <%= f.text_field :loading_date, class: 'input loading_datetime with-guide', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).loading_date : '' %>
+                    <%= f.text_field :pickup_date, class: 'input loading_datetime with-guide', value: is_lcl_info_stage_completed?(params[:operation_secure_id]) ? existing_lcl_cargo_info(@operation).pickup_date : '' %>
                     <div class="icon is-small is-left">
                       <i class="fas fa-calendar-alt"></i>
                     </div>
@@ -105,9 +105,9 @@
             <div class="columns">
               <div class="column is-11">
                 <div class="field">
-                  <label class="label">* Loading Time:</label>
+                  <label class="label">* Docking Hours:</label>
                   <div class="control has-icons-left">
-                    <%= f.time_select :loading_time, { default: default_time(existing_fcl_cargo_info(@operation).loading_time) }, { class: 'input time-input' } %>
+                    <%= f.time_select :dock_hours, { default: default_time(existing_lcl_cargo_info(@operation).dock_hours) }, { class: 'input time-input' } %>
                     <span class="icon is-small is-left">
                       <i class="fas fa-clock"></i>
                     </span>
@@ -122,9 +122,9 @@
               </div>
             </div>
 
-            <% unless existing_fcl_cargo_info(@operation).loading_time.nil? %>
-              <p class="hour hidden"><%= hour(@operation, 'FCL - EXW') %></p>
-              <p class="mins hidden"><%= minute(@operation, 'FCL - EXW') %></p>
+            <% unless existing_lcl_cargo_info(@operation).dock_hours.nil? %>
+              <p class="hour hidden"><%= hour(@operation, 'LCL') %></p>
+              <p class="mins hidden"><%= minute(@operation, 'LCL') %></p>
             <% end %>
 
             <div class="columns">
@@ -132,7 +132,7 @@
                 <div class="field">
                   <label class="label">* Pick Up Reference:</label>
                     <div class="control has-icons-left">
-                      <%= f.text_field :pickup_reference, class: 'input with-guide', value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).pickup_reference : '' %>
+                      <%= f.text_field :pickup_reference, class: 'input with-guide', value: is_lcl_info_stage_completed?(params[:operation_secure_id]) ? existing_lcl_cargo_info(@operation).pickup_reference : '' %>
                       <span class="icon is-small is-left">
                         <i class="fas fa-file-alt"></i>
                       </span>
@@ -173,7 +173,7 @@
                   <label class="label">* Bonded:</label>
                   <div class="control has-icons-left">
                     <div class="select">
-                      <%= f.select :bonded, options_for_select([['NO', false], ['YES', true]], is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).bonded : '' ), {}, class: 'input'  %>
+                      <%= f.select :bonded, options_for_select([['NO', false], ['YES', true]], is_lcl_info_stage_completed?(params[:operation_secure_id]) ? existing_lcl_cargo_info(@operation).bonded : '' ), {}, class: 'input'  %>
                     </div>
                     <span class="icon is-small is-left">
                       <i class="fas fa-cubes"></i>
@@ -195,7 +195,7 @@
                   <label class="label">* Self Propelled:</label>
                   <div class="control has-icons-left">
                     <div class="select">
-                      <%= f.select :self_propelled, options_for_select([['NO', false], ['YES', true]], is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).self_propelled : '' ), {}, class: 'input'  %>
+                      <%= f.select :self_propelled, options_for_select([['NO', false], ['YES', true]], is_lcl_info_stage_completed?(params[:operation_secure_id]) ? existing_lcl_cargo_info(@operation).self_propelled : '' ), {}, class: 'input'  %>
                     </div>
                     <span class="icon is-small is-left">
                       <i class="fas fa-car"></i>
@@ -214,9 +214,9 @@
             <div class="columns">
               <div class="column is-11">
                 <div class="field">
-                  <label class="label">* Number of Containers:</label>
+                  <label class="label">* Number of Pieces:</label>
                   <div class="control has-icons-left">
-                    <%= f.number_field :pieces_number, class: 'input pieces-number-diff fcl-exw', min: 0, value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).pieces_number : '' %>
+                    <%= f.number_field :pieces_number, class: 'input pieces-number-diff lcl', min: 0, value: is_lcl_info_stage_completed?(params[:operation_secure_id]) ? existing_lcl_cargo_info(@operation).pieces_number : '' %>
                     <span class="icon is-small is-left">
                       <i class="fas fa-envelope pieces-number-diff"></i>
                     </span>
@@ -231,7 +231,7 @@
               </div>
             </div>
 
-            <%= f.hidden_field :fcl_exw_steps_cargo_info_id, class: "fcl_exw_steps_cargo_info_id", value: is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? existing_fcl_cargo_info(@operation).id : '' %>
+            <%= f.hidden_field :lcl_steps_cargo_info_id, class: "lcl_steps_cargo_info_id", value: is_lcl_info_stage_completed?(params[:operation_secure_id]) ? existing_lcl_cargo_info(@operation).id : '' %>
             <br>
             <div id="container"></div>
 
@@ -250,7 +250,7 @@
               </div>
             </div>
             <ul>
-              <% existing_fcl_cargo_info(@operation).files.each do |file| %>
+              <% existing_lcl_cargo_info(@operation).files.each do |file| %>
                 <li> <%= link_to file.path.split("/").last, file.url, target: 'blank' %>  </li>
               <% end %>
             </ul>
@@ -258,7 +258,7 @@
 
             <div class="control">
               <br>
-              <%= f.submit is_fcl_exw_info_stage_completed?(params[:operation_secure_id]) ? "UPDATE CARGO INFO" : "REGISTER CARGO INFO" , class: 'button is-link' %>
+              <%= f.submit is_lcl_info_stage_completed?(params[:operation_secure_id]) ? "UPDATE CARGO INFO" : "REGISTER CARGO INFO" , class: 'button is-link' %>
             </div>
             <br>
           <% end %>

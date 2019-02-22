@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   helper_method :resource_name, :resource, :devise_mapping, :resource_class, :is_admin?, :is_representative?, :is_shipper?,
     :is_agent?, :is_operation_completed?, :is_fcl_exw?, :is_fcl_exw_info_stage_completed?, :is_fcl_exw_info_requested?, :is_fcl_exw_info_confirmed?,
     :is_pricing_representative?, :is_fcl_exw_quotation_confirmed?, :is_fcl_exw_booking_requested?, :is_fcl_exw_booking_info_completed?, :is_leader?,
-    :is_fcl_exw_loading_confirmed?, :is_fcl_exw_delivery_confirmed?, :is_fcl_exw_quotation_sell_confirmed?, :is_lcl?
+    :is_fcl_exw_loading_confirmed?, :is_fcl_exw_delivery_confirmed?, :is_fcl_exw_quotation_sell_confirmed?, :is_lcl?, :is_lcl_info_stage_completed?,
+    :is_lcl_booking_requested?
 
   # Roles detection helpers
   def is_admin?
@@ -55,6 +56,21 @@ class ApplicationController < ActionController::Base
   # Operation helpers
   def is_operation_completed?(operation_id)
     GeneralCargoInfo.find_by(operation_id: operation_id).nil? ? false : true
+  end
+
+  # LCL helpers
+  def is_lcl_info_stage_completed?(operation_secure_id)
+    operation_id = Operation.find_by(secure_id: operation_secure_id).id
+    record = LclSteps::CargoInfo.find_by(operation_id: operation_id)
+    if record.created_at == record.updated_at
+      false
+    else
+      if (record.contact_email.nil? || record.contact_number.nil? || record.pickup_address.nil? || record.pickup_date.nil? || record.dock_hours.nil? || record.pickup_reference.nil? || record.pieces_number.nil?)
+        'orange'
+      else
+        true
+      end
+    end
   end
 
   # FCL-EXW helpers
@@ -120,6 +136,10 @@ class ApplicationController < ActionController::Base
 
   def is_fcl_exw_quotation_sell_confirmed?(operation_id)
     Documents::QuotationSelling.find_by(operation_id: operation_id).completed
+  end
+
+  def is_lcl_booking_requested?(operation_id)
+    LclSteps::RequestBooking.find_by(operation_id: operation_id).completed
   end
 
   # Admin Charts helpers

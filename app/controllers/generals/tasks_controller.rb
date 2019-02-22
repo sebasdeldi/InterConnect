@@ -15,6 +15,7 @@ module Generals
       @id = params[:id]
       @task = Generals::Task.find params[:id]
       @operation_id = @task.operation_id
+      @operation = Operation.find(@operation_id)
     end
 
     def update

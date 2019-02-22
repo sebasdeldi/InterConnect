@@ -35,8 +35,6 @@ module FclExwSteps
     private
   	  def self.create_pieces (params_array, cargo_info)
   	  	CommonSteps::Piece.where(fcl_exw_steps_cargo_info_id: cargo_info.id).delete_all
-        puts params_array.to_s
-
   	  	params_array = params_array.drop(3)[0..-4]
         (0..params_array.length).step(6) do |element|
         	unless params_array[element].nil?

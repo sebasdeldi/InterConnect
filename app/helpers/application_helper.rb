@@ -48,6 +48,10 @@ module ApplicationHelper
 		FclExwSteps::CargoInfo.find_by(operation_id: operation)
 	end
 
+	def existing_lcl_cargo_info(operation)
+		LclSteps::CargoInfo.find_by(operation_id: operation)
+	end
+
 	def company_name(customer_id)
 		User.find(customer_id).company_name
 	end

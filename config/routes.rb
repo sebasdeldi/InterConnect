@@ -32,6 +32,11 @@ Rails.application.routes.draw do
 		resources :booking_info, only: [:new, :create]
 	end
 
+	namespace :lcl_steps do
+		resources :cargo_info, only: [:new, :create]
+		post "/request_booking", to: "request_bookings#request_booking"
+	end
+
 	namespace :common_steps do
 		post "/confirm_info", to: "info_confirmed#confirm_info"
 		post "/info", to: "info_requested#request_info"

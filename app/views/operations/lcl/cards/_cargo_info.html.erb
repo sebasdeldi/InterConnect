@@ -1,4 +1,4 @@
-<article class="tile is-child notification step-not-completed <%= is_fcl_exw_info_stage_completed?(operation_secure_id(operation operation_id)) ? 'step-completed' : '' %>  <%= is_fcl_exw_info_stage_completed?(operation_secure_id(operation operation_id)) == 'orange' ? 'step-incompleted' : '' %> show-modal fcl-load-info">
+<article class="tile is-child notification step-not-completed <%= is_lcl_info_stage_completed?(operation_secure_id(operation operation_id)) ? 'step-completed' : '' %>  <%= is_lcl_info_stage_completed?(operation_secure_id(operation operation_id)) == 'orange' ? 'step-incompleted' : '' %> show-modal fcl-load-info">
     <p class="title">
     	<span class="numberCircle"><span><%= number %></span></span>
     	Cargo info

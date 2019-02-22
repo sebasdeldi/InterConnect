@@ -26,6 +26,6 @@ class LclSteps::CargoInfoController < ApplicationController
 
 	private
 		def lcl_cargo_info_params
-			params.require(:lcl_steps_cargo_info).permit({files: []}, :operation_id, :pickup_address, :pickup_date, :docking_hours, :gross_weight, :commercial_description, :cargo_hazardous, :hazardous_document, :pickup_reference, :contact_name, :contact_email, :contact_number, :contact_company, :pieces_number, :bonded, :self_propelled)
+			params.require(:lcl_steps_cargo_info).permit({files: []}, :operation_id, :pickup_address, :pickup_date, :dock_hours, :gross_weight, :commercial_description, :cargo_hazardous, :hazardous_document, :pickup_reference, :contact_name, :contact_email, :contact_number, :contact_company, :pieces_number, :bonded, :self_propelled)
 		end
 end

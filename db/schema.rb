@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210927200629) do
+ActiveRecord::Schema.define(version: 20210927200628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -203,6 +203,16 @@ ActiveRecord::Schema.define(version: 20210927200629) do
     t.index ["operation_id"], name: "index_lcl_steps_cargo_infos_on_operation_id"
   end
 
+  create_table "lcl_steps_request_bookings", force: :cascade do |t|
+    t.boolean "completed", default: false
+    t.bigint "operation_id"
+    t.string "additional_message"
+    t.integer "carrier_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["operation_id"], name: "index_lcl_steps_request_bookings_on_operation_id"
+  end
+
   create_table "operations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -248,8 +258,12 @@ ActiveRecord::Schema.define(version: 20210927200629) do
 
   create_table "pieces", force: :cascade do |t|
     t.bigint "fcl_exw_steps_cargo_info_id"
+    t.bigint "lcl_steps_cargo_info_id"
     t.string "sort"
     t.float "gross_weight"
+    t.float "height"
+    t.float "width"
+    t.float "length"
     t.text "commercial_description"
     t.string "cargo_hazardous"
     t.string "container_size"
@@ -261,6 +275,7 @@ ActiveRecord::Schema.define(version: 20210927200629) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["fcl_exw_steps_cargo_info_id"], name: "index_pieces_on_fcl_exw_steps_cargo_info_id"
+    t.index ["lcl_steps_cargo_info_id"], name: "index_pieces_on_lcl_steps_cargo_info_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -379,8 +394,10 @@ ActiveRecord::Schema.define(version: 20210927200629) do
   add_foreign_key "insurances", "operations"
   add_foreign_key "invoices", "operations"
   add_foreign_key "lcl_steps_cargo_infos", "operations"
+  add_foreign_key "lcl_steps_request_bookings", "operations"
   add_foreign_key "operations_by_users", "operations"
   add_foreign_key "pieces", "fcl_exw_steps_cargo_infos"
+  add_foreign_key "pieces", "lcl_steps_cargo_infos"
   add_foreign_key "slis", "operations"
   add_foreign_key "tariff_groups", "slis"
   add_foreign_key "tasks", "common_steps_info_confirmeds"

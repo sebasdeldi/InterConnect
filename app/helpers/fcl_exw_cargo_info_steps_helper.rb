@@ -8,11 +8,19 @@ module FclExwCargoInfoStepsHelper
 		operation_by_user(operation).shipper.ein
 	end
 
-	def hour(operation)
-		existing_fcl_cargo_info(operation).loading_time.hour
+	def hour(operation, modality)
+		if modality == "FCL - EXW"
+			existing_fcl_cargo_info(operation).loading_time.hour
+		elsif modality == "LCL"
+			existing_lcl_cargo_info(operation).dock_hours.hour
+		end
 	end
 
-	def minute(operation)
-		existing_fcl_cargo_info(operation).loading_time.min
+	def minute(operation, modality)
+		if modality == "FCL - EXW"
+			existing_fcl_cargo_info(operation).loading_time.min
+		elsif modality == "LCL"
+			existing_lcl_cargo_info(operation).dock_hours.min
+		end
 	end
 end

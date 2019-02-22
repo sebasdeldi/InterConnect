@@ -28,25 +28,15 @@
 	  </div>
 	  <br>
 	<% end %>	
+
+  <% if modality == "LCL" %>
+    <%= render "generals/tasks/lcl/tasks_loader", step: step, f: f, operation_id: operation_id %>
+  <% elsif modality == "FCL - EXW" %>
+    <%= render "generals/tasks/fcl_exw/tasks_loader", step: step, f: f, operation_id: operation_id %>
+  <% end %>
   <%= f.hidden_field :operation_id, value: operation_id %>
   <%= f.hidden_field :id, value: id %>
-  <% if step == 'fcl_exw_cargo_info' %>
-    <%= f.hidden_field :fcl_exw_cargo_info_step, value: fcl_exw_steps_cargo_info_id(operation_id) %>
-  <% elsif step == 'info_confirmed' %>
-    <%= f.hidden_field :fcl_exw_info_confirmed_step, value: fcl_exw_info_confirmed_step_id(operation_id) %>
-  <% elsif step == 'info_requested' %>
-    <%= f.hidden_field :fcl_exw_info_requested_step, value: fcl_exw_info_requested_step_id(operation_id) %>
-  <% elsif step == 'fcl_exw_quotation_confirmed' %>
-    <%= f.hidden_field :fcl_exw_quotation_confirmed_step, value: fcl_exw_quotation_confirmed_step_id(operation_id) %>
-  <% elsif step == 'request_booking' %>
-    <%= f.hidden_field :fcl_exw_request_booking_step, value: fcl_exw_request_booking_step_id(operation_id) %>  
-  <% elsif step == 'fcl_exw_booking_info' %>
-    <%= f.hidden_field :fcl_exw_booking_info_steps, value: fcl_exw_booking_info_step_id(operation_id) %>  
-  <% elsif step == 'fcl_container_loading' %>
-    <%= f.hidden_field :fcl_exw_container_loading_step, value: fcl_exw_container_loading_step_id(operation_id) %>  
-  <% elsif step == 'fcl_container_delivery' %>
-    <%= f.hidden_field :fcl_exw_container_delivery_step, value: fcl_exw_container_delivery_step_id(operation_id) %>  
-  <% end %>
+  
 
   <%= f.submit "SAVE", class: 'button is-link' %>
 <% end %>
